@@ -37,3 +37,13 @@ C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum
 C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe
 C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
 C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.pdb

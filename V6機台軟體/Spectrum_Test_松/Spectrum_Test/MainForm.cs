@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Spectrum_Test
 {
@@ -50,10 +50,10 @@ namespace Spectrum_Test
         int recv_count = 0;
         int cycle = 1;
 
-        bool flag = false;
-
-        private int iTask = 0;
+        bool flag;
+        int iTask;
         int ret;
+        int test_motor_round;
 
         public MainForm()
         {
@@ -112,9 +112,14 @@ namespace Spectrum_Test
         /** 開始進行QC程序 */
         private async void startbtn_Click(object sender, EventArgs e)
         {
+            startbtn.Enabled = false;
+            stopbtn.Enabled = true;
+            flag = true;
+            iTask = 0;
+            
             await Task.Run(() =>
             {
-                while (true)
+                while (flag)
                 {
                     switch (iTask)
                     {
@@ -210,8 +215,34 @@ namespace Spectrum_Test
                             }
                             else
                             {
-                                iTask = 30;
+                                iTask = 23;
                             }
+                            break;
+                        /** 暗光譜 */
+                        case 23:
+                            List<double> dark_n = new List<double>();
+                            double dark_lambda;
+
+                            Task.Delay(1000).Wait();
+                            List<int> dark_sp = CMD_CAL();
+                            Task.Delay(1000).Wait();
+
+                            for (int i = 1; i <= 1280; i++)
+                            {
+                                dark_lambda = double.Parse(a0_txt.Text) + double.Parse(a1_txt.Text) * Convert.ToDouble(i) + double.Parse(a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                dark_n.Add(dark_lambda);
+                            }
+
+                            this.InvokeIfRequired(() =>
+                            {
+                                dark_sp_chart.Titles.Clear();
+                                dark_sp_chart.Titles.Add("暗光譜");
+                                dark_sp_chart.Series[0].ToolTip = "X: #VALX{} Y: #VALY{}";
+                                dark_sp_chart.Series[0].Points.Clear();
+                                dark_sp_chart.Series[0].Points.DataBindXY(dark_n, dark_sp);
+                            });
+
+                            iTask = 30;
                             break;
                         /** 開燈  等待T2時間使LED達穩態    */
                         case 30:
@@ -439,18 +470,17 @@ namespace Spectrum_Test
                             }
                             else
                             {
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "掃描中";
+                                }));
                                 iTask = 51;
+
+
                             }
                             break;
                         /** 開始掃描 */
                         case 51:
-                            /*BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "掃描中";
-                            }));*/
-
-
-
                             if (CAL_cycle < int.Parse(total_point_txt.Text))
                             {
                                 ret = CMD_MLS(int.Parse(point_distance_txt.Text));
@@ -467,7 +497,7 @@ namespace Spectrum_Test
 
                                 BeginInvoke((Action)(() =>
                                 {
-                                    status_lb.Text = CAL_cycle.ToString();
+                                    status_lb.Text = "掃描第 " + CAL_cycle.ToString() + " 點";
                                 }));
 
                                 ALL_POINT_CAL.Add(sp4);
@@ -485,7 +515,15 @@ namespace Spectrum_Test
                             List<int> sp5 = new List<int>();
 
                             double lambda;
-                            wl = int.Parse(wl_txt.Text);
+                            
+                            if (String.IsNullOrEmpty(wl_txt.Text))
+                            {
+                                wl = 0;
+                            }
+                            else
+                            {
+                                wl = int.Parse(wl_txt.Text);
+                            }
 
                             for (int i = 1; i <= 1280; i++)
                             {
@@ -503,29 +541,28 @@ namespace Spectrum_Test
                                 sp5.Add(ALL_POINT_CAL[i][index]);
                             }
 
-                            
                             this.InvokeIfRequired(() =>
                             {
+                                chart1.Titles.Clear();
+                                chart1.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
                                 chart1.Series[0].Points.Clear();
                                 chart1.Series[0].Points.DataBindXY(n, sp5);
                             });
 
-                            iTask = 61;
+                            iTask = 100;
                             break;
-                        case 61:
-
-                            if(wl != int.Parse(wl_txt.Text))
-                            {
-                                iTask = 60;
-                            }
-
+                        case 100:
+                            startbtn.Enabled = true;
+                            stopbtn.Enabled = false;
+                            flag = false;
                             break;
                         case 999:
                             BeginInvoke((Action)(() =>
                             {
                                 status_lb.Text = "錯誤!";
                             }));
-
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -688,20 +725,24 @@ namespace Spectrum_Test
 
             // load setting
             selPort = ini.IniReadValue("SETTING", "COMPORT");
-            T1 = double.Parse(ini.IniReadValue("PARAMETER", "T1"));
-            T2 = double.Parse(ini.IniReadValue("PARAMETER", "T2"));
-            XSC = double.Parse(ini.IniReadValue("PARAMETER", "XSC"));
-            XTS = double.Parse(ini.IniReadValue("PARAMETER", "XTS"));
-            XAS = double.Parse(ini.IniReadValue("PARAMETER", "XAS"));
-            X1 = double.Parse(ini.IniReadValue("PARAMETER", "X1"));
-            total_points = double.Parse(ini.IniReadValue("PARAMETER", "TOTALPOINTS"));
-            step = double.Parse(ini.IniReadValue("PARAMETER", "STEP"));
-            DG = int.Parse(ini.IniReadValue("PARAMETER", "DG"));
-            AG = int.Parse(ini.IniReadValue("PARAMETER", "AG"));
-            EXP_init = int.Parse(ini.IniReadValue("PARAMETER", "EXPINITIAL"));
-            EXP_max = int.Parse(ini.IniReadValue("PARAMETER", "EXPMAX"));
-            I_max = int.Parse(ini.IniReadValue("PARAMETER", "IMAX"));
-            I_thr = int.Parse(ini.IniReadValue("PARAMETER", "ITHR"));
+
+            test_motor_round = int.Parse(ini.IniReadValue("MOTOR_TEST", "TEST_ROUND"));
+            txt_motor_test_round.Text = test_motor_round.ToString();
+
+            T1 = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "T1"));
+            T2 = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "T2"));
+            XSC = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "XSC"));
+            XTS = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "XTS"));
+            XAS = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "XAS"));
+            X1 = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "X1"));
+            total_points = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "TOTALPOINTS"));
+            step = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "STEP"));
+            DG = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "DG"));
+            AG = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "AG"));
+            EXP_init = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "EXPINITIAL"));
+            EXP_max = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "EXPMAX"));
+            I_max = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "IMAX"));
+            I_thr = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "ITHR"));
 
             T1_txt.Text = T1.ToString();
             T2_txt.Text = T2.ToString();
@@ -869,7 +910,178 @@ namespace Spectrum_Test
                 SerialWrite("$CAL#");
             }
         }
-        
+
+        private void stopbtn_Click(object sender, EventArgs e)
+        {
+            startbtn.Enabled = true;
+            stopbtn.Enabled = false;
+            flag = false;
+
+            status_lb.Text = "";
+
+            chart1.Titles.Clear();
+            chart1.Series[0].Points.Clear();
+
+
+        }
+
+        private void btnMotor_Test_Click(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(() => RunTestMotor());
+        }
+
+        private void RunTestMotor()
+        {
+            if (runTestMotor())
+                Log("RunTestMotor OK.");
+            else
+                Log("RunTestMotor Fail.");
+        }
+
+        private bool runTestMotor()
+        {
+            int ret;
+            int motor_dir = 1;
+            int round = 0;
+
+            ret = CMD_QPS(1);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_QPS 1 Error!");
+                return false;
+            }
+
+            if (ret == CMD_RET_POS_ON)
+            {
+                Log("CMD_QPS 1 Detect ON!");
+                return false;
+            }
+
+            TestSleep(100);
+
+            ret = CMD_QPS(2);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_QPS 2 Error!");
+                return false;
+            }
+
+            if (ret == CMD_RET_POS_ON)
+            {
+                Log("CMD_QPS 2 Detect ON!");
+                return false;
+            }
+
+            TestSleep(100);
+
+            // try DIR0
+            ret = CMD_DIR(motor_dir);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_DIR Error!");
+                return false;
+            }
+
+            TestSleep(100);
+
+            // run to pos 1
+            ret = CMD_MSP(1);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_MSP Error!");
+                return false;
+            }
+
+            if (ret == CMD_RET_WDIR)
+            {
+                motor_dir = 0;
+            }
+
+            motor_dir = motor_dir == 1 ? 0 : 1;
+
+            TestSleep(100);
+
+            while (round < test_motor_round)
+            {
+                // try DIR0
+                ret = CMD_DIR(motor_dir);
+                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                {
+                    Log("CMD_DIR Error!");
+                    return false;
+                }
+
+                TestSleep(100);
+
+                // run to pos 1
+                ret = CMD_MSP(2);
+                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                {
+                    Log("CMD_MSP Error!");
+                    return false;
+                }
+
+                if (ret == CMD_RET_WDIR)
+                {
+                    Log("CMD_RET_WDIR!");
+                    return false;
+                }
+
+                TestSleep(100);
+
+                motor_dir = motor_dir == 1 ? 0 : 1;
+
+                // try DIR
+                ret = CMD_DIR(motor_dir);
+                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                {
+                    Log("CMD_DIR Error!");
+                    return false;
+                }
+
+                TestSleep(100);
+
+                // run to pos 1
+                ret = CMD_MSP(1);
+                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                {
+                    Log("CMD_MSP Error!");
+                    return false;
+                }
+
+                if (ret == CMD_RET_WDIR)
+                {
+                    Log("CMD_RET_WDIR!");
+                    return false;
+                }
+
+                TestSleep(100);
+
+                motor_dir = motor_dir == 1 ? 0 : 1;
+
+                round++;
+                Log(string.Format("Round {0} OK.", round));
+            }
+            return true;
+        }
+
+        private int CMD_QPS(int pos)
+        {
+            string cmd = string.Format("$QPS{0}#", pos);
+
+            Recv_Clear();
+            SerialWrite(cmd);
+            if (CMD_Timeout(1000)) return CMD_RET_TIMEOUT;
+
+            string recv = Recv_String();
+
+            if (recv.Contains("NACK")) return CMD_RET_NACK;
+            if (recv.Contains("ON")) return CMD_RET_POS_ON;
+            if (recv.Contains("OFF")) return CMD_RET_POS_OFF;
+
+            return CMD_RET_ERR;
+        }
+
 
         private void RunMotorOrigin()
         {
