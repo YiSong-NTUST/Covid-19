@@ -1,0 +1,29 @@
+{
+"SC_ID":"2064-105-c4",  //晶片編號
+"Slit_width_in_um":"20", //狹縫寬度
+"Fiber_diameter_in_mm":"1", //光纖直徑
+"Fiber_length_in_mm":"16", //光纖長度
+"Fiber_to_SC_gap_in_mm":"1", //光纖到晶片的間隙
+"SC_dicing_version":"", //晶片切割版本
+"SC_holder_version":"", //晶片座版本
+"SC_top_wafer":"Silicon", //晶片頂部晶圓材質
+"SC_top_wafer_thickness_in_mm":"0.525",  //晶片頂部晶圓厚度
+"SC_bottom_wafer":"Silicon", //晶片底部晶圓材質
+"SC_bottom_wafer_thickness_in_mm":"0.525", //晶片底部晶圓厚度
+"IS_model":"AR0130", //影像感測器模型
+"IS_pixel_size_in_um":"3.75", //影像感測器每個pixel實際大小
+"ISB_version":"Janfu_Black", //影像感測器晶片版本
+"Date_of_calibration":"2020-10-20-17-36", //計算校正日期
+"Calibration_method":"Laser", //校正方法
+"Calibration_wavelengths":["404.5","535"], //校正所使用到的波長
+"ROI":["0","1280","494","20"], //ROI
+"WC_coefficients":["63.696227987279","0.777838625438333","6.66741737379543E-05","-2.97602669443193E-08"], //校正係數0次排到3次
+"RMS_FWHM_resolution_in_nm":"0.507800042627322"  //光譜解析度RMS,
+"RMS_FWHM_resolution_STD_in_%":"5.19951232655309", //光譜解析度RMS的STD
+"RMS_FWHM_spot_size_in_um":"2.30135291078697", //光譜實際斑點大小的RMS
+"RMS_FWHM_spot_size_STD_in_%":"23.4179730926839", //光譜實際斑點大小的RMS的STD
+"Spectral_accuracy_in_nm":"0.46875", //光譜精準度
+"SNR_full_scale":"", //信噪比
+"Stray_light_in_nm_%":["520","0.01"], //雜散光(測試的波長,百分比)
+"Dynamic_range":"", //動態範圍
+}

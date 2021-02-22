@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thorlabs.TLPM.Interop.Sample", "Thorlabs.TLPM.Interop.Sample\Thorlabs.TLPM.Interop.Sample.csproj", "{4E5F0915-0F87-48C4-B543-14C7CC005789}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		TeamCity|Any CPU = TeamCity|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E5F0915-0F87-48C4-B543-14C7CC005789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5F0915-0F87-48C4-B543-14C7CC005789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5F0915-0F87-48C4-B543-14C7CC005789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5F0915-0F87-48C4-B543-14C7CC005789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5F0915-0F87-48C4-B543-14C7CC005789}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
+		{4E5F0915-0F87-48C4-B543-14C7CC005789}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

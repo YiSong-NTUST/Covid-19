@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2019\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="16.0">
+ <Namespaces>
+  <Namespace Name="Thorlabs.TLPM_32.Interop.Sample">
+   <Messages>
+    <Message Id="TLPM" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="Breaking">
+     <Issue Name="Namespace" Certainty="85" Level="Error">將命名空間名稱 'Thorlabs.TLPM_32.Interop.Sample' 中的 'TLPM' 變更成 'Tlpm'，藉此修正其大小寫。</Issue>
+    </Message>
+    <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="Breaking">
+     <Issue Name="Namespace" Certainty="95" Level="Error">移除命名空間名稱 'Thorlabs.TLPM_32.Interop.Sample' 中的底線。</Issue>
+    </Message>
+   </Messages>
+  </Namespace>
+ </Namespaces>
+ <Targets>
+  <Target Name="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe">
+   <Modules>
+    <Module Name="sample.exe">
+     <Messages>
+      <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+       <Issue Certainty="95" Level="Error">以 CLSCompliant(true) 標記 'Sample.exe'，因為它可以公開外部可見的類型。</Issue>
+      </Message>
+      <Message TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+       <Issue Certainty="95" Level="Warning">因為組件 'Sample.exe' 內含有 ResX 資源檔，請以 NeutralResourcesLanguage 屬性加以標記，並指定組件內的資源語言。這麼做可改善第一次擷取資源的查閱效能。</Issue>
+      </Message>
+     </Messages>
+     <Namespaces>
+      <Namespace Name="Thorlabs.TLPM_32.Interop.Sample">
+       <Types>
+        <Type Name="Extension" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#InvokeIfRequired(System.Windows.Forms.Control,System.Windows.Forms.MethodInvoker)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="必須驗證公用方法的引數" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="96">在外部可見方法 'Extension.InvokeIfRequired(this Control, MethodInvoker)' 中，先驗證參數 'control' 後再使用。</Issue>
+            </Message>
+            <Message Id="1" TypeName="必須驗證公用方法的引數" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="102">在外部可見方法 'Extension.InvokeIfRequired(this Control, MethodInvoker)' 中，先驗證參數 'action' 後再使用。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Form1" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#_TimersTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalError" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="53">修改 'Form1._TimersTimer_Elapsed(object, ElapsedEventArgs)' 以攔截比 'object' 更明確的例外狀況，或重新擲回例外狀況。</Issue>
+            </Message>
+            <Message Id="err" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="63">'Form1._TimersTimer_Elapsed(object, ElapsedEventArgs)' 將變數 'err' 宣告為類型 'int'，但它從未被使用或僅經過指派。請使用這個變數或是將它移除。</Issue>
+            </Message>
+            <Message Id="pInvokeResult" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="44">'Form1._TimersTimer_Elapsed(object, ElapsedEventArgs)' 將變數 'pInvokeResult' 宣告為類型 'int'，但它從未被使用或僅經過指派。請使用這個變數或是將它移除。</Issue>
+            </Message>
+            <Message Id="System.Double.ToString(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="67">因為 'double.ToString(string)' 的行為會隨目前使用者的地區設定而異，請將 'Form1._TimersTimer_Elapsed(object, ElapsedEventArgs)' 中的這個呼叫以呼叫 'double.ToString(string, IFormatProvider)' 取代。如果要對使用者顯示 'double.ToString(string, IFormatProvider)' 的結果，請指定 'CultureInfo.CurrentCulture' 做為 'IFormatProvider' 參數。否則，如果要儲存結果供軟體存取 (例如要保存到磁碟或資料庫時)，請指定 'CultureInfo.InvariantCulture'。</Issue>
+            </Message>
+            <Message TypeName="必須在超出範圍前處置物件" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="36">在方法 'Form1._TimersTimer_Elapsed(object, ElapsedEventArgs)' 中，於物件 'searchDevice' 的所有參考都超出範圍前對其呼叫 System.IDisposable.Dispose。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="tlpm" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.Designer.cs" Line="15">'Form1' 含有欄位 'Form1.tlpm'，是屬於 IDisposable 類型: 'PM100D'。請變更 'Form1' 上的 Dispose 方法以在這個欄位上呼叫 Dispose 或 Close。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Form1_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="DoNotUseTimersThatPreventPowerStateChanges" Category="Microsoft.Mobility" CheckId="CA1601" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.cs" Line="24">請修改方法 'Form1.Form1_Load(object, EventArgs)' 中對 'Timer.Interval.set(double)' 的呼叫，將計時器間隔設定成大於或等於一秒的值。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#InitializeComponent()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message Id="System.Windows.Forms.Control.set_Text(System.String)" TypeName="不要將常值當做已當地語系化的參數傳遞" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2021-02-02 06:30:10Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.Designer.cs" Line="54">方法 'Form1.InitializeComponent()' 在呼叫 'Control.Text.set(string)' 時傳遞常值字串做為參數 'value'。改為從資源表格擷取下列字串: "?"。</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.Designer.cs" Line="75">方法 'Form1.InitializeComponent()' 在呼叫 'Control.Text.set(string)' 時傳遞常值字串做為參數 'value'。改為從資源表格擷取下列字串: "Form1"。</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.Designer.cs" Line="44">方法 'Form1.InitializeComponent()' 在呼叫 'Control.Text.set(string)' 時傳遞常值字串做為參數 'value'。改為從資源表格擷取下列字串: "Power = "。</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample" File="Form1.Designer.cs" Line="62">方法 'Form1.InitializeComponent()' 在呼叫 'Control.Text.set(string)' 時傳遞常值字串做為參數 'value'。改為從資源表格擷取下列字串: "button1"。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213">
+   <Name>可處置的欄位應該受到處置</Name>
+   <Description>如果某個實作 IDisposable 的類型具有也實作 IDisposable 的欄位，這個封裝類型的 Dispose() 實作應該呼叫每一個可處置欄位上的 Dispose()。</Description>
+   <Resolution Name="Default">{0} 含有欄位 {1}，是屬於 IDisposable 類型: {2}。請變更 {0} 上的 Dispose 方法以在這個欄位上呼叫 Dispose 或 Close。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182328.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="usagerules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+   <Name>不要攔截一般例外狀況類型</Name>
+   <Description>您不應該攔截 Exception 或 SystemException。攔截泛型例外狀況類型可能會對程式庫使用者隱藏執行階段問題，而且可能會讓偵錯更加複雜。您應該只攔截能夠順利處理的例外狀況。</Description>
+   <Resolution Name="Default">修改 {0} 以攔截比 {1} 更明確的例外狀況，或重新擲回例外狀況。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182137.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotUseTimersThatPreventPowerStateChanges" Category="Microsoft.Mobility" CheckId="CA1601">
+   <Name>不要使用會妨礙電源狀態變更的計時器</Name>
+   <Description>輪詢頻率不要超過每秒一次，也不要使用每秒引發一次以上的計時器。更高頻率的週期性活動會使 CPU 始終處於忙碌狀態，並且會干擾用來關閉顯示器和硬碟的省電閒置計時器。</Description>
+   <Resolution Name="Default">請修改方法 {1} 中對 {0} 的呼叫，將計時器間隔設定成大於或等於一秒的值。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182230.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="90">Error</MessageLevel>
+   <File Name="mobilityrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+   <Name>識別項名稱應該使用正確的大小寫</Name>
+   <Description>類型、命名空間和成員識別項都是依照 Pascal 命名法的大小寫慣例。參數識別項則都是依照 Camel 命名法的大小寫慣例。這些識別項內兩個字母的縮略字應該使用大寫，例如應該使用 System.IO 而非 System.Io。三個字母以上的縮略字則應該依照 Pascal 命名法的大小寫慣例，例如應該使用 System.Xml 而非 System.XML。Pascal 命名法的大小寫慣例是將每個字的第一個字母大寫，例如 BackColor。Camel 命名法的大小寫慣例則是將第一個字的第一個字母格式設為小寫，並將後續所有字的第一個字母大寫，例如 backgroundColor。雖然兩個字母的縮略字未完全大寫的情況十分常見，但不該因此而排除此規則。例如，'DbConnection' 雖常見，但並不正確，應該 DBConnection 才對。為了與現有的非受控符號配置相容，可能需要違反此規則，不過一般來說，在使用這些符號的組件外部看不到它們。</Description>
+   <Resolution Name="Namespace">將命名空間名稱 '{1}' 中的 '{0}' 變更成 '{2}'，藉此修正其大小寫。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182240.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="85">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707">
+   <Name>識別項名稱不應該包含底線</Name>
+   <Description>指定識別項時請勿使用底線。某些針對應用程式產生的 Visual Studio 識別項會包含底線字元。一般來說，在公用識別項中應該避免使用底線字元。</Description>
+   <Resolution Name="Namespace">移除命名空間名稱 '{0}' 中的底線。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182245.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+   <Name>組件必須標記 CLSCompliantAttribute</Name>
+   <Description>組件應該使用 CLSCompliant 屬性明確陳述其 CLS 標準的合規性。沒有此屬性的組件即不符合 CLS 規範。即使組件、模組或類型的某些部分不符合 CLS 規範，該組件、模組和類型本身仍可符合 CLS 規範。下列為適用規則: 1) 如果項目標記成 CLSCompliant，則任何不符合規範的成員都必須擁有 CLSCompliant 屬性，且其引數設為 false。2) 針對每個不符合 CLS 規範的成員，均須提供相當於符合 CLS 規範的替代成員。</Description>
+   <Resolution Name="Default">以 CLSCompliant(true) 標記 {0}，因為它可以公開外部可見的類型。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182156.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824">
+   <Name>組件必須標記 NeutralResourcesLanguageAttribute</Name>
+   <Description>NeutralResourcesLanguage 屬性會通知 ResourceManager 用於呈現組件之中性文化特性資源的語言。在搜尋與中性資源語言相同的文化特性內的資源時，ResourceManager 會自動使用位於主要組件內的資源，而非搜尋具有目前執行緒之目前使用者介面文化特性的附屬組件。這麼做可改善第一個您所載入之資源的查閱效能，並可降低工作集大小。</Description>
+   <Resolution Name="Default">因為組件 {0} 內含有 ResX 資源檔，請以 NeutralResourcesLanguage 屬性加以標記，並指定組件內的資源語言。這麼做可改善第一次擷取資源的查閱效能。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb385967.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+   <Name>必須移除未使用的區域變數</Name>
+   <Description>請移除未使用或僅在方法實作中指派的區域變數。</Description>
+   <Resolution Name="Default">{0} 將變數 {1} 宣告為類型 {2}，但它從未被使用或僅經過指派。請使用這個變數或是將它移除。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182278.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+   <Name>必須指定 IFormatProvider</Name>
+   <Description>如果有多載採用 IFormatProvider 引數，則應該固定以不採用該引數的多載呼叫。執行階段中的某些方法，會在數值和字串表示之間相互進行轉換，並採用包含一或多個字元且稱為格式規範的字串參數，其會指示轉換值的方式。如果格式規範的含意因文化特性而有所不同，則格式化物件會提供字串表示中使用的實際字元。在文化特性之間的排序和比較行為不應該變更的情節中，請指定 CultureInfo.InvariantCulture，否則便指定 CultureInfo.CurrentCulture。</Description>
+   <Resolution Name="IFormatProviderAlternateString">因為 {0} 的行為會隨目前使用者的地區設定而異，請將 {1} 中的這個呼叫以呼叫 {2} 取代。如果要對使用者顯示 {2} 的結果，請指定 {3} 做為 'IFormatProvider' 參數。否則，如果要儲存結果供軟體存取 (例如要保存到磁碟或資料庫時)，請指定 {4}。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182190.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="globalizationrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="不要將常值當做已當地語系化的參數傳遞" Category="Microsoft.Globalization" CheckId="CA1303">
+   <Name>不要將常值當做已當地語系化的參數傳遞</Name>
+   <Description>內嵌在原始程式碼中的常值字串不容易本地語系化。請避免在一般需要本地語系化字串的情況傳遞常值字串做為引數。</Description>
+   <Resolution Name="KnownValue">方法 {0} 在呼叫 {2} 時傳遞常值字串做為參數 '{1}'。改為從資源表格擷取下列字串: {3}。</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182187.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="必須在超出範圍前處置物件" Category="Microsoft.Reliability" CheckId="CA2000">
+   <Name>必須在超出範圍前處置物件</Name>
+   <Description>如果未在可處置物件的所有參考都超出範圍前明確處置掉該物件，則該物件將在記憶體回收行程執行該物件的完成項時，於某個不定時間被處置掉。因為可能發生例外事件，導致物件的完成項無法執行，所以應改為明確處置掉物件。</Description>
+   <Resolution Name="NonExceptionEdge">在方法 {0} 中，於物件 {1} 的所有參考都超出範圍前對其呼叫 System.IDisposable.Dispose。</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182289.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="必須驗證公用方法的引數" Category="Microsoft.Design" CheckId="CA1062">
+   <Name>必須驗證公用方法的引數</Name>
+   <Description>所有傳遞到外部可見方法的參考引數都必須檢查是否為 null (在 VB 中為 Nothing)。如果適用，應在引數為 null 時擲回 System.ArgumentNullException。</Description>
+   <Resolution Name="Default">在外部可見方法 {0} 中，先驗證參數 '{1}' 後再使用。</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182182.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="16.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">分類</String>
+  <String Key="Certainty">確實性</String>
+  <String Key="CollapseAll">全部摺疊</String>
+  <String Key="CheckId">檢查 ID</String>
+  <String Key="Error">錯誤</String>
+  <String Key="Errors">錯誤</String>
+  <String Key="ExpandAll">全部展開</String>
+  <String Key="Help">說明</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">訊息</String>
+  <String Key="LocationNotStoredInPdb">[位置未儲存在 PDB]</String>
+  <String Key="Project">專案</String>
+  <String Key="Resolution">解析度</String>
+  <String Key="Rule">規則</String>
+  <String Key="RuleFile">規則檔</String>
+  <String Key="RuleDescription">規則說明</String>
+  <String Key="Source">來源</String>
+  <String Key="Status">狀態</String>
+  <String Key="Target">目標</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">Code Analysis 報告</String>
+ </Localized>
+</FxCopReport>

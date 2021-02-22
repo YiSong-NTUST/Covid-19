@@ -1,0 +1,40 @@
+{
+"ID":"2044-106-C6",
+"ELC":"5000",
+"GNV":"32",
+"AGN":"1X",
+"ROI":["0","1280","540","20"],
+"WL":["129.82983027033","0.751870730199166","3.99612512886805E-05","2.30822035367981E-08"],
+"Slit_width_in_um":"20",
+"Fiber_diameter_in_mm":"1",
+"Fiber_length_in_mm":"16",
+"Fiber_to_SC_gap_in_mm":"1",
+"SC_dicing_version":"V1",
+"SC_holder_version":"L-F3",
+"SC_top_wafer":"Silicon",
+"SC_top_wafer_thickness_in_mm":"0.525",
+"SC_bottom_wafer":"Silicon",
+"SC_bottom_wafer_thickness_in_mm":"0.525",
+"IS_model":"AR0130",
+"IS_pixel_size_in_um":"3.75",
+"ISB_version":"Janfu_Black",
+"Date_of_calibration":"2020-12-15-15-18",
+"Calibration_method":"Laser",
+"Calibration_wavelengths":["404.97","443.83","522.35","641.97","779.68"],
+"Calibration_pixels":["","","","",""], //校正用Pixel
+"Calibration_after_wavelengths":["","","","",""],//校正後波長
+"Calibration_wavelengths_errors_in_nm":["","","","",""],//波長差異量
+"Calibration_wavelengths_rms_errors_in_nm":"", //校正後誤差值量化
+"RMS_FWHM_resolution_in_nm":"5.5751620160827",
+"RMS_FWHM_resolution_STD_in_%":"5.39562240918243",
+"RMS_FWHM_spot_size_in_um":"25.6820272825271",
+"RMS_FWHM_spot_size_STD_in_%":"3.62159722181963",
+"Spectral_accuracy_in_nm":"0.46875",
+"SNR_full_scale":["443.221139458102","134.611802367543"],
+"Stray_light_in_nm_%":"0.742876911542723",
+"Dynamic_range":"195.943352318848",
+"Noise_rms_in_%":"",  //雜訊佔最大值百分比
+"Noise_rms_in_256":"", //雜訊值
+"Autoscaling_exposure_initial_value":"60000", //default AutoScaling_初始曝光時間
+"Baseline_range_in_nm":["",""] //光譜基線範圍
+}

@@ -1,0 +1,30 @@
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM_32.Interop.Sample.Form1.resources
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM_32.Interop.Sample.Properties.Resources.resources
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe.config
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.xml
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.pdb
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe.CodeAnalysisLog.xml
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe.lastcodeanalysissucceeded
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csproj.CopyComplete
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Sample.exe
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Sample.pdb
+C:\Users\YiSong\Desktop\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM_32.Interop.Sample.Form1.resources
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM_32.Interop.Sample.Properties.Resources.resources
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Sample.exe
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Sample.pdb
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe.config
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.xml
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.pdb
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe.CodeAnalysisLog.xml
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Sample.exe.lastcodeanalysissucceeded
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\obj\Debug\Thorlabs.TLPM.Interop.Sample.csproj.CopyComplete
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Thorlabs.PM100D_64.Interop.dll
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\MS.NET_CS\Thorlabs.TLPM.Interop.Sample\bin\Debug\Thorlabs.PM100D_64.Interop.xml

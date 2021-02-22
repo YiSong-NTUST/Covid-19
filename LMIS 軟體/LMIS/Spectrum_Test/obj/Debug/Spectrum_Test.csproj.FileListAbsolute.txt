@@ -1,0 +1,57 @@
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.show_Spectrum.resources
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\bin\Debug\Thorlabs.TLPM_32.Interop.dll
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Desktop\LMIS\Spectrum_Test\bin\Debug\Thorlabs.TLPM_64.Interop.dll
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Thorlabs.PM100D_64.Interop.dll
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Thorlabs.TLPM_32.Interop.dll
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Thorlabs.TLPM_64.Interop.dll
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\LMIS 軟體\LMIS\Spectrum_Test\bin\Debug\Thorlabs.PM100D_32.Interop.dll
