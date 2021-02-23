@@ -44,7 +44,7 @@ namespace Spectrum_Test
         double T1, T2, XSC, XTS, XAS, X1, total_points, step;
         int DG, AG, EXP_max, EXP_init, I_max, I_thr;
         int maxValue, EXP, EXP1, I1, EXP2, I2;
-        int CAL_cycle, wl;
+        int CAL_cycle, wl, CAL_RUN_cycle;
 
         char[] recv_buff = new char[24567];
         int recv_count = 0;
@@ -67,6 +67,7 @@ namespace Spectrum_Test
             this.rawlogDelegate = new AddLogDelegate(_rawlog);
 
             chart1.ChartAreas[0].AxisY.Maximum = 4095;
+            point_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
 
             LoadSetting();
             loadPorts();
@@ -112,11 +113,15 @@ namespace Spectrum_Test
         /** 開始進行QC程序 */
         private async void startbtn_Click(object sender, EventArgs e)
         {
+            dark_sp_chart.Series.Clear();
+            point_sp_chart.Series.Clear();
+
             startbtn.Enabled = false;
             stopbtn.Enabled = true;
             flag = true;
             iTask = 0;
-            
+            CAL_RUN_cycle = 1;
+
             await Task.Run(() =>
             {
                 while (flag)
@@ -225,7 +230,6 @@ namespace Spectrum_Test
 
                             Task.Delay(1000).Wait();
                             List<int> dark_sp = CMD_CAL();
-                            Task.Delay(1000).Wait();
 
                             for (int i = 1; i <= 1280; i++)
                             {
@@ -233,13 +237,17 @@ namespace Spectrum_Test
                                 dark_n.Add(dark_lambda);
                             }
 
+                            Series dark_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次暗光譜");
+                            dark_Srs.ChartType = SeriesChartType.Line;
+                            dark_Srs.IsValueShownAsLabel = false;
+                            dark_Srs.Points.DataBindXY(dark_n, dark_sp);
+                            dark_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
                             this.InvokeIfRequired(() =>
                             {
                                 dark_sp_chart.Titles.Clear();
                                 dark_sp_chart.Titles.Add("暗光譜");
-                                dark_sp_chart.Series[0].ToolTip = "X: #VALX{} Y: #VALY{}";
-                                dark_sp_chart.Series[0].Points.Clear();
-                                dark_sp_chart.Series[0].Points.DataBindXY(dark_n, dark_sp);
+                                dark_sp_chart.Series.Add(dark_Srs);
                             });
 
                             iTask = 30;
@@ -259,6 +267,7 @@ namespace Spectrum_Test
                             }
                             else
                             {
+                                T2 = double.Parse(T2_txt.Text);
                                 Task.Delay(Convert.ToInt32(T2 * 1000)).Wait();
                                 iTask = 40;
                             }
@@ -268,8 +277,9 @@ namespace Spectrum_Test
                             BeginInvoke((Action)(() =>
                             {
                                 status_lb.Text = "Auto-scalin";
-                            }));                            
+                            }));
 
+                            AG = int.Parse(AG_txt.Text);
                             ret = CMD_AGN(int.Parse(AG_txt.Text));
                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                             {
@@ -278,6 +288,7 @@ namespace Spectrum_Test
                                 break;
                             }
 
+                            DG = int.Parse(DG_txt.Text);
                             ret = CMD_GNV(int.Parse(DG_txt.Text));
                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                             {
@@ -286,6 +297,7 @@ namespace Spectrum_Test
                                 break;
                             }
 
+                            EXP_init = int.Parse(EXP_initial_txt.Text);
                             ret = CMD_ELC(int.Parse(EXP_initial_txt.Text));
                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                             {
@@ -335,10 +347,8 @@ namespace Spectrum_Test
                         case 45:    //找出目標值的EXP  
                             Task.Delay(1000).Wait();
                             List<int> sp1 = CMD_CAL();
-                            Task.Delay(1000).Wait();
                             maxValue = sp1.Max();
-
-
+                                                        
                             if (maxValue < int.Parse(I_max_txt.Text))
                             {
                                 EXP1 = EXP_init;
@@ -355,12 +365,12 @@ namespace Spectrum_Test
 
                                 Task.Delay(1000).Wait();
                                 List<int> sp2 = CMD_CAL();
-                                Task.Delay(1000).Wait();
                                 maxValue = sp2.Max();
-
 
                                 EXP2 = EXP_init;
                                 I2 = maxValue;
+
+                                I_thr = int.Parse(I_thr_txt.Text);
 
                                 /*System.Diagnostics.Debug.WriteLine("AG...." + AG.ToString());
                                 System.Diagnostics.Debug.WriteLine("DG...." + DG.ToString());
@@ -370,6 +380,7 @@ namespace Spectrum_Test
                                 System.Diagnostics.Debug.WriteLine("I1...." + I1.ToString());
                                 System.Diagnostics.Debug.WriteLine("I2...." + I2.ToString());*/
                                 EXP = EXP1 + ((I_thr - I1) * ((EXP1 - EXP2) / (I1 - I2)));
+
 
                                 if (EXP > int.Parse(EXP_max_txt.Text))
                                 {
@@ -443,10 +454,9 @@ namespace Spectrum_Test
 
                                     Task.Delay(1000).Wait();
                                     List<int> sp3 = CMD_CAL();
-                                    Task.Delay(1000).Wait();
 
                                     CAL_cycle = 0;
-                                    iTask = 50;                                    
+                                    iTask = 50;  
                                 }
                             }
                             else
@@ -473,6 +483,7 @@ namespace Spectrum_Test
                                 BeginInvoke((Action)(() =>
                                 {
                                     status_lb.Text = "掃描中";
+                                    ALL_POINT_CAL.Clear();
                                 }));
                                 iTask = 51;
 
@@ -493,7 +504,6 @@ namespace Spectrum_Test
 
                                 Task.Delay(1000).Wait();
                                 List<int> sp4 = CMD_CAL();
-                                Task.Delay(1000).Wait();
 
                                 BeginInvoke((Action)(() =>
                                 {
@@ -541,20 +551,59 @@ namespace Spectrum_Test
                                 sp5.Add(ALL_POINT_CAL[i][index]);
                             }
 
+                            Series point_Srs = new Series("第"+ CAL_RUN_cycle.ToString()+"次循環");
+                            point_Srs.ChartType = SeriesChartType.Line;
+                            point_Srs.IsValueShownAsLabel = false;
+                            point_Srs.Points.DataBindXY(n, sp5);
+                            point_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+
                             this.InvokeIfRequired(() =>
                             {
-                                chart1.Titles.Clear();
-                                chart1.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
-                                chart1.Series[0].Points.Clear();
-                                chart1.Series[0].Points.DataBindXY(n, sp5);
+                                point_sp_chart.Titles.Clear();
+                                point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
+                                point_sp_chart.Series.Add(point_Srs);
                             });
 
-                            iTask = 100;
+                            iTask = 70;
+                            break;
+                        /** 關燈 */
+                        case 70:
+                            BeginInvoke((Action)(() =>
+                            {
+                                status_lb.Text = "延遲時間T1";
+                            }));
+
+                            ret = CMD_SWL(0);
+                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                            {
+                                Log("CMD_SWL Error!");
+                                iTask = 999;
+                            }
+                            else
+                            {
+                                T1 = double.Parse(T1_txt.Text);
+                                Task.Delay(Convert.ToInt32(T1 * 1000)).Wait();
+                                iTask = 100;
+                            }
                             break;
                         case 100:
-                            startbtn.Enabled = true;
-                            stopbtn.Enabled = false;
-                            flag = false;
+                            
+                            if(CAL_RUN_cycle < int.Parse(CAL_RUN_cycle_txt.Text))
+                            {                                
+                                CAL_RUN_cycle++;
+                                iTask = 0;
+                            }
+                            else
+                            {
+                                BeginInvoke((Action)(() =>
+                                {
+                                    startbtn.Enabled = true;
+                                    stopbtn.Enabled = false;
+                                    flag = false;
+                                    status_lb.Text = "完成";
+                                }));
+                            }                                                      
                             break;
                         case 999:
                             BeginInvoke((Action)(() =>
@@ -632,6 +681,7 @@ namespace Spectrum_Test
         {
             serialPort.Close();
 
+            flag = false;
             btnOpen.Visible = true;
             btnClose.Visible = false;
         }
@@ -1258,7 +1308,7 @@ namespace Spectrum_Test
         {
             command = "$CAL#";
             string cmd = "$CAL#";
-
+            CAL.Clear();
             Recv_Clear();
             SerialWrite(cmd);
 
@@ -1273,7 +1323,6 @@ namespace Spectrum_Test
                     }
                 }                
             }
-
 
             CAL.RemoveAt(0);    //刪除^
             CAL.RemoveAt(0);    //刪除s

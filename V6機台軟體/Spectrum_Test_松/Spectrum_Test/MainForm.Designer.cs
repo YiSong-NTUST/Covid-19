@@ -32,20 +32,26 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtLog = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -60,28 +66,27 @@
             this.btnCommand = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
             this.btnCAL = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.stopbtn = new System.Windows.Forms.Button();
-            this.startbtn = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.cboPort = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnOpen = new System.Windows.Forms.Button();
-            this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.txtLog = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.status_lb = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnMotor_Test = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txt_motor_test_round = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
-            this.btnMotor_Test = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.point_sp_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dark_sp_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.x1_txt = new System.Windows.Forms.TextBox();
             this.Xsc_txt = new System.Windows.Forms.TextBox();
@@ -116,42 +121,39 @@
             this.label6 = new System.Windows.Forms.Label();
             this.point_distance_txt = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.white_point = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.total_point_txt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.xAS_txt = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dark_sp_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.stopbtn = new System.Windows.Forms.Button();
+            this.startbtn = new System.Windows.Forms.Button();
+            this.white_point = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.cboPort = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnOpen = new System.Windows.Forms.Button();
+            this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.label20 = new System.Windows.Forms.Label();
+            this.status_lb = new System.Windows.Forms.Label();
+            this.CAL_RUN_cycle_txt = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dark_sp_chart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.point_sp_chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dark_sp_chart)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -184,256 +186,33 @@
             this.tabPage5.Controls.Add(this.txtCommand);
             this.tabPage5.Controls.Add(this.btnCAL);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(1041, 546);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Command測試";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // tabControl2
             // 
-            this.button2.Location = new System.Drawing.Point(88, 320);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(63, 18);
-            this.button2.TabIndex = 28;
-            this.button2.Text = "SWL1";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(463, 1);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(577, 545);
+            this.tabControl2.TabIndex = 29;
             // 
-            // button3
+            // tabPage3
             // 
-            this.button3.Location = new System.Drawing.Point(27, 320);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(56, 18);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "SWL0";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(88, 297);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 18);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "btnROI488";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnROI
-            // 
-            this.btnROI.Location = new System.Drawing.Point(27, 297);
-            this.btnROI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnROI.Name = "btnROI";
-            this.btnROI.Size = new System.Drawing.Size(56, 18);
-            this.btnROI.TabIndex = 25;
-            this.btnROI.Text = "ROI?";
-            this.btnROI.UseVisualStyleBackColor = true;
-            this.btnROI.Click += new System.EventHandler(this.btnROI_Click);
-            // 
-            // btnELC1000
-            // 
-            this.btnELC1000.Location = new System.Drawing.Point(88, 274);
-            this.btnELC1000.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnELC1000.Name = "btnELC1000";
-            this.btnELC1000.Size = new System.Drawing.Size(56, 18);
-            this.btnELC1000.TabIndex = 24;
-            this.btnELC1000.Text = "ELC1000";
-            this.btnELC1000.UseVisualStyleBackColor = true;
-            this.btnELC1000.Click += new System.EventHandler(this.btnELC1000_Click);
-            // 
-            // btnELC
-            // 
-            this.btnELC.Location = new System.Drawing.Point(27, 274);
-            this.btnELC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnELC.Name = "btnELC";
-            this.btnELC.Size = new System.Drawing.Size(56, 18);
-            this.btnELC.TabIndex = 23;
-            this.btnELC.Text = "ELC?";
-            this.btnELC.UseVisualStyleBackColor = true;
-            this.btnELC.Click += new System.EventHandler(this.btnELC_Click);
-            // 
-            // btnGNV128
-            // 
-            this.btnGNV128.Location = new System.Drawing.Point(88, 250);
-            this.btnGNV128.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnGNV128.Name = "btnGNV128";
-            this.btnGNV128.Size = new System.Drawing.Size(56, 18);
-            this.btnGNV128.TabIndex = 22;
-            this.btnGNV128.Text = "GNV128";
-            this.btnGNV128.UseVisualStyleBackColor = true;
-            this.btnGNV128.Click += new System.EventHandler(this.btnGNV128_Click);
-            // 
-            // btnGNV
-            // 
-            this.btnGNV.Location = new System.Drawing.Point(27, 250);
-            this.btnGNV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnGNV.Name = "btnGNV";
-            this.btnGNV.Size = new System.Drawing.Size(56, 18);
-            this.btnGNV.TabIndex = 21;
-            this.btnGNV.Text = "GNV?";
-            this.btnGNV.UseVisualStyleBackColor = true;
-            this.btnGNV.Click += new System.EventHandler(this.btnGNV_Click);
-            // 
-            // btnAGN2X
-            // 
-            this.btnAGN2X.Location = new System.Drawing.Point(148, 227);
-            this.btnAGN2X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAGN2X.Name = "btnAGN2X";
-            this.btnAGN2X.Size = new System.Drawing.Size(56, 18);
-            this.btnAGN2X.TabIndex = 20;
-            this.btnAGN2X.Text = "AGN2X";
-            this.btnAGN2X.UseVisualStyleBackColor = true;
-            this.btnAGN2X.Click += new System.EventHandler(this.btnAGN2X_Click);
-            // 
-            // btnAGN1X
-            // 
-            this.btnAGN1X.Location = new System.Drawing.Point(88, 227);
-            this.btnAGN1X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAGN1X.Name = "btnAGN1X";
-            this.btnAGN1X.Size = new System.Drawing.Size(56, 18);
-            this.btnAGN1X.TabIndex = 19;
-            this.btnAGN1X.Text = "AGN1X";
-            this.btnAGN1X.UseVisualStyleBackColor = true;
-            this.btnAGN1X.Click += new System.EventHandler(this.btnAGN1X_Click);
-            // 
-            // btnAGN
-            // 
-            this.btnAGN.Location = new System.Drawing.Point(27, 227);
-            this.btnAGN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAGN.Name = "btnAGN";
-            this.btnAGN.Size = new System.Drawing.Size(56, 18);
-            this.btnAGN.TabIndex = 18;
-            this.btnAGN.Text = "AGN?";
-            this.btnAGN.UseVisualStyleBackColor = true;
-            this.btnAGN.Click += new System.EventHandler(this.btnAGN_Click);
-            // 
-            // btnCommand
-            // 
-            this.btnCommand.Location = new System.Drawing.Point(215, 178);
-            this.btnCommand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnCommand.Name = "btnCommand";
-            this.btnCommand.Size = new System.Drawing.Size(62, 18);
-            this.btnCommand.TabIndex = 17;
-            this.btnCommand.Text = "Command";
-            this.btnCommand.UseVisualStyleBackColor = true;
-            this.btnCommand.Click += new System.EventHandler(this.btnCommand_Click);
-            // 
-            // txtCommand
-            // 
-            this.txtCommand.Location = new System.Drawing.Point(27, 178);
-            this.txtCommand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtCommand.Multiline = true;
-            this.txtCommand.Name = "txtCommand";
-            this.txtCommand.Size = new System.Drawing.Size(185, 19);
-            this.txtCommand.TabIndex = 16;
-            // 
-            // btnCAL
-            // 
-            this.btnCAL.Location = new System.Drawing.Point(27, 343);
-            this.btnCAL.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnCAL.Name = "btnCAL";
-            this.btnCAL.Size = new System.Drawing.Size(56, 18);
-            this.btnCAL.TabIndex = 15;
-            this.btnCAL.Text = "CAL";
-            this.btnCAL.UseVisualStyleBackColor = true;
-            this.btnCAL.Click += new System.EventHandler(this.btnCAL_Click);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.chart5);
-            this.tabPage1.Controls.Add(this.chart4);
-            this.tabPage1.Controls.Add(this.chart3);
-            this.tabPage1.Controls.Add(this.dark_sp_chart);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.stopbtn);
-            this.tabPage1.Controls.Add(this.startbtn);
-            this.tabPage1.Controls.Add(this.white_point);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1041, 546);
-            this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "光譜測試";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // stopbtn
-            // 
-            this.stopbtn.Enabled = false;
-            this.stopbtn.Location = new System.Drawing.Point(409, 421);
-            this.stopbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.stopbtn.Name = "stopbtn";
-            this.stopbtn.Size = new System.Drawing.Size(79, 38);
-            this.stopbtn.TabIndex = 22;
-            this.stopbtn.Text = "停止";
-            this.stopbtn.UseVisualStyleBackColor = true;
-            this.stopbtn.Click += new System.EventHandler(this.stopbtn_Click);
-            // 
-            // startbtn
-            // 
-            this.startbtn.Location = new System.Drawing.Point(326, 421);
-            this.startbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.startbtn.Name = "startbtn";
-            this.startbtn.Size = new System.Drawing.Size(79, 38);
-            this.startbtn.TabIndex = 21;
-            this.startbtn.Text = "開始測試";
-            this.startbtn.UseVisualStyleBackColor = true;
-            this.startbtn.Click += new System.EventHandler(this.startbtn_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImage = global::Spectrum_Test.Properties.Resources.refresh;
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRefresh.Location = new System.Drawing.Point(330, 4);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(36, 36);
-            this.btnRefresh.TabIndex = 10;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // cboPort
-            // 
-            this.cboPort.FormattingEnabled = true;
-            this.cboPort.Location = new System.Drawing.Point(111, 12);
-            this.cboPort.Name = "cboPort";
-            this.cboPort.Size = new System.Drawing.Size(137, 20);
-            this.cboPort.TabIndex = 8;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "COM Port";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(254, 12);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(70, 21);
-            this.btnClose.TabIndex = 9;
-            this.btnClose.Text = "Disconnect";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Visible = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.Location = new System.Drawing.Point(254, 12);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(70, 21);
-            this.btnOpen.TabIndex = 11;
-            this.btnOpen.Text = "Connect";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            this.tabPage3.Controls.Add(this.txtLog);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(569, 519);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Log";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // txtLog
             // 
@@ -447,33 +226,199 @@
             this.txtLog.Size = new System.Drawing.Size(573, 519);
             this.txtLog.TabIndex = 12;
             // 
-            // label20
+            // tabPage4
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(512, 27);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(32, 12);
-            this.label20.TabIndex = 13;
-            this.label20.Text = "狀態:";
+            this.tabPage4.Controls.Add(this.checkBox4);
+            this.tabPage4.Controls.Add(this.chart1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(569, 519);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "光譜圖";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // status_lb
+            // checkBox4
             // 
-            this.status_lb.AutoSize = true;
-            this.status_lb.Location = new System.Drawing.Point(548, 27);
-            this.status_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.status_lb.Name = "status_lb";
-            this.status_lb.Size = new System.Drawing.Size(0, 12);
-            this.status_lb.TabIndex = 14;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(5, 4);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(48, 16);
+            this.checkBox4.TabIndex = 16;
+            this.checkBox4.Text = "動態";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // chart1
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1041, 546);
-            this.tabPage2.TabIndex = 7;
-            this.tabPage2.Text = "LED穩定性測試";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(0, 0);
+            this.chart1.Margin = new System.Windows.Forms.Padding(2);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(569, 519);
+            this.chart1.TabIndex = 15;
+            this.chart1.Text = "chart1";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(88, 320);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(63, 18);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "SWL1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(27, 320);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(56, 18);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "SWL0";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(88, 297);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(63, 18);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "btnROI488";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnROI
+            // 
+            this.btnROI.Location = new System.Drawing.Point(27, 297);
+            this.btnROI.Margin = new System.Windows.Forms.Padding(2);
+            this.btnROI.Name = "btnROI";
+            this.btnROI.Size = new System.Drawing.Size(56, 18);
+            this.btnROI.TabIndex = 25;
+            this.btnROI.Text = "ROI?";
+            this.btnROI.UseVisualStyleBackColor = true;
+            this.btnROI.Click += new System.EventHandler(this.btnROI_Click);
+            // 
+            // btnELC1000
+            // 
+            this.btnELC1000.Location = new System.Drawing.Point(88, 274);
+            this.btnELC1000.Margin = new System.Windows.Forms.Padding(2);
+            this.btnELC1000.Name = "btnELC1000";
+            this.btnELC1000.Size = new System.Drawing.Size(56, 18);
+            this.btnELC1000.TabIndex = 24;
+            this.btnELC1000.Text = "ELC1000";
+            this.btnELC1000.UseVisualStyleBackColor = true;
+            this.btnELC1000.Click += new System.EventHandler(this.btnELC1000_Click);
+            // 
+            // btnELC
+            // 
+            this.btnELC.Location = new System.Drawing.Point(27, 274);
+            this.btnELC.Margin = new System.Windows.Forms.Padding(2);
+            this.btnELC.Name = "btnELC";
+            this.btnELC.Size = new System.Drawing.Size(56, 18);
+            this.btnELC.TabIndex = 23;
+            this.btnELC.Text = "ELC?";
+            this.btnELC.UseVisualStyleBackColor = true;
+            this.btnELC.Click += new System.EventHandler(this.btnELC_Click);
+            // 
+            // btnGNV128
+            // 
+            this.btnGNV128.Location = new System.Drawing.Point(88, 250);
+            this.btnGNV128.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGNV128.Name = "btnGNV128";
+            this.btnGNV128.Size = new System.Drawing.Size(56, 18);
+            this.btnGNV128.TabIndex = 22;
+            this.btnGNV128.Text = "GNV128";
+            this.btnGNV128.UseVisualStyleBackColor = true;
+            this.btnGNV128.Click += new System.EventHandler(this.btnGNV128_Click);
+            // 
+            // btnGNV
+            // 
+            this.btnGNV.Location = new System.Drawing.Point(27, 250);
+            this.btnGNV.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGNV.Name = "btnGNV";
+            this.btnGNV.Size = new System.Drawing.Size(56, 18);
+            this.btnGNV.TabIndex = 21;
+            this.btnGNV.Text = "GNV?";
+            this.btnGNV.UseVisualStyleBackColor = true;
+            this.btnGNV.Click += new System.EventHandler(this.btnGNV_Click);
+            // 
+            // btnAGN2X
+            // 
+            this.btnAGN2X.Location = new System.Drawing.Point(148, 227);
+            this.btnAGN2X.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAGN2X.Name = "btnAGN2X";
+            this.btnAGN2X.Size = new System.Drawing.Size(56, 18);
+            this.btnAGN2X.TabIndex = 20;
+            this.btnAGN2X.Text = "AGN2X";
+            this.btnAGN2X.UseVisualStyleBackColor = true;
+            this.btnAGN2X.Click += new System.EventHandler(this.btnAGN2X_Click);
+            // 
+            // btnAGN1X
+            // 
+            this.btnAGN1X.Location = new System.Drawing.Point(88, 227);
+            this.btnAGN1X.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAGN1X.Name = "btnAGN1X";
+            this.btnAGN1X.Size = new System.Drawing.Size(56, 18);
+            this.btnAGN1X.TabIndex = 19;
+            this.btnAGN1X.Text = "AGN1X";
+            this.btnAGN1X.UseVisualStyleBackColor = true;
+            this.btnAGN1X.Click += new System.EventHandler(this.btnAGN1X_Click);
+            // 
+            // btnAGN
+            // 
+            this.btnAGN.Location = new System.Drawing.Point(27, 227);
+            this.btnAGN.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAGN.Name = "btnAGN";
+            this.btnAGN.Size = new System.Drawing.Size(56, 18);
+            this.btnAGN.TabIndex = 18;
+            this.btnAGN.Text = "AGN?";
+            this.btnAGN.UseVisualStyleBackColor = true;
+            this.btnAGN.Click += new System.EventHandler(this.btnAGN_Click);
+            // 
+            // btnCommand
+            // 
+            this.btnCommand.Location = new System.Drawing.Point(215, 178);
+            this.btnCommand.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCommand.Name = "btnCommand";
+            this.btnCommand.Size = new System.Drawing.Size(62, 18);
+            this.btnCommand.TabIndex = 17;
+            this.btnCommand.Text = "Command";
+            this.btnCommand.UseVisualStyleBackColor = true;
+            this.btnCommand.Click += new System.EventHandler(this.btnCommand_Click);
+            // 
+            // txtCommand
+            // 
+            this.txtCommand.Location = new System.Drawing.Point(27, 178);
+            this.txtCommand.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCommand.Multiline = true;
+            this.txtCommand.Name = "txtCommand";
+            this.txtCommand.Size = new System.Drawing.Size(185, 19);
+            this.txtCommand.TabIndex = 16;
+            // 
+            // btnCAL
+            // 
+            this.btnCAL.Location = new System.Drawing.Point(27, 343);
+            this.btnCAL.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCAL.Name = "btnCAL";
+            this.btnCAL.Size = new System.Drawing.Size(56, 18);
+            this.btnCAL.TabIndex = 15;
+            this.btnCAL.Text = "CAL";
+            this.btnCAL.UseVisualStyleBackColor = true;
+            this.btnCAL.Click += new System.EventHandler(this.btnCAL_Click);
             // 
             // tabPage6
             // 
@@ -485,6 +430,16 @@
             this.tabPage6.TabIndex = 8;
             this.tabPage6.Text = "馬達測試";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // btnMotor_Test
+            // 
+            this.btnMotor_Test.Location = new System.Drawing.Point(412, 117);
+            this.btnMotor_Test.Name = "btnMotor_Test";
+            this.btnMotor_Test.Size = new System.Drawing.Size(75, 23);
+            this.btnMotor_Test.TabIndex = 8;
+            this.btnMotor_Test.Text = "測試";
+            this.btnMotor_Test.UseVisualStyleBackColor = true;
+            this.btnMotor_Test.Click += new System.EventHandler(this.btnMotor_Test_Click);
             // 
             // groupBox5
             // 
@@ -541,18 +496,105 @@
             this.textBox10.Size = new System.Drawing.Size(111, 22);
             this.textBox10.TabIndex = 8;
             // 
-            // btnMotor_Test
+            // tabPage1
             // 
-            this.btnMotor_Test.Location = new System.Drawing.Point(412, 117);
-            this.btnMotor_Test.Name = "btnMotor_Test";
-            this.btnMotor_Test.Size = new System.Drawing.Size(75, 23);
-            this.btnMotor_Test.TabIndex = 8;
-            this.btnMotor_Test.Text = "測試";
-            this.btnMotor_Test.UseVisualStyleBackColor = true;
-            this.btnMotor_Test.Click += new System.EventHandler(this.btnMotor_Test_Click);
+            this.tabPage1.Controls.Add(this.chart5);
+            this.tabPage1.Controls.Add(this.chart4);
+            this.tabPage1.Controls.Add(this.point_sp_chart);
+            this.tabPage1.Controls.Add(this.dark_sp_chart);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.stopbtn);
+            this.tabPage1.Controls.Add(this.startbtn);
+            this.tabPage1.Controls.Add(this.white_point);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1041, 546);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "光譜測試";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chart5
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart5.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.chart5.Legends.Add(legend2);
+            this.chart5.Location = new System.Drawing.Point(494, 411);
+            this.chart5.Name = "chart5";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart5.Series.Add(series2);
+            this.chart5.Size = new System.Drawing.Size(541, 130);
+            this.chart5.TabIndex = 54;
+            this.chart5.Text = "chart5";
+            // 
+            // chart4
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart4.ChartAreas.Add(chartArea3);
+            legend3.Enabled = false;
+            legend3.Name = "Legend1";
+            this.chart4.Legends.Add(legend3);
+            this.chart4.Location = new System.Drawing.Point(494, 275);
+            this.chart4.Name = "chart4";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart4.Series.Add(series3);
+            this.chart4.Size = new System.Drawing.Size(541, 130);
+            this.chart4.TabIndex = 53;
+            this.chart4.Text = "chart4";
+            // 
+            // point_sp_chart
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.point_sp_chart.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.point_sp_chart.Legends.Add(legend4);
+            this.point_sp_chart.Location = new System.Drawing.Point(494, 139);
+            this.point_sp_chart.Name = "point_sp_chart";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.point_sp_chart.Series.Add(series4);
+            this.point_sp_chart.Size = new System.Drawing.Size(541, 130);
+            this.point_sp_chart.TabIndex = 52;
+            this.point_sp_chart.Text = "point_sp_chart";
+            // 
+            // dark_sp_chart
+            // 
+            chartArea5.Name = "ChartArea1";
+            this.dark_sp_chart.ChartAreas.Add(chartArea5);
+            legend5.Enabled = false;
+            legend5.Name = "Legend1";
+            this.dark_sp_chart.Legends.Add(legend5);
+            this.dark_sp_chart.Location = new System.Drawing.Point(494, 3);
+            this.dark_sp_chart.Name = "dark_sp_chart";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.dark_sp_chart.Series.Add(series5);
+            this.dark_sp_chart.Size = new System.Drawing.Size(541, 130);
+            this.dark_sp_chart.TabIndex = 51;
+            this.dark_sp_chart.Text = "dark_sp_chart";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CAL_RUN_cycle_txt);
+            this.groupBox1.Controls.Add(this.label32);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.label30);
@@ -600,10 +642,78 @@
             this.groupBox1.Controls.Add(this.xAS_txt);
             this.groupBox1.Location = new System.Drawing.Point(7, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(481, 385);
+            this.groupBox1.Size = new System.Drawing.Size(481, 403);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "光譜測試";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(267, 346);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(47, 22);
+            this.textBox1.TabIndex = 91;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(234, 349);
+            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(29, 12);
+            this.label31.TabIndex = 90;
+            this.label31.Text = "步長";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label30.Location = new System.Drawing.Point(14, 323);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(57, 12);
+            this.label30.TabIndex = 89;
+            this.label30.Text = "檢測參數";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label29.Location = new System.Drawing.Point(14, 259);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(83, 12);
+            this.label29.TabIndex = 88;
+            this.label29.Text = "波長校正係數";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label28.Location = new System.Drawing.Point(14, 192);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(83, 12);
+            this.label28.TabIndex = 87;
+            this.label28.Text = "馬達移動參數";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label27.Location = new System.Drawing.Point(14, 93);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(102, 12);
+            this.label27.TabIndex = 86;
+            this.label27.Text = "Auto-scaling參數";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label26.Location = new System.Drawing.Point(14, 29);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(108, 12);
+            this.label26.TabIndex = 85;
+            this.label26.Text = "LED等待時間參數";
             // 
             // label22
             // 
@@ -911,24 +1021,6 @@
             this.label5.TabIndex = 51;
             this.label5.Text = "間距步數";
             // 
-            // white_point
-            // 
-            this.white_point.Location = new System.Drawing.Point(68, 519);
-            this.white_point.Margin = new System.Windows.Forms.Padding(2);
-            this.white_point.Name = "white_point";
-            this.white_point.Size = new System.Drawing.Size(47, 22);
-            this.white_point.TabIndex = 50;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 522);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 49;
-            this.label4.Text = "白區點";
-            // 
             // total_point_txt
             // 
             this.total_point_txt.Location = new System.Drawing.Point(61, 346);
@@ -965,212 +1057,142 @@
             this.xAS_txt.Size = new System.Drawing.Size(47, 22);
             this.xAS_txt.TabIndex = 45;
             // 
-            // label26
+            // stopbtn
             // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label26.Location = new System.Drawing.Point(14, 29);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(108, 12);
-            this.label26.TabIndex = 85;
-            this.label26.Text = "LED等待時間參數";
+            this.stopbtn.Enabled = false;
+            this.stopbtn.Location = new System.Drawing.Point(409, 446);
+            this.stopbtn.Margin = new System.Windows.Forms.Padding(2);
+            this.stopbtn.Name = "stopbtn";
+            this.stopbtn.Size = new System.Drawing.Size(79, 38);
+            this.stopbtn.TabIndex = 22;
+            this.stopbtn.Text = "停止";
+            this.stopbtn.UseVisualStyleBackColor = true;
+            this.stopbtn.Click += new System.EventHandler(this.stopbtn_Click);
             // 
-            // label27
+            // startbtn
             // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label27.Location = new System.Drawing.Point(14, 93);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(102, 12);
-            this.label27.TabIndex = 86;
-            this.label27.Text = "Auto-scaling參數";
+            this.startbtn.Location = new System.Drawing.Point(326, 446);
+            this.startbtn.Margin = new System.Windows.Forms.Padding(2);
+            this.startbtn.Name = "startbtn";
+            this.startbtn.Size = new System.Drawing.Size(79, 38);
+            this.startbtn.TabIndex = 21;
+            this.startbtn.Text = "開始測試";
+            this.startbtn.UseVisualStyleBackColor = true;
+            this.startbtn.Click += new System.EventHandler(this.startbtn_Click);
             // 
-            // label28
+            // white_point
             // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label28.Location = new System.Drawing.Point(14, 192);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(83, 12);
-            this.label28.TabIndex = 87;
-            this.label28.Text = "馬達移動參數";
+            this.white_point.Location = new System.Drawing.Point(68, 519);
+            this.white_point.Margin = new System.Windows.Forms.Padding(2);
+            this.white_point.Name = "white_point";
+            this.white_point.Size = new System.Drawing.Size(47, 22);
+            this.white_point.TabIndex = 50;
             // 
-            // label29
+            // label4
             // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label29.Location = new System.Drawing.Point(14, 259);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(83, 12);
-            this.label29.TabIndex = 88;
-            this.label29.Text = "波長校正係數";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 522);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "白區點";
             // 
-            // label30
+            // tabPage2
             // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label30.Location = new System.Drawing.Point(14, 323);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(57, 12);
-            this.label30.TabIndex = 89;
-            this.label30.Text = "檢測參數";
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1041, 546);
+            this.tabPage2.TabIndex = 7;
+            this.tabPage2.Text = "LED穩定性測試";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // btnRefresh
             // 
-            this.textBox1.Location = new System.Drawing.Point(267, 346);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(47, 22);
-            this.textBox1.TabIndex = 91;
+            this.btnRefresh.BackgroundImage = global::Spectrum_Test.Properties.Resources.refresh;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRefresh.Location = new System.Drawing.Point(330, 4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(36, 36);
+            this.btnRefresh.TabIndex = 10;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // label31
+            // cboPort
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(234, 349);
-            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(29, 12);
-            this.label31.TabIndex = 90;
-            this.label31.Text = "步長";
+            this.cboPort.FormattingEnabled = true;
+            this.cboPort.Location = new System.Drawing.Point(111, 12);
+            this.cboPort.Name = "cboPort";
+            this.cboPort.Size = new System.Drawing.Size(137, 20);
+            this.cboPort.TabIndex = 8;
             // 
-            // tabControl2
+            // label1
             // 
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(463, 1);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(577, 545);
-            this.tabControl2.TabIndex = 29;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "COM Port";
             // 
-            // tabPage3
+            // btnClose
             // 
-            this.tabPage3.Controls.Add(this.txtLog);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(569, 519);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Log";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.btnClose.Location = new System.Drawing.Point(254, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(70, 21);
+            this.btnClose.TabIndex = 9;
+            this.btnClose.Text = "Disconnect";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Visible = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // tabPage4
+            // btnOpen
             // 
-            this.tabPage4.Controls.Add(this.checkBox4);
-            this.tabPage4.Controls.Add(this.chart1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(569, 519);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "光譜圖";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.btnOpen.Location = new System.Drawing.Point(254, 12);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(70, 21);
+            this.btnOpen.TabIndex = 11;
+            this.btnOpen.Text = "Connect";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
-            // checkBox4
+            // label20
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(5, 4);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(48, 16);
-            this.checkBox4.TabIndex = 16;
-            this.checkBox4.Text = "動態";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(512, 27);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 12);
+            this.label20.TabIndex = 13;
+            this.label20.Text = "狀態:";
             // 
-            // chart1
+            // status_lb
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(0, 0);
-            this.chart1.Margin = new System.Windows.Forms.Padding(2);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(569, 519);
-            this.chart1.TabIndex = 15;
-            this.chart1.Text = "chart1";
+            this.status_lb.AutoSize = true;
+            this.status_lb.Location = new System.Drawing.Point(548, 27);
+            this.status_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.status_lb.Name = "status_lb";
+            this.status_lb.Size = new System.Drawing.Size(0, 12);
+            this.status_lb.TabIndex = 14;
             // 
-            // dark_sp_chart
+            // CAL_RUN_cycle_txt
             // 
-            chartArea5.Name = "ChartArea1";
-            this.dark_sp_chart.ChartAreas.Add(chartArea5);
-            legend5.Enabled = false;
-            legend5.Name = "Legend1";
-            this.dark_sp_chart.Legends.Add(legend5);
-            this.dark_sp_chart.Location = new System.Drawing.Point(494, 3);
-            this.dark_sp_chart.Name = "dark_sp_chart";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.dark_sp_chart.Series.Add(series5);
-            this.dark_sp_chart.Size = new System.Drawing.Size(541, 130);
-            this.dark_sp_chart.TabIndex = 51;
-            this.dark_sp_chart.Text = "dark_sp_chart";
+            this.CAL_RUN_cycle_txt.Location = new System.Drawing.Point(61, 372);
+            this.CAL_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.CAL_RUN_cycle_txt.Name = "CAL_RUN_cycle_txt";
+            this.CAL_RUN_cycle_txt.Size = new System.Drawing.Size(47, 22);
+            this.CAL_RUN_cycle_txt.TabIndex = 93;
             // 
-            // chart3
+            // label32
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea4);
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.chart3.Legends.Add(legend4);
-            this.chart3.Location = new System.Drawing.Point(494, 139);
-            this.chart3.Name = "chart3";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart3.Series.Add(series4);
-            this.chart3.Size = new System.Drawing.Size(541, 130);
-            this.chart3.TabIndex = 52;
-            this.chart3.Text = "chart3";
-            // 
-            // chart4
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chart4.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.chart4.Legends.Add(legend3);
-            this.chart4.Location = new System.Drawing.Point(494, 275);
-            this.chart4.Name = "chart4";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart4.Series.Add(series3);
-            this.chart4.Size = new System.Drawing.Size(541, 130);
-            this.chart4.TabIndex = 53;
-            this.chart4.Text = "chart4";
-            // 
-            // chart5
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart5.ChartAreas.Add(chartArea2);
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.chart5.Legends.Add(legend2);
-            this.chart5.Location = new System.Drawing.Point(494, 411);
-            this.chart5.Name = "chart5";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart5.Series.Add(series2);
-            this.chart5.Size = new System.Drawing.Size(541, 130);
-            this.chart5.TabIndex = 54;
-            this.chart5.Text = "chart5";
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(4, 375);
+            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(53, 12);
+            this.label32.TabIndex = 92;
+            this.label32.Text = "測試次數";
             // 
             // MainForm
             // 
@@ -1191,23 +1213,23 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dark_sp_chart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.point_sp_chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dark_sp_chart)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1308,7 +1330,9 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart5;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart point_sp_chart;
+        private System.Windows.Forms.TextBox CAL_RUN_cycle_txt;
+        private System.Windows.Forms.Label label32;
     }
 }
 
