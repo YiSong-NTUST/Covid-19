@@ -1,4 +1,5 @@
-﻿using SmartTagTool;
+﻿using Newtonsoft.Json;
+using SmartTagTool;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +24,44 @@ namespace Spectrum_Test
 
     public partial class MainForm : Form
     {
+
+        public class Machine
+        {
+            public string id { get; set; }
+            public string note { get; set; }
+            public string t1 { get; set; }
+            public string t2 { get; set; }
+            public string wait { get; set; }
+            public string a0 { get; set; }
+            public string a1 { get; set; }
+            public string a2 { get; set; }
+            public string a3 { get; set; }
+            public string mac { get; set; }
+            public string analog_gain { get; set; }
+            public string digital_gain { get; set; }
+            public string xps { get; set; }
+            public string xts { get; set; }
+            public string xsc { get; set; }
+            public string n_steps { get; set; }
+            public string s_steps { get; set; }
+            public string n_mov { get; set; }
+            public string roi_ho { get; set; }
+            public string roi_hc { get; set; }
+            public string roi_vo { get; set; }
+            public string roi_lc { get; set; }
+            public string exp { get; set; }
+            public string exp_max { get; set; }
+            public string xhome { get; set; }
+            public string baseline_start { get; set; }
+            public string baseline_end { get; set; }
+            public string xbacklash { get; set; }
+            public string direction { get; set; }
+            public string i_max { get; set; }
+            public string i_thr { get; set; }
+            public string auto_scaling { get; set; }
+            public string sc_id { get; set; }
+        }
+
         Stopwatch sw = new Stopwatch();
         public static string command = "";
         public static List<List<int>> ALL_POINT_CAL = new List<List<int>>();
@@ -41,7 +81,7 @@ namespace Spectrum_Test
         public AddLogDelegate rawlogDelegate;
 
         string selPort;
-        double SP_T1, SP_T2, SP_XSC, SP_XTS, SP_XAS, SP_X1, SP_total_points, SP_point_distance, SP_step_distance;
+        double SP_T1, SP_T2, SP_XSC, SP_XTS, SP_XAS, SP_X1, SP_total_points, SP_point_distance_steps, SP_step_distance;
         int SP_DG, SP_AG, SP_EXP_max, SP_EXP_init, SP_I_max, SP_I_thr;
         int SP_maxValue, SP_EXP, SP_EXP1, SP_I1, SP_EXP2, SP_I2;
         int CAL_cycle, SP_wl, CAL_RUN_cycle;
@@ -278,63 +318,6 @@ namespace Spectrum_Test
             // 馬達測試參數
             test_motor_round = int.Parse(ini.IniReadValue("MOTOR_TEST", "TEST_ROUND"));
             txt_motor_test_round.Text = test_motor_round.ToString();
-
-            //  光譜測試參數
-            SP_T1 = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "T1"));
-            SP_T2 = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "T2"));
-            SP_XSC = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "XSC"));
-            SP_XTS = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "XTS"));
-            SP_XAS = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "XAS"));
-            SP_X1 = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "X1"));
-            SP_total_points = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "TOTALPOINTS"));
-            SP_point_distance = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "POINTDISTANCE"));
-            SP_step_distance = double.Parse(ini.IniReadValue("SPECTRUM_TEST", "STEPDISTANCE"));
-            SP_DG = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "DG"));
-            SP_AG = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "AG"));
-            SP_EXP_init = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "EXPINITIAL"));
-            SP_EXP_max = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "EXPMAX"));
-            SP_I_max = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "IMAX"));
-            SP_I_thr = int.Parse(ini.IniReadValue("SPECTRUM_TEST", "ITHR"));
-            SP_test_T1_txt.Text = SP_T1.ToString();
-            SP_test_T2_txt.Text = SP_T2.ToString();
-            SP_test_Xsc_txt.Text = SP_XSC.ToString();
-            SP_test_Xts_txt.Text = SP_XTS.ToString();
-            SP_test_xAS_txt.Text = SP_XAS.ToString();
-            SP_test_x1_txt.Text = SP_X1.ToString();
-            SP_test_total_point_txt.Text = SP_total_points.ToString();
-            SP_test_point_distance_txt.Text = SP_point_distance.ToString();   
-            SP_test_step_distance_txt.Text = SP_step_distance.ToString();
-            SP_test_DG_txt.Text = SP_DG.ToString();
-            SP_test_AG_txt.Text = SP_AG.ToString();
-            SP_test_EXP_initial_txt.Text = SP_EXP_init.ToString();
-            SP_test_EXP_max_txt.Text = SP_EXP_max.ToString();
-            SP_test_I_max_txt.Text = SP_I_max.ToString();
-            SP_test_I_thr_txt.Text = SP_I_thr.ToString();
-
-            // LED測試參數
-            LED_T1 = double.Parse(ini.IniReadValue("LED_TEST", "T1"));
-            LED_T2 = double.Parse(ini.IniReadValue("LED_TEST", "T2"));
-            LED_total_times = double.Parse(ini.IniReadValue("LED_TEST", "TOTALTIMES"));
-            LED_interval_time = double.Parse(ini.IniReadValue("LED_TEST", "INTERVALTIME"));
-            LED_DG = int.Parse(ini.IniReadValue("LED_TEST", "DG"));
-            LED_AG = int.Parse(ini.IniReadValue("LED_TEST", "AG"));
-            LED_EXP_init = int.Parse(ini.IniReadValue("LED_TEST", "EXPINITIAL"));
-            LED_EXP_max = int.Parse(ini.IniReadValue("LED_TEST", "EXPMAX"));
-            LED_I_max = int.Parse(ini.IniReadValue("LED_TEST", "IMAX"));
-            LED_I_thr = int.Parse(ini.IniReadValue("LED_TEST", "ITHR"));
-            LED_test_T1_txt.Text = LED_T1.ToString();
-            LED_test_T2_txt.Text = LED_T2.ToString();
-            LED_test_total_times_txt.Text = LED_total_times.ToString();
-            LED_test_interval_time_txt.Text = LED_interval_time.ToString();
-            LED_test_DG_txt.Text = LED_DG.ToString();
-            LED_test_AG_txt.Text = LED_AG.ToString();
-            LED_test_EXP_initial_txt.Text = LED_EXP_init.ToString();
-            LED_test_EXP_max_txt.Text = LED_EXP_max.ToString();
-            LED_test_I_max_txt.Text = LED_I_max.ToString();
-            LED_test_I_thr_txt.Text = LED_I_thr.ToString();
-
-
-            //test_led1 = bool.Parse(ini.IniReadValue("LED_TEST", "LED1"));
         }
 
         /**     存設定值    */
@@ -355,38 +338,6 @@ namespace Spectrum_Test
             {
                 ini.IniWriteValue("MOTOR_TEST", "TEST_ROUND", txt_motor_test_round.Text);
             }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["SP_test_page"])
-            {
-                ini.IniWriteValue("SPECTRUM_TEST", "T1", SP_test_T1_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "T2", SP_test_T2_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "XSC", SP_test_Xsc_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "XTS", SP_test_Xts_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "XAS", SP_test_xAS_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "X1", SP_test_x1_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "TOTALPOINTS", SP_test_total_point_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "POINTDISTANCE", SP_test_point_distance_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "DG", SP_test_DG_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "AG", SP_test_AG_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "EXPINITIAL", SP_test_EXP_initial_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "EXPMAX", SP_test_EXP_max_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "IMAX", SP_test_I_max_txt.Text);
-                ini.IniWriteValue("SPECTRUM_TEST", "ITHR", SP_test_I_thr_txt.Text);
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["LED_test_page"])
-            {
-                ini.IniWriteValue("LED_TEST", "T1", LED_test_T1_txt.Text);
-                ini.IniWriteValue("LED_TEST", "T2", LED_test_T2_txt.Text);
-                ini.IniWriteValue("LED_TEST", "TOTALTIMES", LED_test_total_times_txt.Text);
-                ini.IniWriteValue("LED_TEST", "INTERVALTIME", LED_test_interval_time_txt.Text);
-                ini.IniWriteValue("LED_TEST", "DG", LED_test_DG_txt.Text);
-                ini.IniWriteValue("LED_TEST", "AG", LED_test_AG_txt.Text);
-                ini.IniWriteValue("LED_TEST", "EXPINITIAL", LED_test_EXP_initial_txt.Text);
-                ini.IniWriteValue("LED_TEST", "EXPMAX", LED_test_EXP_max_txt.Text);
-                ini.IniWriteValue("LED_TEST", "IMAX", LED_test_I_max_txt.Text);
-                ini.IniWriteValue("LED_TEST", "ITHR", LED_test_I_thr_txt.Text);
-            }
-
-            //ini.IniWriteValue("LED_TEST", "LED1", test_led1.ToString());
         }
 
         
@@ -474,10 +425,35 @@ namespace Spectrum_Test
             txtCommand.Text = "$AGN1X#";
         }
 
+        private void btnApi_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtAPI.Text))
+            {
+                GetAllProducts(txtAPI.Text);
+            }
+            
+        }
+
         private void btnAGN2X_Click(object sender, EventArgs e)
         {
             txtCommand.Text = "";
             txtCommand.Text = "$AGN2X#";
+        }
+
+        private void SP_test_point_distance_steps_txt_TextChanged(object sender, EventArgs e)
+        {
+            if(!String.IsNullOrEmpty(SP_test_point_distance_steps_txt.Text) && !String.IsNullOrEmpty(SP_test_step_distance_txt.Text))
+            {
+                SP_point_distance_txt.Text = (double.Parse(SP_test_point_distance_steps_txt.Text) * double.Parse(SP_test_step_distance_txt.Text)).ToString();
+            }            
+        }
+
+        private void SP_test_step_distance_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(SP_test_point_distance_steps_txt.Text) && !String.IsNullOrEmpty(SP_test_step_distance_txt.Text))
+            {
+                SP_point_distance_txt.Text = (double.Parse(SP_test_point_distance_steps_txt.Text) * double.Parse(SP_test_step_distance_txt.Text)).ToString();
+            }
         }
 
         private void btnGNV_Click(object sender, EventArgs e)
@@ -703,6 +679,25 @@ namespace Spectrum_Test
                             }
                             else
                             {
+                                iTask = 5;
+                            }
+                            break;
+                        /** 設ROI */
+                        case 5:
+                            BeginInvoke((Action)(() =>
+                            {
+                                status_lb.Text = "設ROI";
+                            }));
+
+                            ret = CMD_ROI(int.Parse(SP_test_roi_ho_txt.Text), int.Parse(SP_test_roi_hc_txt.Text), int.Parse(SP_test_roi_vo_txt.Text), int.Parse(SP_test_roi_lc_txt.Text));
+
+                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                            {
+                                Log("CMD_DIR Error!");
+                                iTask = 999;
+                            }
+                            else
+                            {
                                 iTask = 10;
                             }
                             break;
@@ -799,6 +794,8 @@ namespace Spectrum_Test
                             Series dark_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次暗光譜");
                             dark_Srs.ChartType = SeriesChartType.Line;
                             dark_Srs.IsValueShownAsLabel = false;
+                            /*dark_Srs.MarkerStyle = MarkerStyle.Circle;
+                            dark_Srs.MarkerSize = 6;*/
                             dark_Srs.Points.DataBindXY(dark_n, dark_sp);
                             dark_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
@@ -1053,7 +1050,7 @@ namespace Spectrum_Test
                         case 51:
                             if (CAL_cycle < int.Parse(SP_test_total_point_txt.Text))
                             {
-                                ret = CMD_MLS(int.Parse(SP_test_point_distance_txt.Text));
+                                ret = CMD_MLS(int.Parse(SP_test_point_distance_steps_txt.Text));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_MLS Error!");
@@ -1111,7 +1108,7 @@ namespace Spectrum_Test
                                 n_wl.Add(i + 1);
 
                                 // 這行要改!!!!!!! //
-                                n_dis.Add(double.Parse(SP_test_x1_txt.Text) + Convert.ToDouble(i) * double.Parse(SP_test_step_distance_txt.Text) * double.Parse(SP_test_point_distance_txt.Text));
+                                n_dis.Add(double.Parse(SP_test_x1_txt.Text) + Convert.ToDouble(i) * double.Parse(SP_test_step_distance_txt.Text) * double.Parse(SP_test_point_distance_steps_txt.Text));
                                 // 這行要改!!!!!!! //
 
                                 sp5.Add(ALL_POINT_CAL[i][index]);
@@ -1121,6 +1118,8 @@ namespace Spectrum_Test
                             point_Srs.ChartType = SeriesChartType.Line;
                             point_Srs.IsValueShownAsLabel = false;
                             point_Srs.Points.DataBindXY(n_wl, sp5);
+                            point_Srs.MarkerStyle = MarkerStyle.Circle;
+                            point_Srs.MarkerSize = 6;
                             point_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
 
@@ -1128,6 +1127,8 @@ namespace Spectrum_Test
                             dis_Srs.ChartType = SeriesChartType.Line;
                             dis_Srs.IsValueShownAsLabel = false;
                             dis_Srs.Points.DataBindXY(n_dis, sp5);
+                            dis_Srs.MarkerStyle = MarkerStyle.Circle;
+                            dis_Srs.MarkerSize = 6;
                             dis_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
                             this.InvokeIfRequired(() =>
@@ -1236,6 +1237,25 @@ namespace Spectrum_Test
                             }));
 
                             ret = CMD_DIR(1);
+
+                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                            {
+                                Log("CMD_DIR Error!");
+                                iTask = 999;
+                            }
+                            else
+                            {
+                                iTask = 5;
+                            }
+                            break;
+                        /** 設ROI */
+                        case 5:
+                            BeginInvoke((Action)(() =>
+                            {
+                                status_lb.Text = "設ROI";
+                            }));
+
+                            ret = CMD_ROI(int.Parse(LED_test_roi_ho_txt.Text), int.Parse(LED_test_roi_hc_txt.Text), int.Parse(LED_test_roi_vo_txt.Text), int.Parse(LED_test_roi_lc_txt.Text));
 
                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                             {
@@ -1581,6 +1601,7 @@ namespace Spectrum_Test
                             time_Srs.ChartType = SeriesChartType.Line;
                             time_Srs.IsValueShownAsLabel = false;
                             time_Srs.Points.DataBindXY(n_wl, sp5);
+                            time_Srs.IsValueShownAsLabel = true;
                             time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
                             this.InvokeIfRequired(() =>
@@ -1843,6 +1864,22 @@ namespace Spectrum_Test
             return CMD_RET_ERR;
         }
 
+        //$ROI0,1280,488,20#
+        private int CMD_ROI(int roi_ho, int roi_hc, int roi_vo, int roi_lc)
+        {
+            string cmd = string.Format("$ROI{0},{1},{2},{3}#", roi_ho, roi_hc, roi_vo, roi_lc);
+            Recv_Clear();
+            SerialWrite(cmd);
+            if (CMD_Timeout(5000)) return CMD_RET_TIMEOUT;
+
+            string recv = Recv_String();
+
+            if (recv.Contains("NACK")) return CMD_RET_NACK;
+            if (recv.Contains("OK")) return CMD_RET_OK;
+
+            return CMD_RET_ERR;
+        }
+
         private int CMD_DIR(int dir)
         {
             string cmd = string.Format("$DIR{0}#", dir);
@@ -1970,7 +2007,7 @@ namespace Spectrum_Test
         {
             int ret;
 
-            ret = CMD_MRS(int.Parse(SP_test_point_distance_txt.Text));
+            ret = CMD_MRS(int.Parse(SP_test_point_distance_steps_txt.Text));
             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
             {
                 Log("CMD_MRS Error!");
@@ -2055,6 +2092,61 @@ namespace Spectrum_Test
                     return false;
             }
 
+        }
+
+        private async void GetAllProducts(string keyword)
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("http://corona-management.cloud.kahap.com/api/get_drive.php?keyword="+keyword);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            var machine = JsonConvert.DeserializeObject <List<Machine>>(responseBody); //反序列化
+
+            // 光譜測試參數
+            SP_test_T1_txt.Text = machine[0].t1.ToString();
+            SP_test_T2_txt.Text = machine[0].t2.ToString();
+            SP_test_Xsc_txt.Text = machine[0].xsc.ToString();
+            SP_test_Xts_txt.Text = machine[0].xts.ToString();
+            /*SP_test_xAS_txt.Text = SP_XAS.ToString();
+            SP_test_x1_txt.Text = SP_X1.ToString();
+            SP_test_total_point_txt.Text = SP_total_points.ToString();
+            SP_test_point_distance_txt.Text = SP_point_distance.ToString();
+            SP_test_step_distance_txt.Text = SP_step_distance.ToString();*/
+            SP_test_DG_txt.Text = machine[0].digital_gain.ToString();
+            SP_test_AG_txt.Text = machine[0].analog_gain.ToString();
+            SP_test_EXP_initial_txt.Text = machine[0].exp.ToString();
+            SP_test_EXP_max_txt.Text = machine[0].exp_max.ToString();
+            SP_test_I_max_txt.Text = machine[0].i_max.ToString();
+            SP_test_I_thr_txt.Text = machine[0].i_thr.ToString();
+            SP_test_roi_ho_txt.Text = machine[0].roi_ho.ToString();
+            SP_test_roi_hc_txt.Text = machine[0].roi_hc.ToString();
+            SP_test_roi_vo_txt.Text = machine[0].roi_vo.ToString();
+            SP_test_roi_lc_txt.Text = machine[0].roi_lc.ToString();
+            SP_test_a0_txt.Text = machine[0].a0.ToString();
+            SP_test_a1_txt.Text = machine[0].a1.ToString();
+            SP_test_a2_txt.Text = machine[0].a2.ToString();
+            SP_test_a3_txt.Text = machine[0].a3.ToString();
+            SP_test_step_distance_txt.Text = machine[0].s_steps.ToString();
+            SP_test_point_distance_steps_txt.Text = machine[0].n_mov.ToString();
+
+            // LED測試參數
+            LED_test_T1_txt.Text = machine[0].t1.ToString();
+            LED_test_T2_txt.Text = machine[0].t2.ToString();
+            LED_test_DG_txt.Text = machine[0].digital_gain.ToString();
+            LED_test_AG_txt.Text = machine[0].analog_gain.ToString();
+            LED_test_EXP_initial_txt.Text = machine[0].exp.ToString();
+            LED_test_EXP_max_txt.Text = machine[0].exp_max.ToString();
+            LED_test_I_max_txt.Text = machine[0].i_max.ToString();
+            LED_test_I_thr_txt.Text = machine[0].i_thr.ToString();
+            LED_test_roi_ho_txt.Text = machine[0].roi_ho.ToString();
+            LED_test_roi_hc_txt.Text = machine[0].roi_hc.ToString();
+            LED_test_roi_vo_txt.Text = machine[0].roi_vo.ToString();
+            LED_test_roi_lc_txt.Text = machine[0].roi_lc.ToString();
+            LED_test_a0_txt.Text = machine[0].a0.ToString();
+            LED_test_a1_txt.Text = machine[0].a1.ToString();
+            LED_test_a2_txt.Text = machine[0].a2.ToString();
+            LED_test_a3_txt.Text = machine[0].a3.ToString();
         }
     }
 
