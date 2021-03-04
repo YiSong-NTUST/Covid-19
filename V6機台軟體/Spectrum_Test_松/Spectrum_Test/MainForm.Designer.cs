@@ -29,23 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.Command_page = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.txtLog = new System.Windows.Forms.TextBox();
@@ -66,7 +72,7 @@
             this.btnCommand = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
             this.btnCAL = new System.Windows.Forms.Button();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.Motor_test_page = new System.Windows.Forms.TabPage();
             this.btnMotor_Test = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txt_motor_test_round = new System.Windows.Forms.TextBox();
@@ -74,13 +80,15 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SP_test_page = new System.Windows.Forms.TabPage();
             this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.distance_sp_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.point_sp_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dark_sp_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SP_test_CAL_RUN_cycle_txt = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.SP_test_step_distance_txt = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -88,48 +96,48 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.x1_txt = new System.Windows.Forms.TextBox();
-            this.Xsc_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_x1_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_Xsc_txt = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.I_thr_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_I_thr_txt = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.I_max_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_I_max_txt = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.EXP_max_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_EXP_max_txt = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.EXP_initial_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_EXP_initial_txt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.AG_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_AG_txt = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.DG_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_DG_txt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.T2_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_T2_txt = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.T1_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_T1_txt = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.Xts_txt = new System.Windows.Forms.TextBox();
-            this.wl_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_Xts_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_wl_txt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.a3_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_a3_txt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.a2_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_a2_txt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.a1_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_a1_txt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.a0_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_a0_txt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.point_distance_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_point_distance_txt = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.total_point_txt = new System.Windows.Forms.TextBox();
+            this.SP_test_total_point_txt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.xAS_txt = new System.Windows.Forms.TextBox();
-            this.stopbtn = new System.Windows.Forms.Button();
-            this.startbtn = new System.Windows.Forms.Button();
+            this.SP_test_xAS_txt = new System.Windows.Forms.TextBox();
+            this.btnSpectrum_Test_Stop = new System.Windows.Forms.Button();
+            this.btnSpectrum_Test_Start = new System.Windows.Forms.Button();
             this.white_point = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.LED_test_page = new System.Windows.Forms.TabPage();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cboPort = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -138,60 +146,105 @@
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.label20 = new System.Windows.Forms.Label();
             this.status_lb = new System.Windows.Forms.Label();
-            this.CAL_RUN_cycle_txt = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LED_test_RUN_cycle_txt = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.LED_test_I_thr_txt = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.LED_test_I_max_txt = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.LED_test_EXP_max_txt = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.LED_test_EXP_initial_txt = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.LED_test_AG_txt = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.LED_test_DG_txt = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.LED_test_T2_txt = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.LED_test_T1_txt = new System.Windows.Forms.TextBox();
+            this.LED_test_wl_txt = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.LED_test_a3_txt = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.LED_test_a2_txt = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.LED_test_a1_txt = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.LED_test_a0_txt = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.LED_test_interval_time_txt = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.LED_test_total_times_txt = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.btnLED_Test_Stop = new System.Windows.Forms.Button();
+            this.btnLED_Test_Start = new System.Windows.Forms.Button();
+            this.B_LED_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.A_LED_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnSpectrum_Test_Save = new System.Windows.Forms.Button();
+            this.btnLED_Test_Save = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.Command_page.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.tabPage6.SuspendLayout();
+            this.Motor_test_page.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.SP_test_page.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distance_sp_chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.point_sp_chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dark_sp_chart)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.LED_test_page.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.B_LED_chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.A_LED_chart)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.Command_page);
+            this.tabControl1.Controls.Add(this.Motor_test_page);
+            this.tabControl1.Controls.Add(this.SP_test_page);
+            this.tabControl1.Controls.Add(this.LED_test_page);
             this.tabControl1.Location = new System.Drawing.Point(3, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1049, 572);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage5
+            // Command_page
             // 
-            this.tabPage5.Controls.Add(this.tabControl2);
-            this.tabPage5.Controls.Add(this.button2);
-            this.tabPage5.Controls.Add(this.button3);
-            this.tabPage5.Controls.Add(this.button1);
-            this.tabPage5.Controls.Add(this.btnROI);
-            this.tabPage5.Controls.Add(this.btnELC1000);
-            this.tabPage5.Controls.Add(this.btnELC);
-            this.tabPage5.Controls.Add(this.btnGNV128);
-            this.tabPage5.Controls.Add(this.btnGNV);
-            this.tabPage5.Controls.Add(this.btnAGN2X);
-            this.tabPage5.Controls.Add(this.btnAGN1X);
-            this.tabPage5.Controls.Add(this.btnAGN);
-            this.tabPage5.Controls.Add(this.btnCommand);
-            this.tabPage5.Controls.Add(this.txtCommand);
-            this.tabPage5.Controls.Add(this.btnCAL);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1041, 546);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Command測試";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.Command_page.Controls.Add(this.tabControl2);
+            this.Command_page.Controls.Add(this.button2);
+            this.Command_page.Controls.Add(this.button3);
+            this.Command_page.Controls.Add(this.button1);
+            this.Command_page.Controls.Add(this.btnROI);
+            this.Command_page.Controls.Add(this.btnELC1000);
+            this.Command_page.Controls.Add(this.btnELC);
+            this.Command_page.Controls.Add(this.btnGNV128);
+            this.Command_page.Controls.Add(this.btnGNV);
+            this.Command_page.Controls.Add(this.btnAGN2X);
+            this.Command_page.Controls.Add(this.btnAGN1X);
+            this.Command_page.Controls.Add(this.btnAGN);
+            this.Command_page.Controls.Add(this.btnCommand);
+            this.Command_page.Controls.Add(this.txtCommand);
+            this.Command_page.Controls.Add(this.btnCAL);
+            this.Command_page.Location = new System.Drawing.Point(4, 22);
+            this.Command_page.Margin = new System.Windows.Forms.Padding(2);
+            this.Command_page.Name = "Command_page";
+            this.Command_page.Size = new System.Drawing.Size(1041, 546);
+            this.Command_page.TabIndex = 4;
+            this.Command_page.Text = "Command測試";
+            this.Command_page.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
@@ -248,22 +301,23 @@
             this.checkBox4.TabIndex = 16;
             this.checkBox4.Text = "動態";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea10.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea10);
+            legend10.Enabled = false;
+            legend10.Name = "Legend1";
+            this.chart1.Legends.Add(legend10);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Legend = "Legend1";
+            series10.Name = "Series1";
+            this.chart1.Series.Add(series10);
             this.chart1.Size = new System.Drawing.Size(569, 519);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
@@ -420,16 +474,16 @@
             this.btnCAL.UseVisualStyleBackColor = true;
             this.btnCAL.Click += new System.EventHandler(this.btnCAL_Click);
             // 
-            // tabPage6
+            // Motor_test_page
             // 
-            this.tabPage6.Controls.Add(this.btnMotor_Test);
-            this.tabPage6.Controls.Add(this.groupBox5);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1041, 546);
-            this.tabPage6.TabIndex = 8;
-            this.tabPage6.Text = "馬達測試";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.Motor_test_page.Controls.Add(this.btnMotor_Test);
+            this.Motor_test_page.Controls.Add(this.groupBox5);
+            this.Motor_test_page.Location = new System.Drawing.Point(4, 22);
+            this.Motor_test_page.Name = "Motor_test_page";
+            this.Motor_test_page.Size = new System.Drawing.Size(1041, 546);
+            this.Motor_test_page.TabIndex = 8;
+            this.Motor_test_page.Text = "馬達測試";
+            this.Motor_test_page.UseVisualStyleBackColor = true;
             // 
             // btnMotor_Test
             // 
@@ -496,106 +550,107 @@
             this.textBox10.Size = new System.Drawing.Size(111, 22);
             this.textBox10.TabIndex = 8;
             // 
-            // tabPage1
+            // SP_test_page
             // 
-            this.tabPage1.Controls.Add(this.chart5);
-            this.tabPage1.Controls.Add(this.chart4);
-            this.tabPage1.Controls.Add(this.point_sp_chart);
-            this.tabPage1.Controls.Add(this.dark_sp_chart);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.stopbtn);
-            this.tabPage1.Controls.Add(this.startbtn);
-            this.tabPage1.Controls.Add(this.white_point);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1041, 546);
-            this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "光譜測試";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.SP_test_page.Controls.Add(this.btnSpectrum_Test_Save);
+            this.SP_test_page.Controls.Add(this.chart5);
+            this.SP_test_page.Controls.Add(this.distance_sp_chart);
+            this.SP_test_page.Controls.Add(this.point_sp_chart);
+            this.SP_test_page.Controls.Add(this.dark_sp_chart);
+            this.SP_test_page.Controls.Add(this.groupBox1);
+            this.SP_test_page.Controls.Add(this.btnSpectrum_Test_Stop);
+            this.SP_test_page.Controls.Add(this.btnSpectrum_Test_Start);
+            this.SP_test_page.Controls.Add(this.white_point);
+            this.SP_test_page.Controls.Add(this.label4);
+            this.SP_test_page.Location = new System.Drawing.Point(4, 22);
+            this.SP_test_page.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_page.Name = "SP_test_page";
+            this.SP_test_page.Size = new System.Drawing.Size(1041, 546);
+            this.SP_test_page.TabIndex = 6;
+            this.SP_test_page.Text = "光譜測試";
+            this.SP_test_page.UseVisualStyleBackColor = true;
             // 
             // chart5
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart5.ChartAreas.Add(chartArea2);
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.chart5.Legends.Add(legend2);
+            chartArea11.Name = "ChartArea1";
+            this.chart5.ChartAreas.Add(chartArea11);
+            legend11.Enabled = false;
+            legend11.Name = "Legend1";
+            this.chart5.Legends.Add(legend11);
             this.chart5.Location = new System.Drawing.Point(494, 411);
             this.chart5.Name = "chart5";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart5.Series.Add(series2);
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series11.IsVisibleInLegend = false;
+            series11.Legend = "Legend1";
+            series11.Name = "Series1";
+            this.chart5.Series.Add(series11);
             this.chart5.Size = new System.Drawing.Size(541, 130);
             this.chart5.TabIndex = 54;
             this.chart5.Text = "chart5";
             // 
-            // chart4
+            // distance_sp_chart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart4.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.chart4.Legends.Add(legend3);
-            this.chart4.Location = new System.Drawing.Point(494, 275);
-            this.chart4.Name = "chart4";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart4.Series.Add(series3);
-            this.chart4.Size = new System.Drawing.Size(541, 130);
-            this.chart4.TabIndex = 53;
-            this.chart4.Text = "chart4";
+            chartArea12.Name = "ChartArea1";
+            this.distance_sp_chart.ChartAreas.Add(chartArea12);
+            legend12.Enabled = false;
+            legend12.Name = "Legend1";
+            this.distance_sp_chart.Legends.Add(legend12);
+            this.distance_sp_chart.Location = new System.Drawing.Point(494, 275);
+            this.distance_sp_chart.Name = "distance_sp_chart";
+            series12.ChartArea = "ChartArea1";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series12.IsVisibleInLegend = false;
+            series12.Legend = "Legend1";
+            series12.Name = "Series1";
+            this.distance_sp_chart.Series.Add(series12);
+            this.distance_sp_chart.Size = new System.Drawing.Size(541, 130);
+            this.distance_sp_chart.TabIndex = 53;
+            this.distance_sp_chart.Text = "distance_sp_chart";
             // 
             // point_sp_chart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.point_sp_chart.ChartAreas.Add(chartArea4);
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.point_sp_chart.Legends.Add(legend4);
+            chartArea13.Name = "ChartArea1";
+            this.point_sp_chart.ChartAreas.Add(chartArea13);
+            legend13.Enabled = false;
+            legend13.Name = "Legend1";
+            this.point_sp_chart.Legends.Add(legend13);
             this.point_sp_chart.Location = new System.Drawing.Point(494, 139);
             this.point_sp_chart.Name = "point_sp_chart";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.point_sp_chart.Series.Add(series4);
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series13.IsVisibleInLegend = false;
+            series13.Legend = "Legend1";
+            series13.Name = "Series1";
+            this.point_sp_chart.Series.Add(series13);
             this.point_sp_chart.Size = new System.Drawing.Size(541, 130);
             this.point_sp_chart.TabIndex = 52;
             this.point_sp_chart.Text = "point_sp_chart";
             // 
             // dark_sp_chart
             // 
-            chartArea5.Name = "ChartArea1";
-            this.dark_sp_chart.ChartAreas.Add(chartArea5);
-            legend5.Enabled = false;
-            legend5.Name = "Legend1";
-            this.dark_sp_chart.Legends.Add(legend5);
+            chartArea14.Name = "ChartArea1";
+            this.dark_sp_chart.ChartAreas.Add(chartArea14);
+            legend14.Enabled = false;
+            legend14.Name = "Legend1";
+            this.dark_sp_chart.Legends.Add(legend14);
             this.dark_sp_chart.Location = new System.Drawing.Point(494, 3);
             this.dark_sp_chart.Name = "dark_sp_chart";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.dark_sp_chart.Series.Add(series5);
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.IsVisibleInLegend = false;
+            series14.Legend = "Legend1";
+            series14.Name = "Series1";
+            this.dark_sp_chart.Series.Add(series14);
             this.dark_sp_chart.Size = new System.Drawing.Size(541, 130);
             this.dark_sp_chart.TabIndex = 51;
             this.dark_sp_chart.Text = "dark_sp_chart";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.CAL_RUN_cycle_txt);
+            this.groupBox1.Controls.Add(this.SP_test_CAL_RUN_cycle_txt);
             this.groupBox1.Controls.Add(this.label32);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.SP_test_step_distance_txt);
             this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.label30);
             this.groupBox1.Controls.Add(this.label29);
@@ -603,43 +658,43 @@
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.label22);
-            this.groupBox1.Controls.Add(this.x1_txt);
-            this.groupBox1.Controls.Add(this.Xsc_txt);
+            this.groupBox1.Controls.Add(this.SP_test_x1_txt);
+            this.groupBox1.Controls.Add(this.SP_test_Xsc_txt);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.I_thr_txt);
+            this.groupBox1.Controls.Add(this.SP_test_I_thr_txt);
             this.groupBox1.Controls.Add(this.label19);
-            this.groupBox1.Controls.Add(this.I_max_txt);
+            this.groupBox1.Controls.Add(this.SP_test_I_max_txt);
             this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.EXP_max_txt);
+            this.groupBox1.Controls.Add(this.SP_test_EXP_max_txt);
             this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.EXP_initial_txt);
+            this.groupBox1.Controls.Add(this.SP_test_EXP_initial_txt);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.AG_txt);
+            this.groupBox1.Controls.Add(this.SP_test_AG_txt);
             this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.DG_txt);
+            this.groupBox1.Controls.Add(this.SP_test_DG_txt);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.T2_txt);
+            this.groupBox1.Controls.Add(this.SP_test_T2_txt);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.T1_txt);
+            this.groupBox1.Controls.Add(this.SP_test_T1_txt);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.Xts_txt);
-            this.groupBox1.Controls.Add(this.wl_txt);
+            this.groupBox1.Controls.Add(this.SP_test_Xts_txt);
+            this.groupBox1.Controls.Add(this.SP_test_wl_txt);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.a3_txt);
+            this.groupBox1.Controls.Add(this.SP_test_a3_txt);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.a2_txt);
+            this.groupBox1.Controls.Add(this.SP_test_a2_txt);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.a1_txt);
+            this.groupBox1.Controls.Add(this.SP_test_a1_txt);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.a0_txt);
+            this.groupBox1.Controls.Add(this.SP_test_a0_txt);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.point_distance_txt);
+            this.groupBox1.Controls.Add(this.SP_test_point_distance_txt);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.total_point_txt);
+            this.groupBox1.Controls.Add(this.SP_test_total_point_txt);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.xAS_txt);
+            this.groupBox1.Controls.Add(this.SP_test_xAS_txt);
             this.groupBox1.Location = new System.Drawing.Point(7, 16);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(481, 403);
@@ -647,13 +702,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "光譜測試";
             // 
-            // textBox1
+            // SP_test_CAL_RUN_cycle_txt
             // 
-            this.textBox1.Location = new System.Drawing.Point(267, 346);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(47, 22);
-            this.textBox1.TabIndex = 91;
+            this.SP_test_CAL_RUN_cycle_txt.Location = new System.Drawing.Point(61, 372);
+            this.SP_test_CAL_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_CAL_RUN_cycle_txt.Name = "SP_test_CAL_RUN_cycle_txt";
+            this.SP_test_CAL_RUN_cycle_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_CAL_RUN_cycle_txt.TabIndex = 93;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(4, 375);
+            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(53, 12);
+            this.label32.TabIndex = 92;
+            this.label32.Text = "測試次數";
+            // 
+            // SP_test_step_distance_txt
+            // 
+            this.SP_test_step_distance_txt.Location = new System.Drawing.Point(267, 346);
+            this.SP_test_step_distance_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_step_distance_txt.Name = "SP_test_step_distance_txt";
+            this.SP_test_step_distance_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_step_distance_txt.TabIndex = 91;
             // 
             // label31
             // 
@@ -725,21 +798,21 @@
             this.label22.TabIndex = 84;
             this.label22.Text = "x1";
             // 
-            // x1_txt
+            // SP_test_x1_txt
             // 
-            this.x1_txt.Location = new System.Drawing.Point(306, 215);
-            this.x1_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.x1_txt.Name = "x1_txt";
-            this.x1_txt.Size = new System.Drawing.Size(47, 22);
-            this.x1_txt.TabIndex = 83;
+            this.SP_test_x1_txt.Location = new System.Drawing.Point(306, 215);
+            this.SP_test_x1_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_x1_txt.Name = "SP_test_x1_txt";
+            this.SP_test_x1_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_x1_txt.TabIndex = 83;
             // 
-            // Xsc_txt
+            // SP_test_Xsc_txt
             // 
-            this.Xsc_txt.Location = new System.Drawing.Point(39, 215);
-            this.Xsc_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.Xsc_txt.Name = "Xsc_txt";
-            this.Xsc_txt.Size = new System.Drawing.Size(47, 22);
-            this.Xsc_txt.TabIndex = 82;
+            this.SP_test_Xsc_txt.Location = new System.Drawing.Point(39, 215);
+            this.SP_test_Xsc_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_Xsc_txt.Name = "SP_test_Xsc_txt";
+            this.SP_test_Xsc_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_Xsc_txt.TabIndex = 82;
             // 
             // label21
             // 
@@ -761,13 +834,13 @@
             this.label18.TabIndex = 80;
             this.label18.Text = "I thr";
             // 
-            // I_thr_txt
+            // SP_test_I_thr_txt
             // 
-            this.I_thr_txt.Location = new System.Drawing.Point(288, 145);
-            this.I_thr_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.I_thr_txt.Name = "I_thr_txt";
-            this.I_thr_txt.Size = new System.Drawing.Size(47, 22);
-            this.I_thr_txt.TabIndex = 79;
+            this.SP_test_I_thr_txt.Location = new System.Drawing.Point(288, 145);
+            this.SP_test_I_thr_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_I_thr_txt.Name = "SP_test_I_thr_txt";
+            this.SP_test_I_thr_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_I_thr_txt.TabIndex = 79;
             // 
             // label19
             // 
@@ -779,13 +852,13 @@
             this.label19.TabIndex = 78;
             this.label19.Text = "I max";
             // 
-            // I_max_txt
+            // SP_test_I_max_txt
             // 
-            this.I_max_txt.Location = new System.Drawing.Point(288, 117);
-            this.I_max_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.I_max_txt.Name = "I_max_txt";
-            this.I_max_txt.Size = new System.Drawing.Size(47, 22);
-            this.I_max_txt.TabIndex = 77;
+            this.SP_test_I_max_txt.Location = new System.Drawing.Point(288, 117);
+            this.SP_test_I_max_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_I_max_txt.Name = "SP_test_I_max_txt";
+            this.SP_test_I_max_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_I_max_txt.TabIndex = 77;
             // 
             // label16
             // 
@@ -797,13 +870,13 @@
             this.label16.TabIndex = 76;
             this.label16.Text = "EXP max";
             // 
-            // EXP_max_txt
+            // SP_test_EXP_max_txt
             // 
-            this.EXP_max_txt.Location = new System.Drawing.Point(173, 145);
-            this.EXP_max_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.EXP_max_txt.Name = "EXP_max_txt";
-            this.EXP_max_txt.Size = new System.Drawing.Size(47, 22);
-            this.EXP_max_txt.TabIndex = 75;
+            this.SP_test_EXP_max_txt.Location = new System.Drawing.Point(173, 145);
+            this.SP_test_EXP_max_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_EXP_max_txt.Name = "SP_test_EXP_max_txt";
+            this.SP_test_EXP_max_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_EXP_max_txt.TabIndex = 75;
             // 
             // label17
             // 
@@ -815,13 +888,13 @@
             this.label17.TabIndex = 74;
             this.label17.Text = "EXP initial";
             // 
-            // EXP_initial_txt
+            // SP_test_EXP_initial_txt
             // 
-            this.EXP_initial_txt.Location = new System.Drawing.Point(173, 117);
-            this.EXP_initial_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.EXP_initial_txt.Name = "EXP_initial_txt";
-            this.EXP_initial_txt.Size = new System.Drawing.Size(47, 22);
-            this.EXP_initial_txt.TabIndex = 73;
+            this.SP_test_EXP_initial_txt.Location = new System.Drawing.Point(173, 117);
+            this.SP_test_EXP_initial_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_EXP_initial_txt.Name = "SP_test_EXP_initial_txt";
+            this.SP_test_EXP_initial_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_EXP_initial_txt.TabIndex = 73;
             // 
             // label14
             // 
@@ -833,13 +906,13 @@
             this.label14.TabIndex = 72;
             this.label14.Text = "AG";
             // 
-            // AG_txt
+            // SP_test_AG_txt
             // 
-            this.AG_txt.Location = new System.Drawing.Point(39, 145);
-            this.AG_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.AG_txt.Name = "AG_txt";
-            this.AG_txt.Size = new System.Drawing.Size(47, 22);
-            this.AG_txt.TabIndex = 71;
+            this.SP_test_AG_txt.Location = new System.Drawing.Point(39, 145);
+            this.SP_test_AG_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_AG_txt.Name = "SP_test_AG_txt";
+            this.SP_test_AG_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_AG_txt.TabIndex = 71;
             // 
             // label15
             // 
@@ -851,13 +924,13 @@
             this.label15.TabIndex = 70;
             this.label15.Text = "DG";
             // 
-            // DG_txt
+            // SP_test_DG_txt
             // 
-            this.DG_txt.Location = new System.Drawing.Point(39, 117);
-            this.DG_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.DG_txt.Name = "DG_txt";
-            this.DG_txt.Size = new System.Drawing.Size(47, 22);
-            this.DG_txt.TabIndex = 69;
+            this.SP_test_DG_txt.Location = new System.Drawing.Point(39, 117);
+            this.SP_test_DG_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_DG_txt.Name = "SP_test_DG_txt";
+            this.SP_test_DG_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_DG_txt.TabIndex = 69;
             // 
             // label12
             // 
@@ -869,13 +942,13 @@
             this.label12.TabIndex = 68;
             this.label12.Text = "T2";
             // 
-            // T2_txt
+            // SP_test_T2_txt
             // 
-            this.T2_txt.Location = new System.Drawing.Point(124, 52);
-            this.T2_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.T2_txt.Name = "T2_txt";
-            this.T2_txt.Size = new System.Drawing.Size(47, 22);
-            this.T2_txt.TabIndex = 67;
+            this.SP_test_T2_txt.Location = new System.Drawing.Point(124, 52);
+            this.SP_test_T2_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_T2_txt.Name = "SP_test_T2_txt";
+            this.SP_test_T2_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_T2_txt.TabIndex = 67;
             // 
             // label13
             // 
@@ -887,13 +960,13 @@
             this.label13.TabIndex = 66;
             this.label13.Text = "T1";
             // 
-            // T1_txt
+            // SP_test_T1_txt
             // 
-            this.T1_txt.Location = new System.Drawing.Point(39, 52);
-            this.T1_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.T1_txt.Name = "T1_txt";
-            this.T1_txt.Size = new System.Drawing.Size(47, 22);
-            this.T1_txt.TabIndex = 65;
+            this.SP_test_T1_txt.Location = new System.Drawing.Point(39, 52);
+            this.SP_test_T1_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_T1_txt.Name = "SP_test_T1_txt";
+            this.SP_test_T1_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_T1_txt.TabIndex = 65;
             // 
             // label11
             // 
@@ -905,21 +978,21 @@
             this.label11.TabIndex = 64;
             this.label11.Text = "Xts";
             // 
-            // Xts_txt
+            // SP_test_Xts_txt
             // 
-            this.Xts_txt.Location = new System.Drawing.Point(216, 215);
-            this.Xts_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.Xts_txt.Name = "Xts_txt";
-            this.Xts_txt.Size = new System.Drawing.Size(47, 22);
-            this.Xts_txt.TabIndex = 63;
+            this.SP_test_Xts_txt.Location = new System.Drawing.Point(216, 215);
+            this.SP_test_Xts_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_Xts_txt.Name = "SP_test_Xts_txt";
+            this.SP_test_Xts_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_Xts_txt.TabIndex = 63;
             // 
-            // wl_txt
+            // SP_test_wl_txt
             // 
-            this.wl_txt.Location = new System.Drawing.Point(378, 346);
-            this.wl_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.wl_txt.Name = "wl_txt";
-            this.wl_txt.Size = new System.Drawing.Size(47, 22);
-            this.wl_txt.TabIndex = 62;
+            this.SP_test_wl_txt.Location = new System.Drawing.Point(378, 346);
+            this.SP_test_wl_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_wl_txt.Name = "SP_test_wl_txt";
+            this.SP_test_wl_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_wl_txt.TabIndex = 62;
             // 
             // label10
             // 
@@ -931,13 +1004,13 @@
             this.label10.TabIndex = 61;
             this.label10.Text = "指定波長";
             // 
-            // a3_txt
+            // SP_test_a3_txt
             // 
-            this.a3_txt.Location = new System.Drawing.Point(306, 282);
-            this.a3_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.a3_txt.Name = "a3_txt";
-            this.a3_txt.Size = new System.Drawing.Size(47, 22);
-            this.a3_txt.TabIndex = 60;
+            this.SP_test_a3_txt.Location = new System.Drawing.Point(306, 282);
+            this.SP_test_a3_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_a3_txt.Name = "SP_test_a3_txt";
+            this.SP_test_a3_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_a3_txt.TabIndex = 60;
             // 
             // label9
             // 
@@ -949,13 +1022,13 @@
             this.label9.TabIndex = 59;
             this.label9.Text = "a3";
             // 
-            // a2_txt
+            // SP_test_a2_txt
             // 
-            this.a2_txt.Location = new System.Drawing.Point(216, 282);
-            this.a2_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.a2_txt.Name = "a2_txt";
-            this.a2_txt.Size = new System.Drawing.Size(47, 22);
-            this.a2_txt.TabIndex = 58;
+            this.SP_test_a2_txt.Location = new System.Drawing.Point(216, 282);
+            this.SP_test_a2_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_a2_txt.Name = "SP_test_a2_txt";
+            this.SP_test_a2_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_a2_txt.TabIndex = 58;
             // 
             // label8
             // 
@@ -967,13 +1040,13 @@
             this.label8.TabIndex = 57;
             this.label8.Text = "a2";
             // 
-            // a1_txt
+            // SP_test_a1_txt
             // 
-            this.a1_txt.Location = new System.Drawing.Point(125, 282);
-            this.a1_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.a1_txt.Name = "a1_txt";
-            this.a1_txt.Size = new System.Drawing.Size(47, 22);
-            this.a1_txt.TabIndex = 56;
+            this.SP_test_a1_txt.Location = new System.Drawing.Point(125, 282);
+            this.SP_test_a1_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_a1_txt.Name = "SP_test_a1_txt";
+            this.SP_test_a1_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_a1_txt.TabIndex = 56;
             // 
             // label7
             // 
@@ -985,13 +1058,13 @@
             this.label7.TabIndex = 55;
             this.label7.Text = "a1";
             // 
-            // a0_txt
+            // SP_test_a0_txt
             // 
-            this.a0_txt.Location = new System.Drawing.Point(39, 282);
-            this.a0_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.a0_txt.Name = "a0_txt";
-            this.a0_txt.Size = new System.Drawing.Size(47, 22);
-            this.a0_txt.TabIndex = 54;
+            this.SP_test_a0_txt.Location = new System.Drawing.Point(39, 282);
+            this.SP_test_a0_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_a0_txt.Name = "SP_test_a0_txt";
+            this.SP_test_a0_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_a0_txt.TabIndex = 54;
             // 
             // label6
             // 
@@ -1003,13 +1076,13 @@
             this.label6.TabIndex = 53;
             this.label6.Text = "a0";
             // 
-            // point_distance_txt
+            // SP_test_point_distance_txt
             // 
-            this.point_distance_txt.Location = new System.Drawing.Point(176, 346);
-            this.point_distance_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.point_distance_txt.Name = "point_distance_txt";
-            this.point_distance_txt.Size = new System.Drawing.Size(47, 22);
-            this.point_distance_txt.TabIndex = 52;
+            this.SP_test_point_distance_txt.Location = new System.Drawing.Point(176, 346);
+            this.SP_test_point_distance_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_point_distance_txt.Name = "SP_test_point_distance_txt";
+            this.SP_test_point_distance_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_point_distance_txt.TabIndex = 52;
             // 
             // label5
             // 
@@ -1021,13 +1094,13 @@
             this.label5.TabIndex = 51;
             this.label5.Text = "間距步數";
             // 
-            // total_point_txt
+            // SP_test_total_point_txt
             // 
-            this.total_point_txt.Location = new System.Drawing.Point(61, 346);
-            this.total_point_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.total_point_txt.Name = "total_point_txt";
-            this.total_point_txt.Size = new System.Drawing.Size(47, 22);
-            this.total_point_txt.TabIndex = 48;
+            this.SP_test_total_point_txt.Location = new System.Drawing.Point(61, 346);
+            this.SP_test_total_point_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_total_point_txt.Name = "SP_test_total_point_txt";
+            this.SP_test_total_point_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_total_point_txt.TabIndex = 48;
             // 
             // label3
             // 
@@ -1049,36 +1122,36 @@
             this.label2.TabIndex = 46;
             this.label2.Text = "xAS";
             // 
-            // xAS_txt
+            // SP_test_xAS_txt
             // 
-            this.xAS_txt.Location = new System.Drawing.Point(125, 215);
-            this.xAS_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.xAS_txt.Name = "xAS_txt";
-            this.xAS_txt.Size = new System.Drawing.Size(47, 22);
-            this.xAS_txt.TabIndex = 45;
+            this.SP_test_xAS_txt.Location = new System.Drawing.Point(125, 215);
+            this.SP_test_xAS_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.SP_test_xAS_txt.Name = "SP_test_xAS_txt";
+            this.SP_test_xAS_txt.Size = new System.Drawing.Size(47, 22);
+            this.SP_test_xAS_txt.TabIndex = 45;
             // 
-            // stopbtn
+            // btnSpectrum_Test_Stop
             // 
-            this.stopbtn.Enabled = false;
-            this.stopbtn.Location = new System.Drawing.Point(409, 446);
-            this.stopbtn.Margin = new System.Windows.Forms.Padding(2);
-            this.stopbtn.Name = "stopbtn";
-            this.stopbtn.Size = new System.Drawing.Size(79, 38);
-            this.stopbtn.TabIndex = 22;
-            this.stopbtn.Text = "停止";
-            this.stopbtn.UseVisualStyleBackColor = true;
-            this.stopbtn.Click += new System.EventHandler(this.stopbtn_Click);
+            this.btnSpectrum_Test_Stop.Enabled = false;
+            this.btnSpectrum_Test_Stop.Location = new System.Drawing.Point(409, 446);
+            this.btnSpectrum_Test_Stop.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpectrum_Test_Stop.Name = "btnSpectrum_Test_Stop";
+            this.btnSpectrum_Test_Stop.Size = new System.Drawing.Size(79, 38);
+            this.btnSpectrum_Test_Stop.TabIndex = 22;
+            this.btnSpectrum_Test_Stop.Text = "停止";
+            this.btnSpectrum_Test_Stop.UseVisualStyleBackColor = true;
+            this.btnSpectrum_Test_Stop.Click += new System.EventHandler(this.btnSpectrum_Test_Stop_Click);
             // 
-            // startbtn
+            // btnSpectrum_Test_Start
             // 
-            this.startbtn.Location = new System.Drawing.Point(326, 446);
-            this.startbtn.Margin = new System.Windows.Forms.Padding(2);
-            this.startbtn.Name = "startbtn";
-            this.startbtn.Size = new System.Drawing.Size(79, 38);
-            this.startbtn.TabIndex = 21;
-            this.startbtn.Text = "開始測試";
-            this.startbtn.UseVisualStyleBackColor = true;
-            this.startbtn.Click += new System.EventHandler(this.startbtn_Click);
+            this.btnSpectrum_Test_Start.Location = new System.Drawing.Point(326, 446);
+            this.btnSpectrum_Test_Start.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpectrum_Test_Start.Name = "btnSpectrum_Test_Start";
+            this.btnSpectrum_Test_Start.Size = new System.Drawing.Size(79, 38);
+            this.btnSpectrum_Test_Start.TabIndex = 21;
+            this.btnSpectrum_Test_Start.Text = "開始測試";
+            this.btnSpectrum_Test_Start.UseVisualStyleBackColor = true;
+            this.btnSpectrum_Test_Start.Click += new System.EventHandler(this.btnSpectrum_Test_Start_Click);
             // 
             // white_point
             // 
@@ -1098,14 +1171,20 @@
             this.label4.TabIndex = 49;
             this.label4.Text = "白區點";
             // 
-            // tabPage2
+            // LED_test_page
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1041, 546);
-            this.tabPage2.TabIndex = 7;
-            this.tabPage2.Text = "LED穩定性測試";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.LED_test_page.Controls.Add(this.btnLED_Test_Save);
+            this.LED_test_page.Controls.Add(this.B_LED_chart);
+            this.LED_test_page.Controls.Add(this.groupBox2);
+            this.LED_test_page.Controls.Add(this.A_LED_chart);
+            this.LED_test_page.Controls.Add(this.btnLED_Test_Stop);
+            this.LED_test_page.Controls.Add(this.btnLED_Test_Start);
+            this.LED_test_page.Location = new System.Drawing.Point(4, 22);
+            this.LED_test_page.Name = "LED_test_page";
+            this.LED_test_page.Size = new System.Drawing.Size(1041, 546);
+            this.LED_test_page.TabIndex = 7;
+            this.LED_test_page.Text = "LED穩定性測試";
+            this.LED_test_page.UseVisualStyleBackColor = true;
             // 
             // btnRefresh
             // 
@@ -1176,23 +1255,460 @@
             this.status_lb.Size = new System.Drawing.Size(0, 12);
             this.status_lb.TabIndex = 14;
             // 
-            // CAL_RUN_cycle_txt
+            // groupBox2
             // 
-            this.CAL_RUN_cycle_txt.Location = new System.Drawing.Point(61, 372);
-            this.CAL_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.CAL_RUN_cycle_txt.Name = "CAL_RUN_cycle_txt";
-            this.CAL_RUN_cycle_txt.Size = new System.Drawing.Size(47, 22);
-            this.CAL_RUN_cycle_txt.TabIndex = 93;
+            this.groupBox2.Controls.Add(this.LED_test_RUN_cycle_txt);
+            this.groupBox2.Controls.Add(this.label34);
+            this.groupBox2.Controls.Add(this.label35);
+            this.groupBox2.Controls.Add(this.label36);
+            this.groupBox2.Controls.Add(this.label38);
+            this.groupBox2.Controls.Add(this.label39);
+            this.groupBox2.Controls.Add(this.label42);
+            this.groupBox2.Controls.Add(this.LED_test_I_thr_txt);
+            this.groupBox2.Controls.Add(this.label43);
+            this.groupBox2.Controls.Add(this.LED_test_I_max_txt);
+            this.groupBox2.Controls.Add(this.label44);
+            this.groupBox2.Controls.Add(this.LED_test_EXP_max_txt);
+            this.groupBox2.Controls.Add(this.label45);
+            this.groupBox2.Controls.Add(this.LED_test_EXP_initial_txt);
+            this.groupBox2.Controls.Add(this.label46);
+            this.groupBox2.Controls.Add(this.LED_test_AG_txt);
+            this.groupBox2.Controls.Add(this.label47);
+            this.groupBox2.Controls.Add(this.LED_test_DG_txt);
+            this.groupBox2.Controls.Add(this.label48);
+            this.groupBox2.Controls.Add(this.LED_test_T2_txt);
+            this.groupBox2.Controls.Add(this.label49);
+            this.groupBox2.Controls.Add(this.LED_test_T1_txt);
+            this.groupBox2.Controls.Add(this.LED_test_wl_txt);
+            this.groupBox2.Controls.Add(this.label51);
+            this.groupBox2.Controls.Add(this.LED_test_a3_txt);
+            this.groupBox2.Controls.Add(this.label52);
+            this.groupBox2.Controls.Add(this.LED_test_a2_txt);
+            this.groupBox2.Controls.Add(this.label53);
+            this.groupBox2.Controls.Add(this.LED_test_a1_txt);
+            this.groupBox2.Controls.Add(this.label54);
+            this.groupBox2.Controls.Add(this.LED_test_a0_txt);
+            this.groupBox2.Controls.Add(this.label55);
+            this.groupBox2.Controls.Add(this.LED_test_interval_time_txt);
+            this.groupBox2.Controls.Add(this.label56);
+            this.groupBox2.Controls.Add(this.LED_test_total_times_txt);
+            this.groupBox2.Controls.Add(this.label57);
+            this.groupBox2.Location = new System.Drawing.Point(7, 16);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(481, 316);
+            this.groupBox2.TabIndex = 48;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "LED測試";
             // 
-            // label32
+            // LED_test_RUN_cycle_txt
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(4, 375);
-            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(53, 12);
-            this.label32.TabIndex = 92;
-            this.label32.Text = "測試次數";
+            this.LED_test_RUN_cycle_txt.Location = new System.Drawing.Point(301, 278);
+            this.LED_test_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_RUN_cycle_txt.Name = "LED_test_RUN_cycle_txt";
+            this.LED_test_RUN_cycle_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_RUN_cycle_txt.TabIndex = 91;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(244, 281);
+            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(53, 12);
+            this.label34.TabIndex = 90;
+            this.label34.Text = "測試次數";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label35.Location = new System.Drawing.Point(14, 255);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(57, 12);
+            this.label35.TabIndex = 89;
+            this.label35.Text = "檢測參數";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label36.Location = new System.Drawing.Point(14, 188);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(83, 12);
+            this.label36.TabIndex = 88;
+            this.label36.Text = "波長校正係數";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label38.Location = new System.Drawing.Point(14, 93);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(102, 12);
+            this.label38.TabIndex = 86;
+            this.label38.Text = "Auto-scaling參數";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label39.Location = new System.Drawing.Point(14, 29);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(108, 12);
+            this.label39.TabIndex = 85;
+            this.label39.Text = "LED等待時間參數";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(260, 148);
+            this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(25, 12);
+            this.label42.TabIndex = 80;
+            this.label42.Text = "I thr";
+            // 
+            // LED_test_I_thr_txt
+            // 
+            this.LED_test_I_thr_txt.Location = new System.Drawing.Point(288, 145);
+            this.LED_test_I_thr_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_I_thr_txt.Name = "LED_test_I_thr_txt";
+            this.LED_test_I_thr_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_I_thr_txt.TabIndex = 79;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(254, 120);
+            this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(32, 12);
+            this.label43.TabIndex = 78;
+            this.label43.Text = "I max";
+            // 
+            // LED_test_I_max_txt
+            // 
+            this.LED_test_I_max_txt.Location = new System.Drawing.Point(288, 117);
+            this.LED_test_I_max_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_I_max_txt.Name = "LED_test_I_max_txt";
+            this.LED_test_I_max_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_I_max_txt.TabIndex = 77;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(123, 148);
+            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(49, 12);
+            this.label44.TabIndex = 76;
+            this.label44.Text = "EXP max";
+            // 
+            // LED_test_EXP_max_txt
+            // 
+            this.LED_test_EXP_max_txt.Location = new System.Drawing.Point(173, 145);
+            this.LED_test_EXP_max_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_EXP_max_txt.Name = "LED_test_EXP_max_txt";
+            this.LED_test_EXP_max_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_EXP_max_txt.TabIndex = 75;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(116, 120);
+            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(55, 12);
+            this.label45.TabIndex = 74;
+            this.label45.Text = "EXP initial";
+            // 
+            // LED_test_EXP_initial_txt
+            // 
+            this.LED_test_EXP_initial_txt.Location = new System.Drawing.Point(173, 117);
+            this.LED_test_EXP_initial_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_EXP_initial_txt.Name = "LED_test_EXP_initial_txt";
+            this.LED_test_EXP_initial_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_EXP_initial_txt.TabIndex = 73;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(15, 148);
+            this.label46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(21, 12);
+            this.label46.TabIndex = 72;
+            this.label46.Text = "AG";
+            // 
+            // LED_test_AG_txt
+            // 
+            this.LED_test_AG_txt.Location = new System.Drawing.Point(39, 145);
+            this.LED_test_AG_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_AG_txt.Name = "LED_test_AG_txt";
+            this.LED_test_AG_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_AG_txt.TabIndex = 71;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(15, 120);
+            this.label47.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(21, 12);
+            this.label47.TabIndex = 70;
+            this.label47.Text = "DG";
+            // 
+            // LED_test_DG_txt
+            // 
+            this.LED_test_DG_txt.Location = new System.Drawing.Point(39, 117);
+            this.LED_test_DG_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_DG_txt.Name = "LED_test_DG_txt";
+            this.LED_test_DG_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_DG_txt.TabIndex = 69;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(102, 55);
+            this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(18, 12);
+            this.label48.TabIndex = 68;
+            this.label48.Text = "T2";
+            // 
+            // LED_test_T2_txt
+            // 
+            this.LED_test_T2_txt.Location = new System.Drawing.Point(124, 52);
+            this.LED_test_T2_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_T2_txt.Name = "LED_test_T2_txt";
+            this.LED_test_T2_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_T2_txt.TabIndex = 67;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(17, 55);
+            this.label49.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(18, 12);
+            this.label49.TabIndex = 66;
+            this.label49.Text = "T1";
+            // 
+            // LED_test_T1_txt
+            // 
+            this.LED_test_T1_txt.Location = new System.Drawing.Point(39, 52);
+            this.LED_test_T1_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_T1_txt.Name = "LED_test_T1_txt";
+            this.LED_test_T1_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_T1_txt.TabIndex = 65;
+            // 
+            // LED_test_wl_txt
+            // 
+            this.LED_test_wl_txt.Location = new System.Drawing.Point(414, 278);
+            this.LED_test_wl_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_wl_txt.Name = "LED_test_wl_txt";
+            this.LED_test_wl_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_wl_txt.TabIndex = 62;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(357, 281);
+            this.label51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(53, 12);
+            this.label51.TabIndex = 61;
+            this.label51.Text = "指定波長";
+            // 
+            // LED_test_a3_txt
+            // 
+            this.LED_test_a3_txt.Location = new System.Drawing.Point(306, 211);
+            this.LED_test_a3_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_a3_txt.Name = "LED_test_a3_txt";
+            this.LED_test_a3_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_a3_txt.TabIndex = 60;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(287, 213);
+            this.label52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(16, 12);
+            this.label52.TabIndex = 59;
+            this.label52.Text = "a3";
+            // 
+            // LED_test_a2_txt
+            // 
+            this.LED_test_a2_txt.Location = new System.Drawing.Point(216, 211);
+            this.LED_test_a2_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_a2_txt.Name = "LED_test_a2_txt";
+            this.LED_test_a2_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_a2_txt.TabIndex = 58;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(197, 213);
+            this.label53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(16, 12);
+            this.label53.TabIndex = 57;
+            this.label53.Text = "a2";
+            // 
+            // LED_test_a1_txt
+            // 
+            this.LED_test_a1_txt.Location = new System.Drawing.Point(125, 211);
+            this.LED_test_a1_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_a1_txt.Name = "LED_test_a1_txt";
+            this.LED_test_a1_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_a1_txt.TabIndex = 56;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(106, 213);
+            this.label54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(16, 12);
+            this.label54.TabIndex = 55;
+            this.label54.Text = "a1";
+            // 
+            // LED_test_a0_txt
+            // 
+            this.LED_test_a0_txt.Location = new System.Drawing.Point(39, 211);
+            this.LED_test_a0_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_a0_txt.Name = "LED_test_a0_txt";
+            this.LED_test_a0_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_a0_txt.TabIndex = 54;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(20, 214);
+            this.label55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(16, 12);
+            this.label55.TabIndex = 53;
+            this.label55.Text = "a0";
+            // 
+            // LED_test_interval_time_txt
+            // 
+            this.LED_test_interval_time_txt.Location = new System.Drawing.Point(188, 278);
+            this.LED_test_interval_time_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_interval_time_txt.Name = "LED_test_interval_time_txt";
+            this.LED_test_interval_time_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_interval_time_txt.TabIndex = 52;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(131, 281);
+            this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(53, 12);
+            this.label56.TabIndex = 51;
+            this.label56.Text = "間隔時間";
+            // 
+            // LED_test_total_times_txt
+            // 
+            this.LED_test_total_times_txt.Location = new System.Drawing.Point(75, 278);
+            this.LED_test_total_times_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.LED_test_total_times_txt.Name = "LED_test_total_times_txt";
+            this.LED_test_total_times_txt.Size = new System.Drawing.Size(47, 22);
+            this.LED_test_total_times_txt.TabIndex = 48;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(18, 281);
+            this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(53, 12);
+            this.label57.TabIndex = 47;
+            this.label57.Text = "測試時間";
+            // 
+            // btnLED_Test_Stop
+            // 
+            this.btnLED_Test_Stop.Enabled = false;
+            this.btnLED_Test_Stop.Location = new System.Drawing.Point(406, 360);
+            this.btnLED_Test_Stop.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLED_Test_Stop.Name = "btnLED_Test_Stop";
+            this.btnLED_Test_Stop.Size = new System.Drawing.Size(79, 38);
+            this.btnLED_Test_Stop.TabIndex = 47;
+            this.btnLED_Test_Stop.Text = "停止";
+            this.btnLED_Test_Stop.UseVisualStyleBackColor = true;
+            // 
+            // btnLED_Test_Start
+            // 
+            this.btnLED_Test_Start.Location = new System.Drawing.Point(323, 360);
+            this.btnLED_Test_Start.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLED_Test_Start.Name = "btnLED_Test_Start";
+            this.btnLED_Test_Start.Size = new System.Drawing.Size(79, 38);
+            this.btnLED_Test_Start.TabIndex = 46;
+            this.btnLED_Test_Start.Text = "開始測試";
+            this.btnLED_Test_Start.UseVisualStyleBackColor = true;
+            this.btnLED_Test_Start.Click += new System.EventHandler(this.btnLED_Test_Start_Click);
+            // 
+            // B_LED_chart
+            // 
+            chartArea8.Name = "ChartArea1";
+            this.B_LED_chart.ChartAreas.Add(chartArea8);
+            legend8.Enabled = false;
+            legend8.Name = "Legend1";
+            this.B_LED_chart.Legends.Add(legend8);
+            this.B_LED_chart.Location = new System.Drawing.Point(497, 275);
+            this.B_LED_chart.Name = "B_LED_chart";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.IsVisibleInLegend = false;
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.B_LED_chart.Series.Add(series8);
+            this.B_LED_chart.Size = new System.Drawing.Size(541, 265);
+            this.B_LED_chart.TabIndex = 54;
+            this.B_LED_chart.Text = "B_LED_chart";
+            // 
+            // A_LED_chart
+            // 
+            chartArea9.Name = "ChartArea1";
+            this.A_LED_chart.ChartAreas.Add(chartArea9);
+            legend9.Enabled = false;
+            legend9.Name = "Legend1";
+            this.A_LED_chart.Legends.Add(legend9);
+            this.A_LED_chart.Location = new System.Drawing.Point(497, 3);
+            this.A_LED_chart.Name = "A_LED_chart";
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.IsVisibleInLegend = false;
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.A_LED_chart.Series.Add(series9);
+            this.A_LED_chart.Size = new System.Drawing.Size(541, 265);
+            this.A_LED_chart.TabIndex = 53;
+            this.A_LED_chart.Text = "A_LED_chart";
+            // 
+            // btnSpectrum_Test_Save
+            // 
+            this.btnSpectrum_Test_Save.Location = new System.Drawing.Point(409, 496);
+            this.btnSpectrum_Test_Save.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpectrum_Test_Save.Name = "btnSpectrum_Test_Save";
+            this.btnSpectrum_Test_Save.Size = new System.Drawing.Size(79, 38);
+            this.btnSpectrum_Test_Save.TabIndex = 55;
+            this.btnSpectrum_Test_Save.Text = "參數存檔";
+            this.btnSpectrum_Test_Save.UseVisualStyleBackColor = true;
+            this.btnSpectrum_Test_Save.Click += new System.EventHandler(this.btnSpectrum_Test_Save_Click);
+            // 
+            // btnLED_Test_Save
+            // 
+            this.btnLED_Test_Save.Location = new System.Drawing.Point(406, 414);
+            this.btnLED_Test_Save.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLED_Test_Save.Name = "btnLED_Test_Save";
+            this.btnLED_Test_Save.Size = new System.Drawing.Size(79, 38);
+            this.btnLED_Test_Save.TabIndex = 56;
+            this.btnLED_Test_Save.Text = "參數存檔";
+            this.btnLED_Test_Save.UseVisualStyleBackColor = true;
+            this.btnLED_Test_Save.Click += new System.EventHandler(this.btnLED_Test_Save_Click);
             // 
             // MainForm
             // 
@@ -1211,25 +1727,30 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
+            this.Command_page.ResumeLayout(false);
+            this.Command_page.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.tabPage6.ResumeLayout(false);
+            this.Motor_test_page.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.SP_test_page.ResumeLayout(false);
+            this.SP_test_page.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distance_sp_chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.point_sp_chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dark_sp_chart)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.LED_test_page.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.B_LED_chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.A_LED_chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1245,7 +1766,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.TextBox txtLog;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage Command_page;
         private System.Windows.Forms.Button btnCommand;
         private System.Windows.Forms.TextBox txtCommand;
         private System.Windows.Forms.Button btnCAL;
@@ -1258,15 +1779,15 @@
         private System.Windows.Forms.Button btnELC1000;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnROI;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button startbtn;
-        private System.Windows.Forms.Button stopbtn;
+        private System.Windows.Forms.TabPage SP_test_page;
+        private System.Windows.Forms.Button btnSpectrum_Test_Start;
+        private System.Windows.Forms.Button btnSpectrum_Test_Stop;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label status_lb;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage LED_test_page;
+        private System.Windows.Forms.TabPage Motor_test_page;
         private System.Windows.Forms.Button btnMotor_Test;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txt_motor_test_round;
@@ -1281,58 +1802,101 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox x1_txt;
-        private System.Windows.Forms.TextBox Xsc_txt;
+        private System.Windows.Forms.TextBox SP_test_x1_txt;
+        private System.Windows.Forms.TextBox SP_test_Xsc_txt;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox I_thr_txt;
+        private System.Windows.Forms.TextBox SP_test_I_thr_txt;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox I_max_txt;
+        private System.Windows.Forms.TextBox SP_test_I_max_txt;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox EXP_max_txt;
+        private System.Windows.Forms.TextBox SP_test_EXP_max_txt;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox EXP_initial_txt;
+        private System.Windows.Forms.TextBox SP_test_EXP_initial_txt;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox AG_txt;
+        private System.Windows.Forms.TextBox SP_test_AG_txt;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox DG_txt;
+        private System.Windows.Forms.TextBox SP_test_DG_txt;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox T2_txt;
+        private System.Windows.Forms.TextBox SP_test_T2_txt;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox T1_txt;
+        private System.Windows.Forms.TextBox SP_test_T1_txt;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox Xts_txt;
-        private System.Windows.Forms.TextBox wl_txt;
+        private System.Windows.Forms.TextBox SP_test_Xts_txt;
+        private System.Windows.Forms.TextBox SP_test_wl_txt;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox a3_txt;
+        private System.Windows.Forms.TextBox SP_test_a3_txt;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox a2_txt;
+        private System.Windows.Forms.TextBox SP_test_a2_txt;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox a1_txt;
+        private System.Windows.Forms.TextBox SP_test_a1_txt;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox a0_txt;
+        private System.Windows.Forms.TextBox SP_test_a0_txt;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox point_distance_txt;
+        private System.Windows.Forms.TextBox SP_test_point_distance_txt;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox white_point;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox total_point_txt;
+        private System.Windows.Forms.TextBox SP_test_total_point_txt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox xAS_txt;
+        private System.Windows.Forms.TextBox SP_test_xAS_txt;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart dark_sp_chart;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox SP_test_step_distance_txt;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart5;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart distance_sp_chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart point_sp_chart;
-        private System.Windows.Forms.TextBox CAL_RUN_cycle_txt;
+        private System.Windows.Forms.TextBox SP_test_CAL_RUN_cycle_txt;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.DataVisualization.Charting.Chart B_LED_chart;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox LED_test_RUN_cycle_txt;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.TextBox LED_test_I_thr_txt;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.TextBox LED_test_I_max_txt;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox LED_test_EXP_max_txt;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox LED_test_EXP_initial_txt;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox LED_test_AG_txt;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox LED_test_DG_txt;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox LED_test_T2_txt;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox LED_test_T1_txt;
+        private System.Windows.Forms.TextBox LED_test_wl_txt;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox LED_test_a3_txt;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox LED_test_a2_txt;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox LED_test_a1_txt;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox LED_test_a0_txt;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox LED_test_interval_time_txt;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox LED_test_total_times_txt;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.DataVisualization.Charting.Chart A_LED_chart;
+        private System.Windows.Forms.Button btnLED_Test_Stop;
+        private System.Windows.Forms.Button btnLED_Test_Start;
+        private System.Windows.Forms.Button btnSpectrum_Test_Save;
+        private System.Windows.Forms.Button btnLED_Test_Save;
     }
 }
 
