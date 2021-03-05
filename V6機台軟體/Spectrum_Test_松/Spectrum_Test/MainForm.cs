@@ -91,6 +91,8 @@ namespace Spectrum_Test
         int LED_maxValue, LED_EXP, LED_EXP1, LED_I1, LED_EXP2, LED_I2;
         int LED_wl, LED_RUN_cycle,LED_AorB;
 
+        double dark;
+
         char[] recv_buff = new char[24567];
         int recv_count = 0;
         int cycle = 1;
@@ -456,6 +458,59 @@ namespace Spectrum_Test
             }
         }
 
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            panel1.Controls.Clear();
+
+            if (!string.IsNullOrEmpty(line_num_txt.Text))
+            {
+                int x = 10, y = 10;
+
+                for (int i = 1; i <= Convert.ToInt32(line_num_txt.Text); i++)
+                {
+                    Label lb = new Label();
+                    lb.Text = "第" + i.ToString() + "條參數";
+                    lb.Name = "lb_" + i.ToString();
+                    //lb.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
+                    lb.Size = new System.Drawing.Size(60,15);
+                    lb.Location = new System.Drawing.Point(x, y + 5);
+                    panel1.Controls.Add(lb);  // 先把元件加入 Controls 裡
+
+                    Label lbl = new Label();
+                    lbl.Text = "SW :";
+                    lbl.Name = "lbl_" + i.ToString();
+                    //lbl.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
+                    lbl.Size = new System.Drawing.Size(35,15);
+                    lbl.Location = new System.Drawing.Point(x, y + 25);
+                    panel1.Controls.Add(lbl);  // 先把元件加入 Controls 裡
+
+                    TextBox txt = new TextBox();
+                    txt.Name = "SW_txt_" + i.ToString();
+                    //txt.Font = new Font("微軟正黑體", 12);
+                    txt.Location = new System.Drawing.Point(x + 50, y + 20);
+                    txt.ImeMode = ImeMode.Alpha;
+                    panel1.Controls.Add(txt);  // 先把元件加入 Controls 裡 
+
+                    Label lb2 = new Label();
+                    lb2.Text = "Line :";
+                    lb2.Name = "lb2_" + i.ToString();
+                    //lbl.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
+                    lb2.Size = new System.Drawing.Size(35, 15);
+                    lb2.Location = new System.Drawing.Point(x, y + 50);
+                    panel1.Controls.Add(lb2);  // 先把元件加入 Controls 裡
+
+                    TextBox txt2 = new TextBox();
+                    txt2.Name = "Line_txt_" + i.ToString();
+                    //txt2.Font = new Font("微軟正黑體", 12);
+                    txt2.Location = new System.Drawing.Point(x + 50, y + 45);
+                    txt2.ImeMode = ImeMode.Alpha;
+                    panel1.Controls.Add(txt2);  // 先把元件加入 Controls 裡   
+
+                    y += 80;
+                }
+            }
+        }
+
         private void btnGNV_Click(object sender, EventArgs e)
         {
             txtCommand.Text = "";
@@ -650,6 +705,8 @@ namespace Spectrum_Test
             point_sp_chart.Titles.Clear();
             distance_sp_chart.Series.Clear();
             distance_sp_chart.Titles.Clear();
+            reflect_sp_chart.Series.Clear();
+            reflect_sp_chart.Titles.Clear();
 
             btnSpectrum_Test_Start.Enabled = false;
             btnSpectrum_Test_Stop.Enabled = true;
@@ -720,56 +777,30 @@ namespace Spectrum_Test
                                 iTask = 20;
                             }
                             break;
-                        /** Xsc */
+                        /** -Xsc+Xts+xAS */
                         case 20:
                             BeginInvoke((Action)(() =>
                             {
-                                status_lb.Text = "移動Xsc";
+                                status_lb.Text = "移動至auto scaling點";
                             }));
 
-                            ret = CMD_MRS(Convert.ToInt32(double.Parse(SP_test_Xsc_txt.Text) / 0.0196));
+                            double Xsc = double.Parse(SP_test_Xsc_txt.Text);
+                            double Xts = double.Parse(SP_test_Xts_txt.Text);
+                            double xAS = double.Parse(SP_test_xAS_txt.Text);
+                            double X_move = -Xsc + Xts + xAS;
+
+                            if(X_move < 0.0)
+                            {
+                                ret = CMD_MRS(Convert.ToInt32((-X_move) / 0.0196));
+                            }
+                            else
+                            {
+                                ret = CMD_MLS(Convert.ToInt32(X_move / 0.0196));
+                            }
 
                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                             {
                                 Log("CMD_MRS Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 21;
-                            }
-                            break;
-                        /** Xts */
-                        case 21:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "移動Xts";
-                            }));
-
-                            ret = CMD_MLS(Convert.ToInt32(double.Parse(SP_test_Xts_txt.Text) / 0.0196));
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MLS Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 22;
-                            }
-                            break;
-                        /** xAS */
-                        case 22:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "移動xAS";
-                            }));
-
-                            ret = CMD_MLS(Convert.ToInt32(double.Parse(SP_test_xAS_txt.Text) / 0.0196));
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MLS Error!");
                                 iTask = 999;
                             }
                             else
@@ -784,6 +815,9 @@ namespace Spectrum_Test
 
                             Task.Delay(1000).Wait();
                             List<int> dark_sp = CMD_CAL();
+
+                            dark = dark_sp.Average();
+                            System.Diagnostics.Debug.WriteLine(dark.ToString());
 
                             for (int i = 1; i <= 1280; i++)
                             {
@@ -1077,9 +1111,12 @@ namespace Spectrum_Test
                             }
                             break;
                         case 60:
+                            List<double> n = new List<double>();
                             List<double> n_wl = new List<double>();
                             List<double> n_dis = new List<double>();
                             List<int> sp5 = new List<int>();
+                            List<double> baseline = new List<double>();
+                            List<List<double>> Sp_Dark_Baseline = new List<List<double>>();
 
                             double lambda;
 
@@ -1095,31 +1132,45 @@ namespace Spectrum_Test
                             for (int i = 1; i <= 1280; i++)
                             {
                                 lambda = double.Parse(SP_test_a0_txt.Text) + double.Parse(SP_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(SP_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(SP_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                n.Add(lambda);
                                 n_wl.Add(lambda);
                             }
 
                             double num = n_wl.OrderBy(item => Math.Abs(item - SP_wl)).ThenBy(item => item).First(); //取最接近的數
                             int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
 
+                            double base_line_835 = n_wl.OrderBy(item => Math.Abs(item - 835.0)).ThenBy(item => item).First(); //取最接近的數
+                            int base_line_835_index = n_wl.FindIndex(item => item.Equals(base_line_835)); //找到該數索引值
+
+                            double base_line_845 = n_wl.OrderBy(item => Math.Abs(item - 845.0)).ThenBy(item => item).First(); //取最接近的數
+                            int base_line_845_index = n_wl.FindIndex(item => item.Equals(base_line_845)); //找到該數索引值
+
                             n_wl.Clear();
                             n_dis.Clear();
+
                             for (int i = 0; i < int.Parse(SP_test_total_point_txt.Text); i++)
                             {
                                 n_wl.Add(i + 1);
-
-                                // 這行要改!!!!!!! //
                                 n_dis.Add(double.Parse(SP_test_x1_txt.Text) + Convert.ToDouble(i) * double.Parse(SP_test_step_distance_txt.Text) * double.Parse(SP_test_point_distance_steps_txt.Text));
-                                // 這行要改!!!!!!! //
-
                                 sp5.Add(ALL_POINT_CAL[i][index]);
+
+                                double baseline_average = 0.0;
+                                for(int j= base_line_835_index; j<= base_line_845_index; j++)
+                                {
+                                    baseline_average += ALL_POINT_CAL[i][j];
+                                }
+
+                                baseline_average /= (base_line_845_index - base_line_835 + 1);
+                                Sp_Dark_Baseline.Add(ALL_POINT_CAL[i].Select(x => x - (baseline_average + dark)).ToList());
                             }
+
 
                             Series point_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
                             point_Srs.ChartType = SeriesChartType.Line;
                             point_Srs.IsValueShownAsLabel = false;
                             point_Srs.Points.DataBindXY(n_wl, sp5);
                             point_Srs.MarkerStyle = MarkerStyle.Circle;
-                            point_Srs.MarkerSize = 6;
+                            point_Srs.MarkerSize = 5;
                             point_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
 
@@ -1128,7 +1179,7 @@ namespace Spectrum_Test
                             dis_Srs.IsValueShownAsLabel = false;
                             dis_Srs.Points.DataBindXY(n_dis, sp5);
                             dis_Srs.MarkerStyle = MarkerStyle.Circle;
-                            dis_Srs.MarkerSize = 6;
+                            dis_Srs.MarkerSize = 5;
                             dis_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
                             this.InvokeIfRequired(() =>
@@ -1141,6 +1192,34 @@ namespace Spectrum_Test
                                 distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
                                 distance_sp_chart.Series.Add(dis_Srs);
                             });
+
+                            for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
+                            {
+                                TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
+                                TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
+
+                                List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                                
+                                Series ref_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() +"反射光譜");
+                                ref_Srs.ChartType = SeriesChartType.Line;
+                                ref_Srs.IsValueShownAsLabel = false;
+                                ref_Srs.Points.DataBindXY(n, sp_ref);
+                                ref_Srs.MarkerStyle = MarkerStyle.Circle;
+                                ref_Srs.MarkerSize = 5;
+                                ref_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                this.InvokeIfRequired(() =>
+                                {
+                                    //reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1;
+                                    //reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
+                                    reflect_sp_chart.Titles.Clear();
+                                    reflect_sp_chart.Titles.Add("反射光譜");
+                                    reflect_sp_chart.Series.Add(ref_Srs);
+
+                                });
+                            }
+
+                            
 
                             iTask = 70;
                             break;
