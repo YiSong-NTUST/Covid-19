@@ -1139,10 +1139,10 @@ namespace Spectrum_Test
                             double num = n_wl.OrderBy(item => Math.Abs(item - SP_wl)).ThenBy(item => item).First(); //取最接近的數
                             int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
 
-                            double base_line_835 = n_wl.OrderBy(item => Math.Abs(item - 835.0)).ThenBy(item => item).First(); //取最接近的數
+                            double base_line_835 = n_wl.OrderBy(item => Math.Abs(item - double.Parse(baseline_start_txt.Text))).ThenBy(item => item).First(); //取最接近的數
                             int base_line_835_index = n_wl.FindIndex(item => item.Equals(base_line_835)); //找到該數索引值
 
-                            double base_line_845 = n_wl.OrderBy(item => Math.Abs(item - 845.0)).ThenBy(item => item).First(); //取最接近的數
+                            double base_line_845 = n_wl.OrderBy(item => Math.Abs(item - double.Parse(baseline_end_txt.Text))).ThenBy(item => item).First(); //取最接近的數
                             int base_line_845_index = n_wl.FindIndex(item => item.Equals(base_line_845)); //找到該數索引值
 
                             n_wl.Clear();
@@ -1160,10 +1160,10 @@ namespace Spectrum_Test
                                     baseline_average += ALL_POINT_CAL[i][j];
                                 }
 
-                                baseline_average /= (base_line_845_index - base_line_835 + 1);
-                                Sp_Dark_Baseline.Add(ALL_POINT_CAL[i].Select(x => x - (baseline_average + dark)).ToList());
+                                baseline_average /= (base_line_845_index - base_line_835_index + 1);
+                                                                
+                                Sp_Dark_Baseline.Add(ALL_POINT_CAL[i].Select(x => x - baseline_average).ToList());
                             }
-
 
                             Series point_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
                             point_Srs.ChartType = SeriesChartType.Line;
@@ -1208,13 +1208,62 @@ namespace Spectrum_Test
                                 ref_Srs.MarkerSize = 5;
                                 ref_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
+                                /***/
+                                Series test1 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                test1.ChartType = SeriesChartType.Line;
+                                test1.IsValueShownAsLabel = false;
+                                test1.Points.DataBindXY(n, ALL_POINT_CAL[int.Parse(SW_txt.Text)]);
+                                test1.MarkerStyle = MarkerStyle.Circle;
+                                test1.MarkerSize = 5;
+                                test1.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                Series test2 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                test2.ChartType = SeriesChartType.Line;
+                                test2.IsValueShownAsLabel = false;
+                                test2.Points.DataBindXY(n, Sp_Dark_Baseline[int.Parse(SW_txt.Text)]);
+                                test2.MarkerStyle = MarkerStyle.Circle;
+                                test2.MarkerSize = 5;
+                                test2.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                Series test3 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                test3.ChartType = SeriesChartType.Line;
+                                test3.IsValueShownAsLabel = false;
+                                test3.Points.DataBindXY(n, ALL_POINT_CAL[int.Parse(Line_txt.Text)]);
+                                test3.MarkerStyle = MarkerStyle.Circle;
+                                test3.MarkerSize = 5;
+                                test3.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                Series test4 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                test4.ChartType = SeriesChartType.Line;
+                                test4.IsValueShownAsLabel = false;
+                                test4.Points.DataBindXY(n, Sp_Dark_Baseline[int.Parse(Line_txt.Text)]);
+                                test4.MarkerStyle = MarkerStyle.Circle;
+                                test4.MarkerSize = 5;
+                                test4.ToolTip = "X: #VALX{} Y: #VALY{}";
+
                                 this.InvokeIfRequired(() =>
                                 {
-                                    //reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1;
-                                    //reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
+                                    reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
+                                    reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                                     reflect_sp_chart.Titles.Clear();
                                     reflect_sp_chart.Titles.Add("反射光譜");
                                     reflect_sp_chart.Series.Add(ref_Srs);
+
+                                    chart2.Titles.Clear();
+                                    chart2.Titles.Add("SW");
+                                    chart2.Series.Add(test1);
+
+                                    chart3.Titles.Clear();
+                                    chart3.Titles.Add("SW-Baseline");
+                                    chart3.Series.Add(test2);
+
+                                    chart4.Titles.Clear();
+                                    chart4.Titles.Add("Line");
+                                    chart4.Series.Add(test3);
+
+                                    chart5.Titles.Clear();
+                                    chart5.Titles.Add("Line-Baseline");
+                                    chart5.Series.Add(test4);
 
                                 });
                             }
@@ -1688,13 +1737,13 @@ namespace Spectrum_Test
                                 if (LED_AorB == 1)
                                 {
                                     A_LED_chart.Titles.Clear();
-                                    A_LED_chart.Titles.Add("波長 " + num.ToString() + " nm 下各時間光強");
+                                    A_LED_chart.Titles.Add("A燈 波長 " + num.ToString() + " nm 下各時間光強");
                                     A_LED_chart.Series.Add(time_Srs);
                                 }
                                 else if (LED_AorB == 2)
                                 {
                                     B_LED_chart.Titles.Clear();
-                                    B_LED_chart.Titles.Add("波長 " + num.ToString() + " nm 下各時間光強");
+                                    B_LED_chart.Titles.Add("B燈 波長 " + num.ToString() + " nm 下各時間光強");
                                     B_LED_chart.Series.Add(time_Srs);
                                 }
                                     
@@ -2208,6 +2257,8 @@ namespace Spectrum_Test
             SP_test_a3_txt.Text = machine[0].a3.ToString();
             SP_test_step_distance_txt.Text = machine[0].s_steps.ToString();
             SP_test_point_distance_steps_txt.Text = machine[0].n_mov.ToString();
+            baseline_start_txt.Text = machine[0].baseline_start.ToString();
+            baseline_end_txt.Text = machine[0].baseline_end.ToString();
 
             // LED測試參數
             LED_test_T1_txt.Text = machine[0].t1.ToString();
