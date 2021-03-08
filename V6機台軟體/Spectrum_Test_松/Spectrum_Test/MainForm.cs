@@ -511,6 +511,11 @@ namespace Spectrum_Test
             }
         }
 
+        private void LED_test_total_times_txt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnGNV_Click(object sender, EventArgs e)
         {
             txtCommand.Text = "";
