@@ -64,3 +64,4 @@ C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spect
 C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
 C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
 C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.ResolveComReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.ResolveComReference.cache
