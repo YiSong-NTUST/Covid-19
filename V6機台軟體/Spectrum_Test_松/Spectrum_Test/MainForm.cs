@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Spectrum_Test
 {
@@ -63,10 +64,15 @@ namespace Spectrum_Test
         }
 
         Stopwatch sw = new Stopwatch();
-        public static string command = "";
-        public static List<List<int>> ALL_POINT_CAL = new List<List<int>>();
-        public static List<byte> CAL = new List<byte>();
-        public static List<int> MULT_CAL = new List<int>();
+        public string command = "";
+        public List<List<int>> ALL_POINT_CAL = new List<List<int>>();
+
+        public List<List<List<int>>> ALL_A_LED_CAL = new List<List<List<int>>>();
+        public List<List<int>> A_LED_CAL = new List<List<int>>();
+        public List<List<List<int>>> ALL_B_LED_CAL = new List<List<List<int>>>();
+        public List<List<int>> B_LED_CAL = new List<List<int>>();
+        public List<byte> CAL = new List<byte>();
+        public List<int> MULT_CAL = new List<int>();
 
         public const int CMD_RET_OK = 0;
         public const int CMD_RET_TIMEOUT = 1;
@@ -101,6 +107,10 @@ namespace Spectrum_Test
         int iTask;
         int ret;
         int test_motor_round;
+
+        private CancellationTokenSource cts;
+        private CancellationToken token;
+
 
         public MainForm()
         {
@@ -458,6 +468,316 @@ namespace Spectrum_Test
             }
         }
 
+        private void LED_test_wl_txt_TextChanged(object sender, EventArgs e)
+        {
+            double lambda;
+            List<double> n_wl = new List<double>();
+            List<int> LED_sp = new List<int>();
+
+            if (String.IsNullOrEmpty(LED_test_wl_txt.Text))
+            {
+                LED_wl = 0;
+            }
+            else
+            {
+                LED_wl = int.Parse(LED_test_wl_txt.Text);
+            }
+
+            for (int i = 1; i <= 1280; i++)
+            {
+                lambda = double.Parse(LED_test_a0_txt.Text) + double.Parse(LED_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(LED_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(LED_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                n_wl.Add(lambda);
+            }
+
+            double num = n_wl.OrderBy(item => Math.Abs(item - LED_wl)).ThenBy(item => item).First(); //取最接近的數
+            int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
+
+
+            if (ALL_A_LED_CAL.Count > 0)
+            { 
+                n_wl.Clear();
+                LED_sp.Clear();
+
+                this.InvokeIfRequired(() =>
+                {
+                    A_LED_chart.Series.Clear();
+                });
+
+                for (int i = 0; i < ALL_A_LED_CAL.Count; i++)
+                {
+                    n_wl.Clear();
+                    LED_sp.Clear();
+                    for (int j = 0; j < ALL_A_LED_CAL[i].Count; j++)
+                    {
+                        n_wl.Add(j * double.Parse(LED_test_interval_time_txt.Text));
+                        LED_sp.Add(ALL_A_LED_CAL[i][j][index]);
+                    }
+                    
+                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + i.ToString() + " 次 ");
+                    time_Srs.ChartType = SeriesChartType.Line;
+                    time_Srs.IsValueShownAsLabel = false;
+                    time_Srs.Points.DataBindXY(n_wl, LED_sp);
+                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                    this.InvokeIfRequired(() =>
+                    {
+                        A_LED_chart.ChartAreas[0].AxisX.Minimum = 0;
+                        A_LED_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                        A_LED_chart.ChartAreas[0].AxisX.Interval = double.Parse(LED_test_interval_time_txt.Text);
+
+                        A_LED_chart.Titles.Clear();
+                        A_LED_chart.Titles.Add("A燈 波長 " + num.ToString() + " nm 下各時間光強");
+                        A_LED_chart.Series.Add(time_Srs);                        
+                    });
+
+                }               
+            }
+                
+            if (ALL_B_LED_CAL.Count > 0)
+            {
+                n_wl.Clear();
+                LED_sp.Clear();
+
+                this.InvokeIfRequired(() =>
+                {
+                    B_LED_chart.Series.Clear();
+                });
+
+                for (int i = 0; i < ALL_B_LED_CAL.Count; i++)
+                {
+                    n_wl.Clear();
+                    LED_sp.Clear();
+                    for (int j = 0; j < ALL_B_LED_CAL[i].Count; j++)
+                    {
+                        n_wl.Add(j * double.Parse(LED_test_interval_time_txt.Text));
+                        LED_sp.Add(ALL_B_LED_CAL[i][j][index]);
+                    }
+
+                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + i + " 次 ");
+                    time_Srs.ChartType = SeriesChartType.Line;
+                    time_Srs.IsValueShownAsLabel = false;
+                    time_Srs.Points.DataBindXY(n_wl, LED_sp);
+                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                    this.InvokeIfRequired(() =>
+                    {
+                        B_LED_chart.ChartAreas[0].AxisX.Minimum = 0;
+                        B_LED_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                        B_LED_chart.ChartAreas[0].AxisX.Interval = double.Parse(LED_test_interval_time_txt.Text);
+
+                        B_LED_chart.Titles.Clear();
+                        B_LED_chart.Titles.Add("B燈 波長 " + num.ToString() + " nm 下各時間光強");                        
+                        B_LED_chart.Series.Add(time_Srs);
+                    });
+                }
+            }
+        }
+
+        private void btnLED_save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel files(*.xlsx)| *.xlsx | All files(*.*) | *.* ";//設定檔案型別            
+            sfd.AddExtension = true;//設定自動在檔名中新增副檔名
+            sfd.FileName = DateTime.Now.ToString("yyyy-MM-dd  HH-mm-ss  LED測試");
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Excel.Application oXL;
+                Excel._Workbook oWB;
+                Excel._Worksheet oSheet;
+                Excel.Range oRng;
+                object misvalue = System.Reflection.Missing.Value;
+                //try
+                //{
+                    oXL = new Excel.Application();
+                    oXL.Visible = false;
+
+                    oWB = oXL.Workbooks.Add();
+
+                    oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+                    oSheet.Name = "A燈 測試結果";
+
+                    double A_lambda;
+
+                    String[,] A_lambda_array = new string[1280, 1];
+
+                    for (int i = 1; i <= 1280; i++)
+                    {
+                        A_lambda = double.Parse(LED_test_a0_txt.Text) + double.Parse(LED_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(LED_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(LED_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+
+                        A_lambda_array[i - 1, 0] = A_lambda.ToString();
+                    }
+
+                    oSheet.get_Range("A1", "A1").Value2 = "波長";
+                    oSheet.get_Range("A2", "A" + (A_lambda_array.GetLength(0) + 1).ToString()).Value2 = A_lambda_array;
+
+                    int col = 2;
+                    for (int i = 0; i < ALL_A_LED_CAL.Count; i++)
+                    {
+                        String[,] sp_array = new string[1280, ALL_A_LED_CAL[i].Count];
+                        for (int j = 0; j < ALL_A_LED_CAL[i].Count; j++)
+                        {                            
+                            for (int k = 0; k < 1280; k++)
+                            {
+                                sp_array[k, j] = ALL_A_LED_CAL[i][j][k].ToString();
+                            }
+                            col++;
+                        }
+
+                        oSheet.get_Range(GetExcelColumnName(col - sp_array.GetLength(1)) + "1", GetExcelColumnName(col - 1) + "1").Value2 = "第" + i.ToString() + "次";
+                        oSheet.get_Range(GetExcelColumnName(col - sp_array.GetLength(1)) + "2", GetExcelColumnName(col-1) + (sp_array.GetLength(0) + 1).ToString()).Value2 = sp_array;
+                    }
+
+                    oSheet = (Excel._Worksheet)oWB.Worksheets.Add();
+                    oSheet.Name = "B燈 測試結果";
+
+                    double B_lambda;
+
+                    String[,] B_lambda_array = new string[1280, 1];
+
+                    for (int i = 1; i <= 1280; i++)
+                    {
+                        B_lambda = double.Parse(LED_test_a0_txt.Text) + double.Parse(LED_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(LED_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(LED_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+
+                        B_lambda_array[i - 1, 0] = B_lambda.ToString();
+                    }
+
+                    oSheet.get_Range("A1", "A1").Value2 = "波長";
+                    oSheet.get_Range("A2", "A" + (B_lambda_array.GetLength(0) + 1).ToString()).Value2 = B_lambda_array;
+
+                    col = 2;
+                    for (int i = 0; i < ALL_B_LED_CAL.Count; i++)
+                    {
+                        String[,] sp_array = new string[1280, ALL_B_LED_CAL[i].Count];
+                        for (int j = 0; j < ALL_B_LED_CAL[i].Count; j++)
+                        {
+                            for (int k = 0; k < 1280; k++)
+                            {
+                                sp_array[k, j] = ALL_B_LED_CAL[i][j][k].ToString();
+                            }
+                            col++;
+                        }
+
+                        oSheet.get_Range(GetExcelColumnName(col - sp_array.GetLength(1)) + "1", GetExcelColumnName(col - 1) + "1").Value2 = "第" + i.ToString() + "次";
+                        oSheet.get_Range(GetExcelColumnName(col - sp_array.GetLength(1)) + "2", GetExcelColumnName(col - 1) + (sp_array.GetLength(0) + 1).ToString()).Value2 = sp_array;
+                    }
+
+                    oXL.Visible = false;
+                    oXL.UserControl = false;
+
+
+                    oWB.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
+                        false, false, Excel.XlSaveAsAccessMode.xlNoChange,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                    oWB.Close();
+                    oXL.Quit();
+                /*}
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }*/
+
+
+
+
+
+                /*if (ALL_A_LED_CAL.Count > 0)
+                {
+                    n_wl.Clear();
+                    LED_sp.Clear();
+
+                    this.InvokeIfRequired(() =>
+                    {
+                        A_LED_chart.Series.Clear();
+                    });
+
+                    for (int i = 0; i < ALL_A_LED_CAL.Count; i++)
+                    {
+                        n_wl.Clear();
+                        LED_sp.Clear();
+                        for (int j = 0; j < ALL_A_LED_CAL[i].Count; j++)
+                        {
+                            n_wl.Add(j * double.Parse(LED_test_interval_time_txt.Text));
+                            LED_sp.Add(ALL_A_LED_CAL[i][j][index]);
+                        }
+
+                        Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + i.ToString() + " 次 ");
+                        time_Srs.ChartType = SeriesChartType.Line;
+                        time_Srs.IsValueShownAsLabel = false;
+                        time_Srs.Points.DataBindXY(n_wl, LED_sp);
+                        time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                        this.InvokeIfRequired(() =>
+                        {
+                            A_LED_chart.ChartAreas[0].AxisX.Minimum = 0;
+                            A_LED_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                            A_LED_chart.ChartAreas[0].AxisX.Interval = double.Parse(LED_test_interval_time_txt.Text);
+
+                            A_LED_chart.Titles.Clear();
+                            A_LED_chart.Titles.Add("A燈 波長 " + num.ToString() + " nm 下各時間光強");
+                            A_LED_chart.Series.Add(time_Srs);
+                        });
+
+                    }
+                }
+
+                if (ALL_B_LED_CAL.Count > 0)
+                {
+                    n_wl.Clear();
+                    LED_sp.Clear();
+
+                    this.InvokeIfRequired(() =>
+                    {
+                        B_LED_chart.Series.Clear();
+                    });
+
+                    for (int i = 0; i < ALL_B_LED_CAL.Count; i++)
+                    {
+                        n_wl.Clear();
+                        LED_sp.Clear();
+                        for (int j = 0; j < ALL_B_LED_CAL[i].Count; j++)
+                        {
+                            n_wl.Add(j * double.Parse(LED_test_interval_time_txt.Text));
+                            LED_sp.Add(ALL_B_LED_CAL[i][j][index]);
+                        }
+
+                        Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + i + " 次 ");
+                        time_Srs.ChartType = SeriesChartType.Line;
+                        time_Srs.IsValueShownAsLabel = false;
+                        time_Srs.Points.DataBindXY(n_wl, LED_sp);
+                        time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                        this.InvokeIfRequired(() =>
+                        {
+                            B_LED_chart.ChartAreas[0].AxisX.Minimum = 0;
+                            B_LED_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                            B_LED_chart.ChartAreas[0].AxisX.Interval = double.Parse(LED_test_interval_time_txt.Text);
+
+                            B_LED_chart.Titles.Clear();
+                            B_LED_chart.Titles.Add("B燈 波長 " + num.ToString() + " nm 下各時間光強");
+                            B_LED_chart.Series.Add(time_Srs);
+                        });
+                    }
+                }*/
+            }
+        }
+
+        private string GetExcelColumnName(int columnNumber)
+        {
+            int dividend = columnNumber;
+            string columnName = String.Empty;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                columnName = Convert.ToChar(65 + modulo).ToString() + columnName;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+
+            return columnName;
+        }
+
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
             panel1.Controls.Clear();
@@ -516,6 +836,15 @@ namespace Spectrum_Test
 
         }
 
+
+        private void btnTaskStop_Click(object sender, EventArgs e)
+        {
+            if (cts != null)
+            {
+                cts.Cancel();
+            }
+        }
+
         private void btnGNV_Click(object sender, EventArgs e)
         {
             txtCommand.Text = "";
@@ -561,149 +890,218 @@ namespace Spectrum_Test
             }
         }
 
-        private void btnMotor_Test_Click(object sender, EventArgs e)
+        private async void btnMotor_Test_Click(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(() => RunTestMotor());
-        }
-
-        private void RunTestMotor()
-        {
-            if (runTestMotor())
-                Log("RunTestMotor OK.");
-            else
-                Log("RunTestMotor Fail.");
-        }
-
-        private bool runTestMotor()
-        {
-            int ret;
-            int motor_dir = 1;
-            int round = 0;
-
-            ret = CMD_QPS(1);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            if (cts != null)
             {
-                Log("CMD_QPS 1 Error!");
-                return false;
+                return;
             }
 
-            if (ret == CMD_RET_POS_ON)
+            cts = new CancellationTokenSource();
+            token = cts.Token;
+
+            try
             {
-                Log("CMD_QPS 1 Detect ON!");
-                return false;
-            }
-
-            TestSleep(100);
-
-            ret = CMD_QPS(2);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-            {
-                Log("CMD_QPS 2 Error!");
-                return false;
-            }
-
-            if (ret == CMD_RET_POS_ON)
-            {
-                Log("CMD_QPS 2 Detect ON!");
-                return false;
-            }
-
-            TestSleep(100);
-
-            // try DIR0
-            ret = CMD_DIR(motor_dir);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-            {
-                Log("CMD_DIR Error!");
-                return false;
-            }
-
-            TestSleep(100);
-
-            // run to pos 1
-            ret = CMD_MSP(1);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-            {
-                Log("CMD_MSP Error!");
-                return false;
-            }
-
-            if (ret == CMD_RET_WDIR)
-            {
-                motor_dir = 0;
-            }
-
-            motor_dir = motor_dir == 1 ? 0 : 1;
-
-            TestSleep(100);
-
-            while (round < test_motor_round)
-            {
-                // try DIR0
-                ret = CMD_DIR(motor_dir);
-                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                await Task.Run(() =>
                 {
-                    Log("CMD_DIR Error!");
-                    return false;
-                }
+                    int ret;
+                    int motor_dir = 1;
+                    int round = 0;
 
-                TestSleep(100);
+                    BeginInvoke((Action)(() =>
+                    {
+                        status_lb.Text = "馬達測試開始";
+                        btnMotor_Test.Enabled = false;
+                    }));
 
-                // run to pos 1
-                ret = CMD_MSP(2);
-                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                {
-                    Log("CMD_MSP Error!");
-                    return false;
-                }
+                    ret = CMD_QPS(1);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_QPS 1 Error!");
+                        Log("RunTestMotor Fail.");
+                        throw new Exception("錯誤");
+                    }
 
-                if (ret == CMD_RET_WDIR)
-                {
-                    Log("CMD_RET_WDIR!");
-                    return false;
-                }
+                    if (ret == CMD_RET_POS_ON)
+                    {
+                        Log("CMD_QPS 1 Detect ON!");
+                        Log("RunTestMotor Fail.");
+                        throw new Exception("錯誤");
+                    }
 
-                TestSleep(100);
+                    Task.Delay(100, token).Wait();
 
-                motor_dir = motor_dir == 1 ? 0 : 1;
+                    ret = CMD_QPS(2);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_QPS 2 Error!");
+                        Log("RunTestMotor Fail.");
+                        throw new Exception("錯誤");
+                    }
 
-                // try DIR
-                ret = CMD_DIR(motor_dir);
-                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                {
-                    Log("CMD_DIR Error!");
-                    return false;
-                }
+                    if (ret == CMD_RET_POS_ON)
+                    {
+                        Log("CMD_QPS 2 Detect ON!");
+                        Log("RunTestMotor Fail.");
+                        throw new Exception("錯誤");
+                    }
 
-                TestSleep(100);
+                    Task.Delay(100, token).Wait();
 
-                // run to pos 1
-                ret = CMD_MSP(1);
-                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                {
-                    Log("CMD_MSP Error!");
-                    return false;
-                }
+                    // try DIR0
+                    ret = CMD_DIR(motor_dir);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_DIR Error!");
+                        Log("RunTestMotor Fail.");
+                        throw new Exception("錯誤");
+                    }
 
-                if (ret == CMD_RET_WDIR)
-                {
-                    Log("CMD_RET_WDIR!");
-                    return false;
-                }
+                    Task.Delay(100, token).Wait();
 
-                TestSleep(100);
+                    // run to pos 1
+                    ret = CMD_MSP(1);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_MSP Error!");
+                        Log("RunTestMotor Fail.");
+                        throw new Exception("錯誤");
+                    }
 
-                motor_dir = motor_dir == 1 ? 0 : 1;
+                    if (ret == CMD_RET_WDIR)
+                    {
+                        motor_dir = 0;
+                    }
 
-                round++;
-                Log(string.Format("Round {0} OK.", round));
+                    motor_dir = motor_dir == 1 ? 0 : 1;
+
+                    Task.Delay(100, token).Wait();
+
+                    while (round < int.Parse(txt_motor_test_round.Text))
+                    {
+                        // try DIR0
+                        ret = CMD_DIR(motor_dir);
+                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                        {
+                            Log("CMD_DIR Error!");
+                            Log("RunTestMotor Fail.");
+                            throw new Exception("錯誤");
+                        }
+
+                        Task.Delay(100, token).Wait();
+
+                        // run to pos 1
+                        ret = CMD_MSP(2);
+                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                        {
+                            Log("CMD_MSP Error!");
+                            Log("RunTestMotor Fail.");
+                            throw new Exception("錯誤");
+                        }
+
+                        if (ret == CMD_RET_WDIR)
+                        {
+                            Log("CMD_RET_WDIR!");
+                            Log("RunTestMotor Fail.");
+                            throw new Exception("錯誤");
+                        }
+
+                        Task.Delay(100, token).Wait();
+
+                        motor_dir = motor_dir == 1 ? 0 : 1;
+
+                        // try DIR
+                        ret = CMD_DIR(motor_dir);
+                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                        {
+                            Log("CMD_DIR Error!");
+                            Log("RunTestMotor Fail.");
+                            throw new Exception("錯誤");
+                        }
+
+                        Task.Delay(100, token).Wait();
+
+                        // run to pos 1
+                        ret = CMD_MSP(1);
+                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                        {
+                            Log("CMD_MSP Error!");
+                            Log("RunTestMotor Fail.");
+                            throw new Exception("錯誤");
+                        }
+
+                        if (ret == CMD_RET_WDIR)
+                        {
+                            Log("CMD_RET_WDIR!");
+                            Log("RunTestMotor Fail.");
+                            throw new Exception("錯誤");
+                        }
+
+                        Task.Delay(100, token).Wait();
+
+                        motor_dir = motor_dir == 1 ? 0 : 1;
+
+                        round++;
+                        Log(string.Format("Round {0} OK.", round));
+                        BeginInvoke((Action)(() =>
+                        {
+                            status_lb.Text = "第" + round.ToString() + "趟測試 OK";
+                        }));
+
+                        if (token.IsCancellationRequested == true)
+                        {
+                            System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
+                            token.ThrowIfCancellationRequested();
+                        }
+                    }
+                    Log("RunTestMotor OK.");
+                    BeginInvoke((Action)(() =>
+                    {
+                        status_lb.Text = "完成";
+                        btnMotor_Test.Enabled = true;
+                    }));
+
+                }, cts.Token);
             }
-            return true;
+            catch (Exception ex)
+            {   
+                if(ex.Message == "錯誤")
+                {
+                    BeginInvoke((Action)(() =>
+                    {
+                        status_lb.Text = "錯誤!";
+                        btnMotor_Test.Enabled = true;
+                    }));
+
+                    cts = null;
+                }
+                else
+                {
+                    BeginInvoke((Action)(() =>
+                    {
+                        status_lb.Text = "停止!";
+                        btnMotor_Test.Enabled = true;
+                    }));
+
+                    cts = null;
+                }
+            }            
         }
 
         /** 開始進行光譜測試程序 */
         private async void btnSpectrum_Test_Start_Click(object sender, EventArgs e)
         {
+            if (cts != null)
+            {
+                return;
+            }
+
+            cts = new CancellationTokenSource();
+            token = cts.Token;
+
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();//引用stopwatch物件
+            Autoscaling_runtime_SP.Text = "";
+
             dark_sp_chart.Series.Clear();
             dark_sp_chart.Titles.Clear();
             point_sp_chart.Series.Clear();
@@ -714,241 +1112,223 @@ namespace Spectrum_Test
             reflect_sp_chart.Titles.Clear();
 
             btnSpectrum_Test_Start.Enabled = false;
-            btnSpectrum_Test_Stop.Enabled = true;
             flag = true;
             iTask = 0;
             CAL_RUN_cycle = 1;
-
-            await Task.Run(() =>
+            try
             {
-                while (flag)
+                await Task.Run(() =>
                 {
-                    switch (iTask)
+                    while (flag)
                     {
-                        /** 設方向 */
-                        case 0:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "設方向";
-                            }));
+                        switch (iTask)
+                        {
+                            /** 設方向 */
+                            case 0:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "設方向";
+                                }));
 
-                            ret = CMD_DIR(1);
+                                ret = CMD_DIR(1);
 
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_DIR Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 5;
-                            }
-                            break;
-                        /** 設ROI */
-                        case 5:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "設ROI";
-                            }));
-
-                            ret = CMD_ROI(int.Parse(SP_test_roi_ho_txt.Text), int.Parse(SP_test_roi_hc_txt.Text), int.Parse(SP_test_roi_vo_txt.Text), int.Parse(SP_test_roi_lc_txt.Text));
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_DIR Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 10;
-                            }
-                            break;
-                        /** 回原點 */
-                        case 10:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "回原點";
-                            }));
-
-                            ret = CMD_MSP(1);
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MSP Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 20;
-                            }
-                            break;
-                        /** -Xsc+Xts+xAS */
-                        case 20:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "移動至auto scaling點";
-                            }));
-
-                            double Xsc = double.Parse(SP_test_Xsc_txt.Text);
-                            double Xts = double.Parse(SP_test_Xts_txt.Text);
-                            double xAS = double.Parse(SP_test_xAS_txt.Text);
-                            double X_move = -Xsc + Xts + xAS;
-
-                            if(X_move < 0.0)
-                            {
-                                ret = CMD_MRS(Convert.ToInt32((-X_move) / 0.0196));
-                            }
-                            else
-                            {
-                                ret = CMD_MLS(Convert.ToInt32(X_move / 0.0196));
-                            }
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MRS Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 23;
-                            }
-                            break;
-                        /** 暗光譜 */
-                        case 23:
-                            List<double> dark_n = new List<double>();
-                            double dark_lambda;
-
-                            Task.Delay(1000).Wait();
-                            List<int> dark_sp = CMD_CAL();
-
-                            dark = dark_sp.Average();
-                            System.Diagnostics.Debug.WriteLine(dark.ToString());
-
-                            for (int i = 1; i <= 1280; i++)
-                            {
-                                dark_lambda = double.Parse(SP_test_a0_txt.Text) + double.Parse(SP_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(SP_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(SP_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
-                                dark_n.Add(dark_lambda);
-                            }
-
-                            Series dark_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次暗光譜");
-                            dark_Srs.ChartType = SeriesChartType.Line;
-                            dark_Srs.IsValueShownAsLabel = false;
-                            /*dark_Srs.MarkerStyle = MarkerStyle.Circle;
-                            dark_Srs.MarkerSize = 6;*/
-                            dark_Srs.Points.DataBindXY(dark_n, dark_sp);
-                            dark_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                            this.InvokeIfRequired(() =>
-                            {
-                                dark_sp_chart.Titles.Clear();
-                                dark_sp_chart.Titles.Add("暗光譜");
-                                dark_sp_chart.Series.Add(dark_Srs);
-                            });
-
-                            iTask = 30;
-                            break;
-                        /** 開燈  等待T2時間使LED達穩態    */
-                        case 30:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "延遲時間T2";
-                            }));
-
-                            ret = CMD_SWL(1);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_SWL Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                SP_T2 = double.Parse(SP_test_T2_txt.Text);
-                                Task.Delay(Convert.ToInt32(SP_T2 * 1000)).Wait();
-                                iTask = 40;
-                            }
-                            break;
-                        /** Auto-scaling */
-                        case 40:    //初始AG DG EXP
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "Auto-scalin";
-                            }));
-
-                            SP_AG = int.Parse(SP_test_AG_txt.Text);
-                            ret = CMD_AGN(int.Parse(SP_test_AG_txt.Text));
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_AGN Error!");
-                                iTask = 999;
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_DIR Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 5;
+                                }
                                 break;
-                            }
+                            /** 設ROI */
+                            case 5:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "設ROI";
+                                }));
 
-                            SP_DG = int.Parse(SP_test_DG_txt.Text);
-                            ret = CMD_GNV(int.Parse(SP_test_DG_txt.Text));
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_GNV Error!");
-                                iTask = 999;
+                                ret = CMD_ROI(int.Parse(SP_test_roi_ho_txt.Text), int.Parse(SP_test_roi_hc_txt.Text), int.Parse(SP_test_roi_vo_txt.Text), int.Parse(SP_test_roi_lc_txt.Text));
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_DIR Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 10;
+                                }
                                 break;
-                            }
+                            /** 回原點 */
+                            case 10:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "回原點";
+                                }));
 
-                            SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
-                            ret = CMD_ELC(int.Parse(SP_test_EXP_initial_txt.Text));
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_ELC Error!");
-                                iTask = 999;
+                                ret = CMD_MSP(1);
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MSP Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 20;
+                                }
                                 break;
-                            }
+                            /** -Xsc+Xts+xAS */
+                            case 20:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "移動至auto scaling點";
+                                }));
 
-                            iTask = 45;
-                            break;
-                        case 41:    //AG增加
-                            SP_AG *= 2;
-                            ret = CMD_AGN(SP_AG);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_AGN Error!");
-                                iTask = 999;
+                                double Xsc = double.Parse(SP_test_Xsc_txt.Text);
+                                double Xts = double.Parse(SP_test_Xts_txt.Text);
+                                double xAS = double.Parse(SP_test_xAS_txt.Text);
+                                double X_move = -Xsc + Xts + xAS;
+
+                                if (X_move < 0.0)
+                                {
+                                    ret = CMD_MRS(Convert.ToInt32((-X_move) / 0.0196));
+                                }
+                                else
+                                {
+                                    ret = CMD_MLS(Convert.ToInt32(X_move / 0.0196));
+                                }
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MRS Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 23;
+                                }
                                 break;
-                            }
+                            /** 暗光譜 */
+                            case 23:
+                                List<double> dark_n = new List<double>();
+                                double dark_lambda;
 
-                            iTask = 45;
-                            break;
-                        case 42:    //DG增加
-                            SP_DG *= 2;
-                            ret = CMD_GNV(SP_DG);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_GNV Error!");
-                                iTask = 999;
+                                Task.Delay(1000, token).Wait();
+                                List<int> dark_sp = CMD_CAL();
+
+                                dark = dark_sp.Average();
+                                System.Diagnostics.Debug.WriteLine(dark.ToString());
+
+                                for (int i = 1; i <= 1280; i++)
+                                {
+                                    dark_lambda = double.Parse(SP_test_a0_txt.Text) + double.Parse(SP_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(SP_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(SP_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                    dark_n.Add(dark_lambda);
+                                }
+
+                                Series dark_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次暗光譜");
+                                dark_Srs.ChartType = SeriesChartType.Line;
+                                dark_Srs.IsValueShownAsLabel = false;
+                                /*dark_Srs.MarkerStyle = MarkerStyle.Circle;
+                                dark_Srs.MarkerSize = 6;*/
+                                dark_Srs.Points.DataBindXY(dark_n, dark_sp);
+                                dark_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                this.InvokeIfRequired(() =>
+                                {
+                                    dark_sp_chart.Titles.Clear();
+                                    dark_sp_chart.Titles.Add("暗光譜");
+                                    dark_sp_chart.Series.Add(dark_Srs);
+                                });
+
+                                iTask = 30;
                                 break;
-                            }
+                            /** 開燈  等待T2時間使LED達穩態    */
+                            case 30:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "延遲時間T2";
+                                }));
 
-                            iTask = 45;
-                            break;
-                        case 43:    //EXP減一半
-                            SP_EXP_init /= 2;
-                            ret = CMD_ELC(SP_EXP_init);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_ELC Error!");
-                                iTask = 999;
+                                ret = CMD_SWL(1);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_SWL Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    SP_T2 = double.Parse(SP_test_T2_txt.Text);
+                                    Task.Delay(Convert.ToInt32(SP_T2 * 1000), token).Wait();
+                                    iTask = 40;
+                                }
                                 break;
-                            }
+                            /** Auto-scaling */
+                            case 40:    //初始AG DG EXP
+                                sw.Reset();//碼表歸零
+                                sw.Start();//碼表開始計時
 
-                            iTask = 45;
-                            break;
-                        case 45:    //找出目標值的EXP  
-                            Task.Delay(1000).Wait();
-                            List<int> sp1 = CMD_CAL();
-                            SP_maxValue = sp1.Max();
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "Auto-scaling";
+                                }));
 
-                            if (SP_maxValue < int.Parse(SP_test_I_max_txt.Text))
-                            {
-                                SP_EXP1 = SP_EXP_init;
-                                SP_I1 = SP_maxValue;
+                                SP_AG = int.Parse(SP_test_AG_txt.Text);
+                                ret = CMD_AGN(int.Parse(SP_test_AG_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_AGN Error!");
+                                    iTask = 999;
+                                    break;
+                                }
 
+                                SP_DG = int.Parse(SP_test_DG_txt.Text);
+                                ret = CMD_GNV(int.Parse(SP_test_DG_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_GNV Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
+                                ret = CMD_ELC(int.Parse(SP_test_EXP_initial_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_ELC Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 41:    //AG增加
+                                SP_AG *= 2;
+                                ret = CMD_AGN(SP_AG);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_AGN Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 42:    //DG增加
+                                SP_DG *= 2;
+                                ret = CMD_GNV(SP_DG);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_GNV Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 43:    //EXP減一半
                                 SP_EXP_init /= 2;
                                 ret = CMD_ELC(SP_EXP_init);
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
@@ -958,44 +1338,100 @@ namespace Spectrum_Test
                                     break;
                                 }
 
-                                Task.Delay(1000).Wait();
-                                List<int> sp2 = CMD_CAL();
-                                SP_maxValue = sp2.Max();
+                                iTask = 45;
+                                break;
+                            case 45:    //找出目標值的EXP  
+                                Task.Delay(1000, token).Wait();
+                                List<int> sp1 = CMD_CAL();
+                                SP_maxValue = sp1.Max();
 
-                                SP_EXP2 = SP_EXP_init;
-                                SP_I2 = SP_maxValue;
-
-                                SP_I_thr = int.Parse(SP_test_I_thr_txt.Text);
-
-                                /*System.Diagnostics.Debug.WriteLine("AG...." + AG.ToString());
-                                System.Diagnostics.Debug.WriteLine("DG...." + DG.ToString());
-                                System.Diagnostics.Debug.WriteLine("EXP...." + EXP.ToString());
-                                System.Diagnostics.Debug.WriteLine("EXP1...." + EXP1.ToString());
-                                System.Diagnostics.Debug.WriteLine("EXP2...." + EXP2.ToString());
-                                System.Diagnostics.Debug.WriteLine("I1...." + I1.ToString());
-                                System.Diagnostics.Debug.WriteLine("I2...." + I2.ToString());*/
-                                SP_EXP = SP_EXP1 + ((SP_I_thr - SP_I1) * ((SP_EXP1 - SP_EXP2) / (SP_I1 - SP_I2)));
-
-
-                                if (SP_EXP > int.Parse(SP_test_EXP_max_txt.Text))
+                                if (SP_maxValue < int.Parse(SP_test_I_max_txt.Text))
                                 {
-                                    if (SP_DG < 128)
+                                    SP_EXP1 = SP_EXP_init;
+                                    SP_I1 = SP_maxValue;
+
+                                    SP_EXP_init /= 2;
+                                    ret = CMD_ELC(SP_EXP_init);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                     {
-                                        SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
-                                        ret = CMD_ELC(SP_EXP_init);
+                                        Log("CMD_ELC Error!");
+                                        iTask = 999;
+                                        break;
+                                    }
+
+                                    Task.Delay(1000, token).Wait();
+                                    List<int> sp2 = CMD_CAL();
+                                    SP_maxValue = sp2.Max();
+
+                                    SP_EXP2 = SP_EXP_init;
+                                    SP_I2 = SP_maxValue;
+
+                                    SP_I_thr = int.Parse(SP_test_I_thr_txt.Text);
+
+                                    /*System.Diagnostics.Debug.WriteLine("AG...." + SP_AG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("DG...." + SP_DG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP...." + SP_EXP.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP1...." + SP_EXP1.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP2...." + SP_EXP2.ToString());
+                                    System.Diagnostics.Debug.WriteLine("I1...." + SP_I1.ToString());
+                                    System.Diagnostics.Debug.WriteLine("I2...." + SP_I2.ToString());*/
+                                    SP_EXP = SP_EXP1 + ((SP_I_thr - SP_I1) * ((SP_EXP1 - SP_EXP2) / (SP_I1 - SP_I2)));
+
+
+                                    if (SP_EXP > int.Parse(SP_test_EXP_max_txt.Text))
+                                    {
+                                        if (SP_DG < 128)
+                                        {
+                                            SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
+                                            ret = CMD_ELC(SP_EXP_init);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_ELC Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            iTask = 42;
+                                            break;
+                                        }
+                                        else if (SP_AG < 8)
+                                        {
+                                            SP_DG = int.Parse(SP_test_DG_txt.Text);
+                                            ret = CMD_GNV(SP_DG);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_GNV Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
+                                            ret = CMD_ELC(SP_EXP_init);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_ELC Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            iTask = 41;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_AGN(SP_AG);
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
-                                            Log("CMD_ELC Error!");
+                                            Log("CMD_AGN Error!");
                                             iTask = 999;
                                             break;
                                         }
 
-                                        iTask = 42;
-                                        break;
-                                    }
-                                    else if (SP_AG < 8)
-                                    {
-                                        SP_DG = int.Parse(SP_test_DG_txt.Text);
                                         ret = CMD_GNV(SP_DG);
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
@@ -1004,8 +1440,7 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
-                                        ret = CMD_ELC(SP_EXP_init);
+                                        ret = CMD_ELC(SP_EXP);
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
                                             Log("CMD_ELC Error!");
@@ -1013,441 +1448,253 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        iTask = 41;
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                        Task.Delay(1000, token).Wait();
+                                        List<int> sp3 = CMD_CAL();
+
+                                        sw.Stop();//碼錶停止
+                                        string minutes = sw.Elapsed.Minutes.ToString();
+                                        string seconds = sw.Elapsed.Seconds.ToString();
+
+                                        BeginInvoke((Action)(() =>
+                                        {
+                                            Autoscaling_runtime_LED.Text = minutes + " 分 " + seconds + " 秒 ";
+                                        }));
+
+                                        CAL_cycle = 0;
+                                        iTask = 50;
                                     }
                                 }
                                 else
                                 {
-                                    ret = CMD_AGN(SP_AG);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        Log("CMD_AGN Error!");
-                                        iTask = 999;
-                                        break;
-                                    }
-
-                                    ret = CMD_GNV(SP_DG);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        Log("CMD_GNV Error!");
-                                        iTask = 999;
-                                        break;
-                                    }
-
-                                    ret = CMD_ELC(SP_EXP);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        Log("CMD_ELC Error!");
-                                        iTask = 999;
-                                        break;
-                                    }
-
-                                    Task.Delay(1000).Wait();
-                                    List<int> sp3 = CMD_CAL();
-
-                                    CAL_cycle = 0;
-                                    iTask = 50;
+                                    iTask = 43;
                                 }
-                            }
-                            else
-                            {
-                                iTask = 43;
-                            }
-                            break;
-                        /** 移到第一點 */
-                        case 50:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "移到第一點";
-                            }));
-
-                            ret = CMD_MLS(Convert.ToInt32((double.Parse(SP_test_x1_txt.Text) - double.Parse(SP_test_xAS_txt.Text)) / 0.0196));
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MLS Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
+                                break;
+                            /** 移到第一點 */
+                            case 50:
                                 BeginInvoke((Action)(() =>
                                 {
-                                    status_lb.Text = "掃描中";
-                                    ALL_POINT_CAL.Clear();
+                                    status_lb.Text = "移到第一點";
                                 }));
-                                iTask = 51;
 
+                                ret = CMD_MLS(Convert.ToInt32((double.Parse(SP_test_x1_txt.Text) - double.Parse(SP_test_xAS_txt.Text)) / 0.0196));
 
-                            }
-                            break;
-                        /** 開始掃描 */
-                        case 51:
-                            if (CAL_cycle < int.Parse(SP_test_total_point_txt.Text))
-                            {
-                                ret = CMD_MLS(int.Parse(SP_test_point_distance_steps_txt.Text));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_MLS Error!");
                                     iTask = 999;
-                                    break;
+                                }
+                                else
+                                {
+                                    BeginInvoke((Action)(() =>
+                                    {
+                                        status_lb.Text = "掃描中";
+                                        ALL_POINT_CAL.Clear();
+                                    }));
+                                    iTask = 51;
+
+
+                                }
+                                break;
+                            /** 開始掃描 */
+                            case 51:
+                                if (CAL_cycle < int.Parse(SP_test_total_point_txt.Text))
+                                {
+                                    ret = CMD_MLS(int.Parse(SP_test_point_distance_steps_txt.Text));
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_MLS Error!");
+                                        iTask = 999;
+                                        break;
+                                    }
+
+                                    Task.Delay(1000, token).Wait();
+                                    List<int> sp4 = CMD_CAL();
+
+                                    BeginInvoke((Action)(() =>
+                                    {
+                                        status_lb.Text = "掃描第 " + CAL_cycle.ToString() + " 點";
+                                    }));
+
+                                    ALL_POINT_CAL.Add(sp4);
+                                    CAL_cycle++;
+
+                                    iTask = 51;
+                                }
+                                else
+                                {
+                                    iTask = 60;
+                                }
+                                break;
+                            case 60:
+                                List<double> n = new List<double>();
+                                List<double> n_wl = new List<double>();
+                                List<double> n_dis = new List<double>();
+                                List<int> sp5 = new List<int>();
+                                List<double> baseline = new List<double>();
+                                List<List<double>> Sp_Dark_Baseline = new List<List<double>>();
+
+                                double lambda;
+
+                                if (String.IsNullOrEmpty(SP_test_wl_txt.Text))
+                                {
+                                    SP_wl = 0;
+                                }
+                                else
+                                {
+                                    SP_wl = int.Parse(SP_test_wl_txt.Text);
                                 }
 
-                                Task.Delay(1000).Wait();
-                                List<int> sp4 = CMD_CAL();
-
-                                BeginInvoke((Action)(() =>
+                                for (int i = 1; i <= 1280; i++)
                                 {
-                                    status_lb.Text = "掃描第 " + CAL_cycle.ToString() + " 點";
-                                }));
-
-                                ALL_POINT_CAL.Add(sp4);
-                                CAL_cycle++;
-
-                                iTask = 51;
-                            }
-                            else
-                            {
-                                iTask = 60;
-                            }
-                            break;
-                        case 60:
-                            List<double> n = new List<double>();
-                            List<double> n_wl = new List<double>();
-                            List<double> n_dis = new List<double>();
-                            List<int> sp5 = new List<int>();
-                            List<double> baseline = new List<double>();
-                            List<List<double>> Sp_Dark_Baseline = new List<List<double>>();
-
-                            double lambda;
-
-                            if (String.IsNullOrEmpty(SP_test_wl_txt.Text))
-                            {
-                                SP_wl = 0;
-                            }
-                            else
-                            {
-                                SP_wl = int.Parse(SP_test_wl_txt.Text);
-                            }
-
-                            for (int i = 1; i <= 1280; i++)
-                            {
-                                lambda = double.Parse(SP_test_a0_txt.Text) + double.Parse(SP_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(SP_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(SP_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
-                                n.Add(lambda);
-                                n_wl.Add(lambda);
-                            }
-
-                            double num = n_wl.OrderBy(item => Math.Abs(item - SP_wl)).ThenBy(item => item).First(); //取最接近的數
-                            int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
-
-                            double base_line_835 = n_wl.OrderBy(item => Math.Abs(item - double.Parse(baseline_start_txt.Text))).ThenBy(item => item).First(); //取最接近的數
-                            int base_line_835_index = n_wl.FindIndex(item => item.Equals(base_line_835)); //找到該數索引值
-
-                            double base_line_845 = n_wl.OrderBy(item => Math.Abs(item - double.Parse(baseline_end_txt.Text))).ThenBy(item => item).First(); //取最接近的數
-                            int base_line_845_index = n_wl.FindIndex(item => item.Equals(base_line_845)); //找到該數索引值
-
-                            n_wl.Clear();
-                            n_dis.Clear();
-
-                            for (int i = 0; i < int.Parse(SP_test_total_point_txt.Text); i++)
-                            {
-                                n_wl.Add(i + 1);
-                                n_dis.Add(double.Parse(SP_test_x1_txt.Text) + Convert.ToDouble(i) * double.Parse(SP_test_step_distance_txt.Text) * double.Parse(SP_test_point_distance_steps_txt.Text));
-                                sp5.Add(ALL_POINT_CAL[i][index]);
-
-                                double baseline_average = 0.0;
-                                for(int j= base_line_835_index; j<= base_line_845_index; j++)
-                                {
-                                    baseline_average += ALL_POINT_CAL[i][j];
+                                    lambda = double.Parse(SP_test_a0_txt.Text) + double.Parse(SP_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(SP_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(SP_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                    n.Add(lambda);
+                                    n_wl.Add(lambda);
                                 }
 
-                                baseline_average /= (base_line_845_index - base_line_835_index + 1);
-                                                                
-                                Sp_Dark_Baseline.Add(ALL_POINT_CAL[i].Select(x => x - baseline_average).ToList());
-                            }
+                                double num = n_wl.OrderBy(item => Math.Abs(item - SP_wl)).ThenBy(item => item).First(); //取最接近的數
+                                int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
 
-                            Series point_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
-                            point_Srs.ChartType = SeriesChartType.Line;
-                            point_Srs.IsValueShownAsLabel = false;
-                            point_Srs.Points.DataBindXY(n_wl, sp5);
-                            point_Srs.MarkerStyle = MarkerStyle.Circle;
-                            point_Srs.MarkerSize = 5;
-                            point_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+                                double base_line_835 = n_wl.OrderBy(item => Math.Abs(item - double.Parse(baseline_start_txt.Text))).ThenBy(item => item).First(); //取最接近的數
+                                int base_line_835_index = n_wl.FindIndex(item => item.Equals(base_line_835)); //找到該數索引值
+
+                                double base_line_845 = n_wl.OrderBy(item => Math.Abs(item - double.Parse(baseline_end_txt.Text))).ThenBy(item => item).First(); //取最接近的數
+                                int base_line_845_index = n_wl.FindIndex(item => item.Equals(base_line_845)); //找到該數索引值
+
+                                n_wl.Clear();
+                                n_dis.Clear();
+
+                                for (int i = 0; i < int.Parse(SP_test_total_point_txt.Text); i++)
+                                {
+                                    n_wl.Add(i + 1);
+                                    n_dis.Add(double.Parse(SP_test_x1_txt.Text) + Convert.ToDouble(i) * double.Parse(SP_test_step_distance_txt.Text) * double.Parse(SP_test_point_distance_steps_txt.Text));
+                                    sp5.Add(ALL_POINT_CAL[i][index]);
+
+                                    double baseline_average = 0.0;
+                                    for (int j = base_line_835_index; j <= base_line_845_index; j++)
+                                    {
+                                        baseline_average += ALL_POINT_CAL[i][j];
+                                    }
+
+                                    baseline_average /= (base_line_845_index - base_line_835_index + 1);
+
+                                    Sp_Dark_Baseline.Add(ALL_POINT_CAL[i].Select(x => x - baseline_average).ToList());
+                                }
+
+                                Series point_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                point_Srs.ChartType = SeriesChartType.Line;
+                                point_Srs.IsValueShownAsLabel = false;
+                                point_Srs.Points.DataBindXY(n_wl, sp5);
+                                point_Srs.MarkerStyle = MarkerStyle.Circle;
+                                point_Srs.MarkerSize = 5;
+                                point_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
 
-                            Series dis_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
-                            dis_Srs.ChartType = SeriesChartType.Line;
-                            dis_Srs.IsValueShownAsLabel = false;
-                            dis_Srs.Points.DataBindXY(n_dis, sp5);
-                            dis_Srs.MarkerStyle = MarkerStyle.Circle;
-                            dis_Srs.MarkerSize = 5;
-                            dis_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                            this.InvokeIfRequired(() =>
-                            {
-                                point_sp_chart.Titles.Clear();
-                                point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
-                                point_sp_chart.Series.Add(point_Srs);
-
-                                distance_sp_chart.Titles.Clear();
-                                distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
-                                distance_sp_chart.Series.Add(dis_Srs);
-                            });
-
-                            for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
-                            {
-                                TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
-                                TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
-
-                                List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
-                                
-                                Series ref_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() +"反射光譜");
-                                ref_Srs.ChartType = SeriesChartType.Line;
-                                ref_Srs.IsValueShownAsLabel = false;
-                                ref_Srs.Points.DataBindXY(n, sp_ref);
-                                ref_Srs.MarkerStyle = MarkerStyle.Circle;
-                                ref_Srs.MarkerSize = 5;
-                                ref_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                                /***/
-                                Series test1 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
-                                test1.ChartType = SeriesChartType.Line;
-                                test1.IsValueShownAsLabel = false;
-                                test1.Points.DataBindXY(n, ALL_POINT_CAL[int.Parse(SW_txt.Text)]);
-                                test1.MarkerStyle = MarkerStyle.Circle;
-                                test1.MarkerSize = 5;
-                                test1.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                                Series test2 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
-                                test2.ChartType = SeriesChartType.Line;
-                                test2.IsValueShownAsLabel = false;
-                                test2.Points.DataBindXY(n, Sp_Dark_Baseline[int.Parse(SW_txt.Text)]);
-                                test2.MarkerStyle = MarkerStyle.Circle;
-                                test2.MarkerSize = 5;
-                                test2.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                                Series test3 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
-                                test3.ChartType = SeriesChartType.Line;
-                                test3.IsValueShownAsLabel = false;
-                                test3.Points.DataBindXY(n, ALL_POINT_CAL[int.Parse(Line_txt.Text)]);
-                                test3.MarkerStyle = MarkerStyle.Circle;
-                                test3.MarkerSize = 5;
-                                test3.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                                Series test4 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
-                                test4.ChartType = SeriesChartType.Line;
-                                test4.IsValueShownAsLabel = false;
-                                test4.Points.DataBindXY(n, Sp_Dark_Baseline[int.Parse(Line_txt.Text)]);
-                                test4.MarkerStyle = MarkerStyle.Circle;
-                                test4.MarkerSize = 5;
-                                test4.ToolTip = "X: #VALX{} Y: #VALY{}";
+                                Series dis_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                dis_Srs.ChartType = SeriesChartType.Line;
+                                dis_Srs.IsValueShownAsLabel = false;
+                                dis_Srs.Points.DataBindXY(n_dis, sp5);
+                                dis_Srs.MarkerStyle = MarkerStyle.Circle;
+                                dis_Srs.MarkerSize = 5;
+                                dis_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
                                 this.InvokeIfRequired(() =>
                                 {
-                                    reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
-                                    reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
-                                    reflect_sp_chart.Titles.Clear();
-                                    reflect_sp_chart.Titles.Add("反射光譜");
-                                    reflect_sp_chart.Series.Add(ref_Srs);
+                                    point_sp_chart.Titles.Clear();
+                                    point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
+                                    point_sp_chart.Series.Add(point_Srs);
 
-                                    chart2.Titles.Clear();
-                                    chart2.Titles.Add("SW");
-                                    chart2.Series.Add(test1);
-
-                                    chart3.Titles.Clear();
-                                    chart3.Titles.Add("SW-Baseline");
-                                    chart3.Series.Add(test2);
-
-                                    chart4.Titles.Clear();
-                                    chart4.Titles.Add("Line");
-                                    chart4.Series.Add(test3);
-
-                                    chart5.Titles.Clear();
-                                    chart5.Titles.Add("Line-Baseline");
-                                    chart5.Series.Add(test4);
-
+                                    distance_sp_chart.Titles.Clear();
+                                    distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
+                                    distance_sp_chart.Series.Add(dis_Srs);
                                 });
-                            }
 
-                            
+                                for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
+                                {
+                                    TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
+                                    TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
 
-                            iTask = 70;
-                            break;
-                        /** 關燈 */
-                        case 70:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "延遲時間T1";
-                            }));
+                                    List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
 
-                            ret = CMD_SWL(0);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_SWL Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                SP_T1 = double.Parse(SP_test_T1_txt.Text);
-                                Task.Delay(Convert.ToInt32(SP_T1 * 1000)).Wait();
-                                iTask = 100;
-                            }
-                            break;
-                        case 100:
+                                    Series ref_Srs = new Series("第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() + "反射光譜");
+                                    ref_Srs.ChartType = SeriesChartType.Line;
+                                    ref_Srs.IsValueShownAsLabel = false;
+                                    ref_Srs.Points.DataBindXY(n, sp_ref);
+                                    ref_Srs.MarkerStyle = MarkerStyle.Circle;
+                                    ref_Srs.MarkerSize = 5;
+                                    ref_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
-                            if (CAL_RUN_cycle < int.Parse(SP_test_CAL_RUN_cycle_txt.Text))
-                            {
-                                CAL_RUN_cycle++;
-                                iTask = 0;
-                            }
-                            else
-                            {
+                                    /***/
+                                    Series test1 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                    test1.ChartType = SeriesChartType.Line;
+                                    test1.IsValueShownAsLabel = false;
+                                    test1.Points.DataBindXY(n, ALL_POINT_CAL[int.Parse(SW_txt.Text)]);
+                                    test1.MarkerStyle = MarkerStyle.Circle;
+                                    test1.MarkerSize = 5;
+                                    test1.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                    Series test2 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                    test2.ChartType = SeriesChartType.Line;
+                                    test2.IsValueShownAsLabel = false;
+                                    test2.Points.DataBindXY(n, Sp_Dark_Baseline[int.Parse(SW_txt.Text)]);
+                                    test2.MarkerStyle = MarkerStyle.Circle;
+                                    test2.MarkerSize = 5;
+                                    test2.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                    Series test3 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                    test3.ChartType = SeriesChartType.Line;
+                                    test3.IsValueShownAsLabel = false;
+                                    test3.Points.DataBindXY(n, ALL_POINT_CAL[int.Parse(Line_txt.Text)]);
+                                    test3.MarkerStyle = MarkerStyle.Circle;
+                                    test3.MarkerSize = 5;
+                                    test3.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                    Series test4 = new Series("第" + CAL_RUN_cycle.ToString() + "次循環");
+                                    test4.ChartType = SeriesChartType.Line;
+                                    test4.IsValueShownAsLabel = false;
+                                    test4.Points.DataBindXY(n, Sp_Dark_Baseline[int.Parse(Line_txt.Text)]);
+                                    test4.MarkerStyle = MarkerStyle.Circle;
+                                    test4.MarkerSize = 5;
+                                    test4.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                    this.InvokeIfRequired(() =>
+                                    {
+                                        reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
+                                        reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
+                                        reflect_sp_chart.Titles.Clear();
+                                        reflect_sp_chart.Titles.Add("反射光譜");
+                                        reflect_sp_chart.Series.Add(ref_Srs);
+
+                                        chart2.Titles.Clear();
+                                        chart2.Titles.Add("SW");
+                                        chart2.Series.Add(test1);
+
+                                        chart3.Titles.Clear();
+                                        chart3.Titles.Add("SW-Baseline");
+                                        chart3.Series.Add(test2);
+
+                                        chart4.Titles.Clear();
+                                        chart4.Titles.Add("Line");
+                                        chart4.Series.Add(test3);
+
+                                        chart5.Titles.Clear();
+                                        chart5.Titles.Add("Line-Baseline");
+                                        chart5.Series.Add(test4);
+
+                                    });
+                                }
+
+
+
+                                iTask = 70;
+                                break;
+                            /** 關燈 */
+                            case 70:
                                 BeginInvoke((Action)(() =>
                                 {
-                                    btnSpectrum_Test_Start.Enabled = true;
-                                    btnSpectrum_Test_Stop.Enabled = false;
-                                    flag = false;
-                                    status_lb.Text = "完成";
+                                    status_lb.Text = "延遲時間T1";
                                 }));
-                            }
-                            break;
-                        case 999:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "錯誤!";
-                            }));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                //timer1.Start();
-            });
-        }               
 
-        private void btnSpectrum_Test_Stop_Click(object sender, EventArgs e)
-        {
-            btnSpectrum_Test_Start.Enabled = true;
-            btnSpectrum_Test_Stop.Enabled = false;
-            flag = false;
-
-            status_lb.Text = "";
-
-            chart1.Titles.Clear();
-            chart1.Series[0].Points.Clear();
-        }
-
-        private async void btnLED_Test_Start_Click(object sender, EventArgs e)
-        {
-            A_LED_chart.Series.Clear();
-            A_LED_chart.Titles.Clear();
-
-            B_LED_chart.Series.Clear();
-            B_LED_chart.Titles.Clear();
-
-            btnLED_Test_Start.Enabled = false;
-            btnLED_Test_Stop.Enabled = true;
-            flag = true;
-            iTask = 0;
-            LED_RUN_cycle = 1;
-            LED_AorB = 1;
-
-            await Task.Run(() =>
-            {
-                while (flag)
-                {
-                    switch (iTask)
-                    {
-                        /** 設方向 */
-                        case 0:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "設方向";
-                            }));
-
-                            ret = CMD_DIR(1);
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_DIR Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 5;
-                            }
-                            break;
-                        /** 設ROI */
-                        case 5:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "設ROI";
-                            }));
-
-                            ret = CMD_ROI(int.Parse(LED_test_roi_ho_txt.Text), int.Parse(LED_test_roi_hc_txt.Text), int.Parse(LED_test_roi_vo_txt.Text), int.Parse(LED_test_roi_lc_txt.Text));
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_DIR Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 10;
-                            }
-                            break;
-                        /** 回原點 */
-                        case 10:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "回原點";
-                            }));
-
-                            ret = CMD_MSP(1);
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MSP Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 20;
-                            }
-                            break;
-                        /** 移到中間 */
-                        case 20:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "移至中間";
-                            }));
-
-                            ret = CMD_MRS(Convert.ToInt32(17.0 / 0.0196));
-
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_MRS Error!");
-                                iTask = 999;
-                            }
-                            else
-                            {
-                                iTask = 30;
-                            }
-                            break;
-                        /** 開燈  等待T2時間使LED達穩態    */
-                        case 30:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "延遲時間T2";
-                            }));
-
-                            if(LED_AorB == 1)
-                            {
-                                ret = CMD_SWL(1);
+                                ret = CMD_SWL(0);
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_SWL Error!");
@@ -1455,109 +1702,297 @@ namespace Spectrum_Test
                                 }
                                 else
                                 {
-                                    LED_T2 = double.Parse(LED_test_T2_txt.Text);
-                                    Task.Delay(Convert.ToInt32(LED_T2 * 1000)).Wait();
-                                    iTask = 40;
+                                    SP_T1 = double.Parse(SP_test_T1_txt.Text);
+                                    Task.Delay(Convert.ToInt32(SP_T1 * 1000), token).Wait();
+                                    iTask = 100;
                                 }
-                            }
-                            else if (LED_AorB == 2)
-                            {
-                                ret = CMD_SUV(1);
+                                break;
+                            case 100:
+
+                                if (CAL_RUN_cycle < int.Parse(SP_test_CAL_RUN_cycle_txt.Text))
+                                {
+                                    CAL_RUN_cycle++;
+                                    iTask = 0;
+                                }
+                                else
+                                {
+                                    BeginInvoke((Action)(() =>
+                                    {
+                                        btnSpectrum_Test_Start.Enabled = true;
+                                        flag = false;
+                                        status_lb.Text = "完成";
+                                        cts = null;
+                                    }));
+                                }
+                                break;
+                            case 999:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "錯誤!";
+                                }));
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if (token.IsCancellationRequested == true)
+                        {
+                            System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
+                            token.ThrowIfCancellationRequested();
+                        }
+                    }
+                }, token);
+            }
+            catch (Exception ex)
+            {
+                if (LED_AorB == 1)
+                {
+                    ret = CMD_SWL(0);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_SWL Error!");
+                    }
+                }
+                else if (LED_AorB == 2)
+                {
+                    ret = CMD_SUV(0);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_SUV Error!");
+                        iTask = 999;
+                    }
+                }
+
+                BeginInvoke((Action)(() =>
+                {
+                    status_lb.Text = "停止!";                    
+                    btnSpectrum_Test_Start.Enabled = true;
+
+                    flag = false;
+
+                    chart1.Titles.Clear();
+                    chart1.Series[0].Points.Clear();
+                }));
+
+                cts = null;
+            }
+        }               
+
+        private async void btnLED_Test_Start_Click(object sender, EventArgs e)
+        {
+            if (cts != null)
+            {
+                return;
+            }
+
+            cts = new CancellationTokenSource();
+            token = cts.Token;
+
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();//引用stopwatch物件
+            Autoscaling_runtime_LED.Text = "";
+
+            A_LED_chart.Series.Clear();
+            A_LED_chart.Titles.Clear();
+
+            B_LED_chart.Series.Clear();
+            B_LED_chart.Titles.Clear();
+
+            ALL_A_LED_CAL = new List<List<List<int>>>();
+            ALL_B_LED_CAL = new List<List<List<int>>>();
+
+            btnLED_Test_Start.Enabled = false;
+            flag = true;
+            iTask = 0;
+            LED_RUN_cycle = 1;
+            LED_AorB = 1;
+
+            try
+            {
+                await Task.Run(() =>
+                {
+                    while (flag)
+                    {
+                        switch (iTask)
+                        {
+                            /** 設方向 */
+                            case 0:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "設方向";
+                                }));
+
+                                ret = CMD_DIR(1);
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
-                                    Log("CMD_SUV Error!");
+                                    Log("CMD_DIR Error!");
                                     iTask = 999;
                                 }
                                 else
                                 {
-                                    LED_T2 = double.Parse(LED_test_T2_txt.Text);
-                                    Task.Delay(Convert.ToInt32(LED_T2 * 1000)).Wait();
-                                    iTask = 40;
+                                    iTask = 5;
                                 }
-                            }                            
-                            break;
-                        /** Auto-scaling */
-                        case 40:    //初始AG DG EXP
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "Auto-scalin";
-                            }));
-
-                            LED_AG = int.Parse(LED_test_AG_txt.Text);
-                            ret = CMD_AGN(int.Parse(LED_test_AG_txt.Text));
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_AGN Error!");
-                                iTask = 999;
                                 break;
-                            }
+                            /** 設ROI */
+                            case 5:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "設ROI";
+                                }));
 
-                            LED_DG = int.Parse(LED_test_DG_txt.Text);
-                            ret = CMD_GNV(int.Parse(LED_test_DG_txt.Text));
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_GNV Error!");
-                                iTask = 999;
+                                ret = CMD_ROI(int.Parse(LED_test_roi_ho_txt.Text), int.Parse(LED_test_roi_hc_txt.Text), int.Parse(LED_test_roi_vo_txt.Text), int.Parse(LED_test_roi_lc_txt.Text));
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_DIR Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 10;
+                                }
                                 break;
-                            }
+                            /** 回原點 */
+                            case 10:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "回原點";
+                                }));
 
-                            LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
-                            ret = CMD_ELC(int.Parse(LED_test_EXP_initial_txt.Text));
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_ELC Error!");
-                                iTask = 999;
+                                ret = CMD_MSP(1);
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MSP Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 20;
+                                }
                                 break;
-                            }
+                            /** 移到中間 */
+                            case 20:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "移至中間";
+                                }));
 
-                            iTask = 45;
-                            break;
-                        case 41:    //AG增加
-                            LED_AG *= 2;
-                            ret = CMD_AGN(LED_AG);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_AGN Error!");
-                                iTask = 999;
+                                ret = CMD_MRS(Convert.ToInt32(17.0 / 0.0196));
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MRS Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    iTask = 30;
+                                }
                                 break;
-                            }
+                            /** 開燈  等待T2時間使LED達穩態    */
+                            case 30:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "延遲時間T2";
+                                }));
 
-                            iTask = 45;
-                            break;
-                        case 42:    //DG增加
-                            LED_DG *= 2;
-                            ret = CMD_GNV(LED_DG);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_GNV Error!");
-                                iTask = 999;
+                                if (LED_AorB == 1)
+                                {
+                                    ret = CMD_SUV(1);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SUV Error!");
+                                        iTask = 999;
+                                    }
+                                    else
+                                    {
+                                        LED_T2 = double.Parse(LED_test_T2_txt.Text);
+                                        Task.Delay(Convert.ToInt32(LED_T2 * 1000), token).Wait();
+                                        iTask = 40;
+                                    }
+                                }
+                                else if (LED_AorB == 2)
+                                {
+                                    ret = CMD_SWL(1);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SWL Error!");
+                                        iTask = 999;
+                                    }
+                                    else
+                                    {
+                                        LED_T2 = double.Parse(LED_test_T2_txt.Text);
+                                        Task.Delay(Convert.ToInt32(LED_T2 * 1000), token).Wait();
+                                        iTask = 40;
+                                    }
+                                }
                                 break;
-                            }
+                            /** Auto-scaling */
+                            case 40:    //初始AG DG EXP
 
-                            iTask = 45;
-                            break;
-                        case 43:    //EXP減一半
-                            LED_EXP_init /= 2;
-                            ret = CMD_ELC(LED_EXP_init);
-                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                            {
-                                Log("CMD_ELC Error!");
-                                iTask = 999;
+                                sw.Reset();//碼表歸零
+                                sw.Start();//碼表開始計時
+
+
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "Auto-scaling";
+                                }));
+
+                                LED_AG = int.Parse(LED_test_AG_txt.Text);
+                                ret = CMD_AGN(int.Parse(LED_test_AG_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_AGN Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                LED_DG = int.Parse(LED_test_DG_txt.Text);
+                                ret = CMD_GNV(int.Parse(LED_test_DG_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_GNV Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
+                                ret = CMD_ELC(int.Parse(LED_test_EXP_initial_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_ELC Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
                                 break;
-                            }
+                            case 41:    //AG增加
+                                LED_AG *= 2;
+                                ret = CMD_AGN(LED_AG);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_AGN Error!");
+                                    iTask = 999;
+                                    break;
+                                }
 
-                            iTask = 45;
-                            break;
-                        case 45:    //找出目標值的EXP  
-                            Task.Delay(1000).Wait();
-                            List<int> sp1 = CMD_CAL();
-                            LED_maxValue = sp1.Max();
+                                iTask = 45;
+                                break;
+                            case 42:    //DG增加
+                                LED_DG *= 2;
+                                ret = CMD_GNV(LED_DG);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_GNV Error!");
+                                    iTask = 999;
+                                    break;
+                                }
 
-                            if (LED_maxValue < int.Parse(LED_test_I_max_txt.Text))
-                            {
-                                LED_EXP1 = LED_EXP_init;
-                                LED_I1 = LED_maxValue;
-
+                                iTask = 45;
+                                break;
+                            case 43:    //EXP減一半
                                 LED_EXP_init /= 2;
                                 ret = CMD_ELC(LED_EXP_init);
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
@@ -1567,44 +2002,100 @@ namespace Spectrum_Test
                                     break;
                                 }
 
-                                Task.Delay(1000).Wait();
-                                List<int> sp2 = CMD_CAL();
-                                LED_maxValue = sp2.Max();
+                                iTask = 45;
+                                break;
+                            case 45:    //找出目標值的EXP  
+                                Task.Delay(1000, token).Wait();
+                                List<int> sp1 = CMD_CAL();
+                                LED_maxValue = sp1.Max();
 
-                                LED_EXP2 = LED_EXP_init;
-                                LED_I2 = LED_maxValue;
-
-                                LED_I_thr = int.Parse(LED_test_I_thr_txt.Text);
-
-                                /*System.Diagnostics.Debug.WriteLine("AG...." + AG.ToString());
-                                System.Diagnostics.Debug.WriteLine("DG...." + DG.ToString());
-                                System.Diagnostics.Debug.WriteLine("EXP...." + EXP.ToString());
-                                System.Diagnostics.Debug.WriteLine("EXP1...." + EXP1.ToString());
-                                System.Diagnostics.Debug.WriteLine("EXP2...." + EXP2.ToString());
-                                System.Diagnostics.Debug.WriteLine("I1...." + I1.ToString());
-                                System.Diagnostics.Debug.WriteLine("I2...." + I2.ToString());*/
-                                LED_EXP = LED_EXP1 + ((LED_I_thr - LED_I1) * ((LED_EXP1 - LED_EXP2) / (LED_I1 - LED_I2)));
-
-
-                                if (LED_EXP > int.Parse(LED_test_EXP_max_txt.Text))
+                                if (LED_maxValue < int.Parse(LED_test_I_max_txt.Text))
                                 {
-                                    if (LED_DG < 128)
+                                    LED_EXP1 = LED_EXP_init;
+                                    LED_I1 = LED_maxValue;
+
+                                    LED_EXP_init /= 2;
+                                    ret = CMD_ELC(LED_EXP_init);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                     {
-                                        LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
-                                        ret = CMD_ELC(LED_EXP_init);
+                                        Log("CMD_ELC Error!");
+                                        iTask = 999;
+                                        break;
+                                    }
+
+                                    Task.Delay(1000, token).Wait();
+                                    List<int> sp2 = CMD_CAL();
+                                    LED_maxValue = sp2.Max();
+
+                                    LED_EXP2 = LED_EXP_init;
+                                    LED_I2 = LED_maxValue;
+
+                                    LED_I_thr = int.Parse(LED_test_I_thr_txt.Text);
+
+                                    /*System.Diagnostics.Debug.WriteLine("AG...." + LED_AG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("DG...." + LED_DG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP...." + LED_EXP.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP1...." + LED_EXP1.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP2...." + LED_EXP2.ToString());
+                                    System.Diagnostics.Debug.WriteLine("I1...." + LED_I1.ToString());
+                                    System.Diagnostics.Debug.WriteLine("I2...." + LED_I2.ToString());*/
+                                    LED_EXP = LED_EXP1 + ((LED_I_thr - LED_I1) * ((LED_EXP1 - LED_EXP2) / (LED_I1 - LED_I2)));
+                                    //System.Diagnostics.Debug.WriteLine("EXP...." + LED_EXP.ToString());
+
+                                    if (LED_EXP > int.Parse(LED_test_EXP_max_txt.Text))
+                                    {
+                                        if (LED_DG < 128)
+                                        {
+                                            LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
+                                            ret = CMD_ELC(LED_EXP_init);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_ELC Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            iTask = 42;
+                                            break;
+                                        }
+                                        else if (LED_AG < 8)
+                                        {
+                                            LED_DG = int.Parse(LED_test_DG_txt.Text);
+                                            ret = CMD_GNV(LED_DG);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_GNV Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
+                                            ret = CMD_ELC(LED_EXP_init);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_ELC Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            iTask = 41;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_AGN(LED_AG);
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
-                                            Log("CMD_ELC Error!");
+                                            Log("CMD_AGN Error!");
                                             iTask = 999;
                                             break;
                                         }
 
-                                        iTask = 42;
-                                        break;
-                                    }
-                                    else if (LED_AG < 8)
-                                    {
-                                        LED_DG = int.Parse(LED_test_DG_txt.Text);
                                         ret = CMD_GNV(LED_DG);
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
@@ -1613,8 +2104,7 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
-                                        ret = CMD_ELC(LED_EXP_init);
+                                        ret = CMD_ELC(LED_EXP);
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
                                             Log("CMD_ELC Error!");
@@ -1622,214 +2112,290 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        iTask = 41;
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                        Task.Delay(1000, token).Wait();
+                                        List<int> sp3 = CMD_CAL();
+
+
+                                        sw.Stop();//碼錶停止
+                                        string minutes = sw.Elapsed.Minutes.ToString();
+                                        string seconds = sw.Elapsed.Seconds.ToString();
+
+
+                                        LED_cycle_time = 0.0;
+
+                                        BeginInvoke((Action)(() =>
+                                        {
+                                            Autoscaling_runtime_LED.Text = minutes + " 分 " + seconds + " 秒 ";
+                                            status_lb.Text = "掃描中";
+
+                                            if (LED_AorB == 1)
+                                            {
+                                                A_LED_CAL = new List<List<int>>();
+                                            }
+                                            else if (LED_AorB == 2)
+                                            {
+                                                B_LED_CAL = new List<List<int>>();
+                                            }
+                                        }));
+
+                                        Task.Delay(1000, token).Wait();
+                                        List<int> sp4 = CMD_CAL();
+
+                                        if (LED_AorB == 1)
+                                        {
+                                            A_LED_CAL.Add(sp4);
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            B_LED_CAL.Add(sp4);
+                                        }
+
+                                        iTask = 50;
                                     }
                                 }
                                 else
                                 {
-                                    ret = CMD_AGN(LED_AG);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        Log("CMD_AGN Error!");
-                                        iTask = 999;
-                                        break;
-                                    }
-
-                                    ret = CMD_GNV(LED_DG);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        Log("CMD_GNV Error!");
-                                        iTask = 999;
-                                        break;
-                                    }
-
-                                    ret = CMD_ELC(LED_EXP);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        Log("CMD_ELC Error!");
-                                        iTask = 999;
-                                        break;
-                                    }
-
-                                    Task.Delay(1000).Wait();
-                                    List<int> sp3 = CMD_CAL();
-
-                                    LED_cycle_time = 0.0;
-
+                                    iTask = 43;
+                                }
+                                break;
+                            /** 開始測試 */
+                            case 50:
+                                if (LED_cycle_time < (double.Parse(LED_test_total_times_txt.Text) * 60.0))
+                                {
                                     BeginInvoke((Action)(() =>
                                     {
-                                        status_lb.Text = "掃描中";
-                                        ALL_POINT_CAL.Clear();
+                                        status_lb.Text = "掃描第 " + (LED_cycle_time / 60.0).ToString() + " 分";
                                     }));
 
+                                    Task.Delay(Convert.ToInt32((double.Parse(LED_test_interval_time_txt.Text) * 60.0) * 1000.0), token).Wait();
+
+                                    Task.Delay(1000, token).Wait();
+                                    List<int> sp5 = CMD_CAL();
+
+                                    if (LED_AorB == 1)
+                                    {
+                                        A_LED_CAL.Add(sp5);
+                                    }
+                                    else if (LED_AorB == 2)
+                                    {
+                                        B_LED_CAL.Add(sp5);                                        
+                                    }
+
+                                    LED_cycle_time += (double.Parse(LED_test_interval_time_txt.Text) * 60.0);
                                     iTask = 50;
                                 }
-                            }
-                            else
-                            {
-                                iTask = 43;
-                            }
-                            break;
-                        /** 開始測試 */
-                        case 50:
-                            if (LED_cycle_time < (double.Parse(LED_test_total_times_txt.Text)*60.0))
-                            {
-                                BeginInvoke((Action)(() =>
+                                else
                                 {
-                                    status_lb.Text = "掃描第 " + (LED_cycle_time / 60.0).ToString() + " 分";
-                                }));
+                                    if (LED_AorB == 1)
+                                    {
+                                        ALL_A_LED_CAL.Add(A_LED_CAL);
+                                    }
+                                    else if (LED_AorB == 2)
+                                    {
+                                        ALL_B_LED_CAL.Add(B_LED_CAL);
+                                    }
+                                        
 
-                                Task.Delay(Convert.ToInt32((double.Parse(LED_test_interval_time_txt.Text) * 60.0)*1000.0)).Wait();
+                                    iTask = 60;
+                                }
+                                break;
+                            case 60:
+                                double lambda;
+                                List<double> n_wl = new List<double>();
+                                List<int> LED_sp = new List<int>();
 
-                                //Task.Delay(1000).Wait();
-                                List<int> sp4 = CMD_CAL();                               
+                                if (String.IsNullOrEmpty(LED_test_wl_txt.Text))
+                                {
+                                    LED_wl = 0;
+                                }
+                                else
+                                {
+                                    LED_wl = int.Parse(LED_test_wl_txt.Text);
+                                }
 
-                                ALL_POINT_CAL.Add(sp4);
-                                LED_cycle_time += (double.Parse(LED_test_interval_time_txt.Text) * 60.0);
+                                for (int i = 1; i <= 1280; i++)
+                                {
+                                    lambda = double.Parse(LED_test_a0_txt.Text) + double.Parse(LED_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(LED_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(LED_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                    n_wl.Add(lambda);
+                                }
 
-                                iTask = 50;
-                            }
-                            else
-                            {
-                                iTask = 60;
-                            }
-                            break;
-                        case 60:
-                            List<double> n_wl = new List<double>();
-                            List<int> sp5 = new List<int>();
+                                double num = n_wl.OrderBy(item => Math.Abs(item - LED_wl)).ThenBy(item => item).First(); //取最接近的數
+                                int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
 
-                            double lambda;
 
-                            if (String.IsNullOrEmpty(LED_test_wl_txt.Text))
-                            {
-                               LED_wl = 0;
-                            }
-                            else
-                            {
-                                LED_wl = int.Parse(LED_test_wl_txt.Text);
-                            }
-
-                            for (int i = 1; i <= 1280; i++)
-                            {
-                                lambda = double.Parse(LED_test_a0_txt.Text) + double.Parse(LED_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(LED_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(LED_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
-                                n_wl.Add(lambda);
-                            }
-
-                            double num = n_wl.OrderBy(item => Math.Abs(item - LED_wl)).ThenBy(item => item).First(); //取最接近的數
-                            int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
-
-                            n_wl.Clear();
-                            for (int i = 0; i < ALL_POINT_CAL.Count; i++)
-                            {
-                                n_wl.Add((i + 1) * double.Parse(LED_test_interval_time_txt.Text));
-                                sp5.Add(ALL_POINT_CAL[i][index]);
-                            }
-
-                            Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + LED_cycle_time.ToString() + " 分");
-                            time_Srs.ChartType = SeriesChartType.Line;
-                            time_Srs.IsValueShownAsLabel = false;
-                            time_Srs.Points.DataBindXY(n_wl, sp5);
-                            time_Srs.IsValueShownAsLabel = true;
-                            time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
-
-                            this.InvokeIfRequired(() =>
-                            {
                                 if (LED_AorB == 1)
                                 {
-                                    A_LED_chart.Titles.Clear();
-                                    A_LED_chart.Titles.Add("A燈 波長 " + num.ToString() + " nm 下各時間光強");
-                                    A_LED_chart.Series.Add(time_Srs);
+                                    n_wl.Clear();
+                                    LED_sp.Clear();
+
+                                    for (int i = 0; i < ALL_A_LED_CAL[LED_RUN_cycle - 1].Count; i++)
+                                    { 
+                                        n_wl.Add(i * double.Parse(LED_test_interval_time_txt.Text));
+                                        LED_sp.Add(ALL_A_LED_CAL[LED_RUN_cycle - 1][i][index]);
+                                    }
+
+
+                                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + (LED_cycle_time / 60.0) + " 分");
+                                    time_Srs.ChartType = SeriesChartType.Line;
+                                    time_Srs.IsValueShownAsLabel = false;
+                                    time_Srs.Points.DataBindXY(n_wl, LED_sp);
+                                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+
+                                    this.InvokeIfRequired(() =>
+                                    {
+
+                                        A_LED_chart.ChartAreas[0].AxisX.Minimum = 0;
+                                        A_LED_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                                        A_LED_chart.ChartAreas[0].AxisX.Interval = double.Parse(LED_test_interval_time_txt.Text);
+
+                                        A_LED_chart.Titles.Clear();
+                                        A_LED_chart.Titles.Add("A燈 波長 " + num.ToString() + " nm 下各時間光強");
+                                        A_LED_chart.Series.Add(time_Srs);
+                                    });
+
                                 }
                                 else if (LED_AorB == 2)
                                 {
-                                    B_LED_chart.Titles.Clear();
-                                    B_LED_chart.Titles.Add("B燈 波長 " + num.ToString() + " nm 下各時間光強");
-                                    B_LED_chart.Series.Add(time_Srs);
-                                }
-                                    
-                            });
+                                    n_wl.Clear();
+                                    for (int i = 0; i < ALL_B_LED_CAL[LED_RUN_cycle - 1].Count; i++)
+                                    {
+                                        n_wl.Add(i * double.Parse(LED_test_interval_time_txt.Text));
+                                        LED_sp.Add(ALL_B_LED_CAL[LED_RUN_cycle - 1][i][index]);
+                                    }
 
-                            iTask = 70;
-                            break;
-                        /** 關燈 */
-                        case 70:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "延遲時間T1";
-                            }));
+                                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString()  + " 次 " + (LED_cycle_time / 60.0) + " 分");
+                                    time_Srs.ChartType = SeriesChartType.Line;
+                                    time_Srs.IsValueShownAsLabel = false;
+                                    time_Srs.Points.DataBindXY(n_wl, LED_sp);
+                                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
-                            if (LED_AorB == 1)
-                            {
-                                ret = CMD_SWL(0);
-                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                {
-                                    Log("CMD_SWL Error!");
-                                    iTask = 999;
-                                }
-                                else
-                                {
-                                    LED_T1 = double.Parse(LED_test_T1_txt.Text);
-                                    Task.Delay(Convert.ToInt32(LED_T1 * 1000)).Wait();
-                                    iTask = 100;
-                                }
-                            }
-                            else if (LED_AorB == 2)
-                            {
-                                ret = CMD_SUV(0);
-                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                {
-                                    Log("CMD_SUV Error!");
-                                    iTask = 999;
-                                }
-                                else
-                                {
-                                    LED_T1 = double.Parse(LED_test_T1_txt.Text);
-                                    Task.Delay(Convert.ToInt32(LED_T1 * 1000)).Wait();
-                                    iTask = 100;
-                                }
-                            }                            
-                            break;
-                        case 100:
+                                    this.InvokeIfRequired(() =>
+                                    {
+                                        B_LED_chart.ChartAreas[0].AxisX.Minimum = 0;
+                                        B_LED_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                                        B_LED_chart.ChartAreas[0].AxisX.Interval = double.Parse(LED_test_interval_time_txt.Text);
 
-                            if (LED_RUN_cycle < int.Parse(LED_test_RUN_cycle_txt.Text))
-                            {
-                                LED_RUN_cycle++;
-                                iTask = 0;
-                            }
-                            else if (LED_AorB == 1)
-                            {
-                                iTask = 0;
-                                LED_RUN_cycle = 1;
-                                LED_AorB = 2;
-                            }
-                            else if (LED_AorB == 2)
-                            {
+                                        B_LED_chart.Titles.Clear();
+                                        B_LED_chart.Titles.Add("B燈 波長 " + num.ToString() + " nm 下各時間光強");
+                                        B_LED_chart.Series.Add(time_Srs);
+                                    });
+                                }
+                                iTask = 70;
+                                break;
+                            /** 關燈 */
+                            case 70:
                                 BeginInvoke((Action)(() =>
                                 {
-                                    btnLED_Test_Start.Enabled = true;
-                                    btnLED_Test_Stop.Enabled = false;
-                                    flag = false;
-                                    status_lb.Text = "完成";
+                                    status_lb.Text = "延遲時間T1";
                                 }));
-                            }
-                            break;
-                        case 999:
-                            BeginInvoke((Action)(() =>
-                            {
-                                status_lb.Text = "錯誤!";
-                            }));
-                            break;
-                        default:
-                            break;
+
+                                if (LED_AorB == 1)
+                                {
+                                    ret = CMD_SUV(0);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SUV Error!");
+                                        iTask = 999;
+                                    }
+                                    else
+                                    {
+                                        LED_T1 = double.Parse(LED_test_T1_txt.Text);
+                                        Task.Delay(Convert.ToInt32(LED_T1 * 1000), token).Wait();
+                                        iTask = 100;
+                                    }
+                                }
+                                else if (LED_AorB == 2)
+                                {
+                                    ret = CMD_SWL(0);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SWL Error!");
+                                        iTask = 999;
+                                    }
+                                    else
+                                    {
+                                        LED_T1 = double.Parse(LED_test_T1_txt.Text);
+                                        Task.Delay(Convert.ToInt32(LED_T1 * 1000), token).Wait();
+                                        iTask = 100;
+                                    }
+                                }
+                                break;
+                            case 100:
+
+                                if (LED_RUN_cycle < int.Parse(LED_test_RUN_cycle_txt.Text))
+                                {
+                                    LED_RUN_cycle++;
+                                    iTask = 0;
+                                }
+                                else if (LED_AorB == 1)
+                                {
+                                    iTask = 0;
+                                    LED_RUN_cycle = 1;
+                                    LED_AorB = 2;
+                                }
+                                else if (LED_AorB == 2)
+                                {
+                                    BeginInvoke((Action)(() =>
+                                    {
+                                        btnLED_Test_Start.Enabled = true;
+                                        flag = false;
+                                        status_lb.Text = "完成";
+                                        cts = null;
+                                    }));
+                                }
+                                break;
+                            case 999:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "錯誤!";
+                                    flag = false;
+                                }));
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if (token.IsCancellationRequested == true)
+                        {
+                            System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
+                            token.ThrowIfCancellationRequested();
+                        }
+                    }
+                }, token);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                if (LED_AorB == 1)
+                {
+                    ret = CMD_SUV(0);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_SUV Error!");
                     }
                 }
-                //timer1.Start();
-            });
+                else if (LED_AorB == 2)
+                {
+                    ret = CMD_SWL(0);
+                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                    {
+                        Log("CMD_SWL Error!");
+                        iTask = 999;
+                    }
+                }
+
+                BeginInvoke((Action)(() =>
+                {
+                    status_lb.Text = "停止!";
+                    btnLED_Test_Start.Enabled = true;
+
+
+                    flag = false;
+                }));
+
+                cts = null;
+            }
         }
 
         private void btnSpectrum_Test_Save_Click(object sender, EventArgs e)
