@@ -805,10 +805,18 @@ namespace Spectrum_Test
 
                     this.InvokeIfRequired(() =>
                     {
+                        A_point_sp_chart.ChartAreas[0].AxisX.Minimum = n_wl[0];
+                        A_point_sp_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                        A_point_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
+                        A_point_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                         A_point_sp_chart.Titles.Clear();
                         A_point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
                         A_point_sp_chart.Series.Add(point_Srs);
 
+                        A_distance_sp_chart.ChartAreas[0].AxisX.Minimum = n_dis[0];
+                        A_distance_sp_chart.ChartAreas[0].AxisX.Maximum = n_dis[n_dis.Count - 1];
+                        A_distance_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
+                        A_distance_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                         A_distance_sp_chart.Titles.Clear();
                         A_distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
                         A_distance_sp_chart.Series.Add(dis_Srs);
@@ -831,6 +839,8 @@ namespace Spectrum_Test
 
                         this.InvokeIfRequired(() =>
                         {
+                            A_reflect_sp_chart.ChartAreas[0].AxisX.Minimum = n[0];
+                            A_reflect_sp_chart.ChartAreas[0].AxisX.Maximum = n[n.Count - 1];
                             A_reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
                             A_reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                             A_reflect_sp_chart.Titles.Clear();
@@ -877,6 +887,7 @@ namespace Spectrum_Test
                         }
 
                         baseline_average /= (base_line_845_index - base_line_835_index + 1);
+
                         Sp_Dark_Baseline.Add(ALL_B_POINT_CAL[i][j].Select(x => x - baseline_average).ToList());
                     }
 
@@ -899,10 +910,18 @@ namespace Spectrum_Test
 
                     this.InvokeIfRequired(() =>
                     {
+                        B_point_sp_chart.ChartAreas[0].AxisX.Minimum = n_wl[0];
+                        B_point_sp_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                        B_point_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
+                        B_point_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                         B_point_sp_chart.Titles.Clear();
                         B_point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
                         B_point_sp_chart.Series.Add(point_Srs);
 
+                        B_distance_sp_chart.ChartAreas[0].AxisX.Minimum = n_dis[0];
+                        B_distance_sp_chart.ChartAreas[0].AxisX.Maximum = n_dis[n_dis.Count - 1];
+                        B_distance_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
+                        B_distance_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                         B_distance_sp_chart.Titles.Clear();
                         B_distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
                         B_distance_sp_chart.Series.Add(dis_Srs);
@@ -915,7 +934,7 @@ namespace Spectrum_Test
 
                         List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
 
-                        Series ref_Srs = new Series("A燈 第" + i.ToString() + "次" + j.ToString() + "反射光譜");
+                        Series ref_Srs = new Series("B燈 第" + i.ToString() + "次" + j.ToString() + "反射光譜");
                         ref_Srs.ChartType = SeriesChartType.Line;
                         ref_Srs.IsValueShownAsLabel = false;
                         ref_Srs.Points.DataBindXY(n, sp_ref);
@@ -925,6 +944,8 @@ namespace Spectrum_Test
 
                         this.InvokeIfRequired(() =>
                         {
+                            B_reflect_sp_chart.ChartAreas[0].AxisX.Minimum = n[0];
+                            B_reflect_sp_chart.ChartAreas[0].AxisX.Maximum = n[n.Count - 1];
                             B_reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
                             B_reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                             B_reflect_sp_chart.Titles.Clear();
@@ -934,6 +955,11 @@ namespace Spectrum_Test
                     }
                 }
             }
+        }
+
+        private void btnSP_save_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
@@ -1407,6 +1433,10 @@ namespace Spectrum_Test
 
                                 this.InvokeIfRequired(() =>
                                 {
+                                    dark_sp_chart.ChartAreas[0].AxisX.Minimum = dark_n[0];
+                                    dark_sp_chart.ChartAreas[0].AxisX.Maximum = dark_n[dark_n.Count - 1];
+                                    dark_sp_chart.ChartAreas[0].AxisY.Maximum = 300;
+                                    dark_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                                     dark_sp_chart.Titles.Clear();
                                     dark_sp_chart.Titles.Add("暗光譜");
                                     dark_sp_chart.Series.Add(dark_Srs);
@@ -1433,7 +1463,43 @@ namespace Spectrum_Test
                                     {
                                         SP_T2 = double.Parse(SP_test_T2_txt.Text);
                                         Task.Delay(Convert.ToInt32(SP_T2 * 1000), token).Wait();
-                                        iTask = 40;
+
+                                        if(CAL_RUN_cycle > 1)
+                                        {
+                                            CAL_cycle = 0;
+
+                                            BeginInvoke((Action)(() =>
+                                            {
+                                                if (LED_AorB == 1)
+                                                {
+                                                    A_POINT_CAL = new List<List<int>>();
+                                                }
+                                                else if (LED_AorB == 2)
+                                                {
+                                                    B_POINT_CAL = new List<List<int>>();
+                                                }
+                                            }));
+
+
+
+                                            Task.Delay(1000, token).Wait();
+                                            List<int> sp4 = CMD_CAL();
+
+                                            if (LED_AorB == 1)
+                                            {
+                                                A_POINT_CAL.Add(sp4);
+                                            }
+                                            else if (LED_AorB == 2)
+                                            {
+                                                B_POINT_CAL.Add(sp4);
+                                            }
+
+                                            iTask = 50;
+                                        }
+                                        else
+                                        {
+                                            iTask = 40;
+                                        }                                        
                                     }
                                 }
                                 else if (LED_AorB == 2)
@@ -1448,7 +1514,44 @@ namespace Spectrum_Test
                                     {
                                         SP_T2 = double.Parse(SP_test_T2_txt.Text);
                                         Task.Delay(Convert.ToInt32(SP_T2 * 1000), token).Wait();
-                                        iTask = 40;
+
+
+                                        if (CAL_RUN_cycle > 1)
+                                        {
+                                            CAL_cycle = 0;
+
+                                            BeginInvoke((Action)(() =>
+                                            {
+                                                if (LED_AorB == 1)
+                                                {
+                                                    A_POINT_CAL = new List<List<int>>();
+                                                }
+                                                else if (LED_AorB == 2)
+                                                {
+                                                    B_POINT_CAL = new List<List<int>>();
+                                                }
+                                            }));
+
+
+
+                                            Task.Delay(1000, token).Wait();
+                                            List<int> sp4 = CMD_CAL();
+
+                                            if (LED_AorB == 1)
+                                            {
+                                                A_POINT_CAL.Add(sp4);
+                                            }
+                                            else if (LED_AorB == 2)
+                                            {
+                                                B_POINT_CAL.Add(sp4);
+                                            }
+
+                                            iTask = 50;
+                                        }
+                                        else
+                                        {
+                                            iTask = 40;
+                                        }
                                     }
                                 }
 
@@ -1643,12 +1746,23 @@ namespace Spectrum_Test
                                         string minutes = sw.Elapsed.Minutes.ToString();
                                         string seconds = sw.Elapsed.Seconds.ToString();
 
+                                        CAL_cycle = 0;
+
                                         BeginInvoke((Action)(() =>
                                         {
                                             Autoscaling_runtime_SP.Text = minutes + " 分 " + seconds + " 秒 ";
+
+                                            if (LED_AorB == 1)
+                                            {
+                                                A_POINT_CAL = new List<List<int>>();
+                                            }
+                                            else if (LED_AorB == 2)
+                                            {
+                                                B_POINT_CAL = new List<List<int>>();
+                                            }
                                         }));
 
-                                        CAL_cycle = 1;
+                                        
 
                                         Task.Delay(1000, token).Wait();
                                         List<int> sp4 = CMD_CAL();
@@ -1752,7 +1866,6 @@ namespace Spectrum_Test
                                         ALL_B_POINT_CAL.Add(B_POINT_CAL);
                                     }
 
-
                                     iTask = 60;
                                 }
                                 break;
@@ -1761,7 +1874,6 @@ namespace Spectrum_Test
                                 List<double> n_wl = new List<double>();
                                 List<double> n_dis = new List<double>();
                                 List<int> sp5 = new List<int>();
-                                List<double> baseline = new List<double>();
                                 List<List<double>> Sp_Dark_Baseline = new List<List<double>>();
 
                                 double lambda;
@@ -1834,10 +1946,18 @@ namespace Spectrum_Test
 
                                     this.InvokeIfRequired(() =>
                                     {
+                                        A_point_sp_chart.ChartAreas[0].AxisX.Minimum = n_wl[0];
+                                        A_point_sp_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                                        A_point_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
+                                        A_point_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
                                         A_point_sp_chart.Titles.Clear();
                                         A_point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
                                         A_point_sp_chart.Series.Add(point_Srs);
 
+                                        A_distance_sp_chart.ChartAreas[0].AxisX.Minimum = n_dis[0];
+                                        A_distance_sp_chart.ChartAreas[0].AxisX.Maximum = n_dis[n_dis.Count - 1];
+                                        A_distance_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
+                                        A_distance_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
                                         A_distance_sp_chart.Titles.Clear();
                                         A_distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
                                         A_distance_sp_chart.Series.Add(dis_Srs);
@@ -1860,6 +1980,8 @@ namespace Spectrum_Test
 
                                         this.InvokeIfRequired(() =>
                                         {
+                                            A_reflect_sp_chart.ChartAreas[0].AxisX.Minimum = n[0];
+                                            A_reflect_sp_chart.ChartAreas[0].AxisX.Maximum = n[n.Count - 1];
                                             A_reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
                                             A_reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                                             A_reflect_sp_chart.Titles.Clear();
@@ -1884,12 +2006,12 @@ namespace Spectrum_Test
                                         double baseline_average = 0.0;
                                         for (int j = base_line_835_index; j <= base_line_845_index; j++)
                                         {
-                                            baseline_average += ALL_B_POINT_CAL[CAL_RUN_cycle - 1][i][index];
+                                            baseline_average += ALL_B_POINT_CAL[CAL_RUN_cycle - 1][i][j];
                                         }
 
                                         baseline_average /= (base_line_845_index - base_line_835_index + 1);
-
-                                        Sp_Dark_Baseline.Add(ALL_B_POINT_CAL[CAL_RUN_cycle - 1][i].Select(x => x - baseline_average).ToList());
+                                        Sp_Dark_Baseline.Add(ALL_B_POINT_CAL[CAL_RUN_cycle - 1][i].Select(x => x - baseline_average).ToList());                                       
+                                        
                                     }
 
                                     Series point_Srs = new Series("B燈 第" + CAL_RUN_cycle.ToString() + "次循環");
@@ -1911,10 +2033,18 @@ namespace Spectrum_Test
 
                                     this.InvokeIfRequired(() =>
                                     {
+                                        B_point_sp_chart.ChartAreas[0].AxisX.Minimum = n_wl[0];
+                                        B_point_sp_chart.ChartAreas[0].AxisX.Maximum = n_wl[n_wl.Count - 1];
+                                        B_point_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
+                                        B_point_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                                         B_point_sp_chart.Titles.Clear();
                                         B_point_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各點光強");
                                         B_point_sp_chart.Series.Add(point_Srs);
 
+                                        B_distance_sp_chart.ChartAreas[0].AxisX.Minimum = n_dis[0];
+                                        B_distance_sp_chart.ChartAreas[0].AxisX.Maximum = n_dis[n_dis.Count - 1];
+                                        B_distance_sp_chart.ChartAreas[0].AxisY.Maximum = 4095;
+                                        B_distance_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                                         B_distance_sp_chart.Titles.Clear();
                                         B_distance_sp_chart.Titles.Add("波長 " + num.ToString() + " nm 下各位置光強");
                                         B_distance_sp_chart.Series.Add(dis_Srs);
@@ -1937,6 +2067,8 @@ namespace Spectrum_Test
 
                                         this.InvokeIfRequired(() =>
                                         {
+                                            B_reflect_sp_chart.ChartAreas[0].AxisX.Minimum = n[0];
+                                            B_reflect_sp_chart.ChartAreas[0].AxisX.Maximum = n[n.Count - 1];
                                             B_reflect_sp_chart.ChartAreas[0].AxisY.Maximum = 1.2;
                                             B_reflect_sp_chart.ChartAreas[0].AxisY.Minimum = 0;
                                             B_reflect_sp_chart.Titles.Clear();
@@ -2098,8 +2230,8 @@ namespace Spectrum_Test
 
             btnLED_save.Enabled = false;
 
-            /*try
-            {*/
+            try
+            {
                 await Task.Run(() =>
                 {
                     while (flag)
@@ -2135,7 +2267,7 @@ namespace Spectrum_Test
 
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
-                                    Log("CMD_DIR Error!");
+                                    Log("CMD_ROI Error!");
                                     iTask = 999;
                                 }
                                 else
@@ -2216,6 +2348,102 @@ namespace Spectrum_Test
                                         LED_T2 = double.Parse(LED_test_T2_txt.Text);
                                         Task.Delay(Convert.ToInt32(LED_T2 * 1000), token).Wait();
                                         iTask = 40;
+                                    }
+                                }
+                                break;
+                            /** 開燈  等待T2時間使LED達穩態   不做Auto scaling */
+                            case 31:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "延遲時間T2";
+                                }));
+
+                                if (LED_AorB == 1)
+                                {
+                                    ret = CMD_SUV(1);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SUV Error!");
+                                        iTask = 999;
+                                    }
+                                    else
+                                    {
+                                        LED_T2 = double.Parse(LED_test_T2_txt.Text);
+                                        Task.Delay(Convert.ToInt32(LED_T2 * 1000), token).Wait();
+
+                                        LED_cycle_time = 0.0;
+
+                                        BeginInvoke((Action)(() =>
+                                        {
+                                            status_lb.Text = "掃描中";
+
+                                            if (LED_AorB == 1)
+                                            {
+                                                A_LED_CAL = new List<List<int>>();
+                                            }
+                                            else if (LED_AorB == 2)
+                                            {
+                                                B_LED_CAL = new List<List<int>>();
+                                            }
+                                        }));
+
+                                        Task.Delay(1000, token).Wait();
+                                        List<int> sp4 = CMD_CAL();
+
+                                        if (LED_AorB == 1)
+                                        {
+                                            A_LED_CAL.Add(sp4);
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            B_LED_CAL.Add(sp4);
+                                        }
+
+                                        iTask = 50;
+                                    }
+                                }
+                                else if (LED_AorB == 2)
+                                {
+                                    ret = CMD_SWL(1);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SWL Error!");
+                                        iTask = 999;
+                                    }
+                                    else
+                                    {
+                                        LED_T2 = double.Parse(LED_test_T2_txt.Text);
+                                        Task.Delay(Convert.ToInt32(LED_T2 * 1000), token).Wait();
+
+                                        LED_cycle_time = 0.0;
+
+                                        BeginInvoke((Action)(() =>
+                                        {
+                                            status_lb.Text = "掃描中";
+
+                                            if (LED_AorB == 1)
+                                            {
+                                                A_LED_CAL = new List<List<int>>();
+                                            }
+                                            else if (LED_AorB == 2)
+                                            {
+                                                B_LED_CAL = new List<List<int>>();
+                                            }
+                                        }));
+
+                                        Task.Delay(1000, token).Wait();
+                                        List<int> sp4 = CMD_CAL();
+
+                                        if (LED_AorB == 1)
+                                        {
+                                            A_LED_CAL.Add(sp4);
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            B_LED_CAL.Add(sp4);
+                                        }
+
+                                        iTask = 50;
                                     }
                                 }
                                 break;
@@ -2619,11 +2847,11 @@ namespace Spectrum_Test
                                 if (LED_RUN_cycle < int.Parse(LED_test_RUN_cycle_txt.Text))
                                 {
                                     LED_RUN_cycle++;
-                                    iTask = 0;
+                                    iTask = 31;
                                 }
                                 else if (LED_AorB == 1)
                                 {
-                                    iTask = 0;
+                                    iTask = 30;
                                     LED_RUN_cycle = 1;
                                     LED_AorB = 2;
                                 }
@@ -2657,7 +2885,7 @@ namespace Spectrum_Test
                         }
                     }
                 }, token);
-            /*}
+            }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
@@ -2690,7 +2918,7 @@ namespace Spectrum_Test
                 }));
 
                 cts = null;
-            }*/
+            }
         }
 
         private void btnSpectrum_Test_Save_Click(object sender, EventArgs e)
