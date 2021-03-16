@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmartTagTool;
 using System;
 using System.Collections.Generic;
@@ -321,46 +322,6 @@ namespace Spectrum_Test
             {
                 ini.IniWriteValue("MOTOR_TEST", "TEST_ROUND", txt_motor_test_round.Text);
             }
-        }
-
-        
-        public void show_Spectrum(List<byte> list)
-        {
-            list.RemoveAt(0);    //刪除^
-            list.RemoveAt(0);    //刪除s
-            list.RemoveAt(0);    //刪除s
-            list.RemoveAt(0);    //刪除s
-            list.RemoveAt(0);    //刪除s
-            list.RemoveAt(0);    //刪除#
-
-            list.RemoveAt(list.Count - 1);    //刪除^
-            list.RemoveAt(list.Count - 1);    //刪除E
-            list.RemoveAt(list.Count - 1);    //刪除O
-            list.RemoveAt(list.Count - 1);    //刪除F
-            list.RemoveAt(list.Count - 1);    //刪除#
-
-            string temp_byte = "";
-            List<int> spectrum = new List<int>();
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (i % 2 == 1)
-                {
-                    int st = Convert.ToInt32(string.Concat(temp_byte, System.Convert.ToString(list[i], 2).PadLeft(8, '0')), 2); //2個byte轉2進制合併後再轉10進制                 
-                    spectrum.Add(st);
-                }
-                temp_byte = System.Convert.ToString(list[i], 2).PadLeft(8, '0');
-            }
-
-            
-
-            List<int> axis_x = new List<int>();
-            for (int i = 1; i <= 1280; i++)
-            {
-                axis_x.Add(i);
-            }
-
-            command = "";
-            CAL.Clear();
         }
 
         /** LED 測試記錄下來的光譜 */
@@ -717,60 +678,6 @@ namespace Spectrum_Test
             }
         }*/
 
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
-        {
-            panel1.Controls.Clear();
-
-            if (!string.IsNullOrEmpty(line_num_txt.Text))
-            {
-                int x = 10, y = 10;
-
-                for (int i = 1; i <= Convert.ToInt32(line_num_txt.Text); i++)
-                {
-                    Label lb = new Label();
-                    lb.Text = "第" + i.ToString() + "條參數";
-                    lb.Name = "lb_" + i.ToString();
-                    //lb.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
-                    lb.Size = new System.Drawing.Size(60,15);
-                    lb.Location = new System.Drawing.Point(x, y + 5);
-                    panel1.Controls.Add(lb);  // 先把元件加入 Controls 裡
-
-                    Label lbl = new Label();
-                    lbl.Text = "SW :";
-                    lbl.Name = "lbl_" + i.ToString();
-                    //lbl.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
-                    lbl.Size = new System.Drawing.Size(35,15);
-                    lbl.Location = new System.Drawing.Point(x, y + 25);
-                    panel1.Controls.Add(lbl);  // 先把元件加入 Controls 裡
-
-                    TextBox txt = new TextBox();
-                    txt.Name = "SW_txt_" + i.ToString();
-                    //txt.Font = new Font("微軟正黑體", 12);
-                    txt.Location = new System.Drawing.Point(x + 50, y + 20);
-                    txt.ImeMode = ImeMode.Alpha;
-                    panel1.Controls.Add(txt);  // 先把元件加入 Controls 裡 
-
-                    Label lb2 = new Label();
-                    lb2.Text = "Line :";
-                    lb2.Name = "lb2_" + i.ToString();
-                    //lbl.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
-                    lb2.Size = new System.Drawing.Size(35, 15);
-                    lb2.Location = new System.Drawing.Point(x, y + 50);
-                    panel1.Controls.Add(lb2);  // 先把元件加入 Controls 裡
-
-                    TextBox txt2 = new TextBox();
-                    txt2.Name = "Line_txt_" + i.ToString();
-                    //txt2.Font = new Font("微軟正黑體", 12);
-                    txt2.Location = new System.Drawing.Point(x + 50, y + 45);
-                    txt2.ImeMode = ImeMode.Alpha;
-                    panel1.Controls.Add(txt2);  // 先把元件加入 Controls 裡   
-
-                    y += 80;
-                }
-            }
-        }
-
-
         private void btnTaskStop_Click(object sender, EventArgs e)
         {
             if (cts != null)
@@ -782,9 +689,14 @@ namespace Spectrum_Test
 
         private async void btnMotor_Test_Click(object sender, EventArgs e)
         {
+            bool motor_result =  await Motor_Test(); //true為成功 false為失敗
+        }
+
+        private async Task<bool> Motor_Test()
+        {
             if (cts != null)
             {
-                return;
+                return false;
             }
 
             cts = new CancellationTokenSource();
@@ -918,8 +830,8 @@ namespace Spectrum_Test
                             System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
                             token.ThrowIfCancellationRequested();
                         }
-                    }
-                    //Log("RunTestMotor OK.");
+                    }                    
+
                     BeginInvoke((Action)(() =>
                     {
                         status_lb.Text = "完成";
@@ -929,8 +841,8 @@ namespace Spectrum_Test
                 }, cts.Token);
             }
             catch (Exception ex)
-            {   
-                if(ex.Message == "錯誤")
+            {
+                if (ex.Message == "錯誤")
                 {
                     BeginInvoke((Action)(() =>
                     {
@@ -950,22 +862,30 @@ namespace Spectrum_Test
 
                     cts = null;
                 }
-            }            
+                return false;
+            }
+
+            return true;
         }
 
         /** 開始進行光譜測試程序 */
         private async void btnSpectrum_Test_Start_Click(object sender, EventArgs e)
         {
+           bool SP_result =  await Spectrum_Test();
+        }
+
+        private async Task<bool> Spectrum_Test()
+        {
             if (cts != null)
             {
-                return;
+                return false;
             }
 
             cts = new CancellationTokenSource();
             token = cts.Token;
 
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();//引用stopwatch物件
-                       
+
             ALL_A_POINT_CAL = new List<List<List<int>>>();
             ALL_B_POINT_CAL = new List<List<List<int>>>();
 
@@ -1112,7 +1032,7 @@ namespace Spectrum_Test
                                         T2 = double.Parse(T2_txt.Text);
                                         Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
 
-                                        if(CAL_RUN_cycle > 1)
+                                        if (CAL_RUN_cycle > 1)
                                         {
                                             CAL_cycle = 0;
 
@@ -1147,7 +1067,7 @@ namespace Spectrum_Test
                                         else
                                         {
                                             iTask = 40;
-                                        }                                        
+                                        }
                                     }
                                 }
                                 else if (LED_AorB == 2)
@@ -1394,7 +1314,7 @@ namespace Spectrum_Test
                                             }
                                         }));
 
-                                        
+
 
                                         Task.Delay(1000, token).Wait();
                                         List<int> sp4 = CMD_CAL();
@@ -1471,7 +1391,7 @@ namespace Spectrum_Test
                                     {
                                         status_lb.Text = "掃描第 " + CAL_cycle.ToString() + " 點";
                                     }));
-                                    
+
                                     if (LED_AorB == 1)
                                     {
                                         A_POINT_CAL.Add(sp4);
@@ -1574,12 +1494,45 @@ namespace Spectrum_Test
                                     dis_Srs.MarkerSize = 5;
                                     dis_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
-                                    for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
-                                    {
-                                        TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
-                                        TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
+                                    double average = sp5.Average();
+                                    bool low_than_average = false;
+                                    List<int> sp_mini_region = new List<int>();
+                                    List<int> index_mini_region = new List<int>();
+                                    List<int> sp_local_minimum = new List<int>();
+                                    List<int> index_local_minimum = new List<int>();
 
-                                        List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                                    for (int i = 0; i < sp5.Count; i++)
+                                    {
+                                        if (sp5[i] < average)
+                                        {
+                                            low_than_average = true;
+                                        }
+
+                                        if (low_than_average)
+                                        {
+                                            if (sp5[i] > average)
+                                            {
+                                                sp_local_minimum.Add(sp_mini_region.Min());
+                                                index_local_minimum.Add(index_mini_region[sp_mini_region.IndexOf(sp_mini_region.Min())]);
+
+                                                index_mini_region = new List<int>();
+                                                sp_mini_region = new List<int>();
+                                                low_than_average = false;
+                                            }
+                                            else
+                                            {
+                                                sp_mini_region.Add(sp5[i]);
+                                                index_mini_region.Add(i);
+                                            }
+                                        }
+                                    }
+
+                                    for (int i = 1; i <= index_local_minimum.Count; i++)
+                                    {
+                                        double SW_dis = double.Parse(SW_dis_txt.Text);
+                                        int SW_dis_to_point = Convert.ToInt16(Math.Round(SW_dis / double.Parse(SP_point_distance_txt.Text), 0, MidpointRounding.AwayFromZero));
+
+                                        List<double> sp_ref = Sp_Dark_Baseline[index_local_minimum[i - 1]].Zip(Sp_Dark_Baseline[(index_local_minimum[i - 1] + SW_dis_to_point)], (x, y) => x / y).ToList();
 
                                         Series ref_Srs = new Series("A燈 第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() + "反射光譜");
                                         ref_Srs.ChartType = SeriesChartType.Line;
@@ -1611,8 +1564,8 @@ namespace Spectrum_Test
                                         }
 
                                         baseline_average /= (base_line_845_index - base_line_835_index + 1);
-                                        Sp_Dark_Baseline.Add(ALL_B_POINT_CAL[CAL_RUN_cycle - 1][i].Select(x => x - baseline_average).ToList());                                       
-                                        
+                                        Sp_Dark_Baseline.Add(ALL_B_POINT_CAL[CAL_RUN_cycle - 1][i].Select(x => x - baseline_average).ToList());
+
                                     }
 
                                     Series point_Srs = new Series("B燈 第" + CAL_RUN_cycle.ToString() + "次循環");
@@ -1632,12 +1585,47 @@ namespace Spectrum_Test
                                     dis_Srs.MarkerSize = 5;
                                     dis_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
-                                    for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
-                                    {
-                                        TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
-                                        TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
+                                    double average = sp5.Average();
+                                    bool low_than_average = false;
+                                    List<int> sp_mini_region = new List<int>();
+                                    List<int> index_mini_region = new List<int>();
+                                    List<int> sp_local_minimum = new List<int>();
+                                    List<int> index_local_minimum = new List<int>();
 
-                                        List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                                    for (int i = 0; i < sp5.Count; i++)
+                                    {
+                                        if (sp5[i] < average)
+                                        {
+                                            low_than_average = true;
+                                        }
+
+                                        if (low_than_average)
+                                        {
+                                            if (sp5[i] > average)
+                                            {
+                                                sp_local_minimum.Add(sp_mini_region.Min());
+                                                index_local_minimum.Add(index_mini_region[sp_mini_region.IndexOf(sp_mini_region.Min())]);
+
+                                                index_mini_region = new List<int>();
+                                                sp_mini_region = new List<int>();
+                                                low_than_average = false;
+                                            }
+                                            else
+                                            {
+                                                sp_mini_region.Add(sp5[i]);
+                                                index_mini_region.Add(i);
+                                            }
+                                        }
+                                    }
+
+
+
+                                    for (int i = 1; i <= index_local_minimum.Count; i++)
+                                    {
+                                        double SW_dis = double.Parse(SW_dis_txt.Text);
+                                        int SW_dis_to_point = Convert.ToInt16(Math.Round(SW_dis / double.Parse(SP_point_distance_txt.Text), 0, MidpointRounding.AwayFromZero));
+
+                                        List<double> sp_ref = Sp_Dark_Baseline[index_local_minimum[i - 1]].Zip(Sp_Dark_Baseline[(index_local_minimum[i - 1] + SW_dis_to_point)], (x, y) => x / y).ToList();
 
                                         Series ref_Srs = new Series("B燈 第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() + "反射光譜");
                                         ref_Srs.ChartType = SeriesChartType.Line;
@@ -1648,7 +1636,7 @@ namespace Spectrum_Test
                                         ref_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
                                     }
-                                }                              
+                                }
 
                                 iTask = 70;
                                 break;
@@ -1755,7 +1743,7 @@ namespace Spectrum_Test
 
                 BeginInvoke((Action)(() =>
                 {
-                    status_lb.Text = "停止!";                    
+                    status_lb.Text = "停止!";
                     btnSpectrum_Test_Start.Enabled = true;
 
                     flag = false;
@@ -1763,13 +1751,85 @@ namespace Spectrum_Test
 
                 cts = null;
             }
-        }               
+
+            return true;
+        }
 
         private async void btnLED_Test_Start_Click(object sender, EventArgs e)
         {
+           bool LED_result = await LED_test();
+
+            System.Diagnostics.Debug.WriteLine(LED_result.ToString());
+        }
+
+        private void btnLoadData_Click(object sender, EventArgs e)
+        {
+            string CRF = CMD_CRF();
+            string[] CRF_array = CRF.Split(new char[] { '{','}' }, StringSplitOptions.RemoveEmptyEntries);
+            JObject jo = (JObject)JsonConvert.DeserializeObject("{" + CRF_array[1] + "}");
+
+            Machine_txt.Text = jo["ID"].ToString();
+
+            string WL = jo["WL"].ToString();
+            WL = WL.Remove(0, 6);
+            WL = WL.Remove(WL.Length - 4, 4);
+
+            string[] WL_array = WL.Split(new string[] { "\",\r\n  \"" }, StringSplitOptions.RemoveEmptyEntries);
+
+            a0_txt.Text = WL_array[0];
+            a1_txt.Text = WL_array[1];
+            a2_txt.Text = WL_array[2];
+            a3_txt.Text = WL_array[3];
+
+            string[] ROI = jo["ROI"].ToString().Split(',');
+            roi_ho_txt.Text = ROI[0];
+            roi_hc_txt.Text = ROI[1];
+            roi_vo_txt.Text = ROI[2];
+            roi_lc_txt.Text = ROI[3];
+
+        }
+
+        private string CMD_CRF()
+        {
+            string cmd = string.Format("$CRF0,isb.json#");
+
+            Recv_Clear();
+            SerialWrite(cmd);
+            if (CMD_Timeout(5000)) return "ERR";
+
+            string recv = Recv_String();
+
+            if (recv.Contains("NACK")) return "ERR";
+
+            return recv;
+        }
+
+        private void btnLoadVersion_Click(object sender, EventArgs e)
+        {
+            VER_txt.Text = CMD_VER();
+        }
+
+
+        private string CMD_VER()
+        {
+            string cmd = string.Format("$VER#");
+
+            Recv_Clear();
+            SerialWrite(cmd);
+            if (CMD_Timeout(1000)) return "ERR";
+
+            string recv = Recv_String();
+
+            if (recv.Contains("NACK")) return "ERR";
+
+            return recv;
+        }
+
+        private async Task<bool> LED_test()
+        {
             if (cts != null)
             {
-                return;
+                return false;
             }
 
             cts = new CancellationTokenSource();
@@ -2232,7 +2292,7 @@ namespace Spectrum_Test
                                     }
                                     else if (LED_AorB == 2)
                                     {
-                                        B_LED_CAL.Add(sp5);                                        
+                                        B_LED_CAL.Add(sp5);
                                     }
 
                                     LED_cycle_time += (double.Parse(LED_test_interval_time_txt.Text) * 60.0);
@@ -2248,7 +2308,7 @@ namespace Spectrum_Test
                                     {
                                         ALL_B_LED_CAL.Add(B_LED_CAL);
                                     }
-                                        
+
 
                                     iTask = 60;
                                 }
@@ -2283,7 +2343,7 @@ namespace Spectrum_Test
                                     LED_sp = new List<int>();
 
                                     for (int i = 0; i < ALL_A_LED_CAL[LED_RUN_cycle - 1].Count; i++)
-                                    { 
+                                    {
                                         n_wl.Add(i * double.Parse(LED_test_interval_time_txt.Text));
                                         LED_sp.Add(ALL_A_LED_CAL[LED_RUN_cycle - 1][i][index]);
                                     }
@@ -2308,7 +2368,7 @@ namespace Spectrum_Test
                                         LED_sp.Add(ALL_B_LED_CAL[LED_RUN_cycle - 1][i][index]);
                                     }
 
-                                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString()  + " 次 " + (LED_cycle_time / 60.0) + " 分");
+                                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + (LED_cycle_time / 60.0) + " 分");
                                     time_Srs.ChartType = SeriesChartType.Line;
                                     time_Srs.IsValueShownAsLabel = false;
                                     time_Srs.Points.DataBindXY(n_wl, LED_sp);
@@ -2354,7 +2414,6 @@ namespace Spectrum_Test
                                 }
                                 break;
                             case 100:
-
                                 if (LED_RUN_cycle < int.Parse(LED_test_RUN_cycle_txt.Text))
                                 {
                                     LED_RUN_cycle++;
@@ -2368,6 +2427,84 @@ namespace Spectrum_Test
                                 }
                                 else if (LED_AorB == 2)
                                 {
+                                    n_wl = new List<double>();
+                                    LED_sp = new List<int>();
+
+                                    if (String.IsNullOrEmpty(LED_test_wl_txt.Text))
+                                    {
+                                        LED_wl = 0;
+                                    }
+                                    else
+                                    {
+                                        LED_wl = int.Parse(LED_test_wl_txt.Text);
+                                    }
+
+                                    for (int i = 1; i <= 1280; i++)
+                                    {
+                                        lambda = double.Parse(a0_txt.Text) + double.Parse(a1_txt.Text) * Convert.ToDouble(i) + double.Parse(a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                        n_wl.Add(lambda);
+                                    }
+
+                                    num = n_wl.OrderBy(item => Math.Abs(item - LED_wl)).ThenBy(item => item).First(); //取最接近的數
+                                    index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
+
+
+                                    if (ALL_A_LED_CAL.Count > 0)
+                                    {
+                                        n_wl = new List<double>();
+                                        LED_sp = new List<int>();
+
+                                        for (int i = 0; i < ALL_A_LED_CAL.Count; i++)
+                                        {
+                                            n_wl = new List<double>();
+                                            LED_sp = new List<int>();
+
+                                            for (int j = 0; j < ALL_A_LED_CAL[i].Count; j++)
+                                            {
+                                                n_wl.Add(j * double.Parse(LED_test_interval_time_txt.Text));
+                                                LED_sp.Add(ALL_A_LED_CAL[i][j][index]);
+                                            }
+
+                                            double average = LED_sp.Average();
+                                            double sumOfSquaresOfDifferences = LED_sp.Select(val => (val - average) * (val - average)).Sum();
+                                            double sd = Math.Sqrt(sumOfSquaresOfDifferences / LED_sp.Count);
+
+                                            if (sd > double.Parse(LED_STD_txt.Text))
+                                            {
+                                                System.Diagnostics.Debug.WriteLine(sd.ToString() + "......." + LED_STD_txt.Text);
+                                                throw new Exception("錯誤");
+                                            }
+                                        }
+                                    }
+
+                                    if (ALL_B_LED_CAL.Count > 0)
+                                    {
+                                        n_wl.Clear();
+                                        LED_sp.Clear();
+
+
+                                        for (int i = 0; i < ALL_B_LED_CAL.Count; i++)
+                                        {
+                                            n_wl.Clear();
+                                            LED_sp.Clear();
+                                            for (int j = 0; j < ALL_B_LED_CAL[i].Count; j++)
+                                            {
+                                                n_wl.Add(j * double.Parse(LED_test_interval_time_txt.Text));
+                                                LED_sp.Add(ALL_B_LED_CAL[i][j][index]);
+                                            }
+
+                                            double average = LED_sp.Average();
+                                            double sumOfSquaresOfDifferences = LED_sp.Select(val => (val - average) * (val - average)).Sum();
+                                            double sd = Math.Sqrt(sumOfSquaresOfDifferences / LED_sp.Count);
+
+                                            if (sd > double.Parse(LED_STD_txt.Text))
+                                            {
+                                                System.Diagnostics.Debug.WriteLine(sd.ToString() + "......." + LED_STD_txt.Text);
+                                                throw new Exception("錯誤");
+                                            }
+                                        }
+                                    }
+
                                     BeginInvoke((Action)(() =>
                                     {
                                         btnLED_Test_Start.Enabled = true;
@@ -2427,8 +2564,12 @@ namespace Spectrum_Test
                 }));
 
                 cts = null;
+                return false;
             }
+
+            return true;
         }
+        
 
         private void btnSpectrum_Test_Save_Click(object sender, EventArgs e)
         {

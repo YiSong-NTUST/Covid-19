@@ -822,12 +822,45 @@ namespace Spectrum_Test
                         A_distance_sp_chart.Series.Add(dis_Srs);
                     });
 
-                    for (int j = 1; j <= int.Parse(line_num_txt.Text); j++)
-                    {
-                        TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + j.ToString(), true)[0];
-                        TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + j.ToString(), true)[0];
+                    double average = sp5.Average();
+                    bool low_than_average = false;
+                    List<int> sp_mini_region = new List<int>();
+                    List<int> index_mini_region = new List<int>();
+                    List<int> sp_local_minimum = new List<int>();
+                    List<int> index_local_minimum = new List<int>();
 
-                        List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                    for (int j = 0; j < sp5.Count; j++)
+                    {
+                        if (sp5[j] < average)
+                        {
+                            low_than_average = true;
+                        }
+
+                        if (low_than_average)
+                        {
+                            if (sp5[j] > average)
+                            {
+                                sp_local_minimum.Add(sp_mini_region.Min());
+                                index_local_minimum.Add(index_mini_region[sp_mini_region.IndexOf(sp_mini_region.Min())]);
+
+                                index_mini_region = new List<int>();
+                                sp_mini_region = new List<int>();
+                                low_than_average = false;
+                            }
+                            else
+                            {
+                                sp_mini_region.Add(sp5[j]);
+                                index_mini_region.Add(j);
+                            }
+                        }
+                    }
+
+                    for (int j = 1; j <= index_local_minimum.Count; j++)
+                    {
+                        double SW_dis = double.Parse(SW_dis_txt.Text);
+                        int SW_dis_to_point = Convert.ToInt16(Math.Round(SW_dis / double.Parse(SP_point_distance_txt.Text), 0, MidpointRounding.AwayFromZero));
+
+                        List<double> sp_ref = Sp_Dark_Baseline[index_local_minimum[i - 1]].Zip(Sp_Dark_Baseline[(index_local_minimum[i - 1] + SW_dis_to_point)], (x, y) => x / y).ToList();
 
                         Series ref_Srs = new Series("A燈 第" + i.ToString() + "次" + j.ToString() + "反射光譜");
                         ref_Srs.ChartType = SeriesChartType.Line;
@@ -927,12 +960,45 @@ namespace Spectrum_Test
                         B_distance_sp_chart.Series.Add(dis_Srs);
                     });
 
-                    for (int j = 1; j <= int.Parse(line_num_txt.Text); j++)
-                    {
-                        TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + j.ToString(), true)[0];
-                        TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + j.ToString(), true)[0];
+                    double average = sp5.Average();
+                    bool low_than_average = false;
+                    List<int> sp_mini_region = new List<int>();
+                    List<int> index_mini_region = new List<int>();
+                    List<int> sp_local_minimum = new List<int>();
+                    List<int> index_local_minimum = new List<int>();
 
-                        List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                    for (int j = 0; j < sp5.Count; j++)
+                    {
+                        if (sp5[j] < average)
+                        {
+                            low_than_average = true;
+                        }
+
+                        if (low_than_average)
+                        {
+                            if (sp5[j] > average)
+                            {
+                                sp_local_minimum.Add(sp_mini_region.Min());
+                                index_local_minimum.Add(index_mini_region[sp_mini_region.IndexOf(sp_mini_region.Min())]);
+
+                                index_mini_region = new List<int>();
+                                sp_mini_region = new List<int>();
+                                low_than_average = false;
+                            }
+                            else
+                            {
+                                sp_mini_region.Add(sp5[j]);
+                                index_mini_region.Add(j);
+                            }
+                        }
+                    }
+
+                    for (int j = 1; j <= index_local_minimum.Count; j++)
+                    {
+                        double SW_dis = double.Parse(SW_dis_txt.Text);
+                        int SW_dis_to_point = Convert.ToInt16(Math.Round(SW_dis / double.Parse(SP_point_distance_txt.Text), 0, MidpointRounding.AwayFromZero));
+
+                        List<double> sp_ref = Sp_Dark_Baseline[index_local_minimum[i - 1]].Zip(Sp_Dark_Baseline[(index_local_minimum[i - 1] + SW_dis_to_point)], (x, y) => x / y).ToList();
 
                         Series ref_Srs = new Series("B燈 第" + i.ToString() + "次" + j.ToString() + "反射光譜");
                         ref_Srs.ChartType = SeriesChartType.Line;
@@ -960,59 +1026,6 @@ namespace Spectrum_Test
         private void btnSP_save_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
-        {
-            panel1.Controls.Clear();
-
-            if (!string.IsNullOrEmpty(line_num_txt.Text))
-            {
-                int x = 10, y = 10;
-
-                for (int i = 1; i <= Convert.ToInt32(line_num_txt.Text); i++)
-                {
-                    Label lb = new Label();
-                    lb.Text = "第" + i.ToString() + "條參數";
-                    lb.Name = "lb_" + i.ToString();
-                    //lb.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
-                    lb.Size = new System.Drawing.Size(60,15);
-                    lb.Location = new System.Drawing.Point(x, y + 5);
-                    panel1.Controls.Add(lb);  // 先把元件加入 Controls 裡
-
-                    Label lbl = new Label();
-                    lbl.Text = "SW :";
-                    lbl.Name = "lbl_" + i.ToString();
-                    //lbl.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
-                    lbl.Size = new System.Drawing.Size(35,15);
-                    lbl.Location = new System.Drawing.Point(x, y + 25);
-                    panel1.Controls.Add(lbl);  // 先把元件加入 Controls 裡
-
-                    TextBox txt = new TextBox();
-                    txt.Name = "SW_txt_" + i.ToString();
-                    //txt.Font = new Font("微軟正黑體", 12);
-                    txt.Location = new System.Drawing.Point(x + 50, y + 20);
-                    txt.ImeMode = ImeMode.Alpha;
-                    panel1.Controls.Add(txt);  // 先把元件加入 Controls 裡 
-
-                    Label lb2 = new Label();
-                    lb2.Text = "Line :";
-                    lb2.Name = "lb2_" + i.ToString();
-                    //lbl.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
-                    lb2.Size = new System.Drawing.Size(35, 15);
-                    lb2.Location = new System.Drawing.Point(x, y + 50);
-                    panel1.Controls.Add(lb2);  // 先把元件加入 Controls 裡
-
-                    TextBox txt2 = new TextBox();
-                    txt2.Name = "Line_txt_" + i.ToString();
-                    //txt2.Font = new Font("微軟正黑體", 12);
-                    txt2.Location = new System.Drawing.Point(x + 50, y + 45);
-                    txt2.ImeMode = ImeMode.Alpha;
-                    panel1.Controls.Add(txt2);  // 先把元件加入 Controls 裡   
-
-                    y += 80;
-                }
-            }
         }
 
         private void LED_test_total_times_txt_TextChanged(object sender, EventArgs e)
@@ -1963,12 +1976,47 @@ namespace Spectrum_Test
                                         A_distance_sp_chart.Series.Add(dis_Srs);
                                     });
 
-                                    for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
-                                    {
-                                        TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
-                                        TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
+                                    double average = sp5.Average();
+                                    bool low_than_average = false;
+                                    List<int> sp_mini_region = new List<int>();
+                                    List<int> index_mini_region = new List<int>();
+                                    List<int> sp_local_minimum = new List<int>();
+                                    List<int> index_local_minimum = new List<int>();
 
-                                        List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                                    for (int i = 0; i < sp5.Count; i++)
+                                    {
+                                        if (sp5[i] < average)
+                                        {
+                                            low_than_average = true;
+                                        }
+
+                                        if (low_than_average)
+                                        {
+                                            if (sp5[i] > average)
+                                            {
+                                                sp_local_minimum.Add(sp_mini_region.Min());
+                                                index_local_minimum.Add(index_mini_region[sp_mini_region.IndexOf(sp_mini_region.Min())]);
+
+                                                index_mini_region = new List<int>();
+                                                sp_mini_region = new List<int>();
+                                                low_than_average = false;
+                                            }
+                                            else
+                                            {
+                                                sp_mini_region.Add(sp5[i]);
+                                                index_mini_region.Add(i);
+                                            }                                            
+                                        }
+                                    }
+
+                                    
+
+                                    for (int i = 1; i <= index_local_minimum.Count; i++)
+                                    {
+                                        double SW_dis = double.Parse(SW_dis_txt.Text);
+                                        int SW_dis_to_point = Convert.ToInt16(Math.Round(SW_dis / double.Parse(SP_point_distance_txt.Text), 0, MidpointRounding.AwayFromZero));
+
+                                        List<double> sp_ref = Sp_Dark_Baseline[index_local_minimum[i - 1]].Zip(Sp_Dark_Baseline[(index_local_minimum[i - 1]+ SW_dis_to_point)], (x, y) => x / y).ToList();
 
                                         Series ref_Srs = new Series("A燈 第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() + "反射光譜");
                                         ref_Srs.ChartType = SeriesChartType.Line;
@@ -2050,12 +2098,47 @@ namespace Spectrum_Test
                                         B_distance_sp_chart.Series.Add(dis_Srs);
                                     });
 
-                                    for (int i = 1; i <= int.Parse(line_num_txt.Text); i++)
-                                    {
-                                        TextBox SW_txt = (TextBox)panel1.Controls.Find("SW_txt_" + i.ToString(), true)[0];
-                                        TextBox Line_txt = (TextBox)panel1.Controls.Find("Line_txt_" + i.ToString(), true)[0];
 
-                                        List<double> sp_ref = Sp_Dark_Baseline[int.Parse(Line_txt.Text)].Zip(Sp_Dark_Baseline[int.Parse(SW_txt.Text)], (x, y) => x / y).ToList();
+                                    double average = sp5.Average();
+                                    bool low_than_average = false;
+                                    List<int> sp_mini_region = new List<int>();
+                                    List<int> index_mini_region = new List<int>();
+                                    List<int> sp_local_minimum = new List<int>();
+                                    List<int> index_local_minimum = new List<int>();
+
+                                    for (int i = 0; i < sp5.Count; i++)
+                                    {
+                                        if (sp5[i] < average)
+                                        {
+                                            low_than_average = true;
+                                        }
+
+                                        if (low_than_average)
+                                        {
+                                            if (sp5[i] > average)
+                                            {
+                                                sp_local_minimum.Add(sp_mini_region.Min());
+                                                index_local_minimum.Add(index_mini_region[sp_mini_region.IndexOf(sp_mini_region.Min())]);
+
+                                                index_mini_region = new List<int>();
+                                                sp_mini_region = new List<int>();
+                                                low_than_average = false;
+                                            }
+                                            else
+                                            {
+                                                sp_mini_region.Add(sp5[i]);
+                                                index_mini_region.Add(i);
+                                            }
+                                        }
+                                    }
+
+
+                                    for (int i = 1; i <= index_local_minimum.Count; i++)
+                                    {
+                                        double SW_dis = double.Parse(SW_dis_txt.Text);
+                                        int SW_dis_to_point = Convert.ToInt16(Math.Round(SW_dis / double.Parse(SP_point_distance_txt.Text), 0, MidpointRounding.AwayFromZero));
+
+                                        List<double> sp_ref = Sp_Dark_Baseline[index_local_minimum[i - 1]].Zip(Sp_Dark_Baseline[(index_local_minimum[i - 1] + SW_dis_to_point)], (x, y) => x / y).ToList();
 
                                         Series ref_Srs = new Series("B燈 第" + CAL_RUN_cycle.ToString() + "次" + i.ToString() + "反射光譜");
                                         ref_Srs.ChartType = SeriesChartType.Line;
