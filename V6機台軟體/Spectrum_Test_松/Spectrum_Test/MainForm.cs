@@ -78,6 +78,8 @@ namespace Spectrum_Test
         public List<byte> CAL = new List<byte>();
         public List<int> MULT_CAL = new List<int>();
 
+        public List<List<int>> POINT_CAL = new List<List<int>>();
+
         public const int CMD_RET_OK = 0;
         public const int CMD_RET_TIMEOUT = 1;
         public const int CMD_RET_NACK = 2;
@@ -100,6 +102,11 @@ namespace Spectrum_Test
         int LED_DG, LED_AG, LED_EXP_init, LED_EXP_max, LED_I_max, LED_I_thr;
         int LED_maxValue, LED_EXP, LED_EXP1, LED_I1, LED_EXP2, LED_I2;
         int LED_wl, LED_RUN_cycle,LED_AorB;
+
+        double Xts_T1, Xts_T2;
+        int Xts_DG, Xts_AG, Xts_EXP_init, Xts_EXP_max, Xts_I_max, Xts_I_thr;
+        int Xts_maxValue, Xts_EXP, Xts_EXP1, Xts_I1, Xts_EXP2, Xts_I2;
+        int Xts_wl,Xts_cycle;
 
         double dark;
 
@@ -432,6 +439,22 @@ namespace Spectrum_Test
             command = "$CAL#";
             txtCommand.Text = "";
             txtCommand.Text = "$CAL#";
+        }
+
+        private void Xts_test_point_distance_steps_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(Xts_test_point_distance_steps_txt.Text) && !String.IsNullOrEmpty(Xts_test_step_distance_txt.Text))
+            {
+                Xts_point_distance_txt.Text = (double.Parse(Xts_test_point_distance_steps_txt.Text) * double.Parse(Xts_test_step_distance_txt.Text)).ToString();
+            }
+        }
+
+        private void Xts_test_step_distance_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(Xts_test_point_distance_steps_txt.Text) && !String.IsNullOrEmpty(Xts_test_step_distance_txt.Text))
+            {
+                Xts_point_distance_txt.Text = (double.Parse(Xts_test_point_distance_steps_txt.Text) * double.Parse(Xts_test_step_distance_txt.Text)).ToString();
+            }
         }
 
         private void btnAGN_Click(object sender, EventArgs e)
@@ -1023,49 +1046,660 @@ namespace Spectrum_Test
             }
         }
 
-        private void btnXts_test_Click(object sender, EventArgs e)
+        private async void btnXts_test_Click(object sender, EventArgs e)
         {
-            ret = CMD_DIR(0);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            int round = 0;
+            int motor_dir = 0;
+            flag = true;
+            iTask = 0;
+            int Xts_RUN_cycle = 0;
+            double last_result = 0.0;
+
+            if (cts != null)
             {
-                Log("CMD_DIR Error!");
+                return;
             }
 
-            Thread.Sleep(100);
+            cts = new CancellationTokenSource();
+            token = cts.Token;
 
-            ret = CMD_MSP(1);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            try
             {
-                Log("CMD_MSP Error!");
+                await Task.Run(() =>
+                {                  
+                    while (flag)
+                    {
+                        switch (iTask)
+                        {
+                            /** 確定馬達方向 回原點 */
+                            case 0:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "Xts測試開始";
+                                    btnMotor_Test.Enabled = false;
+                                }));
+
+                                ret = CMD_QPS(1);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_QPS 1 Error!");
+                                    Log("RunTestMotor Fail.");
+                                    iTask = 999;
+                                }
+
+                                if (ret == CMD_RET_POS_ON)
+                                {
+                                    Log("CMD_QPS 1 Detect ON!");
+                                    Log("RunTestMotor Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                ret = CMD_QPS(2);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_QPS 2 Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                if (ret == CMD_RET_POS_ON)
+                                {
+                                    Log("CMD_QPS 2 Detect ON!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                // try DIR0
+                                ret = CMD_DIR(motor_dir);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_DIR Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                // run to pos 1
+                                ret = CMD_MSP(1);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MSP Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                if (ret == CMD_RET_WDIR)
+                                {
+                                    motor_dir = motor_dir == 1 ? 0 : 1;
+                                }
+
+                                // try DIR0
+                                ret = CMD_DIR(motor_dir);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_DIR Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                // run to pos 1
+                                ret = CMD_MSP(1);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MSP Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                if (ret == CMD_RET_WDIR)
+                                {
+                                    Log("CMD_RET_WDIR!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                iTask = 10;
+                                break;
+                            /** 到Auto-Scaling點 */
+                            case 10:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "移動至Auto Scaling點";
+                                }));
+
+                                double Xsc = double.Parse(Xts_test_Xsc_txt.Text);
+                                double Xts = double.Parse(Xts_test_Xts_init_txt.Text);
+                                double xAS = double.Parse(Xts_test_xAS_txt.Text);
+                                double X_move = -Xsc + Xts + xAS;
+
+
+                                motor_dir = motor_dir == 1 ? 0 : 1;
+
+                                if (motor_dir == 0)
+                                {
+                                    if (X_move < 0.0)
+                                    {
+                                        ret = CMD_MRS(Convert.ToInt32((-X_move) / 0.0196));
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_MLS(Convert.ToInt32(X_move / 0.0196));
+                                    }
+
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_MRS Error!");
+                                        iTask = 999;
+                                    }
+                                }
+                                else
+                                {
+                                    if (X_move < 0.0)
+                                    {
+                                        ret = CMD_MLS(Convert.ToInt32((-X_move) / 0.0196));
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_MRS(Convert.ToInt32(X_move / 0.0196));
+                                    }
+
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_MRS Error!");
+                                        iTask = 999;
+                                    }
+                                }
+
+                                iTask = 30;
+                                break;
+                            /** 開燈  等待T2時間使LED達穩態    */
+                            case 30:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "延遲時間T2";
+                                }));
+
+                                ret = CMD_SUV(1);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_SUV Error!");
+                                    iTask = 999;
+                                }
+                                else
+                                {
+                                    Xts_T2 = double.Parse(Xts_test_T2_txt.Text);
+                                    Task.Delay(Convert.ToInt32(Xts_T2 * 1000), token).Wait();
+                                    iTask = 40;
+                                }
+                                break;
+                            /** 做auto scaling */
+                            case 40:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "Auto-scaling";
+                                }));
+
+                                Xts_AG = int.Parse(Xts_test_AG_txt.Text);
+                                ret = CMD_AGN(int.Parse(Xts_test_AG_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_AGN Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                Xts_DG = int.Parse(Xts_test_DG_txt.Text);
+                                ret = CMD_GNV(int.Parse(Xts_test_DG_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_GNV Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                Xts_EXP_init = int.Parse(Xts_test_EXP_initial_txt.Text);
+                                ret = CMD_ELC(int.Parse(Xts_test_EXP_initial_txt.Text));
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_ELC Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 41:    //AG增加
+                                Xts_AG *= 2;
+                                ret = CMD_AGN(Xts_AG);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_AGN Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 42:    //DG增加
+                                Xts_DG *= 2;
+                                ret = CMD_GNV(Xts_DG);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_GNV Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 43:    //EXP減一半
+                                Xts_EXP_init /= 2;
+                                ret = CMD_ELC(Xts_EXP_init);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_ELC Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                iTask = 45;
+                                break;
+                            case 45:    //找出目標值的EXP  
+                                Task.Delay(1000, token).Wait();
+                                List<int> sp1 = CMD_CAL();
+                                Xts_maxValue = sp1.Max();
+
+                                if (Xts_maxValue < int.Parse(Xts_test_I_max_txt.Text))
+                                {
+                                    Xts_EXP1 = Xts_EXP_init;
+                                    Xts_I1 = Xts_maxValue;
+
+                                    Xts_EXP_init /= 2;
+                                    ret = CMD_ELC(Xts_EXP_init);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_ELC Error!");
+                                        iTask = 999;
+                                        break;
+                                    }
+
+                                    Task.Delay(1000, token).Wait();
+                                    List<int> sp2 = CMD_CAL();
+                                    Xts_maxValue = sp2.Max();
+
+                                    Xts_EXP2 = Xts_EXP_init;
+                                    Xts_I2 = Xts_maxValue;
+
+                                    Xts_I_thr = int.Parse(Xts_test_I_thr_txt.Text);
+
+                                    /*System.Diagnostics.Debug.WriteLine("AG...." + Xts_AG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("DG...." + Xts_DG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP...." + Xts_EXP.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP1...." + Xts_EXP1.ToString());
+                                    System.Diagnostics.Debug.WriteLine("EXP2...." + Xts_EXP2.ToString());
+                                    System.Diagnostics.Debug.WriteLine("I1...." + Xts_I1.ToString());
+                                    System.Diagnostics.Debug.WriteLine("I2...." + Xts_I2.ToString());*/
+                                    Xts_EXP = Xts_EXP1 + ((Xts_I_thr - Xts_I1) * ((Xts_EXP1 - Xts_EXP2) / (Xts_I1 - Xts_I2)));
+
+
+                                    if (Xts_EXP > int.Parse(Xts_test_EXP_max_txt.Text))
+                                    {
+                                        if (Xts_DG < 128)
+                                        {
+                                            Xts_EXP_init = int.Parse(Xts_test_EXP_initial_txt.Text);
+                                            ret = CMD_ELC(Xts_EXP_init);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_ELC Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            iTask = 42;
+                                            break;
+                                        }
+                                        else if (Xts_AG < 8)
+                                        {
+                                            Xts_DG = int.Parse(Xts_test_DG_txt.Text);
+                                            ret = CMD_GNV(Xts_DG);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_GNV Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            Xts_EXP_init = int.Parse(Xts_test_EXP_initial_txt.Text);
+                                            ret = CMD_ELC(Xts_EXP_init);
+                                            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                            {
+                                                Log("CMD_ELC Error!");
+                                                iTask = 999;
+                                                break;
+                                            }
+
+                                            iTask = 41;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_AGN(Xts_AG);
+                                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                        {
+                                            Log("CMD_AGN Error!");
+                                            iTask = 999;
+                                            break;
+                                        }
+
+                                        ret = CMD_GNV(Xts_DG);
+                                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                        {
+                                            Log("CMD_GNV Error!");
+                                            iTask = 999;
+                                            break;
+                                        }
+
+                                        ret = CMD_ELC(Xts_EXP);
+                                        if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                        {
+                                            Log("CMD_ELC Error!");
+                                            iTask = 999;
+                                            break;
+                                        }
+
+                                        Task.Delay(1000, token).Wait();
+                                        List<int> sp3 = CMD_CAL();
+
+                                        Task.Delay(100, token).Wait();
+
+                                        iTask = 50;
+                                    }
+                                }
+                                else
+                                {
+                                    iTask = 43;
+                                }
+                                break;
+                            case 50:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "移到第一點";
+                                }));
+
+                                double Xts_start = double.Parse(Xts_test_x_standard_txt.Text) - ((8 * 0.0196) * (double.Parse(Xts_n_txt.Text) / 2.0));
+
+                                if(motor_dir == 0)
+                                {
+                                    ret = CMD_MLS(Convert.ToInt32((Xts_start - double.Parse(Xts_test_xAS_txt.Text)) / 0.0196));
+                                }
+                                else
+                                {
+                                    ret = CMD_MRS(Convert.ToInt32((Xts_start - double.Parse(Xts_test_xAS_txt.Text)) / 0.0196));
+                                }
+
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MLS Error!");
+                                    iTask = 999;
+                                    break;
+                                }
+
+                                POINT_CAL = new List<List<int>>();
+                                Xts_cycle = 0;
+                                iTask = 60;
+                                break;
+                            case 60:
+                                if (Xts_cycle < int.Parse(Xts_n_txt.Text))
+                                {
+                                    if (motor_dir == 0)
+                                    {
+                                        ret = CMD_MLS(int.Parse(Xts_test_point_distance_steps_txt.Text));
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_MRS(int.Parse(Xts_test_point_distance_steps_txt.Text));
+                                    }
+                                                                        
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_MLS Error!");
+                                        iTask = 999;
+                                        break;
+                                    }
+
+                                    Task.Delay(1000, token).Wait();
+                                    List<int> sp4 = CMD_CAL();
+
+                                    BeginInvoke((Action)(() =>
+                                    {
+                                        status_lb.Text = "掃描第 " + Xts_cycle.ToString() + " 點";
+                                    }));
+
+                                     POINT_CAL.Add(sp4);
+
+                                     Xts_cycle++;
+
+                                    iTask = 60;
+                                }
+                                else
+                                {
+                                    iTask = 70;
+                                }
+                                break;
+                            case 70:
+                                double lambda;
+                                List<double> n_wl = new List<double>();
+                                List<double> n_dis = new List<double>();
+                                List<int> Xts_sp = new List<int>();
+
+                                if (String.IsNullOrEmpty(LED_test_wl_txt.Text))
+                                {
+                                    Xts_wl = 0;
+                                }
+                                else
+                                {
+                                    Xts_wl = int.Parse(LED_test_wl_txt.Text);
+                                }
+
+                                for (int i = 1; i <= 1280; i++)
+                                {
+                                    lambda = double.Parse(LED_test_a0_txt.Text) + double.Parse(LED_test_a1_txt.Text) * Convert.ToDouble(i) + double.Parse(LED_test_a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(LED_test_a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
+                                    n_wl.Add(lambda);
+                                }
+
+                                double num = n_wl.OrderBy(item => Math.Abs(item - Xts_wl)).ThenBy(item => item).First(); //取最接近的數
+                                int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
+
+
+                                n_wl = new List<double>();
+                                Xts_sp = new List<int>();
+
+                                Xts_start = double.Parse(Xts_test_x_standard_txt.Text) - ((8 * 0.0196) * (double.Parse(Xts_n_txt.Text) / 2.0));
+
+                                for (int i = 0; i < POINT_CAL.Count; i++)
+                                {
+                                    n_wl.Add(i + 1);
+                                    n_dis.Add(Xts_start + Convert.ToDouble(i) * double.Parse(SP_test_step_distance_txt.Text) * double.Parse(SP_test_point_distance_steps_txt.Text));
+
+                                    Xts_sp.Add(POINT_CAL[i][index]);
+                                }
+
+                                double Xts_result = double.Parse(Xts_test_Xts_init_txt.Text) + n_dis[Xts_sp.IndexOf(Xts_sp.Min())] - double.Parse(Xts_test_x_standard_txt.Text);
+
+                                Xts_RUN_cycle++;
+
+                                if(Xts_RUN_cycle > int.Parse(Xts_timeout_txt.Text))
+                                {
+                                    System.Diagnostics.Debug.WriteLine("求不出來Xts");
+
+                                    ret = CMD_SUV(0);
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_SUV Error!");
+                                    }
+                                    break;
+                                }
+                                else if (Xts_RUN_cycle > 1 && Math.Abs(Xts_result - last_result) <= double.Parse(Xts_test_delta_x_txt.Text))
+                                {
+                                    BeginInvoke((Action)(() =>
+                                    {
+                                        Xts_test_result_txt.Text = Xts_result.ToString();
+                                    }));
+
+                                    iTask = 100;
+                                    break;
+                                }
+                                else
+                                {
+                                    last_result = Xts_result;                                                                        
+                                    iTask = 80;
+                                }
+                                break;
+                            case 80:
+                                motor_dir = motor_dir == 1 ? 0 : 1;
+
+                                // try DIR0
+                                ret = CMD_DIR(motor_dir);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_DIR Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                // run to pos 1
+                                ret = CMD_MSP(1);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_MSP Error!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                if (ret == CMD_RET_WDIR)
+                                {
+                                    Log("CMD_RET_WDIR!");
+                                    Log("RunXts Fail.");
+                                    iTask = 999;
+                                }
+
+                                Task.Delay(100, token).Wait();
+
+                                iTask = 90;
+                                break;
+                            case 90:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "移動至Auto Scaling點";
+                                }));
+
+                                Xsc = double.Parse(Xts_test_Xsc_txt.Text);
+                                Xts = double.Parse(Xts_test_Xts_init_txt.Text);
+                                xAS = double.Parse(Xts_test_xAS_txt.Text);
+                                X_move = -Xsc + Xts + xAS;
+
+
+                                motor_dir = motor_dir == 1 ? 0 : 1;
+
+                                if (motor_dir == 0)
+                                {
+                                    if (X_move < 0.0)
+                                    {
+                                        ret = CMD_MRS(Convert.ToInt32((-X_move) / 0.0196));
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_MLS(Convert.ToInt32(X_move / 0.0196));
+                                    }
+
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_MRS Error!");
+                                        iTask = 999;
+                                    }
+                                }
+                                else
+                                {
+                                    if (X_move < 0.0)
+                                    {
+                                        ret = CMD_MLS(Convert.ToInt32((-X_move) / 0.0196));
+                                    }
+                                    else
+                                    {
+                                        ret = CMD_MRS(Convert.ToInt32(X_move / 0.0196));
+                                    }
+
+                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                    {
+                                        Log("CMD_MRS Error!");
+                                        iTask = 999;
+                                    }
+                                }
+
+                                iTask = 50;
+                                break;
+                            case 100:
+                                ret = CMD_SUV(0);
+                                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                                {
+                                    Log("CMD_SUV Error!");
+                                }
+
+                                BeginInvoke((Action)(() =>
+                                {
+                                    status_lb.Text = "完成!";
+                                    flag = false;
+                                }));
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if (token.IsCancellationRequested == true)
+                        {
+                            System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
+                            token.ThrowIfCancellationRequested();
+                        }
+                    }
+                }, cts.Token);
             }
-
-            Thread.Sleep(100);
-
-            ret = CMD_QPS(1);
-            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            catch(Exception ex)
             {
-                Log("CMD_QPS 1 Error!");
-            }
+                System.Diagnostics.Debug.WriteLine(ex.Message);
 
-            if (ret == CMD_RET_POS_ON)
-            {
-                Log("CMD_QPS 1 Detect ON!");
-            }
-            else
-            {
-                ret = CMD_DIR(1);
+                ret = CMD_SUV(0);
                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                 {
-                    Log("CMD_DIR Error!");
+                    Log("CMD_SUV Error!");
                 }
 
-                ret = CMD_MSP(1);
-                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                BeginInvoke((Action)(() =>
                 {
-                    Log("CMD_MSP Error!");
-                }
-            }
+                    status_lb.Text = "停止!";
+                    flag = false;
+                }));
 
+                cts = null;
+            }
+            
 
         }
 
