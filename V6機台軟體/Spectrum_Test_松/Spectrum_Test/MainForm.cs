@@ -1023,6 +1023,52 @@ namespace Spectrum_Test
             }
         }
 
+        private void btnXts_test_Click(object sender, EventArgs e)
+        {
+            ret = CMD_DIR(0);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_DIR Error!");
+            }
+
+            Thread.Sleep(100);
+
+            ret = CMD_MSP(1);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_MSP Error!");
+            }
+
+            Thread.Sleep(100);
+
+            ret = CMD_QPS(1);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                Log("CMD_QPS 1 Error!");
+            }
+
+            if (ret == CMD_RET_POS_ON)
+            {
+                Log("CMD_QPS 1 Detect ON!");
+            }
+            else
+            {
+                ret = CMD_DIR(1);
+                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                {
+                    Log("CMD_DIR Error!");
+                }
+
+                ret = CMD_MSP(1);
+                if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+                {
+                    Log("CMD_MSP Error!");
+                }
+            }
+
+
+        }
+
         private void btnSP_save_Click(object sender, EventArgs e)
         {
 

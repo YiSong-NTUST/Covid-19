@@ -1825,6 +1825,11 @@ namespace Spectrum_Test
             return recv;
         }
 
+        private void btnxts_test_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private async Task<bool> LED_test()
         {
             if (cts != null)
