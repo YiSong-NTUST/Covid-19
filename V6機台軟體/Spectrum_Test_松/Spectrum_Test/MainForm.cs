@@ -284,14 +284,14 @@ namespace Spectrum_Test
                     CAL.Add(data);
                 }
 
-                /*if (CAL.Count > 5)
+                if (CAL.Count > 5)
                 {
                     String s = new String(new char[] { (char)CAL[CAL.Count - 5], (char)CAL[CAL.Count - 4], (char)CAL[CAL.Count - 3], (char)CAL[CAL.Count - 2], (char)CAL[CAL.Count - 1] });
                     if (s == "^EOF#")
                     {
                         show_Spectrum(CAL);
                     }
-                }*/
+                }
             }
             else
             {
@@ -1258,7 +1258,7 @@ namespace Spectrum_Test
                                 }
 
                                 Xts_DG = int.Parse(Xts_test_DG_txt.Text);
-                                ret = CMD_GNV(int.Parse(Xts_test_DG_txt.Text));
+                                ret = CMD_GNV((int.Parse(Xts_test_DG_txt.Text) * 32));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_GNV Error!");
@@ -1291,7 +1291,7 @@ namespace Spectrum_Test
                                 break;
                             case 42:    //DG增加
                                 Xts_DG *= 2;
-                                ret = CMD_GNV(Xts_DG);
+                                ret = CMD_GNV((Xts_DG * 32));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_GNV Error!");
@@ -1353,7 +1353,7 @@ namespace Spectrum_Test
 
                                     if (Xts_EXP > int.Parse(Xts_test_EXP_max_txt.Text))
                                     {
-                                        if (Xts_DG < 128)
+                                        if (Xts_DG < 300)
                                         {
                                             Xts_EXP_init = int.Parse(Xts_test_EXP_initial_txt.Text);
                                             ret = CMD_ELC(Xts_EXP_init);
@@ -1370,7 +1370,7 @@ namespace Spectrum_Test
                                         else if (Xts_AG < 8)
                                         {
                                             Xts_DG = int.Parse(Xts_test_DG_txt.Text);
-                                            ret = CMD_GNV(Xts_DG);
+                                            ret = CMD_GNV((Xts_DG * 32));
                                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                             {
                                                 Log("CMD_GNV Error!");
@@ -1405,7 +1405,7 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        ret = CMD_GNV(Xts_DG);
+                                        ret = CMD_GNV((Xts_DG * 32));
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
                                             Log("CMD_GNV Error!");
@@ -2269,7 +2269,7 @@ namespace Spectrum_Test
                                 }
 
                                 SP_DG = int.Parse(SP_test_DG_txt.Text);
-                                ret = CMD_GNV(int.Parse(SP_test_DG_txt.Text));
+                                ret = CMD_GNV((int.Parse(SP_test_DG_txt.Text) * 32));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_GNV Error!");
@@ -2302,7 +2302,7 @@ namespace Spectrum_Test
                                 break;
                             case 42:    //DG增加
                                 SP_DG *= 2;
-                                ret = CMD_GNV(SP_DG);
+                                ret = CMD_GNV((SP_DG * 32));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_GNV Error!");
@@ -2364,7 +2364,7 @@ namespace Spectrum_Test
 
                                     if (SP_EXP > int.Parse(SP_test_EXP_max_txt.Text))
                                     {
-                                        if (SP_DG < 128)
+                                        if (SP_DG < 300)
                                         {
                                             SP_EXP_init = int.Parse(SP_test_EXP_initial_txt.Text);
                                             ret = CMD_ELC(SP_EXP_init);
@@ -2381,7 +2381,7 @@ namespace Spectrum_Test
                                         else if (SP_AG < 8)
                                         {
                                             SP_DG = int.Parse(SP_test_DG_txt.Text);
-                                            ret = CMD_GNV(SP_DG);
+                                            ret = CMD_GNV((SP_DG * 32));
                                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                             {
                                                 Log("CMD_GNV Error!");
@@ -2416,7 +2416,7 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        ret = CMD_GNV(SP_DG);
+                                        ret = CMD_GNV((SP_DG * 32));
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
                                             Log("CMD_GNV Error!");
@@ -3232,7 +3232,7 @@ namespace Spectrum_Test
                                 }
 
                                 LED_DG = int.Parse(LED_test_DG_txt.Text);
-                                ret = CMD_GNV(int.Parse(LED_test_DG_txt.Text));
+                                ret = CMD_GNV((int.Parse(LED_test_DG_txt.Text) * 32));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_GNV Error!");
@@ -3265,7 +3265,7 @@ namespace Spectrum_Test
                                 break;
                             case 42:    //DG增加
                                 LED_DG *= 2;
-                                ret = CMD_GNV(LED_DG);
+                                ret = CMD_GNV((LED_DG * 32));
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                 {
                                     Log("CMD_GNV Error!");
@@ -3327,7 +3327,7 @@ namespace Spectrum_Test
 
                                     if (LED_EXP > int.Parse(LED_test_EXP_max_txt.Text))
                                     {
-                                        if (LED_DG < 128)
+                                        if (LED_DG < 300)
                                         {
                                             LED_EXP_init = int.Parse(LED_test_EXP_initial_txt.Text);
                                             ret = CMD_ELC(LED_EXP_init);
@@ -3344,7 +3344,7 @@ namespace Spectrum_Test
                                         else if (LED_AG < 8)
                                         {
                                             LED_DG = int.Parse(LED_test_DG_txt.Text);
-                                            ret = CMD_GNV(LED_DG);
+                                            ret = CMD_GNV((LED_DG * 32));
                                             if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                             {
                                                 Log("CMD_GNV Error!");
@@ -3379,7 +3379,7 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        ret = CMD_GNV(LED_DG);
+                                        ret = CMD_GNV((LED_DG * 32));
                                         if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                                         {
                                             Log("CMD_GNV Error!");
@@ -3504,7 +3504,7 @@ namespace Spectrum_Test
 
                                 double num = n_wl.OrderBy(item => Math.Abs(item - LED_wl)).ThenBy(item => item).First(); //取最接近的數
                                 int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
-
+                                
 
                                 if (LED_AorB == 1)
                                 {

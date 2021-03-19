@@ -1,0 +1,8 @@
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Release\Spectrum_Test.exe
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Release\Spectrum_Test.pdb
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Release\Spectrum_Test.MainForm.resources
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Release\Spectrum_Test.Properties.Resources.resources
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Release\Spectrum_Test.csproj.GenerateResource.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Release\Spectrum_Test.csproj.CoreCompileInputs.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Release\Spectrum_Test.exe
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Release\Spectrum_Test.pdb
