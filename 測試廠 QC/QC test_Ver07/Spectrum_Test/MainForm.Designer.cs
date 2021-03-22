@@ -72,6 +72,12 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.Sp_space_2_txt = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.Sp_space_1_txt = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.SP_test_position_deviation = new System.Windows.Forms.TextBox();
@@ -183,12 +189,6 @@
             this.label82 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label50 = new System.Windows.Forms.Label();
-            this.Sp_space_2_txt = new System.Windows.Forms.TextBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.Sp_space_1_txt = new System.Windows.Forms.TextBox();
-            this.label65 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
             this.setting_page.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -248,6 +248,12 @@
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
+            // serialPort
+            // 
+            this.serialPort.ErrorReceived += new System.IO.Ports.SerialErrorReceivedEventHandler(this.serialPort_ErrorReceived);
+            this.serialPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.serialPort_PinChanged);
+            this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived_1);
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -271,7 +277,7 @@
             // 
             this.btnTaskStop.BackColor = System.Drawing.Color.Red;
             this.btnTaskStop.Location = new System.Drawing.Point(399, 2);
-            this.btnTaskStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTaskStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnTaskStop.Name = "btnTaskStop";
             this.btnTaskStop.Size = new System.Drawing.Size(79, 38);
             this.btnTaskStop.TabIndex = 48;
@@ -353,7 +359,7 @@
             this.setting_page.Controls.Add(this.label46);
             this.setting_page.Controls.Add(this.label45);
             this.setting_page.Location = new System.Drawing.Point(4, 22);
-            this.setting_page.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.setting_page.Margin = new System.Windows.Forms.Padding(2);
             this.setting_page.Name = "setting_page";
             this.setting_page.Size = new System.Drawing.Size(1053, 602);
             this.setting_page.TabIndex = 10;
@@ -363,7 +369,7 @@
             // btnLoadjson
             // 
             this.btnLoadjson.Location = new System.Drawing.Point(908, 58);
-            this.btnLoadjson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadjson.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadjson.Name = "btnLoadjson";
             this.btnLoadjson.Size = new System.Drawing.Size(119, 33);
             this.btnLoadjson.TabIndex = 161;
@@ -374,7 +380,7 @@
             // VER_txt
             // 
             this.VER_txt.Location = new System.Drawing.Point(777, 66);
-            this.VER_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.VER_txt.Margin = new System.Windows.Forms.Padding(2);
             this.VER_txt.Name = "VER_txt";
             this.VER_txt.Size = new System.Drawing.Size(87, 22);
             this.VER_txt.TabIndex = 159;
@@ -392,7 +398,7 @@
             // Machine_txt
             // 
             this.Machine_txt.Location = new System.Drawing.Point(777, 29);
-            this.Machine_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Machine_txt.Margin = new System.Windows.Forms.Padding(2);
             this.Machine_txt.Name = "Machine_txt";
             this.Machine_txt.Size = new System.Drawing.Size(87, 22);
             this.Machine_txt.TabIndex = 157;
@@ -410,7 +416,7 @@
             // btnLoadVersion
             // 
             this.btnLoadVersion.Location = new System.Drawing.Point(589, 58);
-            this.btnLoadVersion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadVersion.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadVersion.Name = "btnLoadVersion";
             this.btnLoadVersion.Size = new System.Drawing.Size(119, 33);
             this.btnLoadVersion.TabIndex = 156;
@@ -421,7 +427,7 @@
             // btnLoadData
             // 
             this.btnLoadData.Location = new System.Drawing.Point(589, 21);
-            this.btnLoadData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadData.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadData.Name = "btnLoadData";
             this.btnLoadData.Size = new System.Drawing.Size(119, 33);
             this.btnLoadData.TabIndex = 155;
@@ -703,6 +709,64 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "光譜測試";
             // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(107, 123);
+            this.label72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(23, 12);
+            this.label72.TabIndex = 131;
+            this.label72.Text = "mm";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(227, 123);
+            this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(23, 12);
+            this.label50.TabIndex = 130;
+            this.label50.Text = "mm";
+            // 
+            // Sp_space_2_txt
+            // 
+            this.Sp_space_2_txt.Location = new System.Drawing.Point(176, 120);
+            this.Sp_space_2_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.Sp_space_2_txt.Name = "Sp_space_2_txt";
+            this.Sp_space_2_txt.Size = new System.Drawing.Size(47, 22);
+            this.Sp_space_2_txt.TabIndex = 129;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label58.Location = new System.Drawing.Point(134, 123);
+            this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(38, 12);
+            this.label58.TabIndex = 128;
+            this.label58.Text = "間距2";
+            // 
+            // Sp_space_1_txt
+            // 
+            this.Sp_space_1_txt.Location = new System.Drawing.Point(56, 118);
+            this.Sp_space_1_txt.Margin = new System.Windows.Forms.Padding(2);
+            this.Sp_space_1_txt.Name = "Sp_space_1_txt";
+            this.Sp_space_1_txt.Size = new System.Drawing.Size(47, 22);
+            this.Sp_space_1_txt.TabIndex = 127;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label65.Location = new System.Drawing.Point(14, 123);
+            this.label65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(38, 12);
+            this.label65.TabIndex = 126;
+            this.label65.Text = "間距1";
+            // 
             // label41
             // 
             this.label41.AutoSize = true;
@@ -726,7 +790,7 @@
             // SP_test_position_deviation
             // 
             this.SP_test_position_deviation.Location = new System.Drawing.Point(413, 118);
-            this.SP_test_position_deviation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_test_position_deviation.Margin = new System.Windows.Forms.Padding(2);
             this.SP_test_position_deviation.Name = "SP_test_position_deviation";
             this.SP_test_position_deviation.Size = new System.Drawing.Size(111, 22);
             this.SP_test_position_deviation.TabIndex = 120;
@@ -755,7 +819,7 @@
             // SW_dis_txt
             // 
             this.SW_dis_txt.Location = new System.Drawing.Point(142, 88);
-            this.SW_dis_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SW_dis_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SW_dis_txt.Name = "SW_dis_txt";
             this.SW_dis_txt.Size = new System.Drawing.Size(54, 22);
             this.SW_dis_txt.TabIndex = 123;
@@ -773,7 +837,7 @@
             // baseline_end_txt
             // 
             this.baseline_end_txt.Location = new System.Drawing.Point(470, 53);
-            this.baseline_end_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.baseline_end_txt.Margin = new System.Windows.Forms.Padding(2);
             this.baseline_end_txt.Name = "baseline_end_txt";
             this.baseline_end_txt.Size = new System.Drawing.Size(47, 22);
             this.baseline_end_txt.TabIndex = 108;
@@ -791,7 +855,7 @@
             // baseline_start_txt
             // 
             this.baseline_start_txt.Location = new System.Drawing.Point(404, 53);
-            this.baseline_start_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.baseline_start_txt.Margin = new System.Windows.Forms.Padding(2);
             this.baseline_start_txt.Name = "baseline_start_txt";
             this.baseline_start_txt.Size = new System.Drawing.Size(47, 22);
             this.baseline_start_txt.TabIndex = 106;
@@ -809,7 +873,7 @@
             // SP_test_CAL_RUN_cycle_txt
             // 
             this.SP_test_CAL_RUN_cycle_txt.Location = new System.Drawing.Point(302, 54);
-            this.SP_test_CAL_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_test_CAL_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SP_test_CAL_RUN_cycle_txt.Name = "SP_test_CAL_RUN_cycle_txt";
             this.SP_test_CAL_RUN_cycle_txt.Size = new System.Drawing.Size(47, 22);
             this.SP_test_CAL_RUN_cycle_txt.TabIndex = 93;
@@ -837,7 +901,7 @@
             // SP_test_wl_txt
             // 
             this.SP_test_wl_txt.Location = new System.Drawing.Point(173, 54);
-            this.SP_test_wl_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_test_wl_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SP_test_wl_txt.Name = "SP_test_wl_txt";
             this.SP_test_wl_txt.Size = new System.Drawing.Size(47, 22);
             this.SP_test_wl_txt.TabIndex = 62;
@@ -855,7 +919,7 @@
             // SP_test_total_point_txt
             // 
             this.SP_test_total_point_txt.Location = new System.Drawing.Point(62, 54);
-            this.SP_test_total_point_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_test_total_point_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SP_test_total_point_txt.Name = "SP_test_total_point_txt";
             this.SP_test_total_point_txt.Size = new System.Drawing.Size(47, 22);
             this.SP_test_total_point_txt.TabIndex = 48;
@@ -893,7 +957,7 @@
             // SP_point_distance_txt
             // 
             this.SP_point_distance_txt.Location = new System.Drawing.Point(871, 462);
-            this.SP_point_distance_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_point_distance_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SP_point_distance_txt.Name = "SP_point_distance_txt";
             this.SP_point_distance_txt.ReadOnly = true;
             this.SP_point_distance_txt.Size = new System.Drawing.Size(47, 22);
@@ -945,7 +1009,7 @@
             // LED_STD_txt
             // 
             this.LED_STD_txt.Location = new System.Drawing.Point(390, 89);
-            this.LED_STD_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LED_STD_txt.Margin = new System.Windows.Forms.Padding(2);
             this.LED_STD_txt.Name = "LED_STD_txt";
             this.LED_STD_txt.Size = new System.Drawing.Size(111, 22);
             this.LED_STD_txt.TabIndex = 118;
@@ -994,7 +1058,7 @@
             // LED_test_RUN_cycle_txt
             // 
             this.LED_test_RUN_cycle_txt.Location = new System.Drawing.Point(338, 55);
-            this.LED_test_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LED_test_RUN_cycle_txt.Margin = new System.Windows.Forms.Padding(2);
             this.LED_test_RUN_cycle_txt.Name = "LED_test_RUN_cycle_txt";
             this.LED_test_RUN_cycle_txt.Size = new System.Drawing.Size(47, 22);
             this.LED_test_RUN_cycle_txt.TabIndex = 91;
@@ -1022,7 +1086,7 @@
             // LED_test_wl_txt
             // 
             this.LED_test_wl_txt.Location = new System.Drawing.Point(454, 54);
-            this.LED_test_wl_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LED_test_wl_txt.Margin = new System.Windows.Forms.Padding(2);
             this.LED_test_wl_txt.Name = "LED_test_wl_txt";
             this.LED_test_wl_txt.Size = new System.Drawing.Size(47, 22);
             this.LED_test_wl_txt.TabIndex = 62;
@@ -1040,7 +1104,7 @@
             // LED_test_interval_time_txt
             // 
             this.LED_test_interval_time_txt.Location = new System.Drawing.Point(202, 55);
-            this.LED_test_interval_time_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LED_test_interval_time_txt.Margin = new System.Windows.Forms.Padding(2);
             this.LED_test_interval_time_txt.Name = "LED_test_interval_time_txt";
             this.LED_test_interval_time_txt.Size = new System.Drawing.Size(47, 22);
             this.LED_test_interval_time_txt.TabIndex = 52;
@@ -1058,7 +1122,7 @@
             // LED_test_total_times_txt
             // 
             this.LED_test_total_times_txt.Location = new System.Drawing.Point(70, 54);
-            this.LED_test_total_times_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LED_test_total_times_txt.Margin = new System.Windows.Forms.Padding(2);
             this.LED_test_total_times_txt.Name = "LED_test_total_times_txt";
             this.LED_test_total_times_txt.Size = new System.Drawing.Size(47, 22);
             this.LED_test_total_times_txt.TabIndex = 48;
@@ -1086,7 +1150,7 @@
             // SP_test_step_distance_txt
             // 
             this.SP_test_step_distance_txt.Location = new System.Drawing.Point(755, 462);
-            this.SP_test_step_distance_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_test_step_distance_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SP_test_step_distance_txt.Name = "SP_test_step_distance_txt";
             this.SP_test_step_distance_txt.Size = new System.Drawing.Size(47, 22);
             this.SP_test_step_distance_txt.TabIndex = 91;
@@ -1162,7 +1226,7 @@
             // roi_lc_txt
             // 
             this.roi_lc_txt.Location = new System.Drawing.Point(941, 354);
-            this.roi_lc_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.roi_lc_txt.Margin = new System.Windows.Forms.Padding(2);
             this.roi_lc_txt.Name = "roi_lc_txt";
             this.roi_lc_txt.Size = new System.Drawing.Size(47, 22);
             this.roi_lc_txt.TabIndex = 152;
@@ -1170,7 +1234,7 @@
             // SP_test_point_distance_steps_txt
             // 
             this.SP_test_point_distance_steps_txt.Location = new System.Drawing.Point(668, 462);
-            this.SP_test_point_distance_steps_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SP_test_point_distance_steps_txt.Margin = new System.Windows.Forms.Padding(2);
             this.SP_test_point_distance_steps_txt.Name = "SP_test_point_distance_steps_txt";
             this.SP_test_point_distance_steps_txt.Size = new System.Drawing.Size(47, 22);
             this.SP_test_point_distance_steps_txt.TabIndex = 52;
@@ -1179,7 +1243,7 @@
             // a0_txt
             // 
             this.a0_txt.Location = new System.Drawing.Point(618, 296);
-            this.a0_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.a0_txt.Margin = new System.Windows.Forms.Padding(2);
             this.a0_txt.Name = "a0_txt";
             this.a0_txt.Size = new System.Drawing.Size(47, 22);
             this.a0_txt.TabIndex = 118;
@@ -1197,7 +1261,7 @@
             // roi_vo_txt
             // 
             this.roi_vo_txt.Location = new System.Drawing.Point(843, 354);
-            this.roi_vo_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.roi_vo_txt.Margin = new System.Windows.Forms.Padding(2);
             this.roi_vo_txt.Name = "roi_vo_txt";
             this.roi_vo_txt.Size = new System.Drawing.Size(47, 22);
             this.roi_vo_txt.TabIndex = 150;
@@ -1205,7 +1269,7 @@
             // a1_txt
             // 
             this.a1_txt.Location = new System.Drawing.Point(705, 296);
-            this.a1_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.a1_txt.Margin = new System.Windows.Forms.Padding(2);
             this.a1_txt.Name = "a1_txt";
             this.a1_txt.Size = new System.Drawing.Size(47, 22);
             this.a1_txt.TabIndex = 120;
@@ -1213,7 +1277,7 @@
             // roi_hc_txt
             // 
             this.roi_hc_txt.Location = new System.Drawing.Point(742, 354);
-            this.roi_hc_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.roi_hc_txt.Margin = new System.Windows.Forms.Padding(2);
             this.roi_hc_txt.Name = "roi_hc_txt";
             this.roi_hc_txt.Size = new System.Drawing.Size(47, 22);
             this.roi_hc_txt.TabIndex = 148;
@@ -1221,7 +1285,7 @@
             // a2_txt
             // 
             this.a2_txt.Location = new System.Drawing.Point(795, 296);
-            this.a2_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.a2_txt.Margin = new System.Windows.Forms.Padding(2);
             this.a2_txt.Name = "a2_txt";
             this.a2_txt.Size = new System.Drawing.Size(47, 22);
             this.a2_txt.TabIndex = 122;
@@ -1229,7 +1293,7 @@
             // a3_txt
             // 
             this.a3_txt.Location = new System.Drawing.Point(885, 296);
-            this.a3_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.a3_txt.Margin = new System.Windows.Forms.Padding(2);
             this.a3_txt.Name = "a3_txt";
             this.a3_txt.Size = new System.Drawing.Size(47, 22);
             this.a3_txt.TabIndex = 124;
@@ -1237,7 +1301,7 @@
             // T1_txt
             // 
             this.T1_txt.Location = new System.Drawing.Point(615, 146);
-            this.T1_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.T1_txt.Margin = new System.Windows.Forms.Padding(2);
             this.T1_txt.Name = "T1_txt";
             this.T1_txt.Size = new System.Drawing.Size(47, 22);
             this.T1_txt.TabIndex = 125;
@@ -1265,7 +1329,7 @@
             // roi_ho_txt
             // 
             this.roi_ho_txt.Location = new System.Drawing.Point(641, 354);
-            this.roi_ho_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.roi_ho_txt.Margin = new System.Windows.Forms.Padding(2);
             this.roi_ho_txt.Name = "roi_ho_txt";
             this.roi_ho_txt.Size = new System.Drawing.Size(47, 22);
             this.roi_ho_txt.TabIndex = 146;
@@ -1273,7 +1337,7 @@
             // x1_txt
             // 
             this.x1_txt.Location = new System.Drawing.Point(976, 426);
-            this.x1_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.x1_txt.Margin = new System.Windows.Forms.Padding(2);
             this.x1_txt.Name = "x1_txt";
             this.x1_txt.Size = new System.Drawing.Size(47, 22);
             this.x1_txt.TabIndex = 83;
@@ -1281,7 +1345,7 @@
             // T2_txt
             // 
             this.T2_txt.Location = new System.Drawing.Point(712, 146);
-            this.T2_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.T2_txt.Margin = new System.Windows.Forms.Padding(2);
             this.T2_txt.Name = "T2_txt";
             this.T2_txt.Size = new System.Drawing.Size(47, 22);
             this.T2_txt.TabIndex = 127;
@@ -1289,7 +1353,7 @@
             // Xsc_txt
             // 
             this.Xsc_txt.Location = new System.Drawing.Point(650, 426);
-            this.Xsc_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Xsc_txt.Margin = new System.Windows.Forms.Padding(2);
             this.Xsc_txt.Name = "Xsc_txt";
             this.Xsc_txt.Size = new System.Drawing.Size(47, 22);
             this.Xsc_txt.TabIndex = 82;
@@ -1297,7 +1361,7 @@
             // I_thr_txt
             // 
             this.I_thr_txt.Location = new System.Drawing.Point(867, 236);
-            this.I_thr_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.I_thr_txt.Margin = new System.Windows.Forms.Padding(2);
             this.I_thr_txt.Name = "I_thr_txt";
             this.I_thr_txt.Size = new System.Drawing.Size(47, 22);
             this.I_thr_txt.TabIndex = 140;
@@ -1315,7 +1379,7 @@
             // DG_txt
             // 
             this.DG_txt.Location = new System.Drawing.Point(618, 207);
-            this.DG_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DG_txt.Margin = new System.Windows.Forms.Padding(2);
             this.DG_txt.Name = "DG_txt";
             this.DG_txt.Size = new System.Drawing.Size(47, 22);
             this.DG_txt.TabIndex = 130;
@@ -1333,7 +1397,7 @@
             // I_max_txt
             // 
             this.I_max_txt.Location = new System.Drawing.Point(867, 207);
-            this.I_max_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.I_max_txt.Margin = new System.Windows.Forms.Padding(2);
             this.I_max_txt.Name = "I_max_txt";
             this.I_max_txt.Size = new System.Drawing.Size(47, 22);
             this.I_max_txt.TabIndex = 138;
@@ -1341,7 +1405,7 @@
             // Xts_txt
             // 
             this.Xts_txt.Location = new System.Drawing.Point(872, 426);
-            this.Xts_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Xts_txt.Margin = new System.Windows.Forms.Padding(2);
             this.Xts_txt.Name = "Xts_txt";
             this.Xts_txt.Size = new System.Drawing.Size(47, 22);
             this.Xts_txt.TabIndex = 63;
@@ -1349,7 +1413,7 @@
             // AG_txt
             // 
             this.AG_txt.Location = new System.Drawing.Point(618, 236);
-            this.AG_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AG_txt.Margin = new System.Windows.Forms.Padding(2);
             this.AG_txt.Name = "AG_txt";
             this.AG_txt.Size = new System.Drawing.Size(47, 22);
             this.AG_txt.TabIndex = 132;
@@ -1357,7 +1421,7 @@
             // EXP_max_txt
             // 
             this.EXP_max_txt.Location = new System.Drawing.Point(753, 236);
-            this.EXP_max_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXP_max_txt.Margin = new System.Windows.Forms.Padding(2);
             this.EXP_max_txt.Name = "EXP_max_txt";
             this.EXP_max_txt.Size = new System.Drawing.Size(47, 22);
             this.EXP_max_txt.TabIndex = 136;
@@ -1365,7 +1429,7 @@
             // EXP_initial_txt
             // 
             this.EXP_initial_txt.Location = new System.Drawing.Point(753, 207);
-            this.EXP_initial_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXP_initial_txt.Margin = new System.Windows.Forms.Padding(2);
             this.EXP_initial_txt.Name = "EXP_initial_txt";
             this.EXP_initial_txt.Size = new System.Drawing.Size(47, 22);
             this.EXP_initial_txt.TabIndex = 134;
@@ -1433,7 +1497,7 @@
             // xAS_txt
             // 
             this.xAS_txt.Location = new System.Drawing.Point(761, 426);
-            this.xAS_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.xAS_txt.Margin = new System.Windows.Forms.Padding(2);
             this.xAS_txt.Name = "xAS_txt";
             this.xAS_txt.Size = new System.Drawing.Size(47, 22);
             this.xAS_txt.TabIndex = 45;
@@ -1588,7 +1652,7 @@
             this.test_page.Controls.Add(this.label82);
             this.test_page.Controls.Add(this.label83);
             this.test_page.Location = new System.Drawing.Point(4, 22);
-            this.test_page.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.test_page.Margin = new System.Windows.Forms.Padding(2);
             this.test_page.Name = "test_page";
             this.test_page.Size = new System.Drawing.Size(1053, 602);
             this.test_page.TabIndex = 11;
@@ -1618,7 +1682,7 @@
             // EXPORT_lb
             // 
             this.EXPORT_lb.Location = new System.Drawing.Point(297, 456);
-            this.EXPORT_lb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXPORT_lb.Margin = new System.Windows.Forms.Padding(2);
             this.EXPORT_lb.Name = "EXPORT_lb";
             this.EXPORT_lb.Size = new System.Drawing.Size(75, 23);
             this.EXPORT_lb.TabIndex = 62;
@@ -1629,7 +1693,7 @@
             // operator_txt
             // 
             this.operator_txt.Location = new System.Drawing.Point(174, 456);
-            this.operator_txt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.operator_txt.Margin = new System.Windows.Forms.Padding(2);
             this.operator_txt.Name = "operator_txt";
             this.operator_txt.Size = new System.Drawing.Size(108, 22);
             this.operator_txt.TabIndex = 61;
@@ -1671,7 +1735,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(92, 256);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 56;
@@ -1701,7 +1765,7 @@
             // btnSpectrum_Test_Start
             // 
             this.btnSpectrum_Test_Start.Location = new System.Drawing.Point(92, 198);
-            this.btnSpectrum_Test_Start.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSpectrum_Test_Start.Margin = new System.Windows.Forms.Padding(2);
             this.btnSpectrum_Test_Start.Name = "btnSpectrum_Test_Start";
             this.btnSpectrum_Test_Start.Size = new System.Drawing.Size(75, 23);
             this.btnSpectrum_Test_Start.TabIndex = 49;
@@ -1712,7 +1776,7 @@
             // btnLED_Test_Start
             // 
             this.btnLED_Test_Start.Location = new System.Drawing.Point(92, 157);
-            this.btnLED_Test_Start.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLED_Test_Start.Margin = new System.Windows.Forms.Padding(2);
             this.btnLED_Test_Start.Name = "btnLED_Test_Start";
             this.btnLED_Test_Start.Size = new System.Drawing.Size(75, 23);
             this.btnLED_Test_Start.TabIndex = 49;
@@ -1780,64 +1844,6 @@
             this.tabControl1.Size = new System.Drawing.Size(1061, 628);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(227, 123);
-            this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(23, 12);
-            this.label50.TabIndex = 130;
-            this.label50.Text = "mm";
-            // 
-            // Sp_space_2_txt
-            // 
-            this.Sp_space_2_txt.Location = new System.Drawing.Point(176, 120);
-            this.Sp_space_2_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.Sp_space_2_txt.Name = "Sp_space_2_txt";
-            this.Sp_space_2_txt.Size = new System.Drawing.Size(47, 22);
-            this.Sp_space_2_txt.TabIndex = 129;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label58.Location = new System.Drawing.Point(134, 123);
-            this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(38, 12);
-            this.label58.TabIndex = 128;
-            this.label58.Text = "間距2";
-            // 
-            // Sp_space_1_txt
-            // 
-            this.Sp_space_1_txt.Location = new System.Drawing.Point(56, 118);
-            this.Sp_space_1_txt.Margin = new System.Windows.Forms.Padding(2);
-            this.Sp_space_1_txt.Name = "Sp_space_1_txt";
-            this.Sp_space_1_txt.Size = new System.Drawing.Size(47, 22);
-            this.Sp_space_1_txt.TabIndex = 127;
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label65.Location = new System.Drawing.Point(14, 123);
-            this.label65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(38, 12);
-            this.label65.TabIndex = 126;
-            this.label65.Text = "間距1";
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(107, 123);
-            this.label72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(23, 12);
-            this.label72.TabIndex = 131;
-            this.label72.Text = "mm";
             // 
             // MainForm
             // 

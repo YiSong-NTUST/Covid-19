@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SmartTagTool;
@@ -12,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Management;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -87,8 +89,7 @@ namespace Spectrum_Test
         private CancellationTokenSource cts;
         private CancellationToken token;
 
-        string[] pass_ng = new string[] {"-","-","-","-"}; 
-
+        string[] pass_ng = new string[] {"-","-","-","-"};
 
         public MainForm()
         {
@@ -97,10 +98,34 @@ namespace Spectrum_Test
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            ManagementEventWatcher watcher = new ManagementEventWatcher();
+            WqlEventQuery query = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 1");
+            //EventType = 1是對insert和remove都有反應; 
+            //EventType = 2是只有對insert有反應; 
+            //EventType = 3是只有對remove有反應
+            //以上可以視情況宣告為全域instances 方便一些應用
+
+            watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
+            watcher.Query = query;
+            watcher.Start();
+            //如果要停掉watcher就呼叫watcher.Stop(); 不用時可以dispose()掉
+            //注意上述這些初始動作要在serial port init之前
+
+            
+
+
             selPort = "";
                                   
             LoadSetting();
             loadPorts();
+        }
+
+        static void watcher_EventArrived(object sender, EventArrivedEventArgs e)
+        {
+            Debug.WriteLine(e.NewEvent.GetType().Name);
+            Debug.WriteLine(e.NewEvent.Properties.);
+            Debug.WriteLine(e.NewEvent.ClassPath.ClassName);
+            Debug.WriteLine(e.NewEvent.Properties.Count);
         }
 
         /**  port 更新   */
@@ -2024,6 +2049,21 @@ namespace Spectrum_Test
                 Sp_space_1_txt.Text = jo["間距1"].ToString();
                 Sp_space_2_txt.Text = jo["間距2"].ToString();
             }
+        }
+
+        private void serialPort_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
+        {
+            Debug.WriteLine("111");
+        }
+
+        private void serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            Debug.WriteLine("222");
+        }
+
+        private void serialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            Debug.WriteLine("333");
         }
 
         private void btnLoadVersion_Click(object sender, EventArgs e)
