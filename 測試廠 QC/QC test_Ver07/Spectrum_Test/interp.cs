@@ -48,12 +48,12 @@ namespace Spectrum_Test
 
         int findNearestNeighbourIndex(double value, List<double> x)
         {
-            double dist = 0.5;
+            double dist = double.MaxValue;
             int idx = -1;
             for (int i = 0; i < x.Count(); ++i)
             {
                 double newDist = value - x[i];
-                if (newDist > 0 && newDist < dist)
+                if (newDist >= 0 && newDist <= dist)
                 {
                     dist = newDist;
                     idx = i;
