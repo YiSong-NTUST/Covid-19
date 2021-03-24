@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cboPort = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,8 +44,32 @@
             this.label7 = new System.Windows.Forms.Label();
             this.Machine_txt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnLoadVersion = new System.Windows.Forms.Button();
+            this.btnLoadData = new System.Windows.Forms.Button();
             this.label79 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label78 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.Xts_test_timeout_txt = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.Xts_test_delta_x_txt = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.Xts_test_xAS_txt = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.Xts_test_n_txt = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.Xts_test_x_standard_txt = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.Xts_test_Xts_init_txt = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.Xts_test_result_txt = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label72 = new System.Windows.Forms.Label();
@@ -148,81 +171,31 @@
             this.label46 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.test_page = new System.Windows.Forms.TabPage();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnXts_test = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.EXPORT_lb = new System.Windows.Forms.Button();
-            this.label87 = new System.Windows.Forms.Label();
             this.operator_txt = new System.Windows.Forms.TextBox();
             this.label86 = new System.Windows.Forms.Label();
-            this.btnALL_Test_Start = new System.Windows.Forms.Button();
+            this.NG_lb = new System.Windows.Forms.Label();
+            this.PASS_lb = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.label85 = new System.Windows.Forms.Label();
+            this.btnBT_Test = new System.Windows.Forms.Button();
             this.btnSpectrum_Test_Start = new System.Windows.Forms.Button();
             this.btnLED_Test_Start = new System.Windows.Forms.Button();
             this.btnMotor_Test = new System.Windows.Forms.Button();
+            this.label81 = new System.Windows.Forms.Label();
             this.label84 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.BLE_page = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.btnBT_Test = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label73 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.Xts_page = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label81 = new System.Windows.Forms.Label();
-            this.btnXts_test = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.Xts_test_timeout_txt = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.Xts_test_delta_x_txt = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.Xts_test_xAS_txt = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.Xts_test_n_txt = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.Xts_test_x_standard_txt = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.Xts_test_Xts_init_txt = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.Xts_test_result_txt = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.Xts_fail_lb = new System.Windows.Forms.Label();
-            this.Xts_OK_lb = new System.Windows.Forms.Label();
-            this.led_test_pass_lb = new System.Windows.Forms.Label();
-            this.led_test_ng_lb = new System.Windows.Forms.Label();
-            this.sp_test_pass_lb = new System.Windows.Forms.Label();
-            this.sp_test_ng_lb = new System.Windows.Forms.Label();
-            this.all_test_pass_lb = new System.Windows.Forms.Label();
-            this.all_test_ng_lb = new System.Windows.Forms.Label();
-            this.motor_test_pass_lb = new System.Windows.Forms.Label();
-            this.motor_test_ng_lb = new System.Windows.Forms.Label();
-            this.BLE_test_pass_lb = new System.Windows.Forms.Label();
-            this.BLE_test_ng_lb = new System.Windows.Forms.Label();
             this.setting_page.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.test_page.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.BLE_page.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.Xts_page.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnRefresh
@@ -275,24 +248,29 @@
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
+            // serialPort
+            // 
+            this.serialPort.ErrorReceived += new System.IO.Ports.SerialErrorReceivedEventHandler(this.serialPort_ErrorReceived);
+            this.serialPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.serialPort_PinChanged);
+            this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived_1);
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label20.Location = new System.Drawing.Point(722, 19);
+            this.label20.Location = new System.Drawing.Point(842, 26);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(57, 21);
+            this.label20.Size = new System.Drawing.Size(32, 12);
             this.label20.TabIndex = 13;
             this.label20.Text = "狀態:";
             // 
             // status_lb
             // 
-            this.status_lb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.status_lb.Location = new System.Drawing.Point(783, 19);
+            this.status_lb.AutoSize = true;
+            this.status_lb.Location = new System.Drawing.Point(883, 26);
             this.status_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.status_lb.Name = "status_lb";
-            this.status_lb.Size = new System.Drawing.Size(271, 24);
+            this.status_lb.Size = new System.Drawing.Size(0, 12);
             this.status_lb.TabIndex = 14;
             // 
             // btnTaskStop
@@ -314,8 +292,12 @@
             this.setting_page.Controls.Add(this.label7);
             this.setting_page.Controls.Add(this.Machine_txt);
             this.setting_page.Controls.Add(this.label6);
+            this.setting_page.Controls.Add(this.btnLoadVersion);
+            this.setting_page.Controls.Add(this.btnLoadData);
             this.setting_page.Controls.Add(this.label79);
+            this.setting_page.Controls.Add(this.groupBox4);
             this.setting_page.Controls.Add(this.label78);
+            this.setting_page.Controls.Add(this.groupBox3);
             this.setting_page.Controls.Add(this.label77);
             this.setting_page.Controls.Add(this.groupBox1);
             this.setting_page.Controls.Add(this.label76);
@@ -379,25 +361,25 @@
             this.setting_page.Location = new System.Drawing.Point(4, 22);
             this.setting_page.Margin = new System.Windows.Forms.Padding(2);
             this.setting_page.Name = "setting_page";
-            this.setting_page.Size = new System.Drawing.Size(1053, 515);
+            this.setting_page.Size = new System.Drawing.Size(1053, 602);
             this.setting_page.TabIndex = 10;
             this.setting_page.Text = "設定";
             this.setting_page.UseVisualStyleBackColor = true;
             // 
             // btnLoadjson
             // 
-            this.btnLoadjson.Location = new System.Drawing.Point(780, 64);
+            this.btnLoadjson.Location = new System.Drawing.Point(908, 58);
             this.btnLoadjson.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadjson.Name = "btnLoadjson";
             this.btnLoadjson.Size = new System.Drawing.Size(119, 33);
             this.btnLoadjson.TabIndex = 161;
-            this.btnLoadjson.Text = "更換json";
+            this.btnLoadjson.Text = "讀取json";
             this.btnLoadjson.UseVisualStyleBackColor = true;
             this.btnLoadjson.Click += new System.EventHandler(this.btnLoadjson_Click);
             // 
             // VER_txt
             // 
-            this.VER_txt.Location = new System.Drawing.Point(649, 72);
+            this.VER_txt.Location = new System.Drawing.Point(777, 66);
             this.VER_txt.Margin = new System.Windows.Forms.Padding(2);
             this.VER_txt.Name = "VER_txt";
             this.VER_txt.Size = new System.Drawing.Size(87, 22);
@@ -406,7 +388,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(594, 76);
+            this.label7.Location = new System.Drawing.Point(722, 70);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
@@ -415,7 +397,7 @@
             // 
             // Machine_txt
             // 
-            this.Machine_txt.Location = new System.Drawing.Point(649, 35);
+            this.Machine_txt.Location = new System.Drawing.Point(777, 29);
             this.Machine_txt.Margin = new System.Windows.Forms.Padding(2);
             this.Machine_txt.Name = "Machine_txt";
             this.Machine_txt.Size = new System.Drawing.Size(87, 22);
@@ -424,12 +406,34 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(594, 37);
+            this.label6.Location = new System.Drawing.Point(722, 31);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 158;
             this.label6.Text = "機台編號";
+            // 
+            // btnLoadVersion
+            // 
+            this.btnLoadVersion.Location = new System.Drawing.Point(589, 58);
+            this.btnLoadVersion.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLoadVersion.Name = "btnLoadVersion";
+            this.btnLoadVersion.Size = new System.Drawing.Size(119, 33);
+            this.btnLoadVersion.TabIndex = 156;
+            this.btnLoadVersion.Text = "讀取韌體版本";
+            this.btnLoadVersion.UseVisualStyleBackColor = true;
+            this.btnLoadVersion.Click += new System.EventHandler(this.btnLoadVersion_Click);
+            // 
+            // btnLoadData
+            // 
+            this.btnLoadData.Location = new System.Drawing.Point(589, 21);
+            this.btnLoadData.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLoadData.Name = "btnLoadData";
+            this.btnLoadData.Size = new System.Drawing.Size(119, 33);
+            this.btnLoadData.TabIndex = 155;
+            this.btnLoadData.Text = "讀取機台資訊";
+            this.btnLoadData.UseVisualStyleBackColor = true;
+            this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click);
             // 
             // label79
             // 
@@ -441,6 +445,15 @@
             this.label79.TabIndex = 115;
             this.label79.Text = "mm";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Location = new System.Drawing.Point(15, 126);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(545, 112);
+            this.groupBox4.TabIndex = 51;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "藍芽測試";
+            // 
             // label78
             // 
             this.label78.AutoSize = true;
@@ -450,6 +463,208 @@
             this.label78.Size = new System.Drawing.Size(23, 12);
             this.label78.TabIndex = 114;
             this.label78.Text = "mm";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label40);
+            this.groupBox3.Controls.Add(this.label37);
+            this.groupBox3.Controls.Add(this.label29);
+            this.groupBox3.Controls.Add(this.label27);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Controls.Add(this.Xts_test_timeout_txt);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Controls.Add(this.Xts_test_delta_x_txt);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.Xts_test_xAS_txt);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.Xts_test_n_txt);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.Xts_test_x_standard_txt);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.Xts_test_Xts_init_txt);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.Xts_test_result_txt);
+            this.groupBox3.Controls.Add(this.label33);
+            this.groupBox3.Location = new System.Drawing.Point(14, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(546, 105);
+            this.groupBox3.TabIndex = 50;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Xts校正";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(157, 22);
+            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(23, 12);
+            this.label40.TabIndex = 130;
+            this.label40.Text = "mm";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(157, 50);
+            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(23, 12);
+            this.label37.TabIndex = 129;
+            this.label37.Text = "mm";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(157, 77);
+            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(23, 12);
+            this.label29.TabIndex = 128;
+            this.label29.Text = "mm";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(454, 78);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(17, 12);
+            this.label27.TabIndex = 127;
+            this.label27.Text = "次";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(306, 77);
+            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(23, 12);
+            this.label26.TabIndex = 126;
+            this.label26.Text = "mm";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(306, 50);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(23, 12);
+            this.label19.TabIndex = 125;
+            this.label19.Text = "mm";
+            // 
+            // Xts_test_timeout_txt
+            // 
+            this.Xts_test_timeout_txt.Location = new System.Drawing.Point(389, 74);
+            this.Xts_test_timeout_txt.Name = "Xts_test_timeout_txt";
+            this.Xts_test_timeout_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_timeout_txt.TabIndex = 35;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(347, 78);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(40, 12);
+            this.label17.TabIndex = 34;
+            this.label17.Text = "timeout";
+            // 
+            // Xts_test_delta_x_txt
+            // 
+            this.Xts_test_delta_x_txt.Location = new System.Drawing.Point(242, 73);
+            this.Xts_test_delta_x_txt.Name = "Xts_test_delta_x_txt";
+            this.Xts_test_delta_x_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_delta_x_txt.TabIndex = 33;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(205, 76);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 12);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "ΔXts";
+            // 
+            // Xts_test_xAS_txt
+            // 
+            this.Xts_test_xAS_txt.Location = new System.Drawing.Point(92, 73);
+            this.Xts_test_xAS_txt.Name = "Xts_test_xAS_txt";
+            this.Xts_test_xAS_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_xAS_txt.TabIndex = 31;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(62, 76);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(25, 12);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "xAS";
+            // 
+            // Xts_test_n_txt
+            // 
+            this.Xts_test_n_txt.Location = new System.Drawing.Point(389, 47);
+            this.Xts_test_n_txt.Name = "Xts_test_n_txt";
+            this.Xts_test_n_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_n_txt.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(347, 50);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(44, 12);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Xts點數";
+            // 
+            // Xts_test_x_standard_txt
+            // 
+            this.Xts_test_x_standard_txt.Location = new System.Drawing.Point(242, 46);
+            this.Xts_test_x_standard_txt.Name = "Xts_test_x_standard_txt";
+            this.Xts_test_x_standard_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_x_standard_txt.TabIndex = 27;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(185, 50);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 12);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Xts線位置";
+            // 
+            // Xts_test_Xts_init_txt
+            // 
+            this.Xts_test_Xts_init_txt.Location = new System.Drawing.Point(92, 46);
+            this.Xts_test_Xts_init_txt.Name = "Xts_test_Xts_init_txt";
+            this.Xts_test_Xts_init_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_Xts_init_txt.TabIndex = 25;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(13, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(80, 12);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Xts校正起始值";
+            // 
+            // Xts_test_result_txt
+            // 
+            this.Xts_test_result_txt.Location = new System.Drawing.Point(92, 19);
+            this.Xts_test_result_txt.Name = "Xts_test_result_txt";
+            this.Xts_test_result_txt.ReadOnly = true;
+            this.Xts_test_result_txt.Size = new System.Drawing.Size(60, 22);
+            this.Xts_test_result_txt.TabIndex = 23;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(13, 22);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(80, 12);
+            this.label33.TabIndex = 22;
+            this.label33.Text = "Xts校正後數值";
             // 
             // label77
             // 
@@ -487,7 +702,7 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.SP_test_total_point_txt);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(14, 210);
+            this.groupBox1.Location = new System.Drawing.Point(15, 437);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(545, 150);
             this.groupBox1.TabIndex = 49;
@@ -784,7 +999,7 @@
             this.groupBox2.Controls.Add(this.label56);
             this.groupBox2.Controls.Add(this.LED_test_total_times_txt);
             this.groupBox2.Controls.Add(this.label57);
-            this.groupBox2.Location = new System.Drawing.Point(13, 79);
+            this.groupBox2.Location = new System.Drawing.Point(14, 306);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(546, 124);
             this.groupBox2.TabIndex = 49;
@@ -965,7 +1180,7 @@
             // 
             this.groupBox5.Controls.Add(this.txt_motor_test_round);
             this.groupBox5.Controls.Add(this.label23);
-            this.groupBox5.Location = new System.Drawing.Point(14, 16);
+            this.groupBox5.Location = new System.Drawing.Point(15, 243);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(545, 56);
             this.groupBox5.TabIndex = 49;
@@ -1419,47 +1634,54 @@
             // 
             // test_page
             // 
-            this.test_page.Controls.Add(this.motor_test_pass_lb);
-            this.test_page.Controls.Add(this.motor_test_ng_lb);
-            this.test_page.Controls.Add(this.all_test_pass_lb);
-            this.test_page.Controls.Add(this.all_test_ng_lb);
-            this.test_page.Controls.Add(this.sp_test_pass_lb);
-            this.test_page.Controls.Add(this.sp_test_ng_lb);
-            this.test_page.Controls.Add(this.led_test_pass_lb);
-            this.test_page.Controls.Add(this.led_test_ng_lb);
-            this.test_page.Controls.Add(this.pictureBox2);
+            this.test_page.Controls.Add(this.btnXts_test);
+            this.test_page.Controls.Add(this.label18);
             this.test_page.Controls.Add(this.EXPORT_lb);
-            this.test_page.Controls.Add(this.label87);
             this.test_page.Controls.Add(this.operator_txt);
             this.test_page.Controls.Add(this.label86);
-            this.test_page.Controls.Add(this.btnALL_Test_Start);
+            this.test_page.Controls.Add(this.NG_lb);
+            this.test_page.Controls.Add(this.PASS_lb);
+            this.test_page.Controls.Add(this.button1);
             this.test_page.Controls.Add(this.label85);
+            this.test_page.Controls.Add(this.btnBT_Test);
             this.test_page.Controls.Add(this.btnSpectrum_Test_Start);
             this.test_page.Controls.Add(this.btnLED_Test_Start);
             this.test_page.Controls.Add(this.btnMotor_Test);
+            this.test_page.Controls.Add(this.label81);
             this.test_page.Controls.Add(this.label84);
             this.test_page.Controls.Add(this.label82);
             this.test_page.Controls.Add(this.label83);
             this.test_page.Location = new System.Drawing.Point(4, 22);
             this.test_page.Margin = new System.Windows.Forms.Padding(2);
             this.test_page.Name = "test_page";
-            this.test_page.Size = new System.Drawing.Size(1053, 515);
+            this.test_page.Size = new System.Drawing.Size(1053, 602);
             this.test_page.TabIndex = 11;
             this.test_page.Text = "系統測試";
             this.test_page.UseVisualStyleBackColor = true;
             // 
-            // pictureBox2
+            // btnXts_test
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(803, 401);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(243, 107);
-            this.pictureBox2.TabIndex = 70;
-            this.pictureBox2.TabStop = false;
+            this.btnXts_test.Location = new System.Drawing.Point(92, 25);
+            this.btnXts_test.Name = "btnXts_test";
+            this.btnXts_test.Size = new System.Drawing.Size(75, 23);
+            this.btnXts_test.TabIndex = 64;
+            this.btnXts_test.Text = "GO";
+            this.btnXts_test.UseVisualStyleBackColor = true;
+            this.btnXts_test.Click += new System.EventHandler(this.btnXts_test_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(40, 30);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(47, 12);
+            this.label18.TabIndex = 63;
+            this.label18.Text = "Xts校正:";
             // 
             // EXPORT_lb
             // 
-            this.EXPORT_lb.Location = new System.Drawing.Point(293, 367);
+            this.EXPORT_lb.Location = new System.Drawing.Point(297, 456);
             this.EXPORT_lb.Margin = new System.Windows.Forms.Padding(2);
             this.EXPORT_lb.Name = "EXPORT_lb";
             this.EXPORT_lb.Size = new System.Drawing.Size(75, 23);
@@ -1468,19 +1690,9 @@
             this.EXPORT_lb.UseVisualStyleBackColor = true;
             this.EXPORT_lb.Click += new System.EventHandler(this.EXPORT_lb_Click);
             // 
-            // label87
-            // 
-            this.label87.AutoSize = true;
-            this.label87.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label87.Location = new System.Drawing.Point(800, 382);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(144, 16);
-            this.label87.TabIndex = 69;
-            this.label87.Text = "提示: 放入此標準片";
-            // 
             // operator_txt
             // 
-            this.operator_txt.Location = new System.Drawing.Point(170, 367);
+            this.operator_txt.Location = new System.Drawing.Point(174, 456);
             this.operator_txt.Margin = new System.Windows.Forms.Padding(2);
             this.operator_txt.Name = "operator_txt";
             this.operator_txt.Size = new System.Drawing.Size(108, 22);
@@ -1489,37 +1701,70 @@
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(30, 371);
+            this.label86.Location = new System.Drawing.Point(34, 460);
             this.label86.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(136, 12);
             this.label86.TabIndex = 60;
             this.label86.Text = "操作者資訊(工號或名稱):";
             // 
-            // btnALL_Test_Start
+            // NG_lb
             // 
-            this.btnALL_Test_Start.Location = new System.Drawing.Point(88, 167);
-            this.btnALL_Test_Start.Margin = new System.Windows.Forms.Padding(2);
-            this.btnALL_Test_Start.Name = "btnALL_Test_Start";
-            this.btnALL_Test_Start.Size = new System.Drawing.Size(75, 23);
-            this.btnALL_Test_Start.TabIndex = 56;
-            this.btnALL_Test_Start.Text = "GO";
-            this.btnALL_Test_Start.UseVisualStyleBackColor = true;
-            this.btnALL_Test_Start.Click += new System.EventHandler(this.btnALL_Test_Start_Click);
+            this.NG_lb.BackColor = System.Drawing.Color.LightGray;
+            this.NG_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.NG_lb.Location = new System.Drawing.Point(215, 314);
+            this.NG_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.NG_lb.Name = "NG_lb";
+            this.NG_lb.Size = new System.Drawing.Size(145, 62);
+            this.NG_lb.TabIndex = 59;
+            this.NG_lb.Text = "NG";
+            this.NG_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PASS_lb
+            // 
+            this.PASS_lb.BackColor = System.Drawing.Color.LightGray;
+            this.PASS_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.PASS_lb.Location = new System.Drawing.Point(32, 314);
+            this.PASS_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.PASS_lb.Name = "PASS_lb";
+            this.PASS_lb.Size = new System.Drawing.Size(145, 62);
+            this.PASS_lb.TabIndex = 58;
+            this.PASS_lb.Text = "PASS";
+            this.PASS_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(92, 256);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 56;
+            this.button1.Text = "GO";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // label85
             // 
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(30, 173);
+            this.label85.Location = new System.Drawing.Point(34, 262);
             this.label85.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(56, 12);
             this.label85.TabIndex = 57;
             this.label85.Text = "全部測試:";
             // 
+            // btnBT_Test
+            // 
+            this.btnBT_Test.Location = new System.Drawing.Point(92, 77);
+            this.btnBT_Test.Name = "btnBT_Test";
+            this.btnBT_Test.Size = new System.Drawing.Size(75, 23);
+            this.btnBT_Test.TabIndex = 55;
+            this.btnBT_Test.Text = "GO";
+            this.btnBT_Test.UseVisualStyleBackColor = true;
+            this.btnBT_Test.Click += new System.EventHandler(this.btnBT_Test_Click);
+            // 
             // btnSpectrum_Test_Start
             // 
-            this.btnSpectrum_Test_Start.Location = new System.Drawing.Point(88, 109);
+            this.btnSpectrum_Test_Start.Location = new System.Drawing.Point(92, 198);
             this.btnSpectrum_Test_Start.Margin = new System.Windows.Forms.Padding(2);
             this.btnSpectrum_Test_Start.Name = "btnSpectrum_Test_Start";
             this.btnSpectrum_Test_Start.Size = new System.Drawing.Size(75, 23);
@@ -1530,7 +1775,7 @@
             // 
             // btnLED_Test_Start
             // 
-            this.btnLED_Test_Start.Location = new System.Drawing.Point(88, 68);
+            this.btnLED_Test_Start.Location = new System.Drawing.Point(92, 157);
             this.btnLED_Test_Start.Margin = new System.Windows.Forms.Padding(2);
             this.btnLED_Test_Start.Name = "btnLED_Test_Start";
             this.btnLED_Test_Start.Size = new System.Drawing.Size(75, 23);
@@ -1541,7 +1786,7 @@
             // 
             // btnMotor_Test
             // 
-            this.btnMotor_Test.Location = new System.Drawing.Point(88, 26);
+            this.btnMotor_Test.Location = new System.Drawing.Point(92, 115);
             this.btnMotor_Test.Name = "btnMotor_Test";
             this.btnMotor_Test.Size = new System.Drawing.Size(75, 23);
             this.btnMotor_Test.TabIndex = 54;
@@ -1549,10 +1794,20 @@
             this.btnMotor_Test.UseVisualStyleBackColor = true;
             this.btnMotor_Test.Click += new System.EventHandler(this.btnMotor_Test_Click);
             // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(34, 82);
+            this.label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(56, 12);
+            this.label81.TabIndex = 50;
+            this.label81.Text = "藍芽測試:";
+            // 
             // label84
             // 
             this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(30, 114);
+            this.label84.Location = new System.Drawing.Point(34, 203);
             this.label84.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(56, 12);
@@ -1562,7 +1817,7 @@
             // label82
             // 
             this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(30, 33);
+            this.label82.Location = new System.Drawing.Point(34, 122);
             this.label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label82.Name = "label82";
             this.label82.Size = new System.Drawing.Size(56, 12);
@@ -1572,7 +1827,7 @@
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(30, 73);
+            this.label83.Location = new System.Drawing.Point(34, 162);
             this.label83.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(54, 12);
@@ -1581,533 +1836,20 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.BLE_page);
-            this.tabControl1.Controls.Add(this.Xts_page);
             this.tabControl1.Controls.Add(this.test_page);
             this.tabControl1.Controls.Add(this.setting_page);
             this.tabControl1.Location = new System.Drawing.Point(3, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1061, 541);
+            this.tabControl1.Size = new System.Drawing.Size(1061, 628);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // BLE_page
-            // 
-            this.BLE_page.Controls.Add(this.BLE_test_pass_lb);
-            this.BLE_page.Controls.Add(this.button2);
-            this.BLE_page.Controls.Add(this.BLE_test_ng_lb);
-            this.BLE_page.Controls.Add(this.textBox1);
-            this.BLE_page.Controls.Add(this.label18);
-            this.BLE_page.Controls.Add(this.btnBT_Test);
-            this.BLE_page.Controls.Add(this.groupBox6);
-            this.BLE_page.Location = new System.Drawing.Point(4, 22);
-            this.BLE_page.Name = "BLE_page";
-            this.BLE_page.Size = new System.Drawing.Size(1053, 515);
-            this.BLE_page.TabIndex = 12;
-            this.BLE_page.Text = "藍芽測試";
-            this.BLE_page.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(419, 202);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 65;
-            this.button2.Text = "EXPORT";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(296, 202);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(108, 22);
-            this.textBox1.TabIndex = 64;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(156, 206);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(136, 12);
-            this.label18.TabIndex = 63;
-            this.label18.Text = "操作者資訊(工號或名稱):";
-            // 
-            // btnBT_Test
-            // 
-            this.btnBT_Test.Location = new System.Drawing.Point(419, 143);
-            this.btnBT_Test.Name = "btnBT_Test";
-            this.btnBT_Test.Size = new System.Drawing.Size(75, 23);
-            this.btnBT_Test.TabIndex = 57;
-            this.btnBT_Test.Text = "GO";
-            this.btnBT_Test.UseVisualStyleBackColor = true;
-            this.btnBT_Test.Click += new System.EventHandler(this.btnBT_Test_Click);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.button10);
-            this.groupBox6.Controls.Add(this.button11);
-            this.groupBox6.Controls.Add(this.textBox8);
-            this.groupBox6.Controls.Add(this.label73);
-            this.groupBox6.Controls.Add(this.button9);
-            this.groupBox6.Controls.Add(this.button8);
-            this.groupBox6.Location = new System.Drawing.Point(14, 16);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(480, 121);
-            this.groupBox6.TabIndex = 49;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "藍芽測試";
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(335, 48);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 10;
-            this.button10.Text = "Disconnect";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(254, 48);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 9;
-            this.button11.Text = "Connect";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(137, 49);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(111, 22);
-            this.textBox8.TabIndex = 8;
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(15, 52);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(84, 12);
-            this.label73.TabIndex = 7;
-            this.label73.Text = "Connect Address";
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(335, 20);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 6;
-            this.button9.Text = "Scan off";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(254, 20);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 5;
-            this.button8.Text = "Scan on";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // Xts_page
-            // 
-            this.Xts_page.Controls.Add(this.Xts_OK_lb);
-            this.Xts_page.Controls.Add(this.Xts_fail_lb);
-            this.Xts_page.Controls.Add(this.pictureBox1);
-            this.Xts_page.Controls.Add(this.label81);
-            this.Xts_page.Controls.Add(this.btnXts_test);
-            this.Xts_page.Controls.Add(this.groupBox3);
-            this.Xts_page.Location = new System.Drawing.Point(4, 22);
-            this.Xts_page.Name = "Xts_page";
-            this.Xts_page.Size = new System.Drawing.Size(1053, 515);
-            this.Xts_page.TabIndex = 13;
-            this.Xts_page.Text = "Xts校正";
-            this.Xts_page.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(788, 401);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(258, 107);
-            this.pictureBox1.TabIndex = 68;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label81.Location = new System.Drawing.Point(785, 382);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(144, 16);
-            this.label81.TabIndex = 67;
-            this.label81.Text = "提示: 放入此標準片";
-            // 
-            // btnXts_test
-            // 
-            this.btnXts_test.Location = new System.Drawing.Point(430, 139);
-            this.btnXts_test.Name = "btnXts_test";
-            this.btnXts_test.Size = new System.Drawing.Size(75, 23);
-            this.btnXts_test.TabIndex = 66;
-            this.btnXts_test.Text = "GO";
-            this.btnXts_test.UseVisualStyleBackColor = true;
-            this.btnXts_test.Click += new System.EventHandler(this.btnXts_test_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label40);
-            this.groupBox3.Controls.Add(this.label37);
-            this.groupBox3.Controls.Add(this.label29);
-            this.groupBox3.Controls.Add(this.label27);
-            this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Controls.Add(this.Xts_test_timeout_txt);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Controls.Add(this.Xts_test_delta_x_txt);
-            this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Controls.Add(this.Xts_test_xAS_txt);
-            this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Controls.Add(this.Xts_test_n_txt);
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Controls.Add(this.Xts_test_x_standard_txt);
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.Xts_test_Xts_init_txt);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.Xts_test_result_txt);
-            this.groupBox3.Controls.Add(this.label33);
-            this.groupBox3.Location = new System.Drawing.Point(14, 16);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(491, 105);
-            this.groupBox3.TabIndex = 51;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Xts校正";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(157, 22);
-            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(23, 12);
-            this.label40.TabIndex = 130;
-            this.label40.Text = "mm";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(157, 50);
-            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(23, 12);
-            this.label37.TabIndex = 129;
-            this.label37.Text = "mm";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(157, 77);
-            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(23, 12);
-            this.label29.TabIndex = 128;
-            this.label29.Text = "mm";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(454, 78);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(17, 12);
-            this.label27.TabIndex = 127;
-            this.label27.Text = "次";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(306, 77);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(23, 12);
-            this.label26.TabIndex = 126;
-            this.label26.Text = "mm";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(306, 50);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(23, 12);
-            this.label19.TabIndex = 125;
-            this.label19.Text = "mm";
-            // 
-            // Xts_test_timeout_txt
-            // 
-            this.Xts_test_timeout_txt.Location = new System.Drawing.Point(389, 74);
-            this.Xts_test_timeout_txt.Name = "Xts_test_timeout_txt";
-            this.Xts_test_timeout_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_timeout_txt.TabIndex = 35;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(347, 78);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(40, 12);
-            this.label17.TabIndex = 34;
-            this.label17.Text = "timeout";
-            // 
-            // Xts_test_delta_x_txt
-            // 
-            this.Xts_test_delta_x_txt.Location = new System.Drawing.Point(242, 73);
-            this.Xts_test_delta_x_txt.Name = "Xts_test_delta_x_txt";
-            this.Xts_test_delta_x_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_delta_x_txt.TabIndex = 33;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(205, 76);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 12);
-            this.label16.TabIndex = 32;
-            this.label16.Text = "ΔXts";
-            // 
-            // Xts_test_xAS_txt
-            // 
-            this.Xts_test_xAS_txt.Location = new System.Drawing.Point(92, 73);
-            this.Xts_test_xAS_txt.Name = "Xts_test_xAS_txt";
-            this.Xts_test_xAS_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_xAS_txt.TabIndex = 31;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(62, 76);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(25, 12);
-            this.label15.TabIndex = 30;
-            this.label15.Text = "xAS";
-            // 
-            // Xts_test_n_txt
-            // 
-            this.Xts_test_n_txt.Location = new System.Drawing.Point(389, 47);
-            this.Xts_test_n_txt.Name = "Xts_test_n_txt";
-            this.Xts_test_n_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_n_txt.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(347, 50);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(44, 12);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "Xts點數";
-            // 
-            // Xts_test_x_standard_txt
-            // 
-            this.Xts_test_x_standard_txt.Location = new System.Drawing.Point(242, 46);
-            this.Xts_test_x_standard_txt.Name = "Xts_test_x_standard_txt";
-            this.Xts_test_x_standard_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_x_standard_txt.TabIndex = 27;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(185, 50);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 12);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "Xts線位置";
-            // 
-            // Xts_test_Xts_init_txt
-            // 
-            this.Xts_test_Xts_init_txt.Location = new System.Drawing.Point(92, 46);
-            this.Xts_test_Xts_init_txt.Name = "Xts_test_Xts_init_txt";
-            this.Xts_test_Xts_init_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_Xts_init_txt.TabIndex = 25;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 50);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 12);
-            this.label12.TabIndex = 24;
-            this.label12.Text = "Xts校正起始值";
-            // 
-            // Xts_test_result_txt
-            // 
-            this.Xts_test_result_txt.Location = new System.Drawing.Point(92, 19);
-            this.Xts_test_result_txt.Name = "Xts_test_result_txt";
-            this.Xts_test_result_txt.ReadOnly = true;
-            this.Xts_test_result_txt.Size = new System.Drawing.Size(60, 22);
-            this.Xts_test_result_txt.TabIndex = 23;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(13, 22);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(80, 12);
-            this.label33.TabIndex = 22;
-            this.label33.Text = "Xts校正後數值";
-            // 
-            // Xts_fail_lb
-            // 
-            this.Xts_fail_lb.BackColor = System.Drawing.Color.LightGray;
-            this.Xts_fail_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Xts_fail_lb.Location = new System.Drawing.Point(318, 139);
-            this.Xts_fail_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Xts_fail_lb.Name = "Xts_fail_lb";
-            this.Xts_fail_lb.Size = new System.Drawing.Size(67, 23);
-            this.Xts_fail_lb.TabIndex = 61;
-            this.Xts_fail_lb.Text = "fail";
-            this.Xts_fail_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Xts_OK_lb
-            // 
-            this.Xts_OK_lb.BackColor = System.Drawing.Color.LightGray;
-            this.Xts_OK_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Xts_OK_lb.Location = new System.Drawing.Point(243, 139);
-            this.Xts_OK_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Xts_OK_lb.Name = "Xts_OK_lb";
-            this.Xts_OK_lb.Size = new System.Drawing.Size(67, 23);
-            this.Xts_OK_lb.TabIndex = 60;
-            this.Xts_OK_lb.Text = "ok";
-            this.Xts_OK_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // led_test_pass_lb
-            // 
-            this.led_test_pass_lb.BackColor = System.Drawing.Color.LightGray;
-            this.led_test_pass_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.led_test_pass_lb.Location = new System.Drawing.Point(190, 68);
-            this.led_test_pass_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.led_test_pass_lb.Name = "led_test_pass_lb";
-            this.led_test_pass_lb.Size = new System.Drawing.Size(67, 23);
-            this.led_test_pass_lb.TabIndex = 62;
-            this.led_test_pass_lb.Text = "PASS";
-            this.led_test_pass_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // led_test_ng_lb
-            // 
-            this.led_test_ng_lb.BackColor = System.Drawing.Color.LightGray;
-            this.led_test_ng_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.led_test_ng_lb.Location = new System.Drawing.Point(265, 68);
-            this.led_test_ng_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.led_test_ng_lb.Name = "led_test_ng_lb";
-            this.led_test_ng_lb.Size = new System.Drawing.Size(67, 23);
-            this.led_test_ng_lb.TabIndex = 63;
-            this.led_test_ng_lb.Text = "NG";
-            this.led_test_ng_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // sp_test_pass_lb
-            // 
-            this.sp_test_pass_lb.BackColor = System.Drawing.Color.LightGray;
-            this.sp_test_pass_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.sp_test_pass_lb.Location = new System.Drawing.Point(190, 109);
-            this.sp_test_pass_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.sp_test_pass_lb.Name = "sp_test_pass_lb";
-            this.sp_test_pass_lb.Size = new System.Drawing.Size(67, 23);
-            this.sp_test_pass_lb.TabIndex = 71;
-            this.sp_test_pass_lb.Text = "PASS";
-            this.sp_test_pass_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // sp_test_ng_lb
-            // 
-            this.sp_test_ng_lb.BackColor = System.Drawing.Color.LightGray;
-            this.sp_test_ng_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.sp_test_ng_lb.Location = new System.Drawing.Point(265, 109);
-            this.sp_test_ng_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.sp_test_ng_lb.Name = "sp_test_ng_lb";
-            this.sp_test_ng_lb.Size = new System.Drawing.Size(67, 23);
-            this.sp_test_ng_lb.TabIndex = 72;
-            this.sp_test_ng_lb.Text = "NG";
-            this.sp_test_ng_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // all_test_pass_lb
-            // 
-            this.all_test_pass_lb.BackColor = System.Drawing.Color.LightGray;
-            this.all_test_pass_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.all_test_pass_lb.Location = new System.Drawing.Point(190, 167);
-            this.all_test_pass_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.all_test_pass_lb.Name = "all_test_pass_lb";
-            this.all_test_pass_lb.Size = new System.Drawing.Size(67, 23);
-            this.all_test_pass_lb.TabIndex = 73;
-            this.all_test_pass_lb.Text = "PASS";
-            this.all_test_pass_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // all_test_ng_lb
-            // 
-            this.all_test_ng_lb.BackColor = System.Drawing.Color.LightGray;
-            this.all_test_ng_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.all_test_ng_lb.Location = new System.Drawing.Point(265, 167);
-            this.all_test_ng_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.all_test_ng_lb.Name = "all_test_ng_lb";
-            this.all_test_ng_lb.Size = new System.Drawing.Size(67, 23);
-            this.all_test_ng_lb.TabIndex = 74;
-            this.all_test_ng_lb.Text = "NG";
-            this.all_test_ng_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // motor_test_pass_lb
-            // 
-            this.motor_test_pass_lb.BackColor = System.Drawing.Color.LightGray;
-            this.motor_test_pass_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.motor_test_pass_lb.Location = new System.Drawing.Point(190, 26);
-            this.motor_test_pass_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.motor_test_pass_lb.Name = "motor_test_pass_lb";
-            this.motor_test_pass_lb.Size = new System.Drawing.Size(67, 23);
-            this.motor_test_pass_lb.TabIndex = 75;
-            this.motor_test_pass_lb.Text = "PASS";
-            this.motor_test_pass_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // motor_test_ng_lb
-            // 
-            this.motor_test_ng_lb.BackColor = System.Drawing.Color.LightGray;
-            this.motor_test_ng_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.motor_test_ng_lb.Location = new System.Drawing.Point(265, 26);
-            this.motor_test_ng_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.motor_test_ng_lb.Name = "motor_test_ng_lb";
-            this.motor_test_ng_lb.Size = new System.Drawing.Size(67, 23);
-            this.motor_test_ng_lb.TabIndex = 76;
-            this.motor_test_ng_lb.Text = "NG";
-            this.motor_test_ng_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BLE_test_pass_lb
-            // 
-            this.BLE_test_pass_lb.BackColor = System.Drawing.Color.LightGray;
-            this.BLE_test_pass_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.BLE_test_pass_lb.Location = new System.Drawing.Point(262, 143);
-            this.BLE_test_pass_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.BLE_test_pass_lb.Name = "BLE_test_pass_lb";
-            this.BLE_test_pass_lb.Size = new System.Drawing.Size(67, 23);
-            this.BLE_test_pass_lb.TabIndex = 77;
-            this.BLE_test_pass_lb.Text = "PASS";
-            this.BLE_test_pass_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BLE_test_ng_lb
-            // 
-            this.BLE_test_ng_lb.BackColor = System.Drawing.Color.LightGray;
-            this.BLE_test_ng_lb.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.BLE_test_ng_lb.Location = new System.Drawing.Point(337, 143);
-            this.BLE_test_ng_lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.BLE_test_ng_lb.Name = "BLE_test_ng_lb";
-            this.BLE_test_ng_lb.Size = new System.Drawing.Size(67, 23);
-            this.BLE_test_ng_lb.TabIndex = 78;
-            this.BLE_test_ng_lb.Text = "NG";
-            this.BLE_test_ng_lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 588);
+            this.ClientSize = new System.Drawing.Size(1065, 676);
             this.Controls.Add(this.btnTaskStop);
             this.Controls.Add(this.status_lb);
             this.Controls.Add(this.label20);
@@ -2123,6 +1865,8 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.setting_page.ResumeLayout(false);
             this.setting_page.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -2131,17 +1875,7 @@
             this.groupBox5.PerformLayout();
             this.test_page.ResumeLayout(false);
             this.test_page.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.BLE_page.ResumeLayout(false);
-            this.BLE_page.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.Xts_page.ResumeLayout(false);
-            this.Xts_page.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2158,6 +1892,10 @@
         private System.Windows.Forms.Label status_lb;
         private System.Windows.Forms.Button btnTaskStop;
         private System.Windows.Forms.TabPage setting_page;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox Xts_test_result_txt;
+        private System.Windows.Forms.Label label33;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox SP_test_position_deviation;
         private System.Windows.Forms.Label label25;
@@ -2253,11 +1991,15 @@
         private System.Windows.Forms.Button EXPORT_lb;
         private System.Windows.Forms.TextBox operator_txt;
         private System.Windows.Forms.Label label86;
-        private System.Windows.Forms.Button btnALL_Test_Start;
+        private System.Windows.Forms.Label NG_lb;
+        private System.Windows.Forms.Label PASS_lb;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Button btnBT_Test;
         private System.Windows.Forms.Button btnSpectrum_Test_Start;
         private System.Windows.Forms.Button btnLED_Test_Start;
         private System.Windows.Forms.Button btnMotor_Test;
+        private System.Windows.Forms.Label label81;
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.Label label83;
@@ -2266,43 +2008,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox Machine_txt;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnLoadVersion;
+        private System.Windows.Forms.Button btnLoadData;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox SW_dis_txt;
-        private System.Windows.Forms.TextBox SP_test_total_point_txt;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Button btnLoadjson;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.TextBox Sp_space_2_txt;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.TextBox Sp_space_1_txt;
-        private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label87;
-        private System.Windows.Forms.TabPage BLE_page;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Button btnBT_Test;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.TabPage Xts_page;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label81;
-        private System.Windows.Forms.Button btnXts_test;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox Xts_test_timeout_txt;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox Xts_test_delta_x_txt;
@@ -2315,20 +2025,23 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox Xts_test_Xts_init_txt;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox Xts_test_result_txt;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label Xts_OK_lb;
-        private System.Windows.Forms.Label Xts_fail_lb;
-        private System.Windows.Forms.Label motor_test_pass_lb;
-        private System.Windows.Forms.Label motor_test_ng_lb;
-        private System.Windows.Forms.Label all_test_pass_lb;
-        private System.Windows.Forms.Label all_test_ng_lb;
-        private System.Windows.Forms.Label sp_test_pass_lb;
-        private System.Windows.Forms.Label sp_test_ng_lb;
-        private System.Windows.Forms.Label led_test_pass_lb;
-        private System.Windows.Forms.Label led_test_ng_lb;
-        private System.Windows.Forms.Label BLE_test_pass_lb;
-        private System.Windows.Forms.Label BLE_test_ng_lb;
+        private System.Windows.Forms.Button btnXts_test;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox SP_test_total_point_txt;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Button btnLoadjson;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox Sp_space_2_txt;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox Sp_space_1_txt;
+        private System.Windows.Forms.Label label65;
     }
 }
 
