@@ -91,6 +91,8 @@ namespace Spectrum_Test
 
         string[] pass_ng = new string[] {"-","-","-","-"};
 
+        string connect_comport = "", connect_comport_manufacturer = "";
+
         public MainForm()
         {
             InitializeComponent();
@@ -98,34 +100,181 @@ namespace Spectrum_Test
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ManagementEventWatcher watcher = new ManagementEventWatcher();
-            WqlEventQuery query = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 1");
-            //EventType = 1是對insert和remove都有反應; 
-            //EventType = 2是只有對insert有反應; 
-            //EventType = 3是只有對remove有反應
-            //以上可以視情況宣告為全域instances 方便一些應用
+            interp interp = new interp();
 
-            watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
-            watcher.Query = query;
-            watcher.Start();
-            //如果要停掉watcher就呼叫watcher.Stop(); 不用時可以dispose()掉
-            //注意上述這些初始動作要在serial port init之前
+            List<double> new_Y = interp.interp1(new List<double>{ 1,2,3,4,6,7,8,10,11,12},new List<double>{ 10,12,15,13,16,16,18,15,21,20},new List<double>{ 1,2,3,4,5,6,7,8,9,10,11,12});
 
-            
+            foreach(double p in new_Y)
+            {
+                Debug.WriteLine(p.ToString());
+            }
+
+
+            try
+            {
+                WqlEventQuery query = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent");
+                ManagementEventWatcher watcher = new ManagementEventWatcher(query);
+                watcher.EventArrived += new EventArrivedEventHandler(HandleEvent);
+                watcher.Start();
+
+                //Console.WriteLine("waiting for event...");
+            }
+            catch (ManagementException ex)
+            {
+                Console.WriteLine("ERROR: " + ex.Message);
+            }
 
 
             selPort = "";
-                                  
-            LoadSetting();
+
+            //LoadSetting();
+            Loadjson();
             loadPorts();
         }
 
-        static void watcher_EventArrived(object sender, EventArrivedEventArgs e)
-        {
-            Debug.WriteLine(e.NewEvent.GetType().Name);
-            Debug.WriteLine(e.NewEvent.Properties.);
-            Debug.WriteLine(e.NewEvent.ClassPath.ClassName);
-            Debug.WriteLine(e.NewEvent.Properties.Count);
+        private void HandleEvent(object sender, EventArrivedEventArgs e)
+        {            
+            BeginInvoke((Action)(() =>
+            {
+                loadPorts();
+            }));
+
+            int EventType = int.Parse(e.NewEvent.GetPropertyValue("EventType").ToString());
+
+            //event types: http://msdn.microsoft.com/en-us/library/aa394124%28VS.85%29.aspx
+            //Console.Write("Win32_DeviceChangeEvent: ");
+            switch (EventType)
+            {
+                case 1:
+                    //Console.WriteLine("Configuration changed");
+                    break;
+
+                case 2:
+                    //Console.WriteLine("Device Arrival");
+
+                    using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption like '%(COM%'"))
+                    {
+                        var portnames = SerialPort.GetPortNames();
+                        var ports = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Caption"].ToString());
+
+                        var portList = portnames.Select(n => n + " - " + ports.FirstOrDefault(s => s.Contains(n))).ToList();
+
+
+                        var Manufacturer = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Manufacturer"].ToString()).ToList();  //Manufacturer //Service
+
+
+                        foreach (var s in portList.Select((value, index) => new {value, index}))
+                        {
+                            if(Manufacturer[s.index] == "FTDI")
+                            {
+                                pass_ng = new string[] { "-", "-", "-", "-" };
+
+                                string selPort = portnames[s.index];
+                                if (selPort == null || selPort.Equals("")) return;
+                                if (serialPort.IsOpen) return;
+
+                                serialPort.PortName = selPort;
+                                //serialPort.BaudRate = 460800;
+                                serialPort.BaudRate = 115200;
+                                serialPort.DataBits = 8;
+                                serialPort.Handshake = Handshake.None;
+                                serialPort.StopBits = StopBits.One;
+
+                                try
+                                {
+                                    serialPort.Open();
+                                    serialPort.DataReceived += SerialPort_DataReceived;
+
+                                    connect_comport = selPort;
+                                    connect_comport_manufacturer = Manufacturer[s.index];
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message, "Information");
+                                    return;
+                                }                                                               
+
+                                BeginInvoke((Action)(() =>
+                                {
+                                    cboPort.SelectedIndex = s.index;
+                                    status_lb.Text = "已連接裝置";
+                                    btnOpen.Visible = false;
+                                    btnClose.Visible = true;                                    
+                                }));
+
+                                BeginInvoke((Action)(() =>
+                                {
+                                    LoadData();
+                                    VER_txt.Text = CMD_VER();
+                                }));                               
+
+                            }                                                       
+                        }
+
+                    }
+                    break;
+
+                case 3:
+                    //Console.WriteLine("Device Removal");
+
+                    using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption like '%(COM%'"))
+                    {
+                        var portnames = SerialPort.GetPortNames();
+                        var ports = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Caption"].ToString());
+
+                        var portList = portnames.Select(n => n + " - " + ports.FirstOrDefault(s => s.Contains(n))).ToList();
+
+
+                        var Manufacturer = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Manufacturer"].ToString()).ToList();  //Manufacturer //Service
+
+
+                        bool check_machine = false;
+                        foreach (var s in portList.Select((value, index) => new { value, index }))
+                        {                            
+                            if (portnames[s.index] == connect_comport && Manufacturer[s.index] == connect_comport_manufacturer)
+                            {
+                                check_machine = true;                                
+                            }
+                        }
+
+
+                        if (!check_machine)
+                        {                            
+                            serialPort.Close();
+
+                            flag = false;
+
+                            if (cts != null)
+                            {
+                                cts.Cancel();
+                            }
+
+                            connect_comport = "";
+                            connect_comport_manufacturer = "";
+
+                            BeginInvoke((Action)(() =>
+                            {
+                                cboPort.Text = "";
+                                cboPort.SelectedIndex = -1;
+                                status_lb.Text = "已斷開裝置";
+                                btnOpen.Visible = true;
+                                btnClose.Visible = false;
+                            }));
+                        }
+                    }
+
+
+
+                    break;
+
+                case 4:
+                    //Console.WriteLine("Docking");
+                    break;
+
+                default:
+                    //Console.WriteLine("Unknown event type!");
+                    break;
+            }
         }
 
         /**  port 更新   */
@@ -173,6 +322,7 @@ namespace Spectrum_Test
             string selPort = (string)cboPort.SelectedItem;
 
             if (selPort == null || selPort.Equals("")) return;
+            if (serialPort.IsOpen) return;
 
             serialPort.PortName = selPort;
             //serialPort.BaudRate = 460800;
@@ -191,21 +341,41 @@ namespace Spectrum_Test
             {
                 MessageBox.Show(ex.Message, "Information");
                 return;
-            }
+            }  
+            
+            BeginInvoke((Action)(() =>
+            {
+                status_lb.Text = "已連接裝置";
+                btnOpen.Visible = false;
+                btnClose.Visible = true;                
+            }));
 
-  
-            btnOpen.Visible = false;
-            btnClose.Visible = true;
+            LoadData();
+            VER_txt.Text = CMD_VER();
         }
 
         /**     關閉port   */
         private void btnClose_Click(object sender, EventArgs e)
         {
+            if (!serialPort.IsOpen) return;
+
             serialPort.Close();
 
-            flag = false;
-            btnOpen.Visible = true;
-            btnClose.Visible = false;
+            flag = false;            
+
+            if (cts != null)
+            {
+                cts.Cancel();
+            }
+
+            BeginInvoke((Action)(() =>
+            {
+                cboPort.Text = "";
+                cboPort.SelectedIndex = -1;
+                status_lb.Text = "已斷開裝置";
+                btnOpen.Visible = true;
+                btnClose.Visible = false;
+            }));
         }
 
         /**     資料傳送    */
@@ -686,8 +856,9 @@ namespace Spectrum_Test
 
         private async void btnMotor_Test_Click(object sender, EventArgs e)
         {
-            PASS_lb.BackColor = Color.LightGray;
-            NG_lb.BackColor = Color.LightGray;
+            motor_test_pass_lb.BackColor = Color.LightGray;
+            motor_test_ng_lb.BackColor = Color.LightGray;
+            pass_ng[1] = "-";
 
             if (cts != null)
             {
@@ -700,12 +871,12 @@ namespace Spectrum_Test
             if (motor_result)
             {
                 pass_ng[1] = "Pass";
-                PASS_lb.BackColor = Color.Lime;               
+                motor_test_pass_lb.BackColor = Color.Lime;               
             }
             else
             {
                 pass_ng[1] = "NG";
-                NG_lb.BackColor = Color.Red;
+                motor_test_ng_lb.BackColor = Color.Red;
             }
             
         }
@@ -882,8 +1053,9 @@ namespace Spectrum_Test
         /** 開始進行光譜測試程序 */
         private async void btnSpectrum_Test_Start_Click(object sender, EventArgs e)
         {
-            PASS_lb.BackColor = Color.LightGray;
-            NG_lb.BackColor = Color.LightGray;
+            sp_test_pass_lb.BackColor = Color.LightGray;
+            sp_test_ng_lb.BackColor = Color.LightGray;
+            pass_ng[3] = "-";
 
             if (cts != null)
             {
@@ -895,12 +1067,12 @@ namespace Spectrum_Test
             if (SP_result)
             {
                 pass_ng[3] = "Pass";
-                PASS_lb.BackColor = Color.Lime;
+                sp_test_pass_lb.BackColor = Color.Lime;
             }
             else
             {
                 pass_ng[3] = "NG";
-                NG_lb.BackColor = Color.Red;
+                sp_test_ng_lb.BackColor = Color.Red;
             }
         }
 
@@ -1085,6 +1257,18 @@ namespace Spectrum_Test
                                 break;
                             /** 暗光譜 */
                             case 23:
+                                BeginInvoke((Action)(() =>
+                                {
+                                    if(LED_AorB == 1)
+                                    {
+                                        status_lb.Text = "A燈" + "第" + CAL_RUN_cycle.ToString() + "次暗光譜";
+                                    }
+                                    else if(LED_AorB == 2)
+                                    {
+                                        status_lb.Text = "B燈" + "第" + CAL_RUN_cycle.ToString() + "次暗光譜";
+                                    }                                    
+                                }));
+
                                 List<double> dark_n = new List<double>();
                                 double dark_lambda;
 
@@ -1364,6 +1548,7 @@ namespace Spectrum_Test
                                         else
                                         {
                                             System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                            throw new Exception("錯誤");
                                         }
                                     }
                                     else
@@ -1501,8 +1686,16 @@ namespace Spectrum_Test
 
                                     BeginInvoke((Action)(() =>
                                     {
-                                        status_lb.Text = "掃描第 " + CAL_cycle.ToString() + " 點";
+                                        if (LED_AorB == 1)
+                                        {
+                                            status_lb.Text = "A燈" + "第" + CAL_RUN_cycle.ToString() + "次" + "掃描第 " + CAL_cycle.ToString() + " 點";
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            status_lb.Text = "B燈" + "第" + CAL_RUN_cycle.ToString() + "次" + "掃描第 " + CAL_cycle.ToString() + " 點";
+                                        }
                                     }));
+
 
                                     if (LED_AorB == 1)
                                     {
@@ -1840,10 +2033,7 @@ namespace Spectrum_Test
 
                                 break;
                             case 999:
-                                BeginInvoke((Action)(() =>
-                                {
-                                    status_lb.Text = "錯誤!";
-                                }));
+                                throw new Exception("錯誤");
                                 break;
                             default:
                                 break;
@@ -1897,8 +2087,9 @@ namespace Spectrum_Test
 
         private async void btnLED_Test_Start_Click(object sender, EventArgs e)
         {
-            PASS_lb.BackColor = Color.LightGray;
-            NG_lb.BackColor = Color.LightGray;
+            led_test_pass_lb.BackColor = Color.LightGray;
+            led_test_ng_lb.BackColor = Color.LightGray;
+            pass_ng[2] = "-";
 
             if (cts != null)
             {
@@ -1910,20 +2101,20 @@ namespace Spectrum_Test
             if (LED_result)
             {
                 pass_ng[2] = "Pass";
-                PASS_lb.BackColor = Color.Lime;
+                led_test_pass_lb.BackColor = Color.Lime;
             }
             else
             {
                 pass_ng[2] = "NG";
-                NG_lb.BackColor = Color.Red;
+                led_test_ng_lb.BackColor = Color.Red;
             }
 
         }
 
-        private void btnLoadData_Click(object sender, EventArgs e)
+        private void LoadData()
         {
             string CRF = CMD_CRF();
-            string[] CRF_array = CRF.Split(new char[] { '{','}' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] CRF_array = CRF.Split(new char[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
             JObject jo = (JObject)JsonConvert.DeserializeObject("{" + CRF_array[1] + "}");
 
             Machine_txt.Text = jo["ID"].ToString();
@@ -1944,7 +2135,6 @@ namespace Spectrum_Test
             roi_hc_txt.Text = ROI[1];
             roi_vo_txt.Text = ROI[2];
             roi_lc_txt.Text = ROI[3];
-
         }
 
         private string CMD_CRF()
@@ -1980,8 +2170,13 @@ namespace Spectrum_Test
 
         private void btnBT_Test_Click(object sender, EventArgs e)
         {
-            PASS_lb.BackColor = Color.LightGray;
-            NG_lb.BackColor = Color.LightGray;
+            BLE_test_pass_lb.BackColor = Color.LightGray;
+            BLE_test_ng_lb.BackColor = Color.LightGray;
+
+        }
+
+        private void btnALL_Test_Start_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -1997,78 +2192,81 @@ namespace Spectrum_Test
 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string theFile = openFileDialog1.FileName; //取得檔名
-                Encoding enc = Encoding.GetEncoding("utf-8"); //設定檔案的編碼
-                String load_json = System.IO.File.ReadAllText(theFile, enc); //以指定的編碼方式讀取檔案
+                try
+                {
+                    String from = openFileDialog1.FileName;
+                    String to = "setting.json";
 
-                JObject jo = (JObject)JsonConvert.DeserializeObject(load_json);
-
-                Xts_test_Xts_init_txt.Text = jo["Xts校正起始值"].ToString();
-                Xts_test_x_standard_txt.Text = jo["Xts_位置"].ToString();
-                Xts_test_n_txt.Text = jo["Xts_點數"].ToString();
-                Xts_test_xAS_txt.Text = jo["Xts校正xAS"].ToString();
-                Xts_test_delta_x_txt.Text = jo["Xts_誤差"].ToString();
-                Xts_test_result_txt.Text = jo["Xts校正後數值"].ToString();
-                Xts_test_timeout_txt.Text = jo["timeout"].ToString();
-
-                txt_motor_test_round.Text = jo["馬達測試來回趟數"].ToString();
-
-                LED_test_total_times_txt.Text = jo["LED測試時間_分"].ToString();
-                LED_test_interval_time_txt.Text = jo["LED間隔時間_分"].ToString();
-                LED_test_wl_txt.Text = jo["LED指定波長_nm"].ToString();
-                LED_test_RUN_cycle_txt.Text = jo["LED測試次數"].ToString();
-                LED_STD_txt.Text = jo["判定標準STD%"].ToString();
-
-                Xsc_txt.Text = jo["Xsc_mm"].ToString();
-                xAS_txt.Text = jo["xAS_mm"].ToString();
-                Xts_txt.Text = jo["Xts"].ToString();
-                x1_txt.Text = jo["x1"].ToString();
-
-                SP_test_total_point_txt.Text = jo["光譜測試總點數"].ToString();
-                SP_test_point_distance_steps_txt.Text = jo["間距步數"].ToString();
-                SP_test_step_distance_txt.Text = jo["步長_mm"].ToString();
-                SP_point_distance_txt.Text = jo["間距_mm"].ToString();
-                SP_test_wl_txt.Text = jo["光譜測試指定波長_nm"].ToString();
-                SP_test_CAL_RUN_cycle_txt.Text = jo["光譜測試測試次數"].ToString();
-
-                String[] baseline_array = jo["光譜測試baseline"].ToString().Split('"');
-                baseline_start_txt.Text = baseline_array[1];
-                baseline_end_txt.Text = baseline_array[3];
-
-                SW_dis_txt.Text = jo["光譜測試標準白與局部低點距離_mm"].ToString();
-                SP_test_position_deviation.Text = jo["光譜測試判定標準線位置誤差_mm"].ToString();
-
-                T1_txt.Text = jo["T1_秒"].ToString();
-                T2_txt.Text = jo["T2_秒"].ToString();
-                AG_txt.Text = jo["AG"].ToString();
-                DG_txt.Text = jo["DG"].ToString();
-                EXP_initial_txt.Text = jo["EXP initial"].ToString();
-                EXP_max_txt.Text = jo["EXP max"].ToString();
-                I_max_txt.Text = jo["I max"].ToString();
-                I_thr_txt.Text = jo["I thr"].ToString();
-                Sp_space_1_txt.Text = jo["間距1"].ToString();
-                Sp_space_2_txt.Text = jo["間距2"].ToString();
+                    if (File.Exists("setting.json"))
+                    {
+                        File.Delete("setting.json");
+                    }
+                    File.Move(from, to); // Try to move
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex); // Write error
+                }
             }
+
+            Loadjson();
+
+            MessageBox.Show("json檔案更換完成!");
         }
 
-        private void serialPort_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
+        private void Loadjson()
         {
-            Debug.WriteLine("111");
-        }
+            string theFile = "setting.json"; //取得檔名
+            Encoding enc = Encoding.GetEncoding("utf-8"); //設定檔案的編碼
+            String load_json = System.IO.File.ReadAllText(theFile, enc); //以指定的編碼方式讀取檔案
 
-        private void serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-        {
-            Debug.WriteLine("222");
-        }
+            JObject jo = (JObject)JsonConvert.DeserializeObject(load_json);
 
-        private void serialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
-        {
-            Debug.WriteLine("333");
-        }
+            Xts_test_Xts_init_txt.Text = jo["Xts校正起始值"].ToString();
+            Xts_test_x_standard_txt.Text = jo["Xts_位置"].ToString();
+            Xts_test_n_txt.Text = jo["Xts_點數"].ToString();
+            Xts_test_xAS_txt.Text = jo["Xts校正xAS"].ToString();
+            Xts_test_delta_x_txt.Text = jo["Xts_誤差"].ToString();
+            Xts_test_result_txt.Text = jo["Xts校正後數值"].ToString();
+            Xts_test_timeout_txt.Text = jo["timeout"].ToString();
 
-        private void btnLoadVersion_Click(object sender, EventArgs e)
-        {
-            VER_txt.Text = CMD_VER();
+            txt_motor_test_round.Text = jo["馬達測試來回趟數"].ToString();
+
+            LED_test_total_times_txt.Text = jo["LED測試時間_分"].ToString();
+            LED_test_interval_time_txt.Text = jo["LED間隔時間_分"].ToString();
+            LED_test_wl_txt.Text = jo["LED指定波長_nm"].ToString();
+            LED_test_RUN_cycle_txt.Text = jo["LED測試次數"].ToString();
+            LED_STD_txt.Text = jo["判定標準STD%"].ToString();
+
+            Xsc_txt.Text = jo["Xsc_mm"].ToString();
+            xAS_txt.Text = jo["xAS_mm"].ToString();
+            Xts_txt.Text = jo["Xts"].ToString();
+            x1_txt.Text = jo["x1"].ToString();
+
+            SP_test_total_point_txt.Text = jo["光譜測試總點數"].ToString();
+            SP_test_point_distance_steps_txt.Text = jo["間距步數"].ToString();
+            SP_test_step_distance_txt.Text = jo["步長_mm"].ToString();
+            SP_point_distance_txt.Text = jo["間距_mm"].ToString();
+            SP_test_wl_txt.Text = jo["光譜測試指定波長_nm"].ToString();
+            SP_test_CAL_RUN_cycle_txt.Text = jo["光譜測試測試次數"].ToString();
+
+            String[] baseline_array = jo["光譜測試baseline"].ToString().Split('"');
+            baseline_start_txt.Text = baseline_array[1];
+            baseline_end_txt.Text = baseline_array[3];
+
+            SW_dis_txt.Text = jo["光譜測試標準白與局部低點距離_mm"].ToString();
+            SP_test_position_deviation.Text = jo["光譜測試判定標準線位置誤差_mm"].ToString();
+
+            T1_txt.Text = jo["T1_秒"].ToString();
+            T2_txt.Text = jo["T2_秒"].ToString();
+            AG_txt.Text = jo["AG"].ToString();
+            DG_txt.Text = jo["DG"].ToString();
+            EXP_initial_txt.Text = jo["EXP initial"].ToString();
+            EXP_max_txt.Text = jo["EXP max"].ToString();
+            I_max_txt.Text = jo["I max"].ToString();
+            I_thr_txt.Text = jo["I thr"].ToString();
+            Sp_space_1_txt.Text = jo["間距1"].ToString();
+            Sp_space_2_txt.Text = jo["間距2"].ToString();
         }
 
 
@@ -2105,7 +2303,7 @@ namespace Spectrum_Test
                 
                 //=======================輸出JSON===============================
                 #region 輸出json
-                    Directory.CreateDirectory(@"json\");
+                /*    Directory.CreateDirectory(@"json\");
                 string a = @"""";
                 string b = ",";
                 //---------------------------------------------拼寫json---------------------------------------
@@ -2151,7 +2349,7 @@ namespace Spectrum_Test
                 //--------------------------------------------------------------------------------------------
                 //-----------------------------------------------存檔-----------------------------------------
                 string path_ = @"json\"+ "isb" + "_" + Machine_txt.Text + ".json";           
-                File.WriteAllText(path_, json);
+                File.WriteAllText(path_, json);*/
                 #endregion
 
             }
@@ -2343,8 +2541,8 @@ namespace Spectrum_Test
 
         private async void btnXts_test_Click(object sender, EventArgs e)
         {
-            PASS_lb.BackColor = Color.LightGray;
-            NG_lb.BackColor = Color.LightGray;
+            Xts_OK_lb.BackColor = Color.LightGray;
+            Xts_fail_lb.BackColor = Color.LightGray;
 
             if (cts != null)
             {
@@ -2355,11 +2553,11 @@ namespace Spectrum_Test
 
             if (Xts_result)
             {
-                PASS_lb.BackColor = Color.Lime;
+                Xts_OK_lb.BackColor = Color.Lime;
             }
             else
             {
-                NG_lb.BackColor = Color.Red;
+                Xts_fail_lb.BackColor = Color.Red;
             }
         }
 
@@ -2679,6 +2877,7 @@ namespace Spectrum_Test
                                         else
                                         {
                                             System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                            throw new Exception("錯誤");
                                         }
                                     }
                                     else
@@ -2825,13 +3024,7 @@ namespace Spectrum_Test
                                 if (Xts_RUN_cycle > int.Parse(Xts_test_timeout_txt.Text))
                                 {
                                     System.Diagnostics.Debug.WriteLine("求不出來Xts");
-
-                                    ret = CMD_SUV(0);
-                                    if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
-                                    {
-                                        iTask = 999;
-                                    }
-                                    break;
+                                    throw new Exception("錯誤");
                                 }
                                 else if (Xts_RUN_cycle > 1 && Math.Abs(Xts_result - last_result) <= double.Parse(Xts_test_delta_x_txt.Text))
                                 {
@@ -2960,6 +3153,7 @@ namespace Spectrum_Test
                                 }));
                                 break;
                             case 999:
+                                throw new Exception("錯誤");
                                 break;
                             default:
                                 break;
@@ -3371,6 +3565,7 @@ namespace Spectrum_Test
                                         else
                                         {
                                             System.Diagnostics.Debug.WriteLine("調不到目標值");
+                                            throw new Exception("錯誤");
                                         }
                                     }
                                     else
@@ -3447,7 +3642,14 @@ namespace Spectrum_Test
                                 {
                                     BeginInvoke((Action)(() =>
                                     {
-                                        status_lb.Text = "掃描第 " + (LED_cycle_time / 60.0).ToString() + " 分";
+                                        if (LED_AorB == 1)
+                                        {
+                                            status_lb.Text = "A燈" + "第" + LED_RUN_cycle.ToString() + "次" + "掃描第 " + (LED_cycle_time / 60.0).ToString() + " 分";
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            status_lb.Text = "B燈" + "第" + LED_RUN_cycle.ToString() + "次" + "掃描第 " + (LED_cycle_time / 60.0).ToString() + " 分";
+                                        }
                                     }));
 
                                     Task.Delay(Convert.ToInt32((double.Parse(LED_test_interval_time_txt.Text) * 60.0) * 1000.0), token).Wait();
@@ -3515,8 +3717,6 @@ namespace Spectrum_Test
                                     {
                                         n_wl.Add(i * double.Parse(LED_test_interval_time_txt.Text));
                                         LED_sp.Add(ALL_A_LED_CAL[LED_RUN_cycle - 1][i][index]);
-
-                                        System.Diagnostics.Debug.WriteLine("...." + ALL_A_LED_CAL[LED_RUN_cycle - 1][i][index].ToString()) ;
                                     }
 
 
@@ -3526,15 +3726,23 @@ namespace Spectrum_Test
                                     time_Srs.Points.DataBindXY(n_wl, LED_sp);
                                     time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
-                                    double average = LED_sp.Average();
+                                    /* 計算標準差
+                                     * double average = LED_sp.Average();
                                     double sumOfSquaresOfDifferences = LED_sp.Select(val => (val - average) * (val - average)).Sum();
                                     double sd = Math.Sqrt(sumOfSquaresOfDifferences / LED_sp.Count);
+                                    */
 
-                                    if (sd > double.Parse(LED_STD_txt.Text))
+                                    for (int i = 1; i < LED_sp.Count; i++)
                                     {
-                                        System.Diagnostics.Debug.WriteLine(sd.ToString() + "......." + LED_STD_txt.Text);
-                                        throw new Exception("錯誤");
-                                    }
+                                        double percentage = ((LED_sp[i] - LED_sp[0]) / LED_sp[0]) * 100.0;
+
+                                        Debug.WriteLine(percentage.ToString());
+
+                                        if (percentage > double.Parse(LED_STD_txt.Text))
+                                        {
+                                            throw new Exception("錯誤");
+                                        }
+                                    }                                    
                                 }
                                 else if (LED_AorB == 2)
                                 {
@@ -3553,15 +3761,21 @@ namespace Spectrum_Test
                                     time_Srs.Points.DataBindXY(n_wl, LED_sp);
                                     time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
 
-                                    double average = LED_sp.Average();
+                                    /* 計算標準差
+                                     * double average = LED_sp.Average();
                                     double sumOfSquaresOfDifferences = LED_sp.Select(val => (val - average) * (val - average)).Sum();
                                     double sd = Math.Sqrt(sumOfSquaresOfDifferences / LED_sp.Count);
+                                    */
 
 
-                                    if (sd > double.Parse(LED_STD_txt.Text))
+                                    for (int i = 1; i < LED_sp.Count; i++)
                                     {
-                                        System.Diagnostics.Debug.WriteLine(sd.ToString() + "......." + LED_STD_txt.Text);
-                                        throw new Exception("錯誤");
+                                        double percentage = ((LED_sp[i] - LED_sp[0]) / LED_sp[0]) * 100.0;
+
+                                        if (percentage > double.Parse(LED_STD_txt.Text))
+                                        {
+                                            throw new Exception("錯誤");
+                                        }
                                     }
                                 }
                                 iTask = 70;
@@ -3626,11 +3840,7 @@ namespace Spectrum_Test
                                 }
                                 break;
                             case 999:
-                                BeginInvoke((Action)(() =>
-                                {
-                                    status_lb.Text = "錯誤!";
-                                    flag = false;
-                                }));
+                                throw new Exception("錯誤");
                                 break;
                             default:
                                 break;
