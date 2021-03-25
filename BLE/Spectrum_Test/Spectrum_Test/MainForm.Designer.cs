@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btn_test_stop = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnBLE_Test = new System.Windows.Forms.Button();
             this.btnMotor_Test = new System.Windows.Forms.Button();
             this.btnLED_Test = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -40,12 +42,27 @@
             this.chkLED = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.btn_ble_write = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_ble_send = new System.Windows.Forms.Button();
+            this.txt_ble_cmd = new System.Windows.Forms.TextBox();
+            this.btn_ble_tab = new System.Windows.Forms.Button();
+            this.btn_ble_clear = new System.Windows.Forms.Button();
+            this.btn_ble_swl = new System.Windows.Forms.Button();
+            this.txt_ble_charact = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btn_ble_noti = new System.Windows.Forms.Button();
+            this.btn_ble_charact = new System.Windows.Forms.Button();
+            this.btn_ble_services = new System.Windows.Forms.Button();
+            this.txt_ble_service = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btn_ble_devices = new System.Windows.Forms.Button();
+            this.btn_ble_disconnect = new System.Windows.Forms.Button();
+            this.btn_ble_connect = new System.Windows.Forms.Button();
+            this.txt_ble_uuid = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btn_ble_scan_off = new System.Windows.Forms.Button();
+            this.btn_ble_scan_on = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdoPos2 = new System.Windows.Forms.RadioButton();
             this.rdoPos1 = new System.Windows.Forms.RadioButton();
@@ -66,7 +83,15 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btnSaveSetting = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txt_ble_loop_count = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_ble_pass_rssi = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_ble_test_delay = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txt_ble_test_count = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txt_ble_scan_limit = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txt_motor_test_round = new System.Windows.Forms.TextBox();
@@ -86,12 +111,13 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.txtLog = new System.Windows.Forms.TextBox();
-            this.btnMRS1 = new System.Windows.Forms.Button();
-            this.txtMotorCount = new System.Windows.Forms.TextBox();
-            this.btnMLS1 = new System.Windows.Forms.Button();
-            this.txtMotorDelay = new System.Windows.Forms.TextBox();
+            this.cboBLEComport = new System.Windows.Forms.ComboBox();
+            this.btnBLEClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnBLERefresh = new System.Windows.Forms.Button();
+            this.btnBLEOpen = new System.Windows.Forms.Button();
+            this.serialBLEPort = new System.IO.Ports.SerialPort(this.components);
+            this.txtLog = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -119,6 +145,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btn_test_stop);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -128,8 +155,20 @@
             this.tabPage1.Text = "功能測試";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btn_test_stop
+            // 
+            this.btn_test_stop.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn_test_stop.Location = new System.Drawing.Point(397, 488);
+            this.btn_test_stop.Name = "btn_test_stop";
+            this.btn_test_stop.Size = new System.Drawing.Size(84, 41);
+            this.btn_test_stop.TabIndex = 14;
+            this.btn_test_stop.Text = "Stop";
+            this.btn_test_stop.UseVisualStyleBackColor = true;
+            this.btn_test_stop.Click += new System.EventHandler(this.btn_test_stop_Click);
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnBLE_Test);
             this.panel1.Controls.Add(this.btnMotor_Test);
             this.panel1.Controls.Add(this.btnLED_Test);
             this.panel1.Controls.Add(this.checkBox3);
@@ -140,6 +179,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(420, 168);
             this.panel1.TabIndex = 13;
+            // 
+            // btnBLE_Test
+            // 
+            this.btnBLE_Test.Location = new System.Drawing.Point(158, 85);
+            this.btnBLE_Test.Name = "btnBLE_Test";
+            this.btnBLE_Test.Size = new System.Drawing.Size(75, 23);
+            this.btnBLE_Test.TabIndex = 8;
+            this.btnBLE_Test.Text = "測試";
+            this.btnBLE_Test.UseVisualStyleBackColor = true;
+            this.btnBLE_Test.Click += new System.EventHandler(this.btnBLE_Test_Click);
             // 
             // btnMotor_Test
             // 
@@ -216,78 +265,231 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button10);
-            this.groupBox3.Controls.Add(this.button11);
-            this.groupBox3.Controls.Add(this.textBox8);
+            this.groupBox3.Controls.Add(this.btn_ble_write);
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.btn_ble_send);
+            this.groupBox3.Controls.Add(this.txt_ble_cmd);
+            this.groupBox3.Controls.Add(this.btn_ble_tab);
+            this.groupBox3.Controls.Add(this.btn_ble_clear);
+            this.groupBox3.Controls.Add(this.btn_ble_swl);
+            this.groupBox3.Controls.Add(this.txt_ble_charact);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.btn_ble_noti);
+            this.groupBox3.Controls.Add(this.btn_ble_charact);
+            this.groupBox3.Controls.Add(this.btn_ble_services);
+            this.groupBox3.Controls.Add(this.txt_ble_service);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.btn_ble_devices);
+            this.groupBox3.Controls.Add(this.btn_ble_disconnect);
+            this.groupBox3.Controls.Add(this.btn_ble_connect);
+            this.groupBox3.Controls.Add(this.txt_ble_uuid);
             this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.button9);
-            this.groupBox3.Controls.Add(this.button8);
+            this.groupBox3.Controls.Add(this.btn_ble_scan_off);
+            this.groupBox3.Controls.Add(this.btn_ble_scan_on);
             this.groupBox3.Location = new System.Drawing.Point(8, 217);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(480, 121);
+            this.groupBox3.Size = new System.Drawing.Size(480, 183);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "藍芽測試";
             // 
-            // button10
+            // btn_ble_write
             // 
-            this.button10.Location = new System.Drawing.Point(335, 48);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 10;
-            this.button10.Text = "Disconnect";
-            this.button10.UseVisualStyleBackColor = true;
+            this.btn_ble_write.Location = new System.Drawing.Point(231, 132);
+            this.btn_ble_write.Name = "btn_ble_write";
+            this.btn_ble_write.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_write.TabIndex = 25;
+            this.btn_ble_write.Text = "Write";
+            this.btn_ble_write.UseVisualStyleBackColor = true;
+            this.btn_ble_write.Click += new System.EventHandler(this.btn_ble_write_Click);
             // 
-            // button11
+            // textBox1
             // 
-            this.button11.Location = new System.Drawing.Point(254, 48);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 9;
-            this.button11.Text = "Connect";
-            this.button11.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(13, 133);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(212, 22);
+            this.textBox1.TabIndex = 24;
             // 
-            // textBox8
+            // btn_ble_send
             // 
-            this.textBox8.Location = new System.Drawing.Point(137, 49);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(111, 22);
-            this.textBox8.TabIndex = 8;
+            this.btn_ble_send.Location = new System.Drawing.Point(231, 104);
+            this.btn_ble_send.Name = "btn_ble_send";
+            this.btn_ble_send.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_send.TabIndex = 23;
+            this.btn_ble_send.Text = "Send";
+            this.btn_ble_send.UseVisualStyleBackColor = true;
+            this.btn_ble_send.Click += new System.EventHandler(this.btn_ble_send_Click);
+            // 
+            // txt_ble_cmd
+            // 
+            this.txt_ble_cmd.Location = new System.Drawing.Point(13, 105);
+            this.txt_ble_cmd.Name = "txt_ble_cmd";
+            this.txt_ble_cmd.Size = new System.Drawing.Size(212, 22);
+            this.txt_ble_cmd.TabIndex = 22;
+            // 
+            // btn_ble_tab
+            // 
+            this.btn_ble_tab.Location = new System.Drawing.Point(312, 107);
+            this.btn_ble_tab.Name = "btn_ble_tab";
+            this.btn_ble_tab.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_tab.TabIndex = 21;
+            this.btn_ble_tab.Text = "Tab";
+            this.btn_ble_tab.UseVisualStyleBackColor = true;
+            this.btn_ble_tab.Click += new System.EventHandler(this.btn_ble_tab_Click);
+            // 
+            // btn_ble_clear
+            // 
+            this.btn_ble_clear.Location = new System.Drawing.Point(393, 50);
+            this.btn_ble_clear.Name = "btn_ble_clear";
+            this.btn_ble_clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_clear.TabIndex = 20;
+            this.btn_ble_clear.Text = "Clear";
+            this.btn_ble_clear.UseVisualStyleBackColor = true;
+            this.btn_ble_clear.Click += new System.EventHandler(this.btn_ble_clear_Click);
+            // 
+            // btn_ble_swl
+            // 
+            this.btn_ble_swl.Location = new System.Drawing.Point(393, 107);
+            this.btn_ble_swl.Name = "btn_ble_swl";
+            this.btn_ble_swl.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_swl.TabIndex = 19;
+            this.btn_ble_swl.Text = "SWL0";
+            this.btn_ble_swl.UseVisualStyleBackColor = true;
+            this.btn_ble_swl.Click += new System.EventHandler(this.btn_ble_swl_Click);
+            // 
+            // txt_ble_charact
+            // 
+            this.txt_ble_charact.Location = new System.Drawing.Point(114, 77);
+            this.txt_ble_charact.Name = "txt_ble_charact";
+            this.txt_ble_charact.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_charact.TabIndex = 18;
+            this.txt_ble_charact.Text = "2";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 80);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 12);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Characteristic";
+            // 
+            // btn_ble_noti
+            // 
+            this.btn_ble_noti.Location = new System.Drawing.Point(393, 78);
+            this.btn_ble_noti.Name = "btn_ble_noti";
+            this.btn_ble_noti.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_noti.TabIndex = 16;
+            this.btn_ble_noti.Text = "Noti.";
+            this.btn_ble_noti.UseVisualStyleBackColor = true;
+            this.btn_ble_noti.Click += new System.EventHandler(this.btn_ble_noti_Click);
+            // 
+            // btn_ble_charact
+            // 
+            this.btn_ble_charact.Location = new System.Drawing.Point(312, 78);
+            this.btn_ble_charact.Name = "btn_ble_charact";
+            this.btn_ble_charact.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_charact.TabIndex = 15;
+            this.btn_ble_charact.Text = "Charact.";
+            this.btn_ble_charact.UseVisualStyleBackColor = true;
+            this.btn_ble_charact.Click += new System.EventHandler(this.btn_ble_charact_Click);
+            // 
+            // btn_ble_services
+            // 
+            this.btn_ble_services.Location = new System.Drawing.Point(231, 77);
+            this.btn_ble_services.Name = "btn_ble_services";
+            this.btn_ble_services.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_services.TabIndex = 14;
+            this.btn_ble_services.Text = "Services";
+            this.btn_ble_services.UseVisualStyleBackColor = true;
+            this.btn_ble_services.Click += new System.EventHandler(this.btn_ble_services_Click);
+            // 
+            // txt_ble_service
+            // 
+            this.txt_ble_service.Location = new System.Drawing.Point(114, 49);
+            this.txt_ble_service.Name = "txt_ble_service";
+            this.txt_ble_service.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_service.TabIndex = 13;
+            this.txt_ble_service.Text = "1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 12);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Service";
+            // 
+            // btn_ble_devices
+            // 
+            this.btn_ble_devices.Location = new System.Drawing.Point(393, 21);
+            this.btn_ble_devices.Name = "btn_ble_devices";
+            this.btn_ble_devices.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_devices.TabIndex = 11;
+            this.btn_ble_devices.Text = "Devices";
+            this.btn_ble_devices.UseVisualStyleBackColor = true;
+            this.btn_ble_devices.Click += new System.EventHandler(this.btn_ble_devices_Click);
+            // 
+            // btn_ble_disconnect
+            // 
+            this.btn_ble_disconnect.Location = new System.Drawing.Point(312, 49);
+            this.btn_ble_disconnect.Name = "btn_ble_disconnect";
+            this.btn_ble_disconnect.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_disconnect.TabIndex = 10;
+            this.btn_ble_disconnect.Text = "Disconnect";
+            this.btn_ble_disconnect.UseVisualStyleBackColor = true;
+            this.btn_ble_disconnect.Click += new System.EventHandler(this.btn_ble_disconnect_Click);
+            // 
+            // btn_ble_connect
+            // 
+            this.btn_ble_connect.Location = new System.Drawing.Point(231, 49);
+            this.btn_ble_connect.Name = "btn_ble_connect";
+            this.btn_ble_connect.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_connect.TabIndex = 9;
+            this.btn_ble_connect.Text = "Connect";
+            this.btn_ble_connect.UseVisualStyleBackColor = true;
+            this.btn_ble_connect.Click += new System.EventHandler(this.btn_ble_connect_Click);
+            // 
+            // txt_ble_uuid
+            // 
+            this.txt_ble_uuid.Location = new System.Drawing.Point(114, 23);
+            this.txt_ble_uuid.Name = "txt_ble_uuid";
+            this.txt_ble_uuid.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_uuid.TabIndex = 8;
+            this.txt_ble_uuid.Text = "D8:34:33:F0:08:26";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 52);
+            this.label11.Location = new System.Drawing.Point(11, 26);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(84, 12);
             this.label11.TabIndex = 7;
             this.label11.Text = "Connect Address";
             // 
-            // button9
+            // btn_ble_scan_off
             // 
-            this.button9.Location = new System.Drawing.Point(335, 20);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 6;
-            this.button9.Text = "Scan off";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btn_ble_scan_off.Location = new System.Drawing.Point(312, 21);
+            this.btn_ble_scan_off.Name = "btn_ble_scan_off";
+            this.btn_ble_scan_off.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_scan_off.TabIndex = 6;
+            this.btn_ble_scan_off.Text = "Scan off";
+            this.btn_ble_scan_off.UseVisualStyleBackColor = true;
+            this.btn_ble_scan_off.Click += new System.EventHandler(this.btn_ble_scan_off_Click);
             // 
-            // button8
+            // btn_ble_scan_on
             // 
-            this.button8.Location = new System.Drawing.Point(254, 20);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 5;
-            this.button8.Text = "Scan on";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btn_ble_scan_on.Location = new System.Drawing.Point(231, 21);
+            this.btn_ble_scan_on.Name = "btn_ble_scan_on";
+            this.btn_ble_scan_on.Size = new System.Drawing.Size(75, 23);
+            this.btn_ble_scan_on.TabIndex = 5;
+            this.btn_ble_scan_on.Text = "Scan on";
+            this.btn_ble_scan_on.UseVisualStyleBackColor = true;
+            this.btn_ble_scan_on.Click += new System.EventHandler(this.btn_ble_scan_on_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtMotorDelay);
-            this.groupBox2.Controls.Add(this.btnMLS1);
-            this.groupBox2.Controls.Add(this.txtMotorCount);
-            this.groupBox2.Controls.Add(this.btnMRS1);
             this.groupBox2.Controls.Add(this.rdoPos2);
             this.groupBox2.Controls.Add(this.rdoPos1);
             this.groupBox2.Controls.Add(this.txtMotorSteps);
@@ -484,7 +686,7 @@
             // 
             // btnSaveSetting
             // 
-            this.btnSaveSetting.Location = new System.Drawing.Point(416, 305);
+            this.btnSaveSetting.Location = new System.Drawing.Point(416, 360);
             this.btnSaveSetting.Name = "btnSaveSetting";
             this.btnSaveSetting.Size = new System.Drawing.Size(70, 21);
             this.btnSaveSetting.TabIndex = 16;
@@ -494,30 +696,102 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.textBox7);
+            this.groupBox6.Controls.Add(this.txt_ble_loop_count);
+            this.groupBox6.Controls.Add(this.label9);
+            this.groupBox6.Controls.Add(this.txt_ble_pass_rssi);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.txt_ble_test_delay);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.txt_ble_test_count);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.txt_ble_scan_limit);
             this.groupBox6.Controls.Add(this.label10);
             this.groupBox6.Location = new System.Drawing.Point(6, 178);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(480, 121);
+            this.groupBox6.Size = new System.Drawing.Size(480, 164);
             this.groupBox6.TabIndex = 15;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "藍芽測試";
             // 
-            // textBox7
+            // txt_ble_loop_count
             // 
-            this.textBox7.Location = new System.Drawing.Point(137, 21);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(111, 22);
-            this.textBox7.TabIndex = 6;
+            this.txt_ble_loop_count.Location = new System.Drawing.Point(137, 133);
+            this.txt_ble_loop_count.Name = "txt_ble_loop_count";
+            this.txt_ble_loop_count.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_loop_count.TabIndex = 14;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 136);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 12);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "測試LOOP次數";
+            // 
+            // txt_ble_pass_rssi
+            // 
+            this.txt_ble_pass_rssi.Location = new System.Drawing.Point(137, 49);
+            this.txt_ble_pass_rssi.Name = "txt_ble_pass_rssi";
+            this.txt_ble_pass_rssi.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_pass_rssi.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(15, 52);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 12);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "合格 RSSI";
+            // 
+            // txt_ble_test_delay
+            // 
+            this.txt_ble_test_delay.Location = new System.Drawing.Point(137, 105);
+            this.txt_ble_test_delay.Name = "txt_ble_test_delay";
+            this.txt_ble_test_delay.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_test_delay.TabIndex = 10;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 108);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "指令延遲秒數";
+            // 
+            // txt_ble_test_count
+            // 
+            this.txt_ble_test_count.Location = new System.Drawing.Point(137, 77);
+            this.txt_ble_test_count.Name = "txt_ble_test_count";
+            this.txt_ble_test_count.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_test_count.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 80);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 12);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "指令測試次數";
+            // 
+            // txt_ble_scan_limit
+            // 
+            this.txt_ble_scan_limit.Location = new System.Drawing.Point(137, 21);
+            this.txt_ble_scan_limit.Name = "txt_ble_scan_limit";
+            this.txt_ble_scan_limit.Size = new System.Drawing.Size(111, 22);
+            this.txt_ble_scan_limit.TabIndex = 6;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(15, 24);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 12);
+            this.label10.Size = new System.Drawing.Size(84, 12);
             this.label10.TabIndex = 5;
-            this.label10.Text = "Scan RSSI Limit";
+            this.label10.Text = "掃描 RSSI Limit";
             // 
             // groupBox5
             // 
@@ -639,7 +913,7 @@
             // 
             this.btnRefresh.BackgroundImage = global::Spectrum_Test.Properties.Resources.refresh;
             this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRefresh.Location = new System.Drawing.Point(330, 4);
+            this.btnRefresh.Location = new System.Drawing.Point(348, 4);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(36, 36);
             this.btnRefresh.TabIndex = 10;
@@ -648,8 +922,9 @@
             // 
             // cboPort
             // 
+            this.cboPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPort.FormattingEnabled = true;
-            this.cboPort.Location = new System.Drawing.Point(111, 12);
+            this.cboPort.Location = new System.Drawing.Point(129, 12);
             this.cboPort.Name = "cboPort";
             this.cboPort.Size = new System.Drawing.Size(137, 20);
             this.cboPort.TabIndex = 8;
@@ -660,13 +935,13 @@
             this.label1.Location = new System.Drawing.Point(19, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(100, 12);
             this.label1.TabIndex = 7;
-            this.label1.Text = "COM Port";
+            this.label1.Text = "Spectrum COM Port";
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(254, 12);
+            this.btnClose.Location = new System.Drawing.Point(272, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(70, 21);
             this.btnClose.TabIndex = 9;
@@ -677,7 +952,7 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(254, 12);
+            this.btnOpen.Location = new System.Drawing.Point(272, 13);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(70, 21);
             this.btnOpen.TabIndex = 11;
@@ -685,70 +960,85 @@
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
+            // cboBLEComport
+            // 
+            this.cboBLEComport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBLEComport.FormattingEnabled = true;
+            this.cboBLEComport.Location = new System.Drawing.Point(503, 13);
+            this.cboBLEComport.Name = "cboBLEComport";
+            this.cboBLEComport.Size = new System.Drawing.Size(137, 20);
+            this.cboBLEComport.TabIndex = 14;
+            // 
+            // btnBLEClose
+            // 
+            this.btnBLEClose.Location = new System.Drawing.Point(646, 13);
+            this.btnBLEClose.Name = "btnBLEClose";
+            this.btnBLEClose.Size = new System.Drawing.Size(70, 21);
+            this.btnBLEClose.TabIndex = 15;
+            this.btnBLEClose.Text = "Disconnect";
+            this.btnBLEClose.UseVisualStyleBackColor = true;
+            this.btnBLEClose.Visible = false;
+            this.btnBLEClose.Click += new System.EventHandler(this.btnBLEClose_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(411, 16);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 12);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "BLE COM Port";
+            // 
+            // btnBLERefresh
+            // 
+            this.btnBLERefresh.BackgroundImage = global::Spectrum_Test.Properties.Resources.refresh;
+            this.btnBLERefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBLERefresh.Location = new System.Drawing.Point(722, 5);
+            this.btnBLERefresh.Name = "btnBLERefresh";
+            this.btnBLERefresh.Size = new System.Drawing.Size(36, 36);
+            this.btnBLERefresh.TabIndex = 16;
+            this.btnBLERefresh.UseVisualStyleBackColor = true;
+            this.btnBLERefresh.Click += new System.EventHandler(this.btnBLERefresh_Click);
+            // 
+            // btnBLEOpen
+            // 
+            this.btnBLEOpen.Location = new System.Drawing.Point(646, 40);
+            this.btnBLEOpen.Name = "btnBLEOpen";
+            this.btnBLEOpen.Size = new System.Drawing.Size(70, 21);
+            this.btnBLEOpen.TabIndex = 17;
+            this.btnBLEOpen.Text = "Connect";
+            this.btnBLEOpen.UseVisualStyleBackColor = true;
+            this.btnBLEOpen.Click += new System.EventHandler(this.btnBLEOpen_Click);
+            // 
+            // serialBLEPort
+            // 
+            this.serialBLEPort.ReadTimeout = 10;
+            // 
             // txtLog
             // 
             this.txtLog.BackColor = System.Drawing.Color.Black;
             this.txtLog.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLog.ForeColor = System.Drawing.Color.White;
-            this.txtLog.Location = new System.Drawing.Point(512, 68);
+            this.txtLog.Location = new System.Drawing.Point(508, 68);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(405, 546);
-            this.txtLog.TabIndex = 12;
-            // 
-            // btnMRS1
-            // 
-            this.btnMRS1.Location = new System.Drawing.Point(294, 107);
-            this.btnMRS1.Name = "btnMRS1";
-            this.btnMRS1.Size = new System.Drawing.Size(75, 23);
-            this.btnMRS1.TabIndex = 27;
-            this.btnMRS1.Text = "MRS";
-            this.btnMRS1.UseVisualStyleBackColor = true;
-            this.btnMRS1.Click += new System.EventHandler(this.btnMRS1_Click);
-            // 
-            // txtMotorCount
-            // 
-            this.txtMotorCount.Location = new System.Drawing.Point(177, 107);
-            this.txtMotorCount.Name = "txtMotorCount";
-            this.txtMotorCount.Size = new System.Drawing.Size(111, 22);
-            this.txtMotorCount.TabIndex = 28;
-            this.txtMotorCount.Text = "10";
-            // 
-            // btnMLS1
-            // 
-            this.btnMLS1.Location = new System.Drawing.Point(375, 107);
-            this.btnMLS1.Name = "btnMLS1";
-            this.btnMLS1.Size = new System.Drawing.Size(75, 23);
-            this.btnMLS1.TabIndex = 29;
-            this.btnMLS1.Text = "MLS";
-            this.btnMLS1.UseVisualStyleBackColor = true;
-            this.btnMLS1.Click += new System.EventHandler(this.btnMLS1_Click);
-            // 
-            // txtMotorDelay
-            // 
-            this.txtMotorDelay.Location = new System.Drawing.Point(29, 109);
-            this.txtMotorDelay.Name = "txtMotorDelay";
-            this.txtMotorDelay.Size = new System.Drawing.Size(111, 22);
-            this.txtMotorDelay.TabIndex = 30;
-            this.txtMotorDelay.Text = "100";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(149, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 12);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "ms";
+            this.txtLog.Size = new System.Drawing.Size(410, 546);
+            this.txtLog.TabIndex = 18;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 620);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txtLog);
+            this.Controls.Add(this.btnBLEOpen);
+            this.Controls.Add(this.cboBLEComport);
+            this.Controls.Add(this.btnBLEClose);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnBLERefresh);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.cboPort);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOpen);
@@ -790,7 +1080,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;
         private System.IO.Ports.SerialPort serialPort;
-        private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
@@ -807,19 +1096,19 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnWSL0;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Button btn_ble_disconnect;
+        private System.Windows.Forms.Button btn_ble_connect;
+        private System.Windows.Forms.TextBox txt_ble_uuid;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button btn_ble_scan_off;
+        private System.Windows.Forms.Button btn_ble_scan_on;
         private System.Windows.Forms.Button btnSUV1;
         private System.Windows.Forms.Button btnSUV0;
         private System.Windows.Forms.Button btnWSL1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txt_ble_scan_limit;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txt_motor_test_round;
@@ -839,11 +1128,38 @@
         private System.Windows.Forms.RadioButton rdoPos2;
         private System.Windows.Forms.RadioButton rdoPos1;
         private System.Windows.Forms.Button btnMotor_Test;
-        private System.Windows.Forms.TextBox txtMotorDelay;
-        private System.Windows.Forms.Button btnMLS1;
-        private System.Windows.Forms.TextBox txtMotorCount;
-        private System.Windows.Forms.Button btnMRS1;
+        private System.Windows.Forms.ComboBox cboBLEComport;
+        private System.Windows.Forms.Button btnBLEClose;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnBLERefresh;
+        private System.Windows.Forms.Button btnBLEOpen;
+        private System.Windows.Forms.Button btnBLE_Test;
+        private System.IO.Ports.SerialPort serialBLEPort;
+        private System.Windows.Forms.Button btn_ble_devices;
+        private System.Windows.Forms.TextBox txt_ble_service;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn_ble_swl;
+        private System.Windows.Forms.TextBox txt_ble_charact;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btn_ble_noti;
+        private System.Windows.Forms.Button btn_ble_charact;
+        private System.Windows.Forms.Button btn_ble_services;
+        private System.Windows.Forms.Button btn_ble_send;
+        private System.Windows.Forms.TextBox txt_ble_cmd;
+        private System.Windows.Forms.Button btn_ble_tab;
+        private System.Windows.Forms.Button btn_ble_clear;
+        private System.Windows.Forms.TextBox txtLog;
+        private System.Windows.Forms.Button btn_ble_write;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_ble_test_count;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txt_ble_pass_rssi;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_ble_test_delay;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txt_ble_loop_count;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btn_test_stop;
     }
 }
 

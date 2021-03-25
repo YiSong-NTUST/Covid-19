@@ -1,0 +1,9 @@
+C:\Users\yuchi\source\repos\excel_export\excel_export\bin\Debug\excel_export.exe.config
+C:\Users\yuchi\source\repos\excel_export\excel_export\bin\Debug\excel_export.exe
+C:\Users\yuchi\source\repos\excel_export\excel_export\bin\Debug\excel_export.pdb
+C:\Users\yuchi\source\repos\excel_export\excel_export\obj\Debug\excel_export.csprojAssemblyReference.cache
+C:\Users\yuchi\source\repos\excel_export\excel_export\obj\Debug\excel_export.Form1.resources
+C:\Users\yuchi\source\repos\excel_export\excel_export\obj\Debug\excel_export.Properties.Resources.resources
+C:\Users\yuchi\source\repos\excel_export\excel_export\obj\Debug\excel_export.csproj.GenerateResource.cache
+C:\Users\yuchi\source\repos\excel_export\excel_export\obj\Debug\excel_export.exe
+C:\Users\yuchi\source\repos\excel_export\excel_export\obj\Debug\excel_export.pdb
