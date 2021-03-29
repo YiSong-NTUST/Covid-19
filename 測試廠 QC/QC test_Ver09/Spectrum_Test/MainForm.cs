@@ -41,10 +41,15 @@ namespace Spectrum_Test
 
         public List<List<List<int>>> ALL_A_LED_CAL = new List<List<List<int>>>();
         public List<List<int>> A_LED_CAL = new List<List<int>>();
+        public List<double> A_LED_percentage = new List<double>();
         public List<List<List<int>>> ALL_B_LED_CAL = new List<List<List<int>>>();
         public List<List<int>> B_LED_CAL = new List<List<int>>();
+        public List<double> B_LED_percentage = new List<double>();
         public List<byte> CAL = new List<byte>();
         public List<int> MULT_CAL = new List<int>();
+
+        public List<List<double>> A_SP_RFCAL = new List<List<double>>();
+        public List<List<double>> B_SP_RFCAL = new List<List<double>>();
 
         public List<List<int>> POINT_CAL = new List<List<int>>();
 
@@ -67,11 +72,12 @@ namespace Spectrum_Test
         int DG, AG, EXP_init, I_thr;
 
         int SP_maxValue, SP_EXP, SP_EXP1, SP_I1, SP_EXP2, SP_I2;
-        int CAL_cycle, SP_wl, CAL_RUN_cycle;
+        int CAL_cycle, SP_wl, CAL_RUN_cycle, SP_A_EXP, SP_B_EXP;
+        List<double> SP_Accuracy_ERROR = new List<double>();
 
         double LED_cycle_time;
         int LED_maxValue, LED_EXP, LED_EXP1, LED_I1, LED_EXP2, LED_I2;
-        int LED_wl, LED_RUN_cycle;
+        int LED_wl, LED_RUN_cycle, LED_A_EXP,LED_B_EXP;
 
         int Xts_maxValue, Xts_EXP, Xts_EXP1, Xts_I1, Xts_EXP2, Xts_I2;
         int Xts_wl, Xts_cycle;
@@ -189,7 +195,6 @@ namespace Spectrum_Test
 
                         for (int i=0;i< Manufacturer.Count; i++)
                         {
-                            Debug.WriteLine("..."+Manufacturer[i]);
                             if (Manufacturer[i] == "FTDI")
                             {
                                 pass_ng = new string[] { "-", "-", "-", "-" };
@@ -281,32 +286,31 @@ namespace Spectrum_Test
 
                     using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption like '%(COM%'"))
                     {
-                        var portnames = SerialPort.GetPortNames();
+                        string[] portnames = SerialPort.GetPortNames();
                         var ports = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Caption"].ToString());
 
-                        var portList = portnames.Select(n => n + " - " + ports.FirstOrDefault(s => s.Contains(n))).ToList();
+                        List<string> portList = new List<string>();
+                        portList = portnames.Select(n => n + " - " + ports.FirstOrDefault(s => s.Contains(n))).ToList();
 
+                        List<string> Manufacturer = new List<string>();
+                        Manufacturer = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Manufacturer"].ToString()).ToList();  //Manufacturer //Service
 
-                        var Manufacturer = searcher.Get().Cast<ManagementBaseObject>().ToList().Select(p => p["Manufacturer"].ToString()).ToList();  //Manufacturer //Service
-
-
-                        bool check_machine = false; 
+                        bool check_machine = false;
                         bool check_ble = false;
-                        foreach (var s in portList.Select((value, index) => new { value, index }))
-                        {                            
-                            if ((connect_sp_comport=="" && connect_sp_comport_manufacturer == "") || (portnames[s.index] == connect_sp_comport && Manufacturer[s.index] == connect_sp_comport_manufacturer))
+                        for (int i = 0; i < Manufacturer.Count; i++)
+                        {
+                            if ((connect_sp_comport=="" && connect_sp_comport_manufacturer == "") || (portnames[i] == connect_sp_comport && Manufacturer[i] == connect_sp_comport_manufacturer))
                             {
                                 check_machine = true;                                
-                            }
+                            }                                                      
 
-                            if ((connect_ble_comport == "" && connect_ble_comport_manufacturer == "") || (portnames[s.index] == connect_ble_comport && Manufacturer[s.index] == connect_ble_comport_manufacturer))
+                            if ((connect_ble_comport == "" && connect_ble_comport_manufacturer == "") || (portnames[i] == connect_ble_comport && Manufacturer[i] == connect_ble_comport_manufacturer))
                             {
                                 check_ble = true;
                             }
-                        }
+                        }                        
 
-
-                        if (!check_machine)
+                        if (!check_machine && (connect_sp_comport != "" && connect_sp_comport_manufacturer != ""))
                         {                            
                             serialPort.Close();
 
@@ -330,7 +334,7 @@ namespace Spectrum_Test
                             }));
                         }
 
-                        if (!check_ble)
+                        if (!check_ble && (connect_ble_comport != "" && connect_ble_comport_manufacturer != ""))
                         {
                             serialBLEPort.Close();
 
@@ -342,19 +346,16 @@ namespace Spectrum_Test
                             connect_ble_comport = "";
                             connect_ble_comport_manufacturer = "";
 
-                            BeginInvoke((Action)(() =>
+                            /*BeginInvoke((Action)(() =>
                             {
                                 cboBLEComport.Text = "";
                                 cboBLEComport.SelectedIndex = -1;
                                 status_lb.Text = "已斷開藍芽裝置";
                                 btnBLEOpen.Visible = true;
                                 btnBLEClose.Visible = false;
-                            }));
+                            }));*/
                         }
                     }
-
-
-
                     break;
 
                 case 4:
@@ -967,7 +968,7 @@ namespace Spectrum_Test
             if (motor_result)
             {
                 pass_ng[1] = "Pass";
-                motor_test_pass_lb.BackColor = Color.Lime;               
+                motor_test_pass_lb.BackColor = Color.Lime;                
             }
             else
             {
@@ -975,9 +976,7 @@ namespace Spectrum_Test
                 motor_test_ng_lb.BackColor = Color.Red;
             }
 
-            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text,new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text },new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text },new string[] { "motor", pass_ng[1] },new string[] { "LED_A", "" },new string[] { "LED_B", "" },new string[] { "SpectrumA", "" },new string[] { "SpectrumB", "" });
-
-
+            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { pass_ng[1], "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" });
         }
 
         private async Task<bool> Motor_Test()
@@ -1173,15 +1172,61 @@ namespace Spectrum_Test
             {
                 pass_ng[3] = "Pass";
                 sp_test_pass_lb.BackColor = Color.Lime;
+
+                ////////////////////////////////////////////////
+                double A_avg = 0.0;
+                for (int i = 0; i < A_SP_RFCAL.Count; i++)
+                {
+                    A_avg += A_SP_RFCAL[i].Average();
+                }
+                A_avg /= A_SP_RFCAL.Count;
+
+                double B_avg = 0.0;
+                for (int i = 0; i < B_SP_RFCAL.Count; i++)
+                {
+                    B_avg += B_SP_RFCAL[i].Average();
+                }
+                B_avg /= B_SP_RFCAL.Count;
+
+                double avg = (A_avg + B_avg) / 2.0;
+
+                double A_std = 0.0;
+                for (int i = 0; i < A_SP_RFCAL.Count; i++)
+                {
+                    A_std += std_custom_mean(A_SP_RFCAL[i], avg);
+                }
+                A_std /= A_SP_RFCAL.Count;
+
+                double B_std = 0.0;
+                for (int i = 0; i < B_SP_RFCAL.Count; i++)
+                {
+                    B_std += std_custom_mean(B_SP_RFCAL[i], avg);
+                }
+                B_std /= B_SP_RFCAL.Count;
+
+
+                WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "-", (SP_Accuracy_ERROR.Average()).ToString() }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" }, new string[] { pass_ng[3], A_std.ToString(), SP_A_EXP.ToString() }, new string[] { pass_ng[3], B_std.ToString(), SP_B_EXP.ToString() });
             }
             else
             {
                 pass_ng[3] = "NG";
                 sp_test_ng_lb.BackColor = Color.Red;
+
+                WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" }, new string[] { pass_ng[3], "-", "-" }, new string[] { pass_ng[3], "-", "-" });
             }
+        }
 
-            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "motor", "" }, new string[] { "LED_A", "" }, new string[] { "LED_B", "" }, new string[] { "SpectrumA", pass_ng[3] }, new string[] { "SpectrumB", pass_ng[3] });
+        private double std_custom_mean(List<double> x,double mean)
+        {
+            double count = 0.0;
+            for(int i = 0; i < x.Count; i++)
+            {
+                count += Math.Pow((x[i] - mean), 2.0);
+            }
+            count /= x.Count;
+            count = Math.Pow(count, 0.5);
 
+            return count;
         }
 
         private async Task<bool> Spectrum_Test()
@@ -1193,12 +1238,20 @@ namespace Spectrum_Test
 
             ALL_A_POINT_CAL = new List<List<List<int>>>();
             ALL_B_POINT_CAL = new List<List<List<int>>>();
-                        
+
+            A_SP_RFCAL = new List<List<double>>();
+            B_SP_RFCAL = new List<List<double>>();
+
+            SP_Accuracy_ERROR = new List<double>();
+
             flag = true;
             iTask = 0;
             CAL_RUN_cycle = 1;
             LED_AorB = 1;
             int motor_dir = 0;
+
+            SP_A_EXP = 0;
+            SP_B_EXP = 0;
 
             try
             {
@@ -1391,13 +1444,13 @@ namespace Spectrum_Test
                                     dark_n.Add(dark_lambda);
                                 }
 
-                                Series dark_Srs = new Series("燈" + LED_AorB.ToString() + "第" + CAL_RUN_cycle.ToString() + "次暗光譜");
+                                /*Series dark_Srs = new Series("燈" + LED_AorB.ToString() + "第" + CAL_RUN_cycle.ToString() + "次暗光譜");
                                 dark_Srs.ChartType = SeriesChartType.Line;
                                 dark_Srs.IsValueShownAsLabel = false;
-                                /*dark_Srs.MarkerStyle = MarkerStyle.Circle;
-                                dark_Srs.MarkerSize = 6;*/
+                                dark_Srs.MarkerStyle = MarkerStyle.Circle;
+                                dark_Srs.MarkerSize = 6;
                                 dark_Srs.Points.DataBindXY(dark_n, dark_sp);
-                                dark_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+                                dark_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";*/
 
                                 iTask = 30;
                                 break;
@@ -1682,6 +1735,15 @@ namespace Spectrum_Test
                                             break;
                                         }
 
+                                        if (LED_AorB == 1)
+                                        {
+                                            SP_A_EXP = SP_EXP;
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            SP_B_EXP = SP_EXP;
+                                        }
+
                                         Task.Delay(1000, token).Wait();
                                         List<int> sp3 = CMD_CAL();
 
@@ -1767,6 +1829,7 @@ namespace Spectrum_Test
                                     POINT_CAL.Add(sp4);*/
 
                                     iTask = 51;
+                                    Task.Delay(100, token).Wait();
                                 }
                                 break;
                             /** 開始掃描 */
@@ -1830,6 +1893,7 @@ namespace Spectrum_Test
                                     }
 
                                     iTask = 60;
+                                    Task.Delay(100, token).Wait();
                                 }
                                 break;
 
@@ -1976,8 +2040,8 @@ namespace Spectrum_Test
                                         List<double> interp_result = interp.interp1(n.GetRange(boundary_wl_1_index, boundary_wl_2_index - boundary_wl_1_index), sp_ref.GetRange(boundary_wl_1_index, boundary_wl_2_index - boundary_wl_1_index), wl_List);
 
 
-                                        Debug.WriteLine(interp_result.Count.ToString());
-                                        Debug.WriteLine(SP_condition[0].Count.ToString());
+                                        A_SP_RFCAL.Add(interp_result);
+
                                         for (int j = 0;j< SP_condition[0].Count; j++)
                                         {
                                             if (!(SP_condition[1][j]< interp_result[j] && interp_result[j] < SP_condition[2][j]))
@@ -1996,7 +2060,16 @@ namespace Spectrum_Test
                                     Debug.WriteLine(space_1.ToString());
                                     Debug.WriteLine(space_2.ToString());
 
+                                    SP_Accuracy_ERROR.Add(Math.Abs(space_1- double.Parse(Sp_space_1_txt.Text)));
+
                                     if (!((double.Parse(Sp_space_1_txt.Text) - double.Parse(SP_test_position_deviation.Text)) <= space_1  && space_1 <= (double.Parse(Sp_space_1_txt.Text) + double.Parse(SP_test_position_deviation.Text))))
+                                    {
+                                        throw new Exception("錯誤");
+                                    }
+
+                                    SP_Accuracy_ERROR.Add(Math.Abs(space_2 - double.Parse(Sp_space_2_txt.Text)));
+
+                                    if (!((double.Parse(Sp_space_2_txt.Text) - double.Parse(SP_test_position_deviation.Text)) <= space_2 && space_2 <= (double.Parse(Sp_space_2_txt.Text) + double.Parse(SP_test_position_deviation.Text))))
                                     {
                                         throw new Exception("錯誤");
                                     }
@@ -2110,6 +2183,8 @@ namespace Spectrum_Test
                                         interp interp = new interp();
                                         List<double> interp_result = interp.interp1(n.GetRange(boundary_wl_1_index, boundary_wl_2_index - boundary_wl_1_index), sp_ref.GetRange(boundary_wl_1_index, boundary_wl_2_index - boundary_wl_1_index), wl_List);
 
+                                        B_SP_RFCAL.Add(interp_result);
+
                                         for (int j = 0; j < SP_condition[0].Count; j++)
                                         {
                                             if (!(SP_condition[1][j] < interp_result[j] && interp_result[j] < SP_condition[2][j]))
@@ -2117,6 +2192,8 @@ namespace Spectrum_Test
                                                 throw new Exception("錯誤");
                                             }
                                         }
+
+
                                     }
 
                                     //第一間距
@@ -2125,7 +2202,16 @@ namespace Spectrum_Test
                                     //第二間距
                                     double space_2 = n_dis[index_local_minimum[2]] - n_dis[index_local_minimum[1]];
 
+                                    SP_Accuracy_ERROR.Add(Math.Abs(space_1 - double.Parse(Sp_space_1_txt.Text)));
+
                                     if (!((double.Parse(Sp_space_1_txt.Text) - double.Parse(SP_test_position_deviation.Text)) <= space_1 && space_1 <= (double.Parse(Sp_space_1_txt.Text) + double.Parse(SP_test_position_deviation.Text))))
+                                    {
+                                        throw new Exception("錯誤");
+                                    }
+
+                                    SP_Accuracy_ERROR.Add(Math.Abs(space_2 - double.Parse(Sp_space_2_txt.Text)));
+
+                                    if (!((double.Parse(Sp_space_2_txt.Text) - double.Parse(SP_test_position_deviation.Text)) <= space_2 && space_2 <= (double.Parse(Sp_space_2_txt.Text) + double.Parse(SP_test_position_deviation.Text))))
                                     {
                                         throw new Exception("錯誤");
                                     }
@@ -2265,20 +2351,18 @@ namespace Spectrum_Test
             }
 
             bool LED_result = await LED_test();
-
             if (LED_result)
             {
                 pass_ng[2] = "Pass";
                 led_test_pass_lb.BackColor = Color.Lime;
+                WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "-", "-" }, new string[] { pass_ng[2], (A_LED_percentage.Average()).ToString(), LED_A_EXP.ToString() }, new string[] { pass_ng[2], (B_LED_percentage.Average()).ToString(), LED_B_EXP.ToString() }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" });
             }
             else
             {
                 pass_ng[2] = "NG";
                 led_test_ng_lb.BackColor = Color.Red;
-            }
-
-            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "motor", "" }, new string[] { "LED_A", pass_ng[2] }, new string[] { "LED_B", pass_ng[2] }, new string[] { "SpectrumA", "" }, new string[] { "SpectrumB", "" });
-
+                WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "-", "-" }, new string[] { pass_ng[2], "-", "-" }, new string[] { pass_ng[2], "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" });
+            }          
         }
 
         private void LoadData()
@@ -2305,6 +2389,33 @@ namespace Spectrum_Test
             roi_hc_txt.Text = ROI[1];
             roi_vo_txt.Text = ROI[2];
             roi_lc_txt.Text = ROI[3];
+
+
+            ret = CMD_ROI(ROI[0], ROI[1], ROI[2], ROI[3]);
+            if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
+            {
+                BeginInvoke((Action)(() =>
+                {
+                    status_lb.Text = "ROI設定出錯";
+                }));
+            }
+
+        }
+
+        private int CMD_ROI(string ho, string hc, string vo, string lc)
+        {
+            string cmd = string.Format("$ROI{0},{1},{2},{3}#", ho, hc, vo, lc);
+
+            Recv_Clear();
+            SerialWrite(cmd);
+            if (CMD_Timeout(5000)) return CMD_RET_TIMEOUT;
+
+            string recv = Recv_String();
+
+            if (recv.Contains("NACK")) return CMD_RET_NACK;
+            if (recv.Contains("OK")) return CMD_RET_OK;
+
+            return CMD_RET_ERR;
         }
 
         private string CMD_CRF()
@@ -2426,7 +2537,7 @@ namespace Spectrum_Test
                 }
                 else
                 {
-                    pass_ng[1] = "PASS";
+                    pass_ng[1] = "Pass";
                 }
 
                 bool LED_result = await LED_test();
@@ -2438,7 +2549,7 @@ namespace Spectrum_Test
                 }
                 else
                 {
-                    pass_ng[2] = "PASS";
+                    pass_ng[2] = "Pass";
                 }
 
                 bool SP_result = await Spectrum_Test();
@@ -2450,11 +2561,43 @@ namespace Spectrum_Test
                 }
                 else
                 {
-                    pass_ng[3] = "PASS";
+                    pass_ng[3] = "Pass";
                 }
 
                 all_test_pass_lb.BackColor = Color.Lime;
-                WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "motor", pass_ng[1] }, new string[] { "LED_A", pass_ng[2] }, new string[] { "LED_B", pass_ng[2] }, new string[] { "SpectrumA", pass_ng[3] }, new string[] { "SpectrumB", pass_ng[3] });
+
+                ////////////////////////////////////////////////
+                double A_avg = 0.0;
+                for (int i = 0; i < A_SP_RFCAL.Count; i++)
+                {
+                    A_avg += A_SP_RFCAL[i].Average();
+                }
+                A_avg /= A_SP_RFCAL.Count;
+
+                double B_avg = 0.0;
+                for (int i = 0; i < B_SP_RFCAL.Count; i++)
+                {
+                    B_avg += B_SP_RFCAL[i].Average();
+                }
+                B_avg /= B_SP_RFCAL.Count;
+
+                double avg = (A_avg + B_avg) / 2.0;
+
+                double A_std = 0.0;
+                for (int i = 0; i < A_SP_RFCAL.Count; i++)
+                {
+                    A_std += std_custom_mean(A_SP_RFCAL[i], avg);
+                }
+                A_std /= A_SP_RFCAL.Count;
+
+                double B_std = 0.0;
+                for (int i = 0; i < B_SP_RFCAL.Count; i++)
+                {
+                    B_std += std_custom_mean(B_SP_RFCAL[i], avg);
+                }
+                B_std /= B_SP_RFCAL.Count;
+
+                WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { pass_ng[1], (SP_Accuracy_ERROR.Average()).ToString() }, new string[] { pass_ng[2], (A_LED_percentage.Average()).ToString(), LED_A_EXP.ToString() }, new string[] { pass_ng[2], (B_LED_percentage.Average()).ToString(), LED_B_EXP.ToString() }, new string[] { pass_ng[3], A_std.ToString(), SP_A_EXP.ToString() }, new string[] { pass_ng[3], B_std.ToString(), SP_B_EXP.ToString() });
             }
             catch (Exception ex)
             {
@@ -2462,7 +2605,20 @@ namespace Spectrum_Test
                 {
                     status_lb.Text = ex.Message;
                     all_test_ng_lb.BackColor = Color.Red;
-                    WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { "motor", pass_ng[1] }, new string[] { "LED_A", pass_ng[2] }, new string[] { "LED_B", pass_ng[2] }, new string[] { "SpectrumA", pass_ng[3] }, new string[] { "SpectrumB", pass_ng[3] });
+
+                    switch (ex.Message)
+                    {
+                        case "馬達測試錯誤":
+                            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { pass_ng[1], "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" });
+                            break;
+                        case "LED測試錯誤":
+                            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { pass_ng[1], "-" }, new string[] { pass_ng[2], "-", "-" }, new string[] { pass_ng[2], "-", "-" }, new string[] { "-", "-", "-" }, new string[] { "-", "-", "-" });
+                            break;
+                        case "光譜測試錯誤":
+                            WriteExcel(operator_txt.Text, Machine_txt.Text, VER_txt.Text, Machine_txt.Text, new string[] { Xts_txt.Text, T1_txt.Text, T2_txt.Text }, new string[] { a0_txt.Text, a1_txt.Text, a2_txt.Text, a3_txt.Text }, new string[] { roi_ho_txt.Text, roi_hc_txt.Text, roi_vo_txt.Text, roi_lc_txt.Text, EXP_initial_txt.Text, DG_txt.Text, AG_txt.Text }, new string[] { pass_ng[1], "-" }, new string[] { pass_ng[2], (A_LED_percentage.Average()).ToString(), LED_A_EXP.ToString() }, new string[] { pass_ng[2], (B_LED_percentage.Average()).ToString(), LED_B_EXP.ToString() }, new string[] { pass_ng[3], "-", "-" }, new string[] { pass_ng[3], "-", "-" });
+                            break;
+                    }                   
+
                 }));
             }
         }
@@ -3992,13 +4148,13 @@ namespace Spectrum_Test
 
                                     I_thr = int.Parse(I_thr_txt.Text);
 
-                                    /*System.Diagnostics.Debug.WriteLine("AG...." + AG.ToString());
+                                    System.Diagnostics.Debug.WriteLine("AG...." + AG.ToString());
                                     System.Diagnostics.Debug.WriteLine("DG...." + DG.ToString());
                                     System.Diagnostics.Debug.WriteLine("EXP...." + Xts_EXP.ToString());
                                     System.Diagnostics.Debug.WriteLine("EXP1...." + Xts_EXP1.ToString());
                                     System.Diagnostics.Debug.WriteLine("EXP2...." + Xts_EXP2.ToString());
                                     System.Diagnostics.Debug.WriteLine("I1...." + Xts_I1.ToString());
-                                    System.Diagnostics.Debug.WriteLine("I2...." + Xts_I2.ToString());*/
+                                    System.Diagnostics.Debug.WriteLine("I2...." + Xts_I2.ToString());
                                     Xts_EXP = Xts_EXP1 + ((I_thr - Xts_I1) * ((Xts_EXP1 - Xts_EXP2) / (Xts_I1 - Xts_I2)));
 
 
@@ -4366,11 +4522,17 @@ namespace Spectrum_Test
 
             ALL_A_LED_CAL = new List<List<List<int>>>();
             ALL_B_LED_CAL = new List<List<List<int>>>();
-            
+
+            A_LED_percentage = new List<double>();
+            B_LED_percentage = new List<double>();
+
             flag = true;
             iTask = 0;
             LED_RUN_cycle = 1;
             LED_AorB = 1;
+
+            LED_A_EXP = 0;
+            LED_B_EXP = 0;
 
             try
             {
@@ -4755,6 +4917,16 @@ namespace Spectrum_Test
                                             break;
                                         }
 
+                                        if (LED_AorB == 1)
+                                        {
+                                            LED_A_EXP = LED_EXP;
+                                        }
+                                        else if (LED_AorB == 2)
+                                        {
+                                            LED_B_EXP = LED_EXP;
+                                        }
+
+
                                         Task.Delay(1000, token).Wait();
                                         List<int> sp3 = CMD_CAL();
 
@@ -4793,6 +4965,7 @@ namespace Spectrum_Test
                                         }
 
                                         iTask = 50;
+                                        Task.Delay(100, token).Wait();
                                     }
                                 }
                                 else
@@ -4849,10 +5022,10 @@ namespace Spectrum_Test
                                 }
                                 break;
                             case 60:
+                                Task.Delay(100, token).Wait();
                                 double lambda;
                                 List<double> n_wl = new List<double>();
                                 List<int> LED_sp = new List<int>();
-
                                 if (String.IsNullOrEmpty(LED_test_wl_txt.Text))
                                 {
                                     LED_wl = 0;
@@ -4861,17 +5034,13 @@ namespace Spectrum_Test
                                 {
                                     LED_wl = int.Parse(LED_test_wl_txt.Text);
                                 }
-
                                 for (int i = 1; i <= 1280; i++)
                                 {
                                     lambda = double.Parse(a0_txt.Text) + double.Parse(a1_txt.Text) * Convert.ToDouble(i) + double.Parse(a2_txt.Text) * Math.Pow(Convert.ToDouble(i), 2.0) + double.Parse(a3_txt.Text) * Math.Pow(Convert.ToDouble(i), 3.0);
                                     n_wl.Add(lambda);
                                 }
-
                                 double num = n_wl.OrderBy(item => Math.Abs(item - LED_wl)).ThenBy(item => item).First(); //取最接近的數
                                 int index = n_wl.FindIndex(item => item.Equals(num)); //找到該數索引值
-
-
                                 if (LED_AorB == 1)
                                 {
                                     n_wl = new List<double>();
@@ -4883,28 +5052,32 @@ namespace Spectrum_Test
                                         LED_sp.Add(ALL_A_LED_CAL[LED_RUN_cycle - 1][i][index]);
                                     }
 
-
-                                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + (LED_cycle_time / 60.0) + " 分");
+                                    /*Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + (LED_cycle_time / 60.0) + " 分");
                                     time_Srs.ChartType = SeriesChartType.Line;
                                     time_Srs.IsValueShownAsLabel = false;
                                     time_Srs.Points.DataBindXY(n_wl, LED_sp);
-                                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+                                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";*/
 
                                     /* 計算標準差
                                      * double average = LED_sp.Average();
                                     double sumOfSquaresOfDifferences = LED_sp.Select(val => (val - average) * (val - average)).Sum();
                                     double sd = Math.Sqrt(sumOfSquaresOfDifferences / LED_sp.Count);
                                     */
+                                    //Debug.WriteLine("###################");
 
                                     for (int i = 1; i < LED_sp.Count; i++)
                                     {
                                         double percentage = ((double)(Math.Abs(LED_sp[i] - LED_sp[0])) / (double)LED_sp[0]) * 100.0;
-
+                                        Debug.WriteLine("$$$$$$$$$");
+                                        A_LED_percentage.Add(percentage);
+                                        Debug.WriteLine("*********");
                                         if (percentage > double.Parse(LED_STD_txt.Text))
                                         {
+                                            Debug.WriteLine("###################");
                                             throw new Exception("錯誤");
                                         }
-                                    }                                    
+                                    }
+
                                 }
                                 else if (LED_AorB == 2)
                                 {
@@ -4917,11 +5090,11 @@ namespace Spectrum_Test
                                         LED_sp.Add(ALL_B_LED_CAL[LED_RUN_cycle - 1][i][index]);
                                     }
 
-                                    Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + (LED_cycle_time / 60.0) + " 分");
+                                    /*Series time_Srs = new Series("燈 " + LED_AorB.ToString() + " 第 " + LED_RUN_cycle.ToString() + " 次 " + (LED_cycle_time / 60.0) + " 分");
                                     time_Srs.ChartType = SeriesChartType.Line;
                                     time_Srs.IsValueShownAsLabel = false;
                                     time_Srs.Points.DataBindXY(n_wl, LED_sp);
-                                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";
+                                    time_Srs.ToolTip = "X: #VALX{} Y: #VALY{}";*/
 
                                     /* 計算標準差
                                      * double average = LED_sp.Average();
@@ -4929,11 +5102,11 @@ namespace Spectrum_Test
                                     double sd = Math.Sqrt(sumOfSquaresOfDifferences / LED_sp.Count);
                                     */
 
-
                                     for (int i = 1; i < LED_sp.Count; i++)
                                     {
                                         double percentage = ((double)(Math.Abs(LED_sp[i] - LED_sp[0])) / (double)LED_sp[0]) * 100.0;
 
+                                        B_LED_percentage.Add(percentage);
                                         if (percentage > double.Parse(LED_STD_txt.Text))
                                         {
                                             throw new Exception("錯誤");
@@ -5036,16 +5209,16 @@ namespace Spectrum_Test
                         iTask = 999;
                     }
                 }
-
+                System.Diagnostics.Debug.WriteLine("@@@@@@@@");
                 BeginInvoke((Action)(() =>
                 {
                     status_lb.Text = "停止!";
                     btnLED_Test_Start.Enabled = true;
 
                     flag = false;
+                    cts = null;                    
                 }));
-
-                cts = null;
+                System.Diagnostics.Debug.WriteLine("@@@@@@@@");
                 return false;
             }
 
@@ -5392,7 +5565,7 @@ namespace Spectrum_Test
             {
                 new BLEreport
                 {
-                               Date = DateTime.Now.ToString("yyyy_MM_dd"),
+                               Date = DateTime.Now.ToString("yyyy-MM-dd HH-mm"),
                                OP_ID = OP_ID,
                                Mechine_ID = Mechine_ID,
                                Chip_ID = Chip_ID,
@@ -5404,40 +5577,44 @@ namespace Spectrum_Test
                 Export_Excel.CreatExcel(path + @"\" + "BLE_" + DateTime.Now.ToString("yyyy_MM_dd") + ".xlsx", "BLE");
             }
             Export_Excel.WriteTo_BLE_Excel(path + @"\" + "BLE_" + DateTime.Now.ToString("yyyy_MM_dd"), BLE_Report_Data);
-            MessageBox.Show("存檔完成");
+            //MessageBox.Show("存檔完成");
         }
 
 
         private void WriteExcel(string OP_ID,string Mechine_ID,string FW_ver,string Chip_ID,string[] Initial_Data,string[] WC_coef,string[] Image_Date
             ,string[] Motor_Data,string[] LED_A,string[] LED_B,string[] Spectrum_A,string[] Spectrum_B)
         {
+            System.Diagnostics.Debug.WriteLine("&&&&&&&&&&&&&&");
             string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Report";
             //----------
             var Report_Data = new List<QCreport>
             {
                 new QCreport
                 {
-                               Date = DateTime.Now.ToString("yyyy_MM_dd"),
-                               OP_ID = OP_ID,
-                               Mechine_ID = Mechine_ID,
-                               FW_ver = FW_ver,
-                               Chip_ID = Chip_ID,
-                               Initial_Data = Initial_Data,
-                               WC_coef = WC_coef,
-                               Image_Date = Image_Date,
-                               Motor_Data = Motor_Data,
-                               LED_A = LED_A,
-                               LED_B = LED_B,
-                               Spectrum_A = Spectrum_A,
-                               Spectrum_B = Spectrum_B
+                    Date = DateTime.Now.ToString("yyyy-MM-dd HH-mm"),
+                    OP_ID = OP_ID,
+                    Mechine_ID = Mechine_ID,
+                    FW_ver = FW_ver,
+                    Chip_ID = Chip_ID,
+                    Initial_Data = Initial_Data,
+                    WC_coef = WC_coef,
+                    Image_Date = Image_Date,
+                    Motor_Data = Motor_Data,
+                    LED_A = LED_A,
+                    LED_B = LED_B,
+                    Spectrum_A = Spectrum_A,
+                    Spectrum_B = Spectrum_B
                 }
             };
+            System.Diagnostics.Debug.WriteLine("&&&&&&&&&&&&&&");
             if (File.Exists(path + @"\" + "Report_" + DateTime.Now.ToString("yyyy_MM_dd") + ".xlsx") == false)
             {
                 Export_Excel.CreatExcel(path + @"\" + "Report_" + DateTime.Now.ToString("yyyy_MM_dd") + ".xlsx", "QC");
             }
+            System.Diagnostics.Debug.WriteLine("&&&&&&&&&&&&&&");
             Export_Excel.WriteToExcel(path + @"\" + "Report_" + DateTime.Now.ToString("yyyy_MM_dd"), Report_Data);
-            MessageBox.Show("存檔完成");
+            System.Diagnostics.Debug.WriteLine("&&&&&&&&&&&&&&");
+            //MessageBox.Show("存檔完成");
         }
 
         private void loadBLEPorts()
