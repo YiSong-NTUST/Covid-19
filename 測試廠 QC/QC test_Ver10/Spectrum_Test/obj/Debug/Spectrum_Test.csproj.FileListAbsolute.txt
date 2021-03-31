@@ -1,0 +1,298 @@
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+D:\ProMos\2020\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+D:\ken\spectrum\spectrum_test\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.show_Spectrum.resources
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Desktop\Spectrum_Test\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.ResolveComReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\V6機台軟體\Spectrum_Test_松\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.ResolveComReference.cache
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.ResolveComReference.cache
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Desktop\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.ResolveComReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\itextsharp.dll
+D:\QCTEST\QC test 2021.03.16\QC test\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ve04\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ve05\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver06\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver07\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver08\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\YiSong\Documents\GitHub\Covid-19\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver09\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\Spectrum_Test.exe.config
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\Spectrum_Test.pdb
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\itextsharp.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\itextsharp.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.csprojAssemblyReference.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.Keyform.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.MainForm.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.Properties.Resources.resources
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.GenerateResource.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CoreCompileInputs.cache
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.csproj.CopyComplete
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.exe
+C:\Users\Yi-Song\Documents\GitHub\Covid-19機台測試軟體開發\測試廠 QC\QC test_Ver10\Spectrum_Test\obj\Debug\Spectrum_Test.pdb
