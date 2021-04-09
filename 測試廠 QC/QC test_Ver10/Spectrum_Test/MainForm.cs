@@ -94,7 +94,6 @@ namespace Spectrum_Test
         int iTask;
         int ret;
         int test_motor_round;
-        bool LED_ready = true;
 
         private CancellationTokenSource cts;
         private CancellationToken token;
@@ -104,6 +103,7 @@ namespace Spectrum_Test
         string connect_sp_comport = "", connect_sp_comport_manufacturer = "";
         string connect_ble_comport = "", connect_ble_comport_manufacturer = "";
 
+        bool exit_test = false;
         char[] ble_recv_buff = new char[2048];
 
         string ble_recv;
@@ -139,7 +139,6 @@ namespace Spectrum_Test
             groupBox7.Enabled = false;
 
             Auth = false;
-            LED_ready = true;
             System.Drawing.Image img = System.Drawing.Image.FromFile("img\\lock.png");
             Auth_btn.BackgroundImage = img;
             Auth_btn.BackgroundImageLayout = ImageLayout.Stretch;
@@ -681,7 +680,7 @@ namespace Spectrum_Test
 
             try
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     int ret;
                     int motor_dir = 1;
@@ -692,12 +691,6 @@ namespace Spectrum_Test
                         addlog("馬達測試開始");
                         btnMotor_Test.Enabled = false;
                     }));
-
-                    if (token.IsCancellationRequested == true)
-                    {
-                        System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
-                        token.ThrowIfCancellationRequested();
-                    }
 
                     ret = CMD_QPS(1);
                     if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
@@ -710,13 +703,7 @@ namespace Spectrum_Test
                         throw new Exception("錯誤");
                     }
 
-                    await Task.Delay(100, token);
-
-                    if (token.IsCancellationRequested == true)
-                    {
-                        System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
-                        token.ThrowIfCancellationRequested();
-                    }
+                    Task.Delay(100, token).Wait();
 
                     ret = CMD_QPS(2);
                     if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
@@ -729,14 +716,7 @@ namespace Spectrum_Test
                         throw new Exception("錯誤");
                     }
 
-                    await Task.Delay(100, token);
-
-                    if (token.IsCancellationRequested == true)
-                    {
-                        System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
-                        token.ThrowIfCancellationRequested();
-                    }
-
+                    Task.Delay(100, token).Wait();
 
                     // try DIR0
                     ret = CMD_DIR(motor_dir);
@@ -745,14 +725,7 @@ namespace Spectrum_Test
                         throw new Exception("錯誤");
                     }
 
-                    await Task.Delay(100, token);
-
-                    if (token.IsCancellationRequested == true)
-                    {
-                        System.Diagnostics.Debug.WriteLine("使用者已經提出取消請求");
-                        token.ThrowIfCancellationRequested();
-                    }
-
+                    Task.Delay(100, token).Wait();
 
                     // run to pos 1
                     ret = CMD_MSP(1);
@@ -760,6 +733,7 @@ namespace Spectrum_Test
                     {
                         throw new Exception("錯誤");
                     }
+
                     if (ret == CMD_RET_WDIR)
                     {
                         motor_dir = 0;
@@ -767,7 +741,7 @@ namespace Spectrum_Test
 
                     motor_dir = motor_dir == 1 ? 0 : 1;
 
-                    await Task.Delay(100, token);
+                    Task.Delay(100, token).Wait();
 
                     while (round < int.Parse(txt_motor_test_round.Text))
                     {
@@ -778,7 +752,7 @@ namespace Spectrum_Test
                             throw new Exception("錯誤");
                         }
 
-                        await Task.Delay(100, token);
+                        Task.Delay(100, token).Wait();
 
                         // run to pos 1
                         ret = CMD_MSP(2);
@@ -792,10 +766,9 @@ namespace Spectrum_Test
                             throw new Exception("錯誤");
                         }
 
-                        await Task.Delay(100, token);
+                        Task.Delay(100, token).Wait();
 
                         motor_dir = motor_dir == 1 ? 0 : 1;
-                                               
 
                         // try DIR
                         ret = CMD_DIR(motor_dir);
@@ -804,7 +777,7 @@ namespace Spectrum_Test
                             throw new Exception("錯誤");
                         }
 
-                        await Task.Delay(100, token);
+                        Task.Delay(100, token).Wait();
 
                         // run to pos 1
                         ret = CMD_MSP(1);
@@ -812,12 +785,16 @@ namespace Spectrum_Test
                         {
                             throw new Exception("錯誤");
                         }
+
                         if (ret == CMD_RET_WDIR)
                         {
                             throw new Exception("錯誤");
                         }
-                        await Task.Delay(100, token);
+
+                        Task.Delay(100, token).Wait();
+
                         motor_dir = motor_dir == 1 ? 0 : 1;
+
                         round++;
                         BeginInvoke((Action)(() =>
                         {
@@ -840,14 +817,6 @@ namespace Spectrum_Test
             }
             catch (Exception ex)
             {
-                if (ex.Message.Equals("已取消作業。") || ex.Message.Equals("工作已取消。"))
-                {
-                    BeginInvoke((Action)(() =>
-                    {
-                        addlog("馬達測試中止!");
-                    }));
-                }
-
                 BeginInvoke((Action)(() =>
                 {
                     btnMotor_Test.Enabled = true;
@@ -1042,7 +1011,7 @@ namespace Spectrum_Test
 
             try
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     while (flag)
                     {
@@ -1069,7 +1038,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 ret = CMD_QPS(2);
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
@@ -1082,7 +1051,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // try DIR0
                                 ret = CMD_DIR(motor_dir);
@@ -1091,7 +1060,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // run to pos 1
                                 ret = CMD_MSP(1);
@@ -1112,7 +1081,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // run to pos 1
                                 ret = CMD_MSP(1);
@@ -1126,7 +1095,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 iTask = 20;
                                 break;
@@ -1202,7 +1171,7 @@ namespace Spectrum_Test
                                 List<double> dark_n = new List<double>();
                                 double dark_lambda;
 
-                                await Task.Delay(1000, token);
+                                Task.Delay(1000, token).Wait();
                                 List<int> dark_sp = CMD_CAL();
 
                                 dark = dark_sp.Average();
@@ -1240,7 +1209,7 @@ namespace Spectrum_Test
                                     else
                                     {
                                         T2 = double.Parse(T2_txt.Text);
-                                        await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                        Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
 
                                         if (CAL_RUN_cycle > 1)
                                         {
@@ -1260,7 +1229,7 @@ namespace Spectrum_Test
 
 
 
-                                            await Task.Delay(1000, token);
+                                            Task.Delay(1000, token).Wait();
                                             List<int> sp4 = CMD_CAL();
 
                                             if (LED_AorB == 1)
@@ -1290,7 +1259,7 @@ namespace Spectrum_Test
                                     else
                                     {
                                         T2 = double.Parse(T2_txt.Text);
-                                        await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                        Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
 
 
                                         if (CAL_RUN_cycle > 1)
@@ -1311,7 +1280,7 @@ namespace Spectrum_Test
 
 
 
-                                            await Task.Delay(1000, token);
+                                            Task.Delay(1000, token).Wait();
                                             List<int> sp4 = CMD_CAL();
 
                                             if (LED_AorB == 1)
@@ -1403,7 +1372,7 @@ namespace Spectrum_Test
                                 iTask = 45;
                                 break;
                             case 45:    //找出目標值的EXP  
-                                await Task.Delay(1000, token);
+                                Task.Delay(1000, token).Wait();
                                 List<int> sp1 = CMD_CAL();
                                 SP_maxValue = sp1.Max();
 
@@ -1420,7 +1389,7 @@ namespace Spectrum_Test
                                         break;
                                     }
 
-                                    await Task.Delay(1000, token);
+                                    Task.Delay(1000, token).Wait();
                                     List<int> sp2 = CMD_CAL();
                                     SP_maxValue = sp2.Max();
 
@@ -1516,7 +1485,7 @@ namespace Spectrum_Test
                                             SP_B_EXP = SP_EXP;
                                         }
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp3 = CMD_CAL();
 
                                         sw.Stop();//碼錶停止
@@ -1539,7 +1508,7 @@ namespace Spectrum_Test
 
 
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp4 = CMD_CAL();
 
                                         if (LED_AorB == 1)
@@ -1601,7 +1570,7 @@ namespace Spectrum_Test
                                     POINT_CAL.Add(sp4);*/
 
                                     iTask = 51;
-                                    await Task.Delay(100, token);
+                                    Task.Delay(100, token).Wait();
                                 }
                                 break;
                             /** 開始掃描 */
@@ -1624,7 +1593,7 @@ namespace Spectrum_Test
                                         break;
                                     }
 
-                                    await Task.Delay(1000, token);
+                                    Task.Delay(1000, token).Wait();
                                     List<int> sp4 = CMD_CAL();
 
                                     BeginInvoke((Action)(() =>
@@ -1665,7 +1634,7 @@ namespace Spectrum_Test
                                     }
 
                                     iTask = 60;
-                                    await Task.Delay(100, token);
+                                    Task.Delay(100, token).Wait();
                                 }
                                 break;
 
@@ -2040,13 +2009,8 @@ namespace Spectrum_Test
             }
             catch (Exception ex)
             {
-                if (ex.Message.Equals("已取消作業。"))
-                {
-                    BeginInvoke((Action)(() =>
-                    {
-                        addlog("光譜測試中止!");
-                    }));
-                }
+
+                System.Diagnostics.Debug.WriteLine(ex.Message);
 
                 BeginInvoke((Action)(() =>
                 {
@@ -2270,18 +2234,18 @@ namespace Spectrum_Test
             BLE_test_ng_lb.BackColor = Color.LightGray;
             pass_ng[0] = "-";
 
+            exit_test = false;
+
             try
             {
                 bool ble_result = await BLE_Test(); //true為成功 false為失敗
 
                 blink = true;
 
-                //DelayMs(100);
-                Task.Delay(100).Wait();
+                DelayMs(100);
                 BLESerialWrite("scan off\r\n");
 
-                //DelayMs(500);
-                Task.Delay(500).Wait();
+                DelayMs(500);
                 if (ble_result)
                 {
                     pass_ng[0] = "PASS";
@@ -2323,7 +2287,6 @@ namespace Spectrum_Test
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex);
                 BeginInvoke((Action)(() =>
                 {
                     addlog("藍芽測試錯誤");
@@ -2338,7 +2301,6 @@ namespace Spectrum_Test
 
             while (blink)
             {
-                //Task.Delay(500).Wait();
                 await Task.Delay(500);
                 BLE_test_ng_lb.BackColor = BLE_test_ng_lb.BackColor == Color.Red ? Color.LightGray : Color.Red;
             }
@@ -3077,11 +3039,9 @@ namespace Spectrum_Test
             {
                 cmd = string.Format("connect {0}\r\n", dev.UUID);
                 BLE_Recv_Clear();
-                //DelayMs(100);
-                Task.Delay(100).Wait();
+                DelayMs(100);
                 BLESerialWrite(cmd);
-                //DelayMs(500);
-                Task.Delay(500).Wait();
+                DelayMs(500);
 
                 recv = BLE_Recv_String();
 
@@ -3095,11 +3055,9 @@ namespace Spectrum_Test
                 // service discovery
                 cmd = string.Format("gatt services {0}\r\n", dev.UUID);
                 BLE_Recv_Clear();
-                //DelayMs(100);
-                Task.Delay(100).Wait();
+                DelayMs(100);
                 BLESerialWrite(cmd);
-                //DelayMs(500);
-                Task.Delay(500).Wait();
+                DelayMs(500);
 
                 recv = BLE_Recv_String();
 
@@ -3113,11 +3071,9 @@ namespace Spectrum_Test
                 // characteristics discovery
                 cmd = string.Format("gatt characteristics {0} {1}\r\n", dev.UUID, 1);
                 BLE_Recv_Clear();
-                //DelayMs(100);
-                Task.Delay(100).Wait();
+                DelayMs(100);
                 BLESerialWrite(cmd);
-                //DelayMs(500);
-                Task.Delay(500).Wait();
+                DelayMs(500);
 
                 recv = BLE_Recv_String();
                 if (recv.Contains("Characteristic UUID: 3")) break;
@@ -3130,11 +3086,9 @@ namespace Spectrum_Test
                 // characteristics discovery
                 cmd = string.Format("gatt notification on {0} {1}\r\n", dev.UUID, 2);
                 BLE_Recv_Clear();
-                //DelayMs(100);
-                Task.Delay(100).Wait();
+                DelayMs(100);
                 BLESerialWrite(cmd);
-                //DelayMs(500);
-                Task.Delay(500).Wait();
+                DelayMs(500);
 
                 recv = BLE_Recv_String();
                 // Type of write operation: 0x1
@@ -3160,8 +3114,7 @@ namespace Spectrum_Test
                 BLE_Recv_Clear();
                 //Thread.Sleep(2000);
 
-                //DelayMs(500);
-                Task.Delay(500).Wait();
+                DelayMs(500);
 
                 //cmd = string.Format("gatt read {0} {1}\r\n", dev.UUID, 2);
                 //DelayMs(100);
@@ -3206,8 +3159,7 @@ namespace Spectrum_Test
 
             //////Log(sb.ToString());
 
-            //DelayMs(50);
-            Task.Delay(50).Wait();
+            DelayMs(50);
 
 
 
@@ -3239,8 +3191,7 @@ namespace Spectrum_Test
                 BLE_Recv_Clear();
                 //Thread.Sleep(2000);
 
-                //DelayMs(500);
-                Task.Delay(500,token).Wait();
+                DelayMs(500);
 
                 recv = BLE_Recv_String();
 
@@ -3259,7 +3210,7 @@ namespace Spectrum_Test
 
             try
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     BeginInvoke((Action)(() =>
                     {
@@ -3283,8 +3234,7 @@ namespace Spectrum_Test
                     {
                         BLE_Recv_Clear();
                         BLESerialWrite("scan on\r\n");
-                        //DelayMs(1000);
-                        await Task.Delay(1000,token);
+                        DelayMs(1000);
 
                         lst_dev = new Dictionary<string, BLE_Device>();
 
@@ -3308,17 +3258,9 @@ namespace Spectrum_Test
                                         lst_dev.Add(kvp.Key, kvp.Value);
                                 }
 
-                                if (token.IsCancellationRequested == true)
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                }
-
                             }
 
-                            if (token.IsCancellationRequested == true)
-                            {
-                                token.ThrowIfCancellationRequested();
-                            }
+                            if (exit_test) break;
                         }
 
                         if (lst_dev.Count <= 0)
@@ -3332,10 +3274,7 @@ namespace Spectrum_Test
                             throw new Exception("錯誤");
                         }
 
-                        if (token.IsCancellationRequested == true)
-                        {
-                            token.ThrowIfCancellationRequested();
-                        }
+                        if (exit_test) break;
 
                         target_dev = lst_dev.First().Value;
 
@@ -3349,8 +3288,12 @@ namespace Spectrum_Test
                         //DelayMs(500);
                         if (CMD_BLE_Connect(target_dev) == CMD_RET_OK)
                         {
-                            //DelayMs(500);
-                            await Task.Delay(500,token);
+                            DelayMs(500);
+                            if (exit_test)
+                            {
+                                CMD_BLE_DISCONNECT_CMD(target_dev);
+                                break;
+                            }
 
                             for (int i = 0; i < test_ble_cmd_count; i++)
                             {
@@ -3371,26 +3314,24 @@ namespace Spectrum_Test
 
                                 //////Log(string.Format("BLE test {0} OK.", i + 1));
 
-                                //DelayMs(test_ble_cmd_delay);
+                                DelayMs(test_ble_cmd_delay);
 
-                                await Task.Delay(test_ble_cmd_delay,token);
-
-                                if (token.IsCancellationRequested == true)
+                                if (exit_test)
                                 {
-                                    token.ThrowIfCancellationRequested();
+                                    CMD_BLE_DISCONNECT_CMD(target_dev);
+                                    break;
                                 }
-
                             }
 
+                            if (exit_test) break;
 
                             CMD_BLE_DISCONNECT_CMD(target_dev);
 
                             BLESerialWrite("scan off\r\n");
 
-                            //DelayMs(500);
-                            await Task.Delay(500,token);
+                            DelayMs(500);
 
-
+                            if (exit_test) break;
                         }
                         else
                         {
@@ -3413,9 +3354,10 @@ namespace Spectrum_Test
                         //////Log(string.Format("BLE test Loop {0} OK.", loop_index + 1));
                     }
 
-                    if (token.IsCancellationRequested == true)
+                    if (exit_test)
                     {
-                        token.ThrowIfCancellationRequested();
+                        //return false;
+                        throw new Exception("錯誤");
                     }
 
 
@@ -3423,17 +3365,11 @@ namespace Spectrum_Test
                     {
                         btnBT_Test.Enabled = true;
                     }));
+
                 }, cts.Token);
             }
             catch (Exception ex)
             {
-                if (ex.Message.Equals("已取消作業。"))
-                {
-                    BeginInvoke((Action)(() =>
-                    {
-                        addlog("藍芽測試中止!");
-                    }));
-                }
                 btnBT_Test.Enabled = true;                
                 return false;
             }
@@ -3475,7 +3411,7 @@ namespace Spectrum_Test
             //serialBLEPort.Write(cmd);
         }
 
-        /*private void DelayMs(int ms)
+        private void DelayMs(int ms)
         {
             long st = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
 
@@ -3487,7 +3423,7 @@ namespace Spectrum_Test
 
                 Application.DoEvents();
             }
-        }*/
+        }
 
 
         /*private void EXPORT_lb_Click(object sender, EventArgs e)
@@ -3870,7 +3806,7 @@ namespace Spectrum_Test
                 return;
             }
 
-            if (cts != null || LED_ready == false)
+            if (cts != null)
             {
                 return;
             }
@@ -3884,11 +3820,11 @@ namespace Spectrum_Test
 
             Task.Run(() =>
             {
-
                 BeginInvoke((Action)(() =>
                 {
                     //addlog("LED 等待延遲時間T1");
                 }));
+
                 ret = CMD_SUV(0);
                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
                 {
@@ -3899,6 +3835,7 @@ namespace Spectrum_Test
                     T1 = double.Parse(T1_txt.Text);
                     Task.Delay(Convert.ToInt32(T1 * 1000)).Wait();
                 }
+
                 cts = null;
             });            
 
@@ -3952,7 +3889,7 @@ namespace Spectrum_Test
 
             try
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     while (flag)
                     {
@@ -3977,7 +3914,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 ret = CMD_QPS(2);
                                 if (ret == CMD_RET_TIMEOUT || ret == CMD_RET_ERR || ret == CMD_RET_NACK)
@@ -3990,7 +3927,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // try DIR0
                                 ret = CMD_DIR(motor_dir);
@@ -3999,7 +3936,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // run to pos 1
                                 ret = CMD_MSP(1);
@@ -4020,7 +3957,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // run to pos 1
                                 ret = CMD_MSP(1);
@@ -4034,7 +3971,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 iTask = 10;
                                 break;
@@ -4109,7 +4046,7 @@ namespace Spectrum_Test
                                 else
                                 {
                                     T2 = double.Parse(T2_txt.Text);
-                                    await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                    Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
                                     iTask = 40;
                                 }
                                 break;
@@ -4180,7 +4117,7 @@ namespace Spectrum_Test
                                 iTask = 45;
                                 break;
                             case 45:    //找出目標值的EXP  
-                                await Task.Delay(1000, token);
+                                Task.Delay(1000, token).Wait();
                                 List<int> sp1 = CMD_CAL();
                                 Xts_maxValue = sp1.Max();
 
@@ -4197,7 +4134,7 @@ namespace Spectrum_Test
                                         break;
                                     }
 
-                                    await Task.Delay(1000, token);
+                                    Task.Delay(1000, token).Wait();
                                     List<int> sp2 = CMD_CAL();
                                     Xts_maxValue = sp2.Max();
 
@@ -4284,10 +4221,10 @@ namespace Spectrum_Test
                                             break;
                                         }
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp3 = CMD_CAL();
 
-                                        await Task.Delay(100, token);
+                                        Task.Delay(100, token).Wait();
 
                                         iTask = 50;
                                     }
@@ -4341,7 +4278,7 @@ namespace Spectrum_Test
                                         break;
                                     }
 
-                                    await Task.Delay(1000, token);
+                                    Task.Delay(1000, token).Wait();
                                     List<int> sp4 = CMD_CAL();
 
                                     BeginInvoke((Action)(() =>
@@ -4376,7 +4313,7 @@ namespace Spectrum_Test
                                     break;
                                 }
 
-                                await Task.Delay(1000, token);
+                                Task.Delay(1000, token).Wait();
                                 List<int> sp5 = CMD_CAL();
 
                                 if(sp5.Max() > 1000)
@@ -4469,7 +4406,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 // run to pos 1
                                 ret = CMD_MSP(1);
@@ -4483,7 +4420,7 @@ namespace Spectrum_Test
                                     iTask = 999;
                                 }
 
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
 
                                 iTask = 90;
                                 break;
@@ -4564,13 +4501,7 @@ namespace Spectrum_Test
             }
             catch (Exception ex)
             {
-                if (ex.Message.Equals("已取消作業。") || ex.Message.Equals("工作已取消。"))
-                {
-                    BeginInvoke((Action)(() =>
-                    {
-                        addlog("Xts校正中止!");
-                    }));
-                }
+                System.Diagnostics.Debug.WriteLine(ex.Message);
 
                 BeginInvoke((Action)(() =>
                 {
@@ -4580,7 +4511,7 @@ namespace Spectrum_Test
                 flag = false;
                 return false;
             }
-                        
+
             return true;
         }
         
@@ -4613,7 +4544,7 @@ namespace Spectrum_Test
 
             try
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     while (flag)
                     {
@@ -4690,7 +4621,7 @@ namespace Spectrum_Test
                                     else
                                     {
                                         T2 = double.Parse(T2_txt.Text);
-                                        await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                        Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
                                         iTask = 40;
                                     }
                                 }
@@ -4704,7 +4635,7 @@ namespace Spectrum_Test
                                     else
                                     {
                                         T2 = double.Parse(T2_txt.Text);
-                                        await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                        Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
                                         iTask = 40;
                                     }
                                 }
@@ -4726,7 +4657,7 @@ namespace Spectrum_Test
                                     else
                                     {
                                         T2 = double.Parse(T2_txt.Text);
-                                        await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                        Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
 
                                         LED_cycle_time = 0.0;
 
@@ -4744,7 +4675,7 @@ namespace Spectrum_Test
                                             }
                                         }));
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp4 = CMD_CAL();
 
                                         if (LED_AorB == 1)
@@ -4769,7 +4700,7 @@ namespace Spectrum_Test
                                     else
                                     {
                                         T2 = double.Parse(T2_txt.Text);
-                                        await Task.Delay(Convert.ToInt32(T2 * 1000), token);
+                                        Task.Delay(Convert.ToInt32(T2 * 1000), token).Wait();
 
                                         LED_cycle_time = 0.0;
 
@@ -4787,7 +4718,7 @@ namespace Spectrum_Test
                                             }
                                         }));
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp4 = CMD_CAL();
 
                                         if (LED_AorB == 1)
@@ -4875,7 +4806,7 @@ namespace Spectrum_Test
                                 iTask = 45;
                                 break;
                             case 45:    //找出目標值的EXP  
-                                await Task.Delay(1000, token);
+                                Task.Delay(1000, token).Wait();
                                 List<int> sp1 = CMD_CAL();
                                 LED_maxValue = sp1.Max();
 
@@ -4892,7 +4823,7 @@ namespace Spectrum_Test
                                         break;
                                     }
 
-                                    await Task.Delay(1000, token);
+                                    Task.Delay(1000, token).Wait();
                                     List<int> sp2 = CMD_CAL();
                                     LED_maxValue = sp2.Max();
 
@@ -4989,7 +4920,7 @@ namespace Spectrum_Test
                                         }
 
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp3 = CMD_CAL();
 
 
@@ -5014,7 +4945,7 @@ namespace Spectrum_Test
                                             }
                                         }));
 
-                                        await Task.Delay(1000, token);
+                                        Task.Delay(1000, token).Wait();
                                         List<int> sp4 = CMD_CAL();
 
                                         if (LED_AorB == 1)
@@ -5027,7 +4958,7 @@ namespace Spectrum_Test
                                         }
 
                                         iTask = 50;
-                                        await Task.Delay(100, token);
+                                        Task.Delay(100, token).Wait();
                                     }
                                 }
                                 else
@@ -5051,9 +4982,9 @@ namespace Spectrum_Test
                                         }
                                     }));
 
-                                    await Task.Delay(Convert.ToInt32((double.Parse(LED_test_interval_time_txt.Text) * 60.0) * 1000.0), token);
+                                    Task.Delay(Convert.ToInt32((double.Parse(LED_test_interval_time_txt.Text) * 60.0) * 1000.0), token).Wait();
 
-                                    await Task.Delay(1000, token);
+                                    Task.Delay(1000, token).Wait();
                                     List<int> sp5 = CMD_CAL();
 
                                     if (LED_AorB == 1)
@@ -5084,7 +5015,7 @@ namespace Spectrum_Test
                                 }
                                 break;
                             case 60:
-                                await Task.Delay(100, token);
+                                Task.Delay(100, token).Wait();
                                 double lambda;
                                 List<double> n_wl = new List<double>();
                                 List<int> LED_sp = new List<int>();
@@ -5217,14 +5148,8 @@ namespace Spectrum_Test
             }
             catch (Exception ex)
             {
-                if (ex.Message.Equals("已取消作業。") || ex.Message.Equals("工作已取消。"))
-                {
-                    BeginInvoke((Action)(() =>
-                    {
-                        addlog("LED測試中止!");
-                    }));
-                }
-
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                               
                 BeginInvoke((Action)(() =>
                 {
                     btnLED_Test_Start.Enabled = true;             
@@ -5442,7 +5367,7 @@ namespace Spectrum_Test
 
             Recv_Clear();
             SerialWrite(cmd);
-            if (CMD_Timeout(5000)) return CMD_RET_TIMEOUT;
+            if (CMD_Timeout(30000)) return CMD_RET_TIMEOUT;
 
             string recv = Recv_String();
 
@@ -5458,9 +5383,10 @@ namespace Spectrum_Test
 
             Recv_Clear();
             SerialWrite(cmd);
-            if (CMD_Timeout(5000)) return CMD_RET_TIMEOUT;
+            if (CMD_Timeout(30000)) return CMD_RET_TIMEOUT;
 
             string recv = Recv_String();
+
             if (recv.Contains("NACK")) return CMD_RET_NACK;
             if (recv.Contains("OK")) return CMD_RET_OK;
 
